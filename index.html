@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792882000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792890000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -378,6 +378,12 @@ const CH=[ // 몸체는 구슬 또는 하트만 · 얼굴은 앞면에만 (f: �
  {n:'주황팡',c:'#ff9a3d',l:'#ffe0c0',d:'#d0600f',s:'ball',f:'sparkle',no:7},
  {n:'빨강팡',c:'#ff4d5a',l:'#ffc8cc',d:'#c41e2e',s:'ball',f:'kiss',no:8}];
 CH.forEach(c=>c.k=c.c);
+/* ===== 팡팡이 원화 8종 (512캔버스·발밑 256,448 → 256 저장) ===== */
+const PANG=[['purple','보라팡'],['lime','연두팡'],['sky','하늘팡'],['green','초록팡'],['yellow','노랑팡'],['orange','주황팡'],['red','빨강팡'],['cream','미색팡']];
+const PANG_OLD=['purple','red','lime','sky','green','yellow','orange','red']; // 예전 저장 S.ch(숫자) → 새 id (하트팡→빨강팡)
+const PIMG={};PANG.forEach(([id])=>{const im=new Image();im.onload=()=>{PIMG[id]=im};im.src='art/ch/pang_'+id+'.png?v='+(typeof V!=='undefined'?V:'')});
+function pangId(ch){if(typeof ch==='string'&&PANG.some(p=>p[0]===ch))return ch;return PANG_OLD[ch|0]||'purple'}
+function drawPangArt(g,ch,fx,fy,size){const im=PIMG[pangId(ch)];if(!im)return false;g.drawImage(im,fx-size/2,fy-size*448/512,size,size);return true}
 
 /* ===== 그림 그리는 도구 ===== */
 function cnv(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;return c}
@@ -400,7 +406,8 @@ function drawFace(g,f,r,ey){g.save();g.strokeStyle=FACEC;g.fillStyle=FACEC;g.lin
  else if(f==='happy'){for(const sx of[-1,1]){g.beginPath();g.arc(sx*e,ey+r*.04,r*.1,Math.PI*1.15,Math.PI*1.85);g.stroke()}g.beginPath();g.arc(0,ey+r*.12,r*.15,.12*Math.PI,.88*Math.PI);g.stroke()}
  else{for(const sx of[-1,1]){g.beginPath();g.arc(sx*e,ey,r*.085,0,7);g.fill()}g.beginPath();g.arc(0,ey+r*.13,r*.12,.15*Math.PI,.85*Math.PI);g.stroke()}
  g.restore()}
-function drawPang(g,ch,cx,cy,r,face,back){ // 탱글한 구슬/하트 · 큰 흰 반사광 · 앞면 얼굴
+function drawPang(g,ch,cx,cy,r,face,back){if(drawPangArt(g,ch,cx,cy+r*1.25,r*3))return;if(typeof ch==='string')ch={purple:0,lime:2,sky:3,green:4,yellow:5,orange:6,red:7,cream:5}[ch]||0;return drawPang0(g,ch,cx,cy,r,face,back)}
+function drawPang0(g,ch,cx,cy,r,face,back){ // 탱글한 구슬/하트 · 큰 흰 반사광 · 앞면 얼굴
  const C=CH[ch],P=shapeParts(C.s,r);g.save();g.translate(cx,cy);g.lineJoin='round';
  g.strokeStyle=C.d;g.lineWidth=Math.max(1.5,r*.08);for(const q of P)g.stroke(q);
  const gr=g.createRadialGradient(-r*.3,-r*.4,r*.1,0,0,r*1.1);gr.addColorStop(0,C.l);gr.addColorStop(.5,C.c);gr.addColorStop(1,C.d);g.fillStyle=gr;for(const q of P)g.fill(q);
@@ -684,7 +691,7 @@ function drawCrop(c,X,Y,t){const C=CROPS[c.k],p=iso(X+.5,Y+.55,.1),pr=Math.min(1
   const s=iso(X+.5,Y+.5,1.2+Math.sin(t*3+X)*.06);x.fillStyle='#fff';x.save();x.translate(s[0]+TW*.2,s[1]);x.rotate(t*2);for(let k=0;k<4;k++){x.rotate(Math.PI/2);x.beginPath();x.ellipse(0,TW*.03,TW*.012,TW*.03,0,0,7);x.fill()}x.restore()}}
 /* 캐릭터 · 닭 */
 function drawPlayer(t){const P=S.pl,p=iso(P.x,P.y),moving=P.mv>0,b=moving?Math.abs(Math.sin(t*12))*TW*.08:Math.sin(t*3)*TW*.01,r=TW*.3;
- shadow(P.x,P.y,.3,.13,.3);const fr=P.fy+P.fx>-.2;const sq=moving?1+Math.sin(t*24)*.04:1;x.save();x.translate(p[0],p[1]-r*1.05-b);x.scale(1/sq,sq);drawPang(x,S.ch,0,0,r,true,!fr);x.restore()}
+ shadow(P.x,P.y,.3,.13,.3);const fr=P.fy+P.fx>-.2;const sq=moving?1+Math.sin(t*24)*.04:1;x.save();if(PIMG[pangId(S.ch)]){x.translate(p[0],p[1]-b);x.scale(1/sq,sq);drawPangArt(x,S.ch,0,0,TW*1.2)}else{x.translate(p[0],p[1]-r*1.05-b);x.scale(1/sq,sq);drawPang(x,S.ch,0,0,r,true,!fr)}x.restore()}
 function drawChicken(c,t){const p=iso(c.x,c.y),b=c.mv?Math.abs(Math.sin(t*14+c.x))*TW*.05:0;shadow(c.x,c.y,.16,.07,.25);if(artOK('chicken_front')){const fr=c.fy+c.fx>-.2,k=fr||!artOK('chicken_back')?'chicken_front':'chicken_back',a=ART[k],dr=c.fx-c.fy>0?1:-1,fl=fr?dr>0:dr<0,s2=TW/ART_BASE;x.save();x.translate(p[0],p[1]-b);if(fl)x.scale(-1,1);x.drawImage(a.img,-a.ax*s2,-a.ay*s2,a.w*s2,a.h*s2);x.restore()}else drawChick(x,p[0],p[1]-TW*.16-b,TW*.15,c.fy+c.fx>-.2,c.fx-c.fy>0?1:-1);
  if(c.heart>0){const q=iso(c.x,c.y,1.2+(1-c.heart)*.8);x.globalAlpha=Math.min(1,c.heart*2);x.fillStyle='#ff5d8a';x.font=`${14*DPR}px sans-serif`;x.textAlign='center';x.fillText('♥',q[0],q[1]);x.globalAlpha=1}}
 /* 숲 (지도 밖까지 빽빽하게) */
@@ -904,13 +911,13 @@ $('bMenu').onclick=()=>{save();hide('ovPause');paused=false;state='title';bgm(fa
 
 /* ===== 시작 화면 ===== */
 const TUT={"goal":"팡팡이와 함께 나만의 농장을 가꿔요!<br>땅 갈기 → 씨앗 심기 → 물 주기 → 자고 나면 쑥쑥<br>출하함에서 팔고 상점에서 씨앗·닭·꾸미기를 사요<br>주문 게시판의 주문을 채우면 보상이 더 커요","touch":[["⚡ 행동력","일하면 줄어요 · 음식 먹기·잠으로 회복"],["풀밭 톡","그 자리로 걸어가기"],["괭이 들고 풀밭 톡·쓱","땅 갈기"],["씨앗 들고 밭 쓱","여러 칸 심기"],["화면 끌기 · 두 손가락","둘러보기 · 확대/축소"],["팡팡이 톡","하던 일 멈추기"],["아래 칸","씨앗·물건 고르기"]],"pc":[["클릭 · 드래그 · 휠","이동·일하기 · 둘러보기 · 확대/축소"],["WASD / 방향키","직접 걷기"],["SPACE / E","바라보는 칸에 행동"],["1~9 · ESC","물건 고르기 · 메뉴"]]};
-let pick=0;
-function titleUI(){$('bContinue').hidden=!store.get('farm-save');const sh2=$('show');sh2.innerHTML='';[0,1,2,5].forEach((ch,i)=>{const c=cnv(96,96);drawPang(c.getContext('2d'),ch,48,52,34,true,false);c.style.cssText='width:52px;height:52px;animation:kb 1.2s ease-in-out '+(-i*.3)+'s infinite';sh2.appendChild(c)})}
+let pick='purple';
+function titleUI(){$('bContinue').hidden=!store.get('farm-save');const sh2=$('show');sh2.innerHTML='';['purple','lime','sky','cream'].forEach((ch,i)=>{const c=cnv(96,96);drawPang(c.getContext('2d'),ch,48,52,34,true,false);c.style.cssText='width:52px;height:52px;animation:kb 1.2s ease-in-out '+(-i*.3)+'s infinite';sh2.appendChild(c)})}
 const st=document.createElement('style');st.textContent='#show{display:flex;gap:6px;justify-content:center}@keyframes kb{50%{transform:translateY(-6px)}}';document.head.appendChild(st);
-$('chs').innerHTML=CH.map((c,i)=>`<button data-i="${i}"><canvas width="96" height="96"></canvas><span>${c.n}</span></button>`).join('');
-$('chs').querySelectorAll('canvas').forEach((c,i)=>drawPang(c.getContext('2d'),i,48,50,32,true,false));
-const chSync=()=>$('chs').querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.i===pick));chSync();
-$('chs').onclick=e=>{const b=e.target.closest('button');if(b){pick=+b.dataset.i;chSync()}};
+$('chs').innerHTML=PANG.map(([id,n])=>`<button data-i="${id}"><canvas width="96" height="96"></canvas><span>${n}</span></button>`).join('');
+const chDraw=()=>$('chs').querySelectorAll('canvas').forEach((c,i)=>{const q=c.getContext('2d');q.clearRect(0,0,96,96);drawPangArt(q,PANG[i][0],48,95,112)||drawPang(q,PANG[i][0],48,50,32,true,false)});chDraw();
+const chSync=()=>$('chs').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.i===pick));chSync();
+$('chs').onclick=e=>{const b=e.target.closest('button');if(b){pick=b.dataset.i;chSync()}};
 function begin(){ensureSign();hide('ovTitle');hide('ovNew');state='play';paused=false;drawInv();hud();actKey='';bgm(true);if(S.awayMsg){setTimeout(()=>toast(S.awayMsg),400);S.awayMsg=null}}
 $('bContinue').onclick=()=>{unlock();if(load())begin()};
 $('bNew').onclick=()=>{unlock();if(store.get('farm-save')&&!confirmNew)return askNew();hide('ovTitle');show('ovNew')};
@@ -925,7 +932,7 @@ function loop(t){requestAnimationFrame(loop);const dt=Math.min(.05,(t-(last||t))
   saveT+=dt;if(saveT>10){saveT=0;save()}actT-=dt;if(actT<=0){actT=.1;actUpdate();hud()}}
  if(tipTm>0){tipTm-=dt;if(tipTm<=0)$('tip').textContent=''}
  if(S){render(ts);drawPops(dt)}else{x.fillStyle='#4f9a3a';x.fillRect(0,0,W,H)}}
-resize();titleUI();
+resize();titleUI();{const pw=setInterval(()=>{if(Object.keys(PIMG).length>=8){clearInterval(pw);if(!$('ovTitle').hidden||state==='title')titleUI();chDraw()}},120);setTimeout(()=>clearInterval(pw),20000)}
 // 제목 화면 뒤 배경용 미리보기 농장
 if(!load()){newGame(0,'',1);S.pl.x=8;S.pl.y=12}
 requestAnimationFrame(loop);
@@ -1011,7 +1018,7 @@ function statUI(){if(!S||!$('sLv'))return;ensureAlpha();$('sLv').textContent=S.l
 const _hud=hud;hud=function(){_hud();statUI()};
 const _begin=begin;begin=function(){ensureAlpha();_begin();statUI()};
 ensureAlpha();statUI();
-if(window.__f)Object.assign(window.__f,{openShop,ensureAlpha,faint,addXP,openMach,machAct,sleepN:()=>sleep(),doAct2:()=>doAct(),get ACT(){return decide()}});
+if(window.__f)Object.assign(window.__f,{PIMG,pangId,openShop,ensureAlpha,faint,addXP,openMach,machAct,sleepN:()=>sleep(),doAct2:()=>doAct(),get ACT(){return decide()}});
 /* 게임 설명 창 글자 한글로 */
 new MutationObserver(()=>{document.querySelectorAll('.phT:not([data-k])').forEach(d=>{d.dataset.k=1;const h=d.querySelector('.phT-h');if(h)h.textContent='게임 방법';const b=d.querySelector('#phTgo');if(b)b.textContent=b.textContent==='CLOSE'?'닫기':'시작!';const k=d.querySelector('.phT-k');})}).observe(document.body,{childList:true});
 

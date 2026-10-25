@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792880000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792881000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -436,7 +436,7 @@ const CROPS={
  sesame:{n:'참깨',days:6,seed:40,sell:46,c:'#f6efe2',c2:'#d8c8a0',lf:'#6aae47'},
  eggplant:{n:'가지',days:4,seed:25,sell:40,c:'#6a2a8a',c2:'#a060c0',lf:'#4f8a3a',re:2},
  watermelon:{n:'수박',days:8,seed:80,sell:360,c:'#3f8a2e',c2:'#e8382a',lf:'#4f9a3a'}};
-const ITEM={egg:{n:'달걀',sell:50},gegg:{n:'황금달걀',sell:220},
+const ITEM={hoe:{n:'괭이',tool:1,desc:'고르고 풀밭을 누르거나 쓸면 땅을 갈아요'},egg:{n:'달걀',sell:50},gegg:{n:'황금달걀',sell:220},
  sprinkler:{n:'스프링클러',price:150,place:1,desc:'매일 아침 주변 8칸에 물을 줘요'},
  flower:{n:'꽃화분',price:25,place:1,deco:1,desc:'농장을 화사하게'},
  bench:{n:'벤치',price:80,place:1,deco:1,desc:'쉬어가는 의자'},
@@ -750,7 +750,7 @@ function decide(){if(!S)return null;const P=S.pl;
   if(it.place)return{l:'놓기',ic:sid,f:()=>place(tx,ty,sid)};
   if(!S.wet[ty*MW+tx])return{l:'물 주기',ic:'can',f:()=>{S.wet[ty*MW+tx]=1;sfx.water();splash(tx,ty)}};
   return{l:'씨앗 고르기',ic:'seed_turnip',dim:1,f:()=>toast('아래 칸에서 씨앗을 골라요')}}
- if(g==='g'||g==='p'){if(it.place)return{l:'놓기',ic:sid,f:()=>place(tx,ty,sid)};if(g==='g')return{l:'땅 갈기',ic:'hoe',f:()=>{S.G[ty][tx]='s';sfx.hoe();save()}}}
+ if(g==='g'||g==='p'){if(it.place)return{l:'놓기',ic:sid,f:()=>place(tx,ty,sid)};if(g==='g'&&sid==='hoe')return{l:'땅 갈기',ic:'hoe',f:()=>{S.G[ty][tx]='s';sfx.hoe();save()}}}
  if(g==='w')return{l:'연못',ic:'can',dim:1,f:()=>toast('맑은 연못이에요')};
  return null}
 function place(tx,ty,id){if(S.O[ty][tx]||S.C[ty][tx]){toast('여기엔 놓을 수 없어요');return}const P=S.pl;if(Math.floor(P.x)===tx&&Math.floor(P.y)===ty)return;
@@ -806,7 +806,7 @@ function drawPops(dt){for(const p of POPS){p.t+=dt;const q=iso(p.x,p.y,.8+p.t*1.
 /* ===== 상단 정보 · 인벤토리 ===== */
 const fmtT=m=>{const h=Math.floor(m/60)%24,mm=Math.floor(m%60/10)*10;return(h<10?'0':'')+h+':'+(mm<10?'0':'')+mm};
 function hud(){if(!S)return;$('hDay').textContent=S.day;$('hTime').textContent=fmtT(S.min)+(S.rain?' ☂':'');$('hGold').textContent=S.gold.toLocaleString()+'G'}
-function drawInv(){if(!S)return;const el=$('inv');el.innerHTML='';S.inv.forEach((s,i)=>{const b=document.createElement('button');if(i===S.sel)b.className='on';const c=document.createElement('canvas');c.width=c.height=72;drawIcon(c.getContext('2d'),s.id,72);b.appendChild(c);const n=document.createElement('b');n.textContent=s.n;b.appendChild(n);
+function drawInv(){if(!S)return;const el=$('inv');el.innerHTML='';S.inv.forEach((s,i)=>{const b=document.createElement('button');if(i===S.sel)b.className='on';const c=document.createElement('canvas');c.width=c.height=72;drawIcon(c.getContext('2d'),s.id,72);b.appendChild(c);const n=document.createElement('b');n.textContent=ITEM[s.id]&&ITEM[s.id].tool?'':s.n;b.appendChild(n);
  b.onclick=e=>{e.stopPropagation();const it=ITEM[s.id];if(i===S.sel&&it.food!=null&&eatSel())return;S.sel=i;drawInv();tipT(it.n+(it.desc?' · '+it.desc:'')+(it.food?` · 한 번 더 누르면 먹어요 (+${it.food}⚡)`:''))};el.appendChild(b)})}
 let tipTm=0;function tipT(t){$('tip').textContent=t;tipTm=2.5}
 
@@ -831,8 +831,12 @@ addEventListener('keydown',e=>{if(e.target.tagName==='INPUT')return;const k=KM[e
 const relK=()=>{for(const k in KEY)KEY[k]=0;IN.x=IN.y=0;$('joyK').style.transform=''};addEventListener('keyup',e=>{const k=KM[e.key];if(k)KEY[k]=0});addEventListener('blur',relK);document.addEventListener('visibilitychange',()=>{if(document.hidden){relK();save()}});
 var DRAGGING=0,SLEEPARM=0,TAPFACE=null,TAPQ=[],TAPPATH=null,TAPWAIT=0,KEYMODE=0;
 function tapTile(e){const r=cv.getBoundingClientRect(),[wx,wy]=scr2w((e.clientX-r.left)*DPR,(e.clientY-r.top)*DPR);return[Math.floor(wx),Math.floor(wy)]}
-function tapAdd(tx,ty){if(!inMap(tx,ty))return;if(TAPQ.some(q=>q[0]===tx&&q[1]===ty))return;if(TAPQ.length<40)TAPQ.push([tx,ty])}
+function isWalk(tx,ty){if(!inMap(tx,ty)||solidAt(tx,ty))return false;const g=S.G[ty][tx],sid=selId(),it=ITEM[sid]||{};if(objAt(tx,ty)||S.C[ty][tx])return false;if(g!=='g'&&g!=='p')return false;if(sid==='hoe'&&g==='g')return false;if(it.place)return false;if(S.ck&&S.ck.some(c=>Math.floor(c.x)===tx&&Math.floor(c.y)===ty))return false;return true}
+function tapAdd(tx,ty){if(!inMap(tx,ty))return;if(TAPQ.some(q=>q[0]===tx&&q[1]===ty))return;if(isWalk(tx,ty)){for(let i=TAPQ.length-1;i>=0;i--)if(TAPQ[i].walk)TAPQ.splice(i,1);if(TAPQ.length===0)TAPPATH=null;const q=[tx,ty];q.walk=1;TAPQ.push(q);return}if(TAPQ.length<40)TAPQ.push([tx,ty])}
 function tapCells(tx,ty){const o=objAt(tx,ty);if(o&&o.w&&(o.w>1||o.d>1)){const c=[];for(let j=0;j<o.d;j++)for(let i=0;i<o.w;i++)c.push([o.x+i,o.y+j]);return c}return[[tx,ty]]}
+function walkPath(tx,ty){const P=S.pl,sx=Math.floor(P.x),sy=Math.floor(P.y),ok=(a,b)=>inMap(a,b)&&!solidAt(a,b),prev=new Map(),k=(a,b)=>b*MW+a,Q=[[sx,sy]];prev.set(k(sx,sy),null);const D=[[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]];let end=null;
+ for(let i=0;i<Q.length&&i<4000;i++){const [a,b]=Q[i];if(a===tx&&b===ty){end=[a,b];break}for(const [dx,dy] of D){const na=a+dx,nb=b+dy;if(prev.has(k(na,nb))||!ok(na,nb))continue;if(dx&&dy&&(!ok(a+dx,b)||!ok(a,b+dy)))continue;prev.set(k(na,nb),[a,b]);Q.push([na,nb])}}
+ if(!end)return null;const path=[];let c=end;while(c){path.unshift(c);c=prev.get(k(c[0],c[1]))}return path}
 function findPath(tx,ty){const P=S.pl,sx=Math.floor(P.x),sy=Math.floor(P.y),CL=tapCells(tx,ty),inC=(a,b)=>CL.some(c=>c[0]===a&&c[1]===b),near=(a,b)=>{let m=9,f=null;for(const c of CL){const d=Math.max(Math.abs(a-c[0]),Math.abs(b-c[1])),o2=Math.abs(a-c[0])+Math.abs(b-c[1]);if(d===1&&(!f||o2<m)){m=o2;f=c}}return f},goal=(a,b)=>!inC(a,b)&&!!near(a,b),ok=(a,b)=>inMap(a,b)&&!solidAt(a,b);
  if(goal(sx,sy)&&Math.abs(sx-near(sx,sy)[0])+Math.abs(sy-near(sx,sy)[1])===1){TAPFACE=near(sx,sy);return[[sx,sy]]}const prev=new Map(),k=(a,b)=>b*MW+a,Q=[[sx,sy]];prev.set(k(sx,sy),null);let end=null,best=null;
  const D=[[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]];
@@ -840,9 +844,9 @@ function findPath(tx,ty){const P=S.pl,sx=Math.floor(P.x),sy=Math.floor(P.y),CL=t
   for(const [dx,dy] of D){const na=a+dx,nb=b+dy;if(prev.has(k(na,nb))||!ok(na,nb))continue;if(dx&&dy&&(!ok(a+dx,b)||!ok(a,b+dy)))continue;prev.set(k(na,nb),[a,b]);Q.push([na,nb])}}
  end=end||best;if(!end)return null;TAPFACE=near(end[0],end[1]);const path=[];let c=end;while(c){path.unshift(c);c=prev.get(k(c[0],c[1]))}return path}
 function autoWalk(dt){const P=S.pl;if(TAPWAIT>0){TAPWAIT-=dt;return}
- if(!TAPPATH){if(!TAPQ.length){P.mv=0;return}const [tx,ty]=TAPQ[0],p=findPath(tx,ty);if(!p){TAPQ.shift();toast('거기는 갈 수 없어요');sfx.no();return}TAPPATH=p.map(([a,b])=>[a+.5,b+.5])}
+ if(!TAPPATH){if(!TAPQ.length){P.mv=0;return}const q0=TAPQ[0],[tx,ty]=q0,p=q0.walk?walkPath(tx,ty):findPath(tx,ty);if(!p){TAPQ.shift();toast('거기는 갈 수 없어요');sfx.no();return}TAPPATH=p.map(([a,b])=>[a+.5,b+.5])}
  if(TAPPATH.length){const [gx,gy]=TAPPATH[0],dx=gx-P.x,dy=gy-P.y,d=Math.hypot(dx,dy),sp=3.4*dt*(S.en>0?1:.55);if(d<=sp){P.x=gx;P.y=gy;TAPPATH.shift()}else{P.x+=dx/d*sp;P.y+=dy/d*sp;P.fx=dx/d;P.fy=dy/d;P.mv=1}return}
- const [tx,ty]=TAPQ.shift(),F=TAPFACE||[tx,ty];TAPPATH=null;P.mv=0;const fx=F[0]+.5-P.x,fy=F[1]+.5-P.y,l=Math.hypot(fx,fy)||1;P.fx=fx/l;P.fy=fy/l;actKey='';ACT=decide();if(window.__f)(__f.log=__f.log||[]).push([tx,ty,ACT&&ACT.l,Math.floor(P.x),Math.floor(P.y),target()]);if(ACT&&ACT.ic==='sleep'&&!(SLEEPARM>Date.now())){SLEEPARM=Date.now()+4000;toast('한 번 더 누르면 잠자요 💤');TAPWAIT=.12;return}if(ACT){SLEEPARM=0;ACT.f();GD=1;hud()}else sfx.no();TAPWAIT=.12}
+ if(TAPQ[0]&&TAPQ[0].walk){TAPQ.shift();TAPPATH=null;P.mv=0;return}const [tx,ty]=TAPQ.shift(),F=TAPFACE||[tx,ty];TAPPATH=null;P.mv=0;const fx=F[0]+.5-P.x,fy=F[1]+.5-P.y,l=Math.hypot(fx,fy)||1;P.fx=fx/l;P.fy=fy/l;actKey='';ACT=decide();if(window.__f)(__f.log=__f.log||[]).push([tx,ty,ACT&&ACT.l,Math.floor(P.x),Math.floor(P.y),target()]);if(ACT&&ACT.ic==='sleep'&&!(SLEEPARM>Date.now())){SLEEPARM=Date.now()+4000;toast('한 번 더 누르면 잠자요 💤');TAPWAIT=.12;return}if(ACT){SLEEPARM=0;ACT.f();GD=1;hud()}else sfx.no();TAPWAIT=.12}
 (function(){let pid=null,lt='';
  cv.addEventListener('pointerdown',e=>{if(state!=='play'||paused)return;unlock();e.preventDefault();const [tx,ty]=tapTile(e),P=S.pl;KEYMODE=0;
   if(Math.hypot(tx+.5-P.x,ty+.5-P.y)<.6&&!TAPQ.length&&!TAPPATH){return}if(Math.hypot(tx+.5-P.x,ty+.5-P.y)<.6){if(TAPQ.length||TAPPATH){TAPQ.length=0;TAPPATH=null;toast('하던 일을 멈췄어요')}return}
@@ -881,7 +885,7 @@ $('bPause').onclick=()=>menu(!paused);$('bResume').onclick=()=>menu(false);$('bS
 $('bMenu').onclick=()=>{save();hide('ovPause');paused=false;state='title';bgm(false);titleUI();show('ovTitle')};
 
 /* ===== 시작 화면 ===== */
-const TUT={"goal":"팡팡이와 함께 나만의 농장을 가꿔요!<br>땅 갈기 → 씨앗 심기 → 물 주기 → 자고 나면 쑥쑥<br>출하함에서 팔고 상점에서 씨앗·닭·꾸미기를 사요<br>주문 게시판의 주문을 채우면 보상이 더 커요","touch":[["⚡ 행동력","일하면 줄어요 · 음식 먹기·잠으로 회복"],["칸 톡","팡팡이가 가서 알맞은 일 하기"],["여러 칸 쓱","줄지어 차례로 일하기"],["팡팡이 톡","하던 일 멈추기"],["아래 칸","씨앗·물건 고르기"]],"pc":[["클릭 / 드래그","가서 일하기"],["WASD / 방향키","직접 걷기"],["SPACE / E","바라보는 칸에 행동"],["1~9 · ESC","물건 고르기 · 메뉴"]]};
+const TUT={"goal":"팡팡이와 함께 나만의 농장을 가꿔요!<br>땅 갈기 → 씨앗 심기 → 물 주기 → 자고 나면 쑥쑥<br>출하함에서 팔고 상점에서 씨앗·닭·꾸미기를 사요<br>주문 게시판의 주문을 채우면 보상이 더 커요","touch":[["⚡ 행동력","일하면 줄어요 · 음식 먹기·잠으로 회복"],["풀밭 톡","그 자리로 걸어가기"],["괭이 들고 톡·쓱","땅 갈기"],["밭·작물·시설 톡","가서 알맞은 일 하기 (쓸면 차례로)"],["팡팡이 톡","하던 일 멈추기"],["아래 칸","씨앗·물건 고르기"]],"pc":[["클릭 / 드래그","가서 일하기"],["WASD / 방향키","직접 걷기"],["SPACE / E","바라보는 칸에 행동"],["1~9 · ESC","물건 고르기 · 메뉴"]]};
 let pick=0;
 function titleUI(){$('bContinue').hidden=!store.get('farm-save');const sh2=$('show');sh2.innerHTML='';[0,1,2,5].forEach((ch,i)=>{const c=cnv(96,96);drawPang(c.getContext('2d'),ch,48,52,34,true,false);c.style.cssText='width:52px;height:52px;animation:kb 1.2s ease-in-out '+(-i*.3)+'s infinite';sh2.appendChild(c)})}
 const st=document.createElement('style');st.textContent='#show{display:flex;gap:6px;justify-content:center}@keyframes kb{50%{transform:translateY(-6px)}}';document.head.appendChild(st);
@@ -924,7 +928,7 @@ const RECIPES={
  bangat:[{in:{pepper:3},out:'gochugaru'},{in:{soybean:3},out:'tofu'}],
  jangdok:[{in:{soybean:4},out:'meju'},{in:{meju:1},out:'doenjang',days:3},{in:{meju:1},out:'ganjang',days:3}],
  oil_press:[{in:{sesame:3},out:'sesame_oil'},{in:{peanut:3},out:'peanut_oil'}]};
-function ensureAlpha(){if(!S)return;if(S.lv==null){S.lv=1;S.xp=0}if(S.en==null)S.en=EN_MAX;if(!S.mach)S.mach={};if(!S.today)S.today={earn:0,hv:0,made:0,xp:0}}
+function ensureAlpha(){if(!S)return;if(S.inv&&!S.inv.some(s=>s.id==='hoe')){S.inv.unshift({id:'hoe',n:1});S.sel=(S.sel||0)+1}if(S.lv==null){S.lv=1;S.xp=0}if(S.en==null)S.en=EN_MAX;if(!S.mach)S.mach={};if(!S.today)S.today={earn:0,hv:0,made:0,xp:0}}
 /* 경험치 */
 function addXP(n,tx,ty){ensureAlpha();n=Math.round(n);if(n<=0)return;S.xp+=n;S.today.xp+=n;if(tx!=null)pop(tx,ty,`+${n} EXP`,'#9fe8ff');
  while(S.lv<LVMAX&&S.xp>=xpNeed(S.lv)){S.xp-=xpNeed(S.lv);S.lv++;const L=(LVUNL[S.lv]||[]).map(k=>ITEM[k]?ITEM[k].n:k);sfx.get();setTimeout(()=>toast(`레벨 ${S.lv}!`+(L.length?' · 새로 열림: '+L.join(', '):'')),300)}statUI()}

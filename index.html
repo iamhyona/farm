@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792873000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792874000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -445,9 +445,9 @@ function drawGroundStatic(xa,xb,ya,yb){
    for(let k=0;k<3;k++){const tt=(k+.5)/3,p=[lerp(a[0],b[0],tt),lerp(a[1],b[1],tt)];x.fillStyle=['#c9c2b0','#b4ad9a','#ddd6c4'][(xx+y+k)%3];x.strokeStyle=OLS;x.lineWidth=1*DPR;x.beginPath();x.ellipse(p[0],p[1],TW*.075,TW*.045,0,0,7);x.fill();x.stroke()}}}
  // 밭: 볼록한 흙 이랑
  for(let y=0;y<MH;y++)for(let xx=0;xx<MW;xx++){if(S.G[y][xx]!=='s')continue;const cr=S.C[y][xx],wet=cr?cr.w:S.wet&&S.wet[y*MW+xx],h=.1;
-  if(!artOK('soil_dry')&&gAt(xx,y+1)!=='s')poly([iso(xx,y+1,0),iso(xx+1,y+1,0),iso(xx+1,y+1,h),iso(xx,y+1,h)],wet?'#4a2a16':'#8a5430',OLS,1);
-  if(!artOK('soil_dry')&&gAt(xx+1,y)!=='s')poly([iso(xx+1,y,0),iso(xx+1,y+1,0),iso(xx+1,y+1,h),iso(xx+1,y,h)],wet?'#3a2010':'#74452a',OLS,1);
-  if(artOK('soil_dry')){if(wet&&artOK('soil_wet'))drawArt('soil_wet',xx,y);else drawArt('soil_dry',xx,y,0,1,wet);continue}
+  if(gAt(xx,y+1)!=='s')poly([iso(xx,y+1,0),iso(xx+1,y+1,0),iso(xx+1,y+1,h),iso(xx,y+1,h)],wet?'#4a2a16':'#9a6232',OLS,1);
+  if(gAt(xx+1,y)!=='s')poly([iso(xx+1,y,0),iso(xx+1,y+1,0),iso(xx+1,y+1,h),iso(xx+1,y,h)],wet?'#3a2010':'#82512a',OLS,1);
+  if(artOK('soil_dry')){if(wet&&artOK('soil_wet'))drawArt('soil_wet',xx,y,h);else drawArt('soil_dry',xx,y,h,1,wet);continue}
   const p=iso(xx,y,h);x.drawImage(soilTop(wet?1:0,hsh(xx,y)*3|0),p[0]-TW/2,p[1])}}
 
 /* 물체 */
@@ -492,7 +492,7 @@ function drawObj(o,t){const X=o.x,Y=o.y;if(o.t==='fence'&&artOK('fence')){const 
 /* 작물 */
 const LFL={};
 function drawCrop(c,X,Y,t){const C=CROPS[c.k],p=iso(X+.5,Y+.55,.1),pr=Math.min(1,c.age/C.days),ripe=c.age>=C.days,sw=Math.sin(t*2+X+Y)*.05;
- if(artOK(c.k+'_0')){const st=ripe?3:c.age===0?0:pr<.5?1:2,key=artOK(c.k+'_'+st)?c.k+'_'+st:c.k+'_0';drawArt(key,X+.5,Y+.5,artOK('soil_dry')?0:.1);if(ripe){const s=iso(X+.5,Y+.5,1.2+Math.sin(t*3+X)*.06);x.fillStyle='#fff';x.beginPath();x.arc(s[0]+TW*.2,s[1],2.2*DPR,0,7);x.fill()}return}
+ if(artOK(c.k+'_0')){const st=ripe?3:c.age===0?0:pr<.5?1:2,key=artOK(c.k+'_'+st)?c.k+'_'+st:c.k+'_0';drawArt(key,X+.5,Y+.5,.1);if(ripe){const s=iso(X+.5,Y+.5,1.2+Math.sin(t*3+X)*.06);x.fillStyle='#fff';x.beginPath();x.arc(s[0]+TW*.2,s[1],2.2*DPR,0,7);x.fill()}return}
  if(c.age===0){x.fillStyle='#4a2a14';for(const [a,b] of[[-.08,0],[.06,.03],[0,-.04]]){x.beginPath();x.arc(p[0]+a*TW,p[1]+b*TW,1.8*DPR,0,7);x.fill()}return}
  shadow(X+.5,Y+.6,.22*(.5+pr),.1,.18);const n=ripe?6:2+Math.round(pr*4),hh=TW*(.14+pr*.34);
  for(let i=0;i<n;i++){const a=-1.15+i*2.3/(n-1||1)+sw,lx=p[0]+Math.sin(a)*hh*.42,ly=p[1]-hh*.5-Math.cos(a)*hh*.25;x.fillStyle=i%2?C.lf:LFL[C.lf]||(LFL[C.lf]=sh(C.lf,1.15));x.strokeStyle=OLS;x.lineWidth=1.1*DPR;x.beginPath();x.ellipse(lx,ly,TW*.055*(.7+pr*.5),hh*.5,a*.8,0,7);x.fill();x.stroke();

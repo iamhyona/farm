@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792872000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792873000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -139,6 +139,16 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 #bPause i,#bSound i{background:url(art/ic/hud_pause.png) center/contain no-repeat!important;-webkit-mask:none!important;mask:none!important;box-shadow:none!important;width:22px!important;height:22px!important}
 #bSound.on i{background-image:url(art/ic/hud_music_on.png)!important}
 #bSound:not(.on) i{background-image:url(art/ic/hud_music_off.png)!important}
+#stat{position:absolute;left:8px;top:8px;z-index:4;display:flex;flex-direction:column;gap:5px;pointer-events:none;font-family:Galmuri11,sans-serif}
+#stat>div{display:flex;align-items:center;gap:5px;background:rgba(42,23,18,.72);border:2px solid rgba(255,240,200,.55);border-radius:12px;padding:3px 8px 3px 4px}
+#stat .ic{width:20px;height:20px;background:center/contain no-repeat;display:block}
+#stat .lvI{background-image:url(art/ic/hud_level.png)}#stat .enI{background-image:url(art/ic/hud_energy.png)}
+#stat b{color:#fff3c4;font-size:12px;min-width:14px}
+#stat .xb,#stat .eb{width:74px;height:8px;border-radius:5px;background:rgba(0,0,0,.45);overflow:hidden;display:block}
+#stat .xb i,#stat .eb i{display:block;height:100%;width:0;border-radius:5px;transition:width .3s}
+#stat .xb i{background:linear-gradient(90deg,#7fd8ff,#b48cff)}#stat .eb i{background:linear-gradient(90deg,#ffb52a,#ffe45a)}
+#stat.low .eb i{background:#ff5a4a}#stat.low .en{animation:lowE 1s infinite}
+@keyframes lowE{50%{border-color:#ff5a4a}}
 
 </style></head>
 
@@ -248,22 +258,36 @@ const CROPS={
  potato:{n:'감자',days:4,seed:20,sell:75,c:'#d9a55a',c2:'#f0c98a',lf:'#5fae45'},
  straw:{n:'딸기',days:4,seed:40,sell:45,c:'#ff3b5c',c2:'#ffd0d8',lf:'#3fa845',re:2},
  tomato:{n:'토마토',days:5,seed:30,sell:40,c:'#ff4a3a',c2:'#ffb0a0',lf:'#3a9a40',re:3},
- pumpkin:{n:'호박',days:6,seed:60,sell:230,c:'#ff9a1a',c2:'#ffd08a',lf:'#4f9a3a'}};
+ pumpkin:{n:'호박',days:6,seed:60,sell:230,c:'#ff9a1a',c2:'#ffd08a',lf:'#4f9a3a'},
+ cabbage:{n:'양배추',days:5,seed:35,sell:120,c:'#9fd86a',c2:'#d8f5b0',lf:'#4fae45'},
+ corn:{n:'옥수수',days:6,seed:45,sell:60,c:'#ffd23f',c2:'#fff0a0',lf:'#5aa83a',re:3},
+ wheat:{n:'밀',days:3,seed:8,sell:25,c:'#e8c050',c2:'#f8e0a0',lf:'#9ab84a'},
+ grape:{n:'포도',days:7,seed:60,sell:70,c:'#8a4acb',c2:'#c8a0f0',lf:'#4a9a3a',re:3}};
 const ITEM={egg:{n:'달걀',sell:50},gegg:{n:'황금달걀',sell:220},
  sprinkler:{n:'스프링클러',price:150,place:1,desc:'매일 아침 주변 8칸에 물을 줘요'},
  flower:{n:'꽃화분',price:25,place:1,deco:1,desc:'농장을 화사하게'},
  bench:{n:'벤치',price:80,place:1,deco:1,desc:'쉬어가는 의자'},
  lamp:{n:'가로등',price:60,place:1,deco:1,desc:'밤에 불이 켜져요'},
  fence:{n:'울타리',price:10,place:1,deco:1,desc:'나무 울타리 한 칸'},
- chicken:{n:'닭',price:120,desc:'매일 달걀을 낳아요 (쓰다듬으면 황금달걀 확률↑)'}};
+ chicken:{n:'닭',price:120,desc:'매일 달걀을 낳아요 (쓰다듬으면 황금달걀 확률↑)'},
+ keg_pickle:{n:'절임통',price:300,place:1,mach:1,desc:'채소를 맛있는 절임으로'},
+ mill:{n:'제분기',price:500,place:1,mach:1,desc:'밀·옥수수를 가루로'},
+ jam_maker:{n:'잼 제조기',price:450,place:1,mach:1,desc:'딸기·포도를 잼으로'},
+ keg_ferment:{n:'발효통',price:700,place:1,mach:1,desc:'포도·토마토를 주스로'},
+ oven:{n:'오븐',price:900,place:1,mach:1,desc:'빵·파이·수프를 구워요'},
+ pickle:{n:'채소 절임',sell:200,food:25},flour:{n:'밀가루',sell:160},cornmeal:{n:'옥수수가루',sell:260},
+ bread:{n:'빵',sell:320,food:50},pumpkin_pie:{n:'호박파이',sell:720,food:80},soup:{n:'채소 수프',sell:460,food:70},
+ jam_straw:{n:'딸기잼',sell:300,food:30},jam_grape:{n:'포도잼',sell:420,food:35},
+ juice_grape:{n:'포도주스',sell:280,food:40},juice_tomato:{n:'토마토주스',sell:260,food:40}};
+ITEM.egg.food=15;ITEM.gegg.food=40;
 for(const k in CROPS){ITEM['seed_'+k]={n:CROPS[k].n+' 씨앗',price:CROPS[k].seed,seed:k,desc:CROPS[k].days+'일 만에 자라요'+(CROPS[k].re?` · 수확 후 ${CROPS[k].re}일마다 다시 열려요`:'')};ITEM[k]={n:CROPS[k].n,sell:CROPS[k].sell,crop:k}}
 const sellOf=id=>ITEM[id]&&ITEM[id].sell||0;
 
 /* ===== 아이콘 (인벤토리 · 상점) ===== */
 const ICM={hoe:'act_hoe',can:'act_water',hand:'act_hand',sleep:'act_sleep',coin:'act_coin',shop:'act_shop',board:'act_board',pick:'act_pick',weed:'act_weed',pet:'act_pet',egg:'item_egg',gegg:'item_egg_gold',sprinkler:'item_sprinkler',chicken:'item_chicken'},ICI={};
-const icKey=id=>ICM[id]||(/^seed_/.test(id)?id:'item_'+id);
+const icKey=id=>ICM[id]||(/^seed_/.test(id)||ICI[id]?id:'item_'+id);
 fetch('art/ic/list.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():[]).then(L=>{let n=L.length;for(const k of L){const im=new Image();im.onload=()=>{ICI[k]=im;if(--n<=0&&typeof drawInv==='function'){try{drawInv();actKey=''}catch(e){}}};im.onerror=()=>{--n};im.src='art/ic/'+k+'.png?v=1'}}).catch(()=>{});
-function drawIcon(g,id,S){g.clearRect(0,0,S,S);if(!id)return;{const im=ICI[icKey(id)];if(im){g.drawImage(im,S*.04,S*.04,S*.92,S*.92);return}}g.save();g.scale(S/48,S/48);g.lineJoin='round';g.lineCap='round';g.strokeStyle=OL;g.lineWidth=2.4;
+function drawIcon(g,id,S){g.clearRect(0,0,S,S);if(!id)return;{const im=ICI[icKey(id)];if(im){g.drawImage(im,S*.04,S*.04,S*.92,S*.92);return}const A=typeof ART!=='undefined'&&ART[id];if(A&&A.ok){const k=S*.9/Math.max(A.w,A.h);g.drawImage(A.img,(S-A.w*k)/2,(S-A.h*k)/2,A.w*k,A.h*k);return}}g.save();g.scale(S/48,S/48);g.lineJoin='round';g.lineCap='round';g.strokeStyle=OL;g.lineWidth=2.4;
  const it=ITEM[id]||{};
  if(it.seed){const C=CROPS[it.seed];g.fillStyle='#e9d3a8';g.beginPath();g.moveTo(12,14);g.lineTo(36,14);g.lineTo(39,42);g.lineTo(9,42);g.closePath();g.fill();g.stroke();g.fillStyle='#c9a46a';g.fillRect(14,10,20,6);g.strokeRect(14,10,20,6);
   g.fillStyle=C.c;g.beginPath();g.arc(24,29,7,0,7);g.fill();g.stroke();g.fillStyle=C.lf;g.beginPath();g.ellipse(24,20,3,5,0,0,7);g.fill()}
@@ -286,7 +310,7 @@ function drawIcon(g,id,S){g.clearRect(0,0,S,S);if(!id)return;{const im=ICI[icKey
  else if(id==='weed'){g.fillStyle='#3fa845';for(const a of[-.5,0,.5]){g.beginPath();g.ellipse(24+a*14,30-Math.abs(a)*4,4,12,a,0,7);g.fill();g.stroke()}}
  else if(id==='pet'){g.fillStyle='#ff5d8a';g.beginPath();g.moveTo(24,40);g.bezierCurveTo(6,28,10,10,24,20);g.bezierCurveTo(38,10,42,28,24,40);g.fill();g.stroke()}
  g.restore()}
-function cropProduce(g,k,x,y,r){const C=CROPS[k];g.save();g.lineWidth=2.2;g.strokeStyle=OL;
+function cropProduce(g,k,x,y,r){const C=CROPS[k];{const im=ICI['item_'+k];if(im){g.drawImage(im,x-r*1.15,y-r*1.15,r*2.3,r*2.3);return}}g.save();g.lineWidth=2.2;g.strokeStyle=OL;if(!{turnip:1,carrot:1,potato:1,straw:1,tomato:1,pumpkin:1}[k]){g.fillStyle=C.c;g.beginPath();g.arc(x,y,r*.8,0,7);g.fill();g.stroke();g.restore();return}
  if(k==='turnip'){g.fillStyle=C.c;g.beginPath();g.arc(x,y+2,r*.8,0,7);g.fill();g.stroke();g.fillStyle=C.c2;g.beginPath();g.arc(x,y-r*.1,r*.8,Math.PI*1.1,Math.PI*1.9);g.fill();g.fillStyle=C.lf;for(const a of[-.4,0,.4]){g.beginPath();g.ellipse(x+a*r,y-r*.9,r*.2,r*.5,a,0,7);g.fill();g.stroke()}}
  else if(k==='carrot'){g.fillStyle=C.c;g.beginPath();g.moveTo(x-r*.55,y-r*.5);g.lineTo(x+r*.55,y-r*.5);g.lineTo(x,y+r);g.closePath();g.fill();g.stroke();g.fillStyle=C.lf;for(const a of[-.35,0,.35]){g.beginPath();g.ellipse(x+a*r,y-r*.95,r*.17,r*.45,a,0,7);g.fill();g.stroke()}}
  else if(k==='potato'){g.fillStyle=C.c;g.beginPath();g.ellipse(x,y,r*.9,r*.7,.3,0,7);g.fill();g.stroke();g.fillStyle='#a87a3a';for(const [a,b] of[[-.3,-.2],[.3,.1],[0,.35]]){g.beginPath();g.arc(x+a*r,y+b*r,r*.08,0,7);g.fill()}}
@@ -427,7 +451,7 @@ function drawGroundStatic(xa,xb,ya,yb){
   const p=iso(xx,y,h);x.drawImage(soilTop(wet?1:0,hsh(xx,y)*3|0),p[0]-TW/2,p[1])}}
 
 /* 물체 */
-function drawObj(o,t){const X=o.x,Y=o.y;if(o.t==='fence'&&artOK('fence')){const isF=(a,b)=>{const q=S.O[b]&&S.O[b][a];return q&&q.t==='fence'},fl=(isF(X,Y-1)||isF(X,Y+1))&&!(isF(X-1,Y)||isF(X+1,Y)),a=ART.fence,s2=TW/ART_BASE,p=iso(X+.5,Y+.5);shadow(X+.5,Y+.55,.4,.12,.2);x.save();x.translate(p[0],p[1]);if(fl)x.scale(-1,1);x.drawImage(a.img,-a.ax*s2,-a.ay*s2,a.w*s2,a.h*s2);x.restore();return}if(o.t==='sign'){shadow(X+.5,Y+.6,.45,.16,.25);if(artOK('sign')){drawArt('sign',X+.5,Y+.5);const s2=TW/ART_BASE,p=iso(X+.5,Y+.5);x.save();x.translate(p[0]-2*s2,p[1]-110*s2);x.transform(1,.5,0,1,0,0);x.font=`900 ${Math.min(11,(150/Math.max(4,(S.name||'').length)))*DPR}px Galmuri11`;x.textAlign='center';x.textBaseline='middle';x.fillStyle='#5a2e12';x.fillText(S.name||'팡팡농장',0,0,180*s2);x.restore()}else box(X+.2,Y+.45,.6,.08,.7,'#c48a58');return}const AK={rock:'rock',weed:'weed',scare:'scarecrow',bin:'bin',crate:'crate',bench:'bench',mail:'mailbox',well:'well',barrel:'barrel',hay:'hay',bed:'bed',flower:'flower',lamp:'lamp',sprinkler:'sprinkler',wild:'wildflower',bush:o.v>.72&&artOK('bush_berry')?'bush_berry':'bush'}[o.t];if(AK&&artOK(AK)){if(o.t!=='bed'&&o.t!=='wild')shadow(X+.5,Y+.55,o.t==='weed'||o.t==='flower'||o.t==='sprinkler'?.3:o.t==='lamp'?.22:.4,o.t==='weed'||o.t==='flower'?.13:.18,.28);drawArt(AK,X+.5,Y+.5);if(o.t==='bin'){const p=iso(X+.5,Y+.5,1.05+Math.sin(t*2)*.03);x.fillStyle='#ffd23f';x.strokeStyle=OL;x.lineWidth=3*DPR;x.font=`900 ${10*DPR}px Galmuri11`;x.textAlign='center';x.strokeText('출하',p[0],p[1]);x.fillText('출하',p[0],p[1])}return}
+function drawObj(o,t){const X=o.x,Y=o.y;if(o.t==='fence'&&artOK('fence')){const isF=(a,b)=>{const q=S.O[b]&&S.O[b][a];return q&&q.t==='fence'},fl=(isF(X,Y-1)||isF(X,Y+1))&&!(isF(X-1,Y)||isF(X+1,Y)),a=ART.fence,s2=TW/ART_BASE,p=iso(X+.5,Y+.5);shadow(X+.5,Y+.55,.4,.12,.2);x.save();x.translate(p[0],p[1]);if(fl)x.scale(-1,1);x.drawImage(a.img,-a.ax*s2,-a.ay*s2,a.w*s2,a.h*s2);x.restore();return}if(o.t==='sign'){shadow(X+.5,Y+.6,.45,.16,.25);if(artOK('sign')){drawArt('sign',X+.5,Y+.5);const s2=TW/ART_BASE,p=iso(X+.5,Y+.5);x.save();x.translate(p[0]-2*s2,p[1]-110*s2);x.transform(1,.5,0,1,0,0);x.font=`900 ${Math.min(11,(150/Math.max(4,(S.name||'').length)))*DPR}px Galmuri11`;x.textAlign='center';x.textBaseline='middle';x.fillStyle='#5a2e12';x.fillText(S.name||'팡팡농장',0,0,180*s2);x.restore()}else box(X+.2,Y+.45,.6,.08,.7,'#c48a58');return}const AK={rock:'rock',weed:'weed',scare:'scarecrow',bin:'bin',crate:'crate',bench:'bench',mail:'mailbox',well:'well',barrel:'barrel',hay:'hay',bed:'bed',flower:'flower',lamp:'lamp',sprinkler:'sprinkler',wild:'wildflower',bush:o.v>.72&&artOK('bush_berry')?'bush_berry':'bush',keg_pickle:'keg_pickle',mill:'mill',jam_maker:'jam_maker',keg_ferment:'keg_ferment',oven:'oven'}[o.t];if(AK&&artOK(AK)){if(o.t!=='bed'&&o.t!=='wild')shadow(X+.5,Y+.55,o.t==='weed'||o.t==='flower'||o.t==='sprinkler'?.3:o.t==='lamp'?.22:.4,o.t==='weed'||o.t==='flower'?.13:.18,.28);drawArt(AK,X+.5,Y+.5);if(ITEM[o.t]&&ITEM[o.t].mach)machBadge(o,t);if(o.t==='bin'){const p=iso(X+.5,Y+.5,1.05+Math.sin(t*2)*.03);x.fillStyle='#ffd23f';x.strokeStyle=OL;x.lineWidth=3*DPR;x.font=`900 ${10*DPR}px Galmuri11`;x.textAlign='center';x.strokeText('출하',p[0],p[1]);x.fillText('출하',p[0],p[1])}return}
  switch(o.t){
  case'house':{shadow(X+2.2,Y+3.1,2.3,1,.3);if(artOK('house')){drawArt('house',X+4,Y+3);break}box(X+.1,Y+.1,3.8,2.8,2.2,'#fff1dc',0,OLS,7);box(X,Y+2.8,4,.25,.25,'#c9b49a');
   winY(X+.45,X+1.15,Y+2.9,.9,1.6,'#ff9ab8');winY(X+2.8,X+3.5,Y+2.9,.9,1.6,'#ff9ab8');winX(X+3.9,Y+.7,Y+1.5,.95,1.6);winX(X+3.9,Y+1.9,Y+2.5,.95,1.6);
@@ -505,7 +529,7 @@ function render(t){if(!S)return;const P=S.pl,want=[(P.x-P.y)*TW/2,(P.x+P.y)*TH/2
 
 /* ===== 게임 상태 · 규칙 ===== */
 let S=null,state='title',paused=false;
-const MIN_SEC=.3; // 게임 1분 = 실제 0.3초 (하루 6시~24시 ≈ 5분 24초)
+const MIN_SEC=.833; // 게임 1분 = 실제 0.83초 (하루 6시~24시 ≈ 15분)
 const YARD={x0:17,x1:22,y0:7,y1:12};
 const emptyGrid=()=>Array.from({length:MH},()=>Array(MW).fill(null));
 function newGame(ch,name,nosave){const F=newFarm();S={v:1,ch,name:name||'팡팡농장',day:1,min:360,gold:200,G:F.G,O:F.O,C:emptyGrid(),wet:{},
@@ -564,7 +588,7 @@ function dayPass(n=1,away=false){for(let k=0;k<n;k++){S.day++;
 function sleep(){if(state!=='play')return;state='sleep';sfx.sleep();$('fade').classList.add('on');setTimeout(()=>{dayPass(1);S.pl.x=4.6;S.pl.y=5.6;S.pl.fx=0;S.pl.fy=1;save();hud();
  setTimeout(()=>{$('fade').classList.remove('on');state='play';toast(`${S.day}일차 아침`+(S.rain?' · 비가 와서 물을 안 줘도 돼요':''))},500)},700)}
 /* 주문 */
-function genOrders(){const pool=Object.keys(CROPS).filter(k=>CROPS[k].days<=2+Math.min(5,S.day));if(S.ck.length)pool.push('egg');S.orders=[];
+function genOrders(){const pool=Object.keys(CROPS).filter(k=>unlocked(k)&&CROPS[k].days<=2+Math.min(5,S.day));if(S.ck.length)pool.push('egg');S.orders=[];
  for(let i=0;i<3;i++){const id=pool[(Math.random()*pool.length)|0],v=sellOf(id),q=clamp(Math.round((120+S.day*12)/v),1,8);S.orders.push({id,q,r:Math.round(v*q*1.6/5)*5+10,done:0})}}
 /* 닭 */
 function addChicken(){S.ck.push({x:YARD.x0+1+Math.random()*(YARD.x1-YARD.x0-2),y:YARD.y0+1+Math.random()*3,fx:0,fy:1,mv:0,aff:0,pet:0,heart:0,t:0,tx:0,ty:0})}
@@ -603,7 +627,7 @@ function drawPops(dt){for(const p of POPS){p.t+=dt;const q=iso(p.x,p.y,.8+p.t*1.
 const fmtT=m=>{const h=Math.floor(m/60)%24,mm=Math.floor(m%60/10)*10;return(h<10?'0':'')+h+':'+(mm<10?'0':'')+mm};
 function hud(){if(!S)return;$('hDay').textContent=S.day;$('hTime').textContent=fmtT(S.min)+(S.rain?' ☂':'');$('hGold').textContent=S.gold.toLocaleString()+'G'}
 function drawInv(){if(!S)return;const el=$('inv');el.innerHTML='';S.inv.forEach((s,i)=>{const b=document.createElement('button');if(i===S.sel)b.className='on';const c=document.createElement('canvas');c.width=c.height=72;drawIcon(c.getContext('2d'),s.id,72);b.appendChild(c);const n=document.createElement('b');n.textContent=s.n;b.appendChild(n);
- b.onclick=e=>{e.stopPropagation();S.sel=i;drawInv();const it=ITEM[s.id];tipT(it.n+(it.desc?' · '+it.desc:''))};el.appendChild(b)})}
+ b.onclick=e=>{e.stopPropagation();const it=ITEM[s.id];if(i===S.sel&&it.food!=null&&eatSel())return;S.sel=i;drawInv();tipT(it.n+(it.desc?' · '+it.desc:'')+(it.food?` · 한 번 더 누르면 먹어요 (+${it.food}⚡)`:''))};el.appendChild(b)})}
 let tipTm=0;function tipT(t){$('tip').textContent=t;tipTm=2.5}
 
 /* ===== 행동 버튼 ===== */
@@ -637,7 +661,7 @@ function findPath(tx,ty){const P=S.pl,sx=Math.floor(P.x),sy=Math.floor(P.y),CL=t
  end=end||best;if(!end)return null;TAPFACE=near(end[0],end[1]);const path=[];let c=end;while(c){path.unshift(c);c=prev.get(k(c[0],c[1]))}return path}
 function autoWalk(dt){const P=S.pl;if(TAPWAIT>0){TAPWAIT-=dt;return}
  if(!TAPPATH){if(!TAPQ.length){P.mv=0;return}const [tx,ty]=TAPQ[0],p=findPath(tx,ty);if(!p){TAPQ.shift();toast('거기는 갈 수 없어요');sfx.no();return}TAPPATH=p.map(([a,b])=>[a+.5,b+.5])}
- if(TAPPATH.length){const [gx,gy]=TAPPATH[0],dx=gx-P.x,dy=gy-P.y,d=Math.hypot(dx,dy),sp=3.4*dt;if(d<=sp){P.x=gx;P.y=gy;TAPPATH.shift()}else{P.x+=dx/d*sp;P.y+=dy/d*sp;P.fx=dx/d;P.fy=dy/d;P.mv=1}return}
+ if(TAPPATH.length){const [gx,gy]=TAPPATH[0],dx=gx-P.x,dy=gy-P.y,d=Math.hypot(dx,dy),sp=3.4*dt*(S.en>0?1:.55);if(d<=sp){P.x=gx;P.y=gy;TAPPATH.shift()}else{P.x+=dx/d*sp;P.y+=dy/d*sp;P.fx=dx/d;P.fy=dy/d;P.mv=1}return}
  const [tx,ty]=TAPQ.shift(),F=TAPFACE||[tx,ty];TAPPATH=null;P.mv=0;const fx=F[0]+.5-P.x,fy=F[1]+.5-P.y,l=Math.hypot(fx,fy)||1;P.fx=fx/l;P.fy=fy/l;actKey='';ACT=decide();if(window.__f)(__f.log=__f.log||[]).push([tx,ty,ACT&&ACT.l,Math.floor(P.x),Math.floor(P.y),target()]);if(ACT&&ACT.ic==='sleep'&&!(SLEEPARM>Date.now())){SLEEPARM=Date.now()+4000;toast('한 번 더 누르면 잠자요 💤');TAPWAIT=.12;return}if(ACT){SLEEPARM=0;ACT.f();GD=1;hud()}else sfx.no();TAPWAIT=.12}
 (function(){let pid=null,lt='';
  cv.addEventListener('pointerdown',e=>{if(state!=='play'||paused)return;unlock();e.preventDefault();const [tx,ty]=tapTile(e),P=S.pl;KEYMODE=0;
@@ -646,7 +670,7 @@ function autoWalk(dt){const P=S.pl;if(TAPWAIT>0){TAPWAIT-=dt;return}
  cv.addEventListener('pointermove',e=>{if(e.pointerId!==pid||state!=='play')return;const [tx,ty]=tapTile(e),key=tx+','+ty;if(key===lt)return;lt=key;tapAdd(tx,ty)});
  const up=e=>{if(e.pointerId===pid){pid=null;DRAGGING=0}};cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up)})();
 function move(dt){const P=S.pl;let jx=IN.x+(KEY.r?1:0)-(KEY.l?1:0),jy=IN.y+(KEY.dn?1:0)-(KEY.u?1:0);const l=Math.hypot(jx,jy);if(l<.05)return false;if(TAPQ.length||TAPPATH){TAPQ.length=0;TAPPATH=null}KEYMODE=1;if(l>1){jx/=l;jy/=l}
- let wx=jx+jy,wy=jy-jx;const wl=Math.hypot(wx,wy);wx/=wl;wy/=wl;const sp=3.1*Math.min(1,l)*dt;P.fx=wx;P.fy=wy;P.mv=1;
+ let wx=jx+jy,wy=jy-jx;const wl=Math.hypot(wx,wy);wx/=wl;wy/=wl;const sp=3.1*Math.min(1,l)*dt*(S.en>0?1:.55);P.fx=wx;P.fy=wy;P.mv=1;
  if(!hits(P.x+wx*sp,P.y))P.x+=wx*sp;if(!hits(P.x,P.y+wy*sp))P.y+=wy*sp;return true}
 
 /* ===== 창: 상점 · 출하 · 주문 ===== */
@@ -666,8 +690,8 @@ function openOrders(){const L=S.orders.map((o,i)=>{const have=count(o.id);return
  openPanel(`주문 게시판 · ${S.day}일차`,L.join('')+'<div class="it"><div></div><div><small>주문은 매일 아침 새로 바뀌어요. 시장가보다 더 많이 받아요!</small></div><div></div></div>')}
 $('pnL').addEventListener('click',e=>{const b=e.target.closest('button[data-a]');if(!b||b.disabled)return;const [a,v]=b.dataset.a.split(':');
  if(a==='buy'){const it=ITEM[v];if(S.gold<it.price)return;S.gold-=it.price;if(v==='chicken'){addChicken();toast('닭이 닭장 마당에 왔어요!');sfx.cluck()}else{give(v);sfx.coin()}hud();openShop()}
- else if(a==='sell'){const n=count(v),g=sellOf(v)*n;if(take(v,n)){S.gold+=g;S.st.earn+=g;sfx.coin();toast(`+${g.toLocaleString()}G`);hud();openSell()}}
- else if(a==='ord'){const o=S.orders[+v];if(o&&!o.done&&take(o.id,o.q)){o.done=1;S.gold+=o.r;S.st.earn+=o.r;sfx.get();toast(`주문 완료! +${o.r}G`);hud();openOrders()}}
+ else if(a==='sell'){const n=count(v),g=sellOf(v)*n;if(take(v,n)){S.gold+=g;S.st.earn+=g;gainSell(g);sfx.coin();toast(`+${g.toLocaleString()}G`);hud();openSell()}}
+ else if(a==='ord'){const o=S.orders[+v];if(o&&!o.done&&take(o.id,o.q)){o.done=1;S.gold+=o.r;S.st.earn+=o.r;gainSell(o.r);sfx.get();toast(`주문 완료! +${o.r}G`);hud();openOrders()}}
  save()});
 
 /* ===== 메뉴 ===== */
@@ -677,7 +701,7 @@ $('bPause').onclick=()=>menu(!paused);$('bResume').onclick=()=>menu(false);$('bS
 $('bMenu').onclick=()=>{save();hide('ovPause');paused=false;state='title';bgm(false);titleUI();show('ovTitle')};
 
 /* ===== 시작 화면 ===== */
-const TUT={"goal":"팡팡이와 함께 나만의 농장을 가꿔요!<br>땅 갈기 → 씨앗 심기 → 물 주기 → 자고 나면 쑥쑥<br>출하함에서 팔고 상점에서 씨앗·닭·꾸미기를 사요<br>주문 게시판의 주문을 채우면 보상이 더 커요","touch":[["칸 톡","팡팡이가 가서 알맞은 일 하기"],["여러 칸 쓱","줄지어 차례로 일하기"],["팡팡이 톡","하던 일 멈추기"],["아래 칸","씨앗·물건 고르기"]],"pc":[["클릭 / 드래그","가서 일하기"],["WASD / 방향키","직접 걷기"],["SPACE / E","바라보는 칸에 행동"],["1~9 · ESC","물건 고르기 · 메뉴"]]};
+const TUT={"goal":"팡팡이와 함께 나만의 농장을 가꿔요!<br>땅 갈기 → 씨앗 심기 → 물 주기 → 자고 나면 쑥쑥<br>출하함에서 팔고 상점에서 씨앗·닭·꾸미기를 사요<br>주문 게시판의 주문을 채우면 보상이 더 커요","touch":[["⚡ 행동력","일하면 줄어요 · 음식 먹기·잠으로 회복"],["칸 톡","팡팡이가 가서 알맞은 일 하기"],["여러 칸 쓱","줄지어 차례로 일하기"],["팡팡이 톡","하던 일 멈추기"],["아래 칸","씨앗·물건 고르기"]],"pc":[["클릭 / 드래그","가서 일하기"],["WASD / 방향키","직접 걷기"],["SPACE / E","바라보는 칸에 행동"],["1~9 · ESC","물건 고르기 · 메뉴"]]};
 let pick=0;
 function titleUI(){$('bContinue').hidden=!store.get('farm-save');const sh2=$('show');sh2.innerHTML='';[0,1,2,5].forEach((ch,i)=>{const c=cnv(96,96);drawPang(c.getContext('2d'),ch,48,52,34,true,false);c.style.cssText='width:52px;height:52px;animation:kb 1.2s ease-in-out '+(-i*.3)+'s infinite';sh2.appendChild(c)})}
 const st=document.createElement('style');st.textContent='#show{display:flex;gap:6px;justify-content:center}@keyframes kb{50%{transform:translateY(-6px)}}';document.head.appendChild(st);
@@ -695,7 +719,7 @@ $('bStart').onclick=()=>{unlock();newGame(pick,$('farmName').value.trim());const
 /* ===== 진행 ===== */
 let last=0,saveT=0,actT=0;
 function loop(t){requestAnimationFrame(loop);const dt=Math.min(.05,(t-(last||t))/1000);last=t;const ts=t/1000;
- if(S&&state==='play'&&!paused){if(!move(dt))autoWalk(dt);chickens(dt);S.min+=dt/MIN_SEC;if(S.min>=1440){toast('너무 늦었어요… 집으로!');S.pl.x=4.6;S.pl.y=5.6;sleep()}
+ if(S&&state==='play'&&!paused){if(!move(dt))autoWalk(dt);chickens(dt);S.min+=dt/MIN_SEC;if(S.min>=1440)faint();
   saveT+=dt;if(saveT>10){saveT=0;save()}actT-=dt;if(actT<=0){actT=.1;actUpdate();hud()}}
  if(tipTm>0){tipTm-=dt;if(tipTm<=0)$('tip').textContent=''}
  if(S){render(ts);drawPops(dt)}else{x.fillStyle='#4f9a3a';x.fillRect(0,0,W,H)}}
@@ -704,6 +728,85 @@ resize();titleUI();
 if(!load()){newGame(0,'',1);S.pl.x=8;S.pl.y=12}
 requestAnimationFrame(loop);
 if(location.hash==='#test')window.__f={iso:(a,b,h)=>iso(a,b,h),get TQ(){return TAPQ},get DPR(){return DPR},get S(){return S},set S(v){S=v},newGame,dayPass,decide,doAct,move,IN,KEY,begin,openShop,openSell,openOrders,closePanel,give,save,load,get state(){return state}};
+/* ===== 알파: 행동력 · 레벨 · 가공 · 정산 · 기절 ===== */
+var LVUNL={1:['turnip','carrot','potato','cabbage','flower','fence','bench','lamp','chicken'],3:['tomato','corn','keg_pickle'],5:['straw','pumpkin','mill','jam_maker'],8:['grape','wheat','keg_ferment'],10:['sprinkler','oven']};
+function unlockLv(id){if(!LVUNL)return 1;for(const l in LVUNL)if(LVUNL[l].includes(id))return +l;return 1}
+function unlocked(id){return !S||(S.lv||1)>=unlockLv(id)}
+const LVMAX=20,xpNeed=l=>40+l*30;
+const EN_MAX=100,COST={'땅 갈기':2,'심기':1,'물 주기':1,'수확':1,'돌 깨기':4,'풀 뽑기':4,'꽃 꺾기':1};
+const RECIPES={
+ keg_pickle:[{in:{carrot:2},out:'pickle'},{in:{turnip:3},out:'pickle'},{in:{potato:2},out:'pickle'},{in:{cabbage:1},out:'pickle'}],
+ mill:[{in:{wheat:3},out:'flour'},{in:{corn:2},out:'cornmeal'}],
+ jam_maker:[{in:{straw:3},out:'jam_straw'},{in:{grape:3},out:'jam_grape'}],
+ keg_ferment:[{in:{grape:2},out:'juice_grape'},{in:{tomato:3},out:'juice_tomato'}],
+ oven:[{in:{flour:1,egg:1},out:'bread'},{in:{pumpkin:1,flour:1},out:'pumpkin_pie'},{in:{potato:1,carrot:1,cabbage:1},out:'soup'}]};
+function ensureAlpha(){if(!S)return;if(S.lv==null){S.lv=1;S.xp=0}if(S.en==null)S.en=EN_MAX;if(!S.mach)S.mach={};if(!S.today)S.today={earn:0,hv:0,made:0,xp:0}}
+/* 경험치 */
+function addXP(n,tx,ty){ensureAlpha();n=Math.round(n);if(n<=0)return;S.xp+=n;S.today.xp+=n;if(tx!=null)pop(tx,ty,`+${n} EXP`,'#9fe8ff');
+ while(S.lv<LVMAX&&S.xp>=xpNeed(S.lv)){S.xp-=xpNeed(S.lv);S.lv++;const L=(LVUNL[S.lv]||[]).map(k=>ITEM[k]?ITEM[k].n:k);sfx.get();setTimeout(()=>toast(`레벨 ${S.lv}!`+(L.length?' · 새로 열림: '+L.join(', '):'')),300)}statUI()}
+function gainSell(g){addXP(g/25)}
+/* 행동력 */
+function spend(c){ensureAlpha();if(S.en<c){toast('힘이 없어요… 음식을 먹거나 집에서 쉬어요');sfx.no();return false}S.en=Math.max(0,S.en-c);statUI();return true}
+function eatSel(){const id=selId(),it=ITEM[id];if(!it||it.food==null)return false;ensureAlpha();if(S.en>=EN_MAX){toast('지금은 배불러요');return true}
+ if(take(id)){const v=Math.max(3,it.food||Math.round(sellOf(id)/6));S.en=Math.min(EN_MAX,S.en+v);sfx.get();toast(`${it.n} 냠! +${v}⚡`);statUI();save()}return true}
+for(const k in CROPS)if(ITEM[k]&&ITEM[k].food==null)ITEM[k].food=Math.max(4,Math.round(CROPS[k].sell/8));
+/* 행동 감싸기: 행동력·경험치·가공 시설 */
+const _decide=decide;
+decide=function(){ensureAlpha();const T=target();if(T){const o=objAt(T[0],T[1]);if(o&&ITEM[o.t]&&ITEM[o.t].mach)return machAct(o)}
+ const a=_decide();if(!a||a.dim)return a;const c=COST[a.l];if(c==null)return a;const f=a.f,T2=target();
+ a.f=()=>{if(!spend(c))return;const before=S.st.hv;f();const [tx,ty]=T2||[0,0];
+  if(a.l==='수확'&&S.st.hv>before){S.today.hv++;const cr=S.C[ty]&&S.C[ty][tx],k=a.ic;addXP(3+(CROPS[k]?CROPS[k].days*2:2),tx,ty)}
+  else if(a.l==='심기')addXP(1);else if(c>=4)addXP(2)};
+ return a};
+/* 가공 시설 */
+const mkey=o=>o.x+','+o.y;
+function machAct(o){const m=S.mach[mkey(o)],it=ITEM[o.t];
+ if(m&&S.day>=m.ready)return{l:'꺼내기',ic:m.out,f:()=>{give(m.out);delete S.mach[mkey(o)];S.today.made++;addXP(10,o.x,o.y);pop(o.x,o.y,'+1 '+ITEM[m.out].n);sfx.get();save()}};
+ if(m)return{l:`${ITEM[m.out].n} 만드는 중`,ic:m.out,dim:1,f:()=>toast(`${ITEM[m.out].n}: 내일 아침에 완성돼요`)};
+ return{l:it.n,ic:'act_process',f:()=>openMach(o)}}
+function openMach(o){const it=ITEM[o.t],L=RECIPES[o.t].map((r,i)=>{const need=Object.entries(r.in),ok=need.every(([k,n])=>count(k)>=n);
+  return row(r.out,ITEM[r.out].n,need.map(([k,n])=>`${ITEM[k].n} ${n} (${count(k)})`).join(' + ')+` → 내일 · ${sellOf(r.out)}G`,'넣기',`mk:${o.x},${o.y},${i}`,!ok)});
+ openPanel(it.n,L.join('')+'<div class="it"><div></div><div><small>재료를 넣으면 다음 날 아침에 완성돼요. 가공품은 더 비싸게 팔리고, 먹으면 힘이 많이 나요.</small></div><div></div></div>')}
+$('pnL').addEventListener('click',e=>{const b=e.target.closest('button[data-a]');if(!b||b.disabled)return;const [a,v]=b.dataset.a.split(':');if(a!=='mk')return;
+ const [mx,my,ri]=v.split(',').map(Number),o=S.O[my][mx],r=RECIPES[o.t][ri];if(!Object.entries(r.in).every(([k,n])=>count(k)>=n))return;
+ for(const [k,n] of Object.entries(r.in))take(k,n);S.mach[mx+','+my]={out:r.out,ready:S.day+1};addXP(4);sfx.plant();toast(`${ITEM[r.out].n} 만들기 시작!`);closePanel();save()});
+function machBadge(o,t){const m=S.mach&&S.mach[mkey(o)];if(!m)return;const p=iso(o.x+.5,o.y+.5,1.15+Math.sin(t*3)*.04),r=TW*.13;
+ if(S.day>=m.ready){x.fillStyle='#fff';x.strokeStyle=OL;x.lineWidth=2*DPR;x.beginPath();x.arc(p[0],p[1],r,0,7);x.fill();x.stroke();const im=ICI[icKey(m.out)];if(im)x.drawImage(im,p[0]-r*.85,p[1]-r*.85,r*1.7,r*1.7)}
+ else{x.fillStyle='rgba(255,255,255,.75)';for(let i=0;i<3;i++){const k=(t*.6+i/3)%1;x.globalAlpha=1-k;x.beginPath();x.arc(p[0]+Math.sin(k*6+i)*TW*.04,p[1]-k*TW*.25,TW*(.03+k*.04),0,7);x.fill()}x.globalAlpha=1}}
+/* 상점 (레벨 해금) */
+openShop=function(){ensureAlpha();const L=[],lock=id=>unlocked(id)?'':`Lv ${unlockLv(id)}에 열려요`;
+ const r2=(id,name,desc,price,extra)=>{const lk=lock(id);return row(id,name,lk||desc,lk?'잠김':price+'G','buy:'+id,!!lk||S.gold<price||extra)};
+ L.push('<div class="hd">SEEDS · 씨앗</div>');for(const k of Object.keys(CROPS).sort((a,b)=>unlockLv(a)-unlockLv(b))){const id='seed_'+k,it=ITEM[id];L.push(r2(k,it.n,it.desc,it.price).replace(`data-ic="${k}"`,`data-ic="${id}"`).replace(`buy:${k}"`,`buy:${id}"`))}
+ L.push('<div class="hd">MACHINE · 가공 시설</div>');for(const id of['keg_pickle','mill','jam_maker','keg_ferment','oven'])L.push(r2(id,ITEM[id].n,ITEM[id].desc,ITEM[id].price));
+ L.push('<div class="hd">ANIMAL · 동물</div>');L.push(r2('chicken','닭',ITEM.chicken.desc+` (${S.ck.length}/10)`,ITEM.chicken.price,S.ck.length>=10));
+ L.push('<div class="hd">TOOL · 도구</div>');L.push(r2('sprinkler','스프링클러',ITEM.sprinkler.desc,150));
+ L.push('<div class="hd">DECO · 꾸미기</div>');for(const id of['flower','bench','lamp','fence'])L.push(r2(id,ITEM[id].n,ITEM[id].desc,ITEM[id].price));
+ openPanel(`상점 · ${S.gold.toLocaleString()}G`,L.join(''))};
+/* 씨앗 해금 검사: 잠긴 씨앗은 살 수 없지만 이미 가진 것은 심을 수 있어요 */
+/* 하루 넘기기 · 잠 · 기절 · 정산 */
+const _dayPass=dayPass;dayPass=function(n=1,away=false){ensureAlpha();_dayPass(n,away);S.en=EN_MAX;statUI()};
+function canSleep(){return S.min>=19*60||S.en<=0}
+const _sleep=sleep;
+sleep=function(force){if(state!=='play')return;ensureAlpha();if(!force&&!canSleep()){toast('아직 일러요 · 저녁 7시부터 잘 수 있어요');sfx.no();return}
+ const sum={...S.today,day:S.day,gold:S.gold,lv:S.lv};S.today={earn:0,hv:0,made:0,xp:0};_sleep();setTimeout(()=>daySummary(sum),1500)};
+function faint(){if(state!=='play')return;ensureAlpha();const lose=Math.min(100,Math.floor(S.gold*.1));S.gold-=lose;const sum={...S.today,day:S.day,gold:S.gold,lv:S.lv,faint:lose};S.today={earn:0,hv:0,made:0,xp:0};
+ state='sleep';sfx.sleep();$('fade').classList.add('on');setTimeout(()=>{dayPass(1);S.min=720;S.en=Math.round(EN_MAX*.5);S.pl.x=4.6;S.pl.y=5.6;S.pl.fx=0;S.pl.fy=1;save();hud();statUI();
+  setTimeout(()=>{$('fade').classList.remove('on');state='play';daySummary(sum)},500)},900)}
+function daySummary(s){const box=(t,v)=>`<div class="it"><div></div><div><b>${t}</b></div><div style="font-weight:900;color:#ffd23f">${v}</div></div>`;
+ openPanel(`${s.day}일차 정산`,(s.faint!=null?`<div class="it"><div></div><div><b>너무 늦게까지 일해서 기절했어요</b><small>낮 12시에 일어났어요 · 치료비 ${s.faint}G · 힘 절반만 회복</small></div><div></div></div>`:'')
+  +box('오늘 번 돈',(s.earn||0).toLocaleString()+'G')+box('수확',(s.hv||0)+'개')+box('가공품',(s.made||0)+'개')+box('경험치',`+${s.xp||0}`)
+  +box('레벨',`Lv ${S.lv} (${S.xp}/${xpNeed(S.lv)})`)+box('가진 돈',S.gold.toLocaleString()+'G')
+  +`<div class="it"><div></div><div><small>${S.rain?'오늘은 비가 와서 물을 안 줘도 돼요. ':''}가공 시설에 넣은 재료는 지금 꺼낼 수 있어요.</small></div><div></div></div>`)}
+/* 오늘 번 돈 추적 */
+const _gainSell=gainSell;gainSell=function(g){ensureAlpha();S.today.earn+=g;_gainSell(g)};
+/* 상단 행동력 · 레벨 표시 */
+(function(){const f=$('field'),d=document.createElement('div');d.id='stat';d.innerHTML='<div class="lv"><i class="ic lvI"></i><b id="sLv">1</b><span class="xb"><i id="sXp"></i></span></div><div class="en"><i class="ic enI"></i><span class="eb"><i id="sEn"></i></span><b id="sEnT">100</b></div>';f.appendChild(d)})();
+function statUI(){if(!S||!$('sLv'))return;ensureAlpha();$('sLv').textContent=S.lv;$('sXp').style.width=Math.min(100,S.xp/xpNeed(S.lv)*100)+'%';$('sEn').style.width=(S.en/EN_MAX*100)+'%';$('sEnT').textContent=Math.round(S.en);$('stat').classList.toggle('low',S.en<=15)}
+const _hud=hud;hud=function(){_hud();statUI()};
+const _begin=begin;begin=function(){ensureAlpha();_begin();statUI()};
+ensureAlpha();statUI();
+if(window.__f)Object.assign(window.__f,{openShop,ensureAlpha,faint,addXP,openMach,machAct,sleepN:()=>sleep(),doAct2:()=>doAct(),get ACT(){return decide()}});
+
 })();
 
 </script>

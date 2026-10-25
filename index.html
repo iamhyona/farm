@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792869000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792870000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -134,6 +134,8 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 .pnl .it button[disabled]{opacity:.35}
 .pnl .hd{padding:7px 10px;font:700 11px Silkscreen;color:var(--g2);letter-spacing:.1em;background:#10132b}
 .phS-b[hidden]{display:none!important}
+
+.joy,.act{display:none!important}
 
 </style></head>
 
@@ -478,9 +480,10 @@ function drawChicken(c,t){const p=iso(c.x,c.y),b=c.mv?Math.abs(Math.sin(t*14+c.x
 function outsideTrees(L){const [a0]=scr2w(0,0),[a1]=scr2w(W,H),[,b0]=scr2w(W,0),[,b1]=scr2w(0,H);for(let y=Math.floor(b0)-3;y<=Math.ceil(b1)+3;y++)for(let xx=Math.floor(a0)-3;xx<=Math.ceil(a1)+3;xx++){if(xx>=0&&y>=0&&xx<MW&&y<MH)continue;const v=hsh(xx,y,2);if(v<.15)continue;L.push([xx+y+.5,()=>{shadow(xx+.55,y+.65,.55,.25,.3);const tk=treeKeys();if(tk.length)drawArt(tk[(v*tk.length*7|0)%tk.length],xx+.5,y+.5,0,v>.6?1.2:1);else drawSpr(treeSpr(v,v>.6),xx+.5,y+.62)}])}}
 
 let nightA=0,clouds=[...Array(5)].map((_,i)=>({x:i*7,y:i*5+2,s:1+i%3*.5}));
-function render(t){if(!S)return;const P=S.pl,want=[(P.x-P.y)*TW/2,(P.x+P.y)*TH/2];CX+=(want[0]-CX)*.18;CY+=(want[1]-CY)*.18;
+function render(t){if(!S)return;const P=S.pl,want=[(P.x-P.y)*TW/2,(P.x+P.y)*TH/2];if(!(typeof DRAGGING!=='undefined'&&DRAGGING)){CX+=(want[0]-CX)*.18;CY+=(want[1]-CY)*.18}
  x.setTransform(1,0,0,1,0,0);x.fillStyle='#6aae47';x.fillRect(0,0,W,H);drawGround(t);
- const T=target();if(T&&state==='play'){const q=[iso(T[0],T[1],.11),iso(T[0]+1,T[1],.11),iso(T[0]+1,T[1]+1,.11),iso(T[0],T[1]+1,.11)];x.save();x.setLineDash([5*DPR,4*DPR]);x.lineDashOffset=-t*20;poly(q,'rgba(255,240,150,.2)','#fff6b0',2);x.restore()}
+ if(state==='play'&&typeof TAPQ!=='undefined')TAPQ.forEach((q,i)=>{const pq=[iso(q[0],q[1],.11),iso(q[0]+1,q[1],.11),iso(q[0]+1,q[1]+1,.11),iso(q[0],q[1]+1,.11)];x.save();x.setLineDash([5*DPR,4*DPR]);x.lineDashOffset=-t*20;poly(pq,i?'rgba(255,255,255,.12)':'rgba(255,240,150,.25)',i?'rgba(255,255,255,.7)':'#fff6b0',2);x.restore()});
+ const T=target();if(T&&state==='play'&&typeof KEYMODE!=='undefined'&&KEYMODE){const q=[iso(T[0],T[1],.11),iso(T[0]+1,T[1],.11),iso(T[0]+1,T[1]+1,.11),iso(T[0],T[1]+1,.11)];x.save();x.setLineDash([5*DPR,4*DPR]);x.lineDashOffset=-t*20;poly(q,'rgba(255,240,150,.2)','#fff6b0',2);x.restore()}
  const L=[];for(let y=0;y<MH;y++)for(let xx=0;xx<MW;xx++){const o=S.O[y][xx];if(o&&o.t!=='part'){const w=o.w||1,d=o.d||1;L.push([xx+w-1+y+d-1+.5,()=>drawObj(o,t)])}const c=S.C[y][xx];if(c)L.push([xx+y+.4,()=>drawCrop(c,xx,y,t)])}
  outsideTrees(L);for(const c of S.ck)L.push([c.x+c.y,()=>drawChicken(c,t)]);L.push([P.x+P.y,()=>drawPlayer(t)]);
  L.sort((a,b)=>a[0]-b[0]);for(const [,f] of L)f();
@@ -616,11 +619,29 @@ addEventListener('keydown',e=>{if(e.target.tagName==='INPUT')return;const k=KM[e
  if(/^[1-9]$/.test(e.key)&&S&&S.inv[+e.key-1]){S.sel=+e.key-1;drawInv()}
  if(e.key==='Escape'){if(panelOpen())closePanel();else if(state==='play')menu(!paused)}});
 const relK=()=>{for(const k in KEY)KEY[k]=0;IN.x=IN.y=0;$('joyK').style.transform=''};addEventListener('keyup',e=>{const k=KM[e.key];if(k)KEY[k]=0});addEventListener('blur',relK);document.addEventListener('visibilitychange',()=>{if(document.hidden){relK();save()}});
-$('cv').addEventListener('pointerdown',e=>{if(state!=='play'||paused)return;unlock();const r=cv.getBoundingClientRect(),[wx,wy]=scr2w((e.clientX-r.left)*DPR,(e.clientY-r.top)*DPR),P=S.pl,tx=Math.floor(wx),ty=Math.floor(wy),dx=tx+.5-P.x,dy=ty+.5-P.y;
- if(Math.hypot(dx,dy)<1.9&&!(tx===Math.floor(P.x)&&ty===Math.floor(P.y))){const l=Math.hypot(dx,dy);P.fx=dx/l;P.fy=dy/l;actKey='';doAct()}});
-function move(dt){const P=S.pl;let jx=IN.x+(KEY.r?1:0)-(KEY.l?1:0),jy=IN.y+(KEY.dn?1:0)-(KEY.u?1:0);const l=Math.hypot(jx,jy);if(l<.05){P.mv=0;return}if(l>1){jx/=l;jy/=l}
+var DRAGGING=0,SLEEPARM=0,TAPFACE=null,TAPQ=[],TAPPATH=null,TAPWAIT=0,KEYMODE=0;
+function tapTile(e){const r=cv.getBoundingClientRect(),[wx,wy]=scr2w((e.clientX-r.left)*DPR,(e.clientY-r.top)*DPR);return[Math.floor(wx),Math.floor(wy)]}
+function tapAdd(tx,ty){if(!inMap(tx,ty))return;if(TAPQ.some(q=>q[0]===tx&&q[1]===ty))return;if(TAPQ.length<40)TAPQ.push([tx,ty])}
+function tapCells(tx,ty){const o=objAt(tx,ty);if(o&&o.w&&(o.w>1||o.d>1)){const c=[];for(let j=0;j<o.d;j++)for(let i=0;i<o.w;i++)c.push([o.x+i,o.y+j]);return c}return[[tx,ty]]}
+function findPath(tx,ty){const P=S.pl,sx=Math.floor(P.x),sy=Math.floor(P.y),CL=tapCells(tx,ty),inC=(a,b)=>CL.some(c=>c[0]===a&&c[1]===b),near=(a,b)=>{let m=9,f=null;for(const c of CL){const d=Math.max(Math.abs(a-c[0]),Math.abs(b-c[1])),o2=Math.abs(a-c[0])+Math.abs(b-c[1]);if(d===1&&(!f||o2<m)){m=o2;f=c}}return f},goal=(a,b)=>!inC(a,b)&&!!near(a,b),ok=(a,b)=>inMap(a,b)&&!solidAt(a,b);
+ if(goal(sx,sy)&&Math.abs(sx-near(sx,sy)[0])+Math.abs(sy-near(sx,sy)[1])===1){TAPFACE=near(sx,sy);return[[sx,sy]]}const prev=new Map(),k=(a,b)=>b*MW+a,Q=[[sx,sy]];prev.set(k(sx,sy),null);let end=null,best=null;
+ const D=[[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]];
+ for(let i=0;i<Q.length&&i<4000;i++){const [a,b]=Q[i];if(goal(a,b)){const nc=near(a,b),orth=Math.abs(a-nc[0])+Math.abs(b-nc[1])===1;if(orth){end=[a,b];break}if(!best)best=[a,b]}
+  for(const [dx,dy] of D){const na=a+dx,nb=b+dy;if(prev.has(k(na,nb))||!ok(na,nb))continue;if(dx&&dy&&(!ok(a+dx,b)||!ok(a,b+dy)))continue;prev.set(k(na,nb),[a,b]);Q.push([na,nb])}}
+ end=end||best;if(!end)return null;TAPFACE=near(end[0],end[1]);const path=[];let c=end;while(c){path.unshift(c);c=prev.get(k(c[0],c[1]))}return path}
+function autoWalk(dt){const P=S.pl;if(TAPWAIT>0){TAPWAIT-=dt;return}
+ if(!TAPPATH){if(!TAPQ.length){P.mv=0;return}const [tx,ty]=TAPQ[0],p=findPath(tx,ty);if(!p){TAPQ.shift();toast('거기는 갈 수 없어요');sfx.no();return}TAPPATH=p.map(([a,b])=>[a+.5,b+.5])}
+ if(TAPPATH.length){const [gx,gy]=TAPPATH[0],dx=gx-P.x,dy=gy-P.y,d=Math.hypot(dx,dy),sp=3.4*dt;if(d<=sp){P.x=gx;P.y=gy;TAPPATH.shift()}else{P.x+=dx/d*sp;P.y+=dy/d*sp;P.fx=dx/d;P.fy=dy/d;P.mv=1}return}
+ const [tx,ty]=TAPQ.shift(),F=TAPFACE||[tx,ty];TAPPATH=null;P.mv=0;const fx=F[0]+.5-P.x,fy=F[1]+.5-P.y,l=Math.hypot(fx,fy)||1;P.fx=fx/l;P.fy=fy/l;actKey='';ACT=decide();if(window.__f)(__f.log=__f.log||[]).push([tx,ty,ACT&&ACT.l,Math.floor(P.x),Math.floor(P.y),target()]);if(ACT&&ACT.ic==='sleep'&&!(SLEEPARM>Date.now())){SLEEPARM=Date.now()+4000;toast('한 번 더 누르면 잠자요 💤');TAPWAIT=.12;return}if(ACT){SLEEPARM=0;ACT.f();GD=1;hud()}else sfx.no();TAPWAIT=.12}
+(function(){let pid=null,lt='';
+ cv.addEventListener('pointerdown',e=>{if(state!=='play'||paused)return;unlock();e.preventDefault();const [tx,ty]=tapTile(e),P=S.pl;KEYMODE=0;
+  if(Math.hypot(tx+.5-P.x,ty+.5-P.y)<.6&&!TAPQ.length&&!TAPPATH){return}if(Math.hypot(tx+.5-P.x,ty+.5-P.y)<.6){if(TAPQ.length||TAPPATH){TAPQ.length=0;TAPPATH=null;toast('하던 일을 멈췄어요')}return}
+  pid=e.pointerId;DRAGGING=1;lt=tx+','+ty;try{cv.setPointerCapture(pid)}catch(_){}tapAdd(tx,ty)});
+ cv.addEventListener('pointermove',e=>{if(e.pointerId!==pid||state!=='play')return;const [tx,ty]=tapTile(e),key=tx+','+ty;if(key===lt)return;lt=key;tapAdd(tx,ty)});
+ const up=e=>{if(e.pointerId===pid){pid=null;DRAGGING=0}};cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up)})();
+function move(dt){const P=S.pl;let jx=IN.x+(KEY.r?1:0)-(KEY.l?1:0),jy=IN.y+(KEY.dn?1:0)-(KEY.u?1:0);const l=Math.hypot(jx,jy);if(l<.05)return false;if(TAPQ.length||TAPPATH){TAPQ.length=0;TAPPATH=null}KEYMODE=1;if(l>1){jx/=l;jy/=l}
  let wx=jx+jy,wy=jy-jx;const wl=Math.hypot(wx,wy);wx/=wl;wy/=wl;const sp=3.1*Math.min(1,l)*dt;P.fx=wx;P.fy=wy;P.mv=1;
- if(!hits(P.x+wx*sp,P.y))P.x+=wx*sp;if(!hits(P.x,P.y+wy*sp))P.y+=wy*sp}
+ if(!hits(P.x+wx*sp,P.y))P.x+=wx*sp;if(!hits(P.x,P.y+wy*sp))P.y+=wy*sp;return true}
 
 /* ===== 창: 상점 · 출하 · 주문 ===== */
 const panelOpen=()=>$('ovPanel').classList.contains('show');
@@ -650,7 +671,7 @@ $('bPause').onclick=()=>menu(!paused);$('bResume').onclick=()=>menu(false);$('bS
 $('bMenu').onclick=()=>{save();hide('ovPause');paused=false;state='title';bgm(false);titleUI();show('ovTitle')};
 
 /* ===== 시작 화면 ===== */
-const TUT={"goal":"팡팡이와 함께 나만의 농장을 가꿔요!<br>땅 갈기 → 씨앗 심기 → 물 주기 → 자고 나면 쑥쑥<br>출하함에서 팔고 상점에서 씨앗·닭·꾸미기를 사요<br>주문 게시판의 주문을 채우면 보상이 더 커요","touch":[["조이스틱","걸어 다니기"],["행동 버튼","바라보는 칸에 알맞은 일 하기"],["가까운 칸 톡","그 칸에 바로 행동"],["아래 칸","씨앗·물건 고르기"]],"pc":[["WASD / 방향키","걷기"],["SPACE / E","행동"],["1~9","물건 고르기"],["ESC","메뉴"]]};
+const TUT={"goal":"팡팡이와 함께 나만의 농장을 가꿔요!<br>땅 갈기 → 씨앗 심기 → 물 주기 → 자고 나면 쑥쑥<br>출하함에서 팔고 상점에서 씨앗·닭·꾸미기를 사요<br>주문 게시판의 주문을 채우면 보상이 더 커요","touch":[["칸 톡","팡팡이가 가서 알맞은 일 하기"],["여러 칸 쓱","줄지어 차례로 일하기"],["팡팡이 톡","하던 일 멈추기"],["아래 칸","씨앗·물건 고르기"]],"pc":[["클릭 / 드래그","가서 일하기"],["WASD / 방향키","직접 걷기"],["SPACE / E","바라보는 칸에 행동"],["1~9 · ESC","물건 고르기 · 메뉴"]]};
 let pick=0;
 function titleUI(){$('bContinue').hidden=!store.get('farm-save');const sh2=$('show');sh2.innerHTML='';[0,1,2,5].forEach((ch,i)=>{const c=cnv(96,96);drawPang(c.getContext('2d'),ch,48,52,34,true,false);c.style.cssText='width:52px;height:52px;animation:kb 1.2s ease-in-out '+(-i*.3)+'s infinite';sh2.appendChild(c)})}
 const st=document.createElement('style');st.textContent='#show{display:flex;gap:6px;justify-content:center}@keyframes kb{50%{transform:translateY(-6px)}}';document.head.appendChild(st);
@@ -668,7 +689,7 @@ $('bStart').onclick=()=>{unlock();newGame(pick,$('farmName').value.trim());const
 /* ===== 진행 ===== */
 let last=0,saveT=0,actT=0;
 function loop(t){requestAnimationFrame(loop);const dt=Math.min(.05,(t-(last||t))/1000);last=t;const ts=t/1000;
- if(S&&state==='play'&&!paused){move(dt);chickens(dt);S.min+=dt/MIN_SEC;if(S.min>=1440){toast('너무 늦었어요… 집으로!');S.pl.x=4.6;S.pl.y=5.6;sleep()}
+ if(S&&state==='play'&&!paused){if(!move(dt))autoWalk(dt);chickens(dt);S.min+=dt/MIN_SEC;if(S.min>=1440){toast('너무 늦었어요… 집으로!');S.pl.x=4.6;S.pl.y=5.6;sleep()}
   saveT+=dt;if(saveT>10){saveT=0;save()}actT-=dt;if(actT<=0){actT=.1;actUpdate();hud()}}
  if(tipTm>0){tipTm-=dt;if(tipTm<=0)$('tip').textContent=''}
  if(S){render(ts);drawPops(dt)}else{x.fillStyle='#4f9a3a';x.fillRect(0,0,W,H)}}
@@ -676,7 +697,7 @@ resize();titleUI();
 // 제목 화면 뒤 배경용 미리보기 농장
 if(!load()){newGame(0,'',1);S.pl.x=8;S.pl.y=12}
 requestAnimationFrame(loop);
-if(location.hash==='#test')window.__f={get S(){return S},set S(v){S=v},newGame,dayPass,decide,doAct,move,IN,KEY,begin,openShop,openSell,openOrders,closePanel,give,save,load,get state(){return state}};
+if(location.hash==='#test')window.__f={iso:(a,b,h)=>iso(a,b,h),get TQ(){return TAPQ},get DPR(){return DPR},get S(){return S},set S(v){S=v},newGame,dayPass,decide,doAct,move,IN,KEY,begin,openShop,openSell,openOrders,closePanel,give,save,load,get state(){return state}};
 })();
 
 </script>

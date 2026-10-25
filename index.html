@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792894000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792896000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -318,6 +318,18 @@ html,body{background:#2e1c12!important}
 #chs button canvas{width:58px!important;height:58px!important;flex:0 0 58px!important;max-width:none!important}
 #chs button canvas{margin:0 -20px!important;width:54px!important;height:54px!important;flex:0 0 54px!important;align-self:center!important}
 
+#screen .hud .box span,#screen .hud .box small{color:#fffaf0!important;text-shadow:0 2px 0 #5a2e12,2px 0 0 #5a2e12,-2px 0 0 #5a2e12,0 -2px 0 #5a2e12,1.5px 1.5px 0 #5a2e12,-1.5px 1.5px 0 #5a2e12,1.5px -1.5px 0 #5a2e12,-1.5px -1.5px 0 #5a2e12,0 3px 0 rgba(60,25,5,.45)!important;font-weight:400!important}
+#screen .hud .box.gold span{color:#ffe14d!important}
+#screen .hud .box small{color:#ffe7b0!important}
+#screen .hud .btnb{display:flex!important;align-items:center!important;justify-content:center!important}
+#screen .hud .hic{width:26px;height:26px;display:block;filter:drop-shadow(0 1.5px 0 rgba(255,240,200,.7))}
+#screen .hud .hic rect,#screen .hud .hic ellipse{fill:#6b3515}
+#screen .hud .hic path{fill:none;stroke:#6b3515;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+#screen .hud .hic path.hl{stroke-width:3.4}
+#screen .hud .hic path.sl{display:none;stroke:#c8321e;stroke-width:3}
+#screen .hud #bSound.off .hic path.sl{display:block}
+#screen .hud #bSound.off .hic{opacity:1}
+
 </style></head>
 
 <body>
@@ -328,8 +340,8 @@ html,body{background:#2e1c12!important}
       <div class="box"><small>DAY</small><span id="hDay">1</span></div>
       <div class="box wide"><span id="hTime">06:00</span></div>
       <div class="box wide gold"><span id="hGold">0</span></div>
-      <button class="box btnb" id="bPause" aria-label="메뉴"><i class="pix" data-ic="pause"></i></button>
-      <button class="box btnb on" id="bSound" aria-label="소리"><i class="pix" data-ic="note"></i></button>
+      <button class="box btnb" id="bPause" aria-label="메뉴"><svg class="hic" viewBox="0 0 24 24"><rect x="5.5" y="4" width="4.6" height="16" rx="1.8"/><rect x="13.9" y="4" width="4.6" height="16" rx="1.8"/></svg></button>
+      <button class="box btnb on" id="bSound" aria-label="소리"><svg class="hic" viewBox="0 0 24 24"><path d="M9 17.2V6.2l10-2.4v11.4"/><ellipse cx="6.6" cy="17.6" rx="3.1" ry="2.5"/><ellipse cx="16.6" cy="15.4" rx="3.1" ry="2.5"/><path class="hl" d="M9 8.6l10-2.4"/><path class="sl" d="M4 4l16 16"/></svg></button>
     </div>
     <div class="field" id="field"><canvas id="cv"></canvas>
       <div class="toast2" id="toast2"></div>
@@ -392,6 +404,9 @@ const PANG=[['purple','퍼플팡'],['lime','그린팡'],['sky','블루팡'],['gr
 const PANG_OLD=['purple','red','lime','sky','green','yellow','orange','red']; // 예전 저장 S.ch(숫자) → 새 id (하트팡→빨강팡)
 const PIMG={};PANG.forEach(([id])=>{const im=new Image();im.onload=()=>{PIMG[id]=im};im.src='art/ch/pang_'+id+'.png?v='+(typeof V!=='undefined'?V:'')});
 function pangId(ch){if(typeof ch==='string'&&PANG.some(p=>p[0]===ch))return ch;return PANG_OLD[ch|0]||'purple'}
+const ANIMI={};function pangAnim(ch){const id=pangId(ch);if(!(id in ANIMI)){ANIMI[id]=null;const im=new Image();im.onload=()=>{ANIMI[id]=im};im.src='art/ch/anim_'+id+'.png?v='+(typeof V!=='undefined'?V:'')}return ANIMI[id]}
+const PDIR=['front','back','left','right'];
+function drawPangAnim(g,ch,fx,fy,size,dir,col){const im=pangAnim(ch);if(!im)return false;const c=im.width/5;g.drawImage(im,col*c,dir*c,c,c,fx-size/2,fy-size*.875,size,size);return true}
 function drawPangArt(g,ch,fx,fy,size){const im=PIMG[pangId(ch)];if(!im)return false;g.drawImage(im,fx-size/2,fy-size*448/512,size,size);return true}
 
 /* ===== 그림 그리는 도구 ===== */
@@ -700,7 +715,8 @@ function drawCrop(c,X,Y,t){const C=CROPS[c.k],p=iso(X+.5,Y+.55,.1),pr=Math.min(1
   const s=iso(X+.5,Y+.5,1.2+Math.sin(t*3+X)*.06);x.fillStyle='#fff';x.save();x.translate(s[0]+TW*.2,s[1]);x.rotate(t*2);for(let k=0;k<4;k++){x.rotate(Math.PI/2);x.beginPath();x.ellipse(0,TW*.03,TW*.012,TW*.03,0,0,7);x.fill()}x.restore()}}
 /* 캐릭터 · 닭 */
 function drawPlayer(t){const P=S.pl,p=iso(P.x,P.y),moving=P.mv>0,b=moving?Math.abs(Math.sin(t*12))*TW*.08:Math.sin(t*3)*TW*.01,r=TW*.3;
- shadow(P.x,P.y,.3,.13,.3);const fr=P.fy+P.fx>-.2;const sq=moving?1+Math.sin(t*24)*.04:1;x.save();if(PIMG[pangId(S.ch)]){x.translate(p[0],p[1]-b);x.scale(1/sq,sq);drawPangArt(x,S.ch,0,0,TW*1.2)}else{x.translate(p[0],p[1]-r*1.05-b);x.scale(1/sq,sq);drawPang(x,S.ch,0,0,r,true,!fr)}x.restore()}
+ shadow(P.x,P.y,.3,.13,.3);const fr=P.fy+P.fx>-.2;const sq=moving?1+Math.sin(t*24)*.04:1;x.save();{const sdx=P.fx-P.fy,sdy=(P.fx+P.fy)/2;let d=P.dir==null?0:P.dir;if(Math.abs(sdx)>Math.abs(sdy)+1e-3)d=sdx>0?3:2;else if(Math.abs(sdy)>Math.abs(sdx)+1e-3)d=sdy>0?0:1;P.dir=d}
+if(pangAnim(S.ch)){drawPangAnim(x,S.ch,p[0],p[1],TW*1.2,P.dir,moving?1+(Math.floor(t*8)%4):0)}else if(PIMG[pangId(S.ch)]){x.translate(p[0],p[1]-b);x.scale(1/sq,sq);drawPangArt(x,S.ch,0,0,TW*1.2)}else{x.translate(p[0],p[1]-r*1.05-b);x.scale(1/sq,sq);drawPang(x,S.ch,0,0,r,true,!fr)}x.restore()}
 function drawChicken(c,t){const p=iso(c.x,c.y),b=c.mv?Math.abs(Math.sin(t*14+c.x))*TW*.05:0;shadow(c.x,c.y,.16,.07,.25);if(artOK('chicken_front')){const fr=c.fy+c.fx>-.2,k=fr||!artOK('chicken_back')?'chicken_front':'chicken_back',a=ART[k],dr=c.fx-c.fy>0?1:-1,fl=fr?dr>0:dr<0,s2=TW/ART_BASE;x.save();x.translate(p[0],p[1]-b);if(fl)x.scale(-1,1);x.drawImage(a.img,-a.ax*s2,-a.ay*s2,a.w*s2,a.h*s2);x.restore()}else drawChick(x,p[0],p[1]-TW*.16-b,TW*.15,c.fy+c.fx>-.2,c.fx-c.fy>0?1:-1);
  if(c.heart>0){const q=iso(c.x,c.y,1.2+(1-c.heart)*.8);x.globalAlpha=Math.min(1,c.heart*2);x.fillStyle='#ff5d8a';x.font=`${14*DPR}px sans-serif`;x.textAlign='center';x.fillText('♥',q[0],q[1]);x.globalAlpha=1}}
 /* 숲 (지도 밖까지 빽빽하게) */

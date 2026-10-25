@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792878000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792879000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -275,6 +275,38 @@ html,body{background:#2e1c12!important}
 #screen .phS{overflow:visible!important}
 #screen .phS-btns .phS-b.phS-how{background:none!important;width:min(250px,100%)!important;height:auto!important;font-size:19px!important;letter-spacing:0!important;margin-top:0!important}
 #screen .flogo{transform:translateY(-90px);animation:none!important}#screen .fl-img{animation:flb 3s ease-in-out infinite}
+/* ===== UI 정리본 (art/ui2, 9-slice 값은 원본÷2) ===== */
+#screen #ovTitle{background:url(art/ui2/title_bg.jpg) center 30%/cover no-repeat!important}
+#screen #ovNew{background:linear-gradient(rgba(42,23,18,.25),rgba(42,23,18,.5)),url(art/ui2/title_bg.jpg) center 30%/cover no-repeat!important}
+#screen .phS-b,.phT .phS-b{border-width:19px 30px!important;border-image:url(art/ui2/btn_green.png) 40 64 fill / 19px 30px stretch!important;min-height:60px!important;filter:none!important}
+#screen .phS-b:active,.phT .phS-b:active{border-image-source:url(art/ui2/btn_green_pressed.png)!important;transform:none!important}
+#screen .phS-b.phS-how,#screen .btn,#screen .phS-btns .phS-b.phS-how{border-image:url(art/ui2/btn_wood.png) 40 64 fill / 19px 30px stretch!important}
+#screen .phS-b.phS-how:active,#screen .btn:active{border-image-source:url(art/ui2/btn_wood_pressed.png)!important}
+#screen .x{background:url(art/ui2/btn_close.png) center/contain no-repeat!important;width:58px;height:58px;filter:none!important}
+#screen .x:active{background-image:url(art/ui2/btn_close_pressed.png)!important;transform:none}
+#screen .pnl,.phT .phT-c{border-width:36px!important;border-image:url(art/ui2/panel.png) 56 fill / 36px stretch!important;filter:none!important}
+#screen #pnT{border-style:solid;border-width:14px 44px;border-image:url(art/ui2/panel_header.png) 36 112 fill / 14px 44px stretch;padding:2px 4px;margin-bottom:-26px;position:relative;z-index:2;font-size:19px!important;min-width:180px}
+#screen .pnl{padding-top:14px!important}
+#screen .pnl .hd{border-width:8px 12px!important;border-image:url(art/ui2/hud_plate.png) 32 52 fill / 8px 12px stretch!important}
+#screen .pnl .it button{border-width:12px 17px!important;border-image:url(art/ui2/btn_small.png) 40 56 fill / 12px 17px stretch!important;filter:none!important}
+#screen .pnl .it button:active{border-image-source:url(art/ui2/btn_small_pressed.png)!important}
+#screen .chs button{border-width:14px!important;border-image:url(art/ui2/card.png) 40 fill / 14px stretch!important;filter:none!important}
+#screen .chs button.on{border-image-source:url(art/ui2/card_selected.png)!important;filter:drop-shadow(0 0 6px rgba(255,210,80,.8))!important}
+#screen input{border-width:16px 24px!important;border-image:url(art/ui2/input.png) 32 90 fill / 16px 24px stretch!important}
+#screen .hud .box{border-width:11px 14px!important;border-image:url(art/ui2/hud_plate.png) 32 52 fill / 11px 14px stretch!important}
+#screen .hud .box.btnb{border-image:url(art/ui2/btn_icon.png) 32 fill / 11px stretch!important}
+#screen .hud .box.btnb:active{border-image-source:url(art/ui2/btn_icon_pressed.png)!important}
+#screen .inv button{border-width:12px!important;border-image:url(art/ui2/slot.png) 32 fill / 12px stretch!important;filter:none!important}
+#screen .inv button.on{border-image-source:url(art/ui2/slot_selected.png)!important;filter:drop-shadow(0 0 5px rgba(255,210,80,.8))!important}
+#stat>div{border-image:url(art/ui2/hud_plate.png) 32 52 fill / 8px 12px stretch!important}
+#stat .xb,#stat .eb{border:0!important;border-image:none!important;height:14px!important;width:86px!important}
+#stat .xb::after,#stat .eb::after{content:'';position:absolute;inset:0;border-style:solid;border-width:6px 8px;border-image:url(art/ui2/bar_frame.png) 16 28 fill / 6px 8px stretch;pointer-events:none}
+#stat .xb i,#stat .eb i{left:3px!important;top:3px!important;bottom:3px!important;border-width:0 4px!important;border-image:url(art/ui2/bar_fill_energy.png) 10 16 fill / 0 4px stretch!important;max-width:calc(100% - 14px)!important}
+#stat .xb i{border-image:url(art/ui2/bar_fill_xp.png) 10 16 fill / 0 4px stretch!important}
+.phTip{border-width:12px 16px 18px 12px!important;border-image:url(art/ui2/toast.png) 32 80 48 60 fill / 12px 16px 18px 12px stretch!important}
+.phT .phT-r kbd,#screen .pnl .hd{border-image-source:url(art/ui2/hud_plate.png)!important}
+/* 게임 화면 액자 */
+#screen::after{content:'';position:absolute;inset:-6px;z-index:7;pointer-events:none;border-style:solid;border-width:44px 22px 16px;border-image:url(art/ui2/frame.png) 200 88 56 fill / 44px 22px 16px stretch}
 
 </style></head>
 
@@ -298,7 +330,7 @@ html,body{background:#2e1c12!important}
       <div class="fade" id="fade"></div>
     </div>
 
-    <div class="ov show" id="ovTitle"><div class="phS"><i class="phS-sp a"></i><div class="flogo"><img class="fl-img" src="art/ui/logo.png" alt="PANG FARM"><div class="fl-ko">팡팡농장</div></div><div class="phS-show" id="show"></div><i class="phS-sp b"></i><div class="phS-btns"><button class="phS-b" id="bContinue">이어하기</button><button class="phS-b" id="bNew">새 농장 만들기</button></div><i class="phS-sp c"></i><div class="phS-credit">이 게임은 서울 마포구에 사는 박현아가 만든<br>비상업용 게임이에요. 팡팡이와 함께<br>나만의 농장을 가꿔 보세요!</div></div></div>
+    <div class="ov show" id="ovTitle"><div class="phS"><i class="phS-sp a"></i><div class="flogo"><img class="fl-img" src="art/ui2/logo.png" alt="PANG FARM"><div class="fl-ko">팡팡농장</div></div><div class="phS-show" id="show"></div><i class="phS-sp b"></i><div class="phS-btns"><button class="phS-b" id="bContinue">이어하기</button><button class="phS-b" id="bNew">새 농장 만들기</button></div><i class="phS-sp c"></i><div class="phS-credit">이 게임은 서울 마포구에 사는 박현아가 만든<br>비상업용 게임이에요. 팡팡이와 함께<br>나만의 농장을 가꿔 보세요!</div></div></div>
 
     <div class="ov" id="ovNew">
       <div class="sub">농장 주인 고르기</div>

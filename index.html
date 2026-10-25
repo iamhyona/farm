@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792875000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792876000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -204,12 +204,24 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 .phT .phT-r span{color:var(--ft)!important;font-size:14px!important}
 .phTip{background:var(--fp)!important;color:var(--ft)!important;border:3px solid var(--fk)!important;border-radius:16px!important;box-shadow:0 4px 0 var(--fk)!important}
 .phTip path{fill:#7a4a26!important}
+/* 바깥 틀 · 저작권 줄 (농장 톤) */
+html,body{background:#2e1c12!important}
+.gb{background:repeating-linear-gradient(90deg,#4a2e1c 0 22px,#43291a 22px 24px,#4f321f 24px 46px,#43291a 46px 48px)!important}
+.lcd-label{padding:8px 6px 7px!important;gap:8px!important}
+.lcd-label .ln canvas{display:none!important}
+.lcd-label .ln{height:14px!important;flex:1;background:
+ radial-gradient(ellipse 5px 3px at 50% 30%,#7cc95a 90%,transparent) 0 0/26px 14px repeat-x,
+ radial-gradient(ellipse 5px 3px at 50% 72%,#5aa83a 90%,transparent) 13px 0/26px 14px repeat-x,
+ linear-gradient(transparent 6px,#8a5a34 6px,#8a5a34 8px,transparent 8px)!important;opacity:.95}
+.lcd-label .copy{font-family:Jua,sans-serif!important;font-size:14px!important;letter-spacing:.04em!important;color:#fff3c4!important;-webkit-text-stroke:3px #2a1712;paint-order:stroke fill;text-shadow:0 2px 0 #2a1712!important;white-space:nowrap}
+.bezel{background:linear-gradient(#8a5a34,#6b4224)!important;border:3px solid #2a1712!important;border-radius:16px!important;box-shadow:0 4px 0 #1c0f0a,inset 0 2px 0 rgba(255,220,160,.35)!important;padding:7px!important}
+#screen{border-radius:11px!important}
 
 </style></head>
 
 <body>
 <div class="gb">
-  <div class="lcd-label"><i class="ln"></i><span class="copy">© 2026 PARK HYONA</span><i class="ln"></i></div>
+  <div class="lcd-label"><i class="ln"></i><span class="copy">© 2026 박현아 · PANG FARM</span><i class="ln"></i></div>
   <div class="bezel"><div class="screen" id="screen">
     <div class="hud">
       <div class="box"><small>DAY</small><span id="hDay">1</span></div>

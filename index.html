@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792890000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792891000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -308,6 +308,10 @@ html,body{background:#2e1c12!important}
 /* 게임 화면 액자 */
 #screen::after{content:'';position:absolute;inset:-6px;z-index:7;pointer-events:none;border-style:solid;border-width:44px 22px 16px;border-image:url(art/ui2/frame.png) 200 88 56 fill / 44px 22px 16px stretch}
 #cv{touch-action:none}
+#chs{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:8px!important}
+#chs button{width:auto!important;min-width:0!important;padding-left:2px!important;padding-right:2px!important}
+#chs button canvas{width:60px!important;height:60px!important;aspect-ratio:1/1;object-fit:contain}
+#chs button span{white-space:nowrap;font-size:clamp(11px,3.2vw,14px)!important;letter-spacing:-.03em}
 
 </style></head>
 
@@ -369,17 +373,17 @@ const OL='#2a1712'; // 외곽선 색 (쿠키런 느낌 두꺼운 갈색 선)
 
 /* ===== 팡팡이 (구슬·하트 몸체 · 앞면 얼굴) ===== */
 const CH=[ // 몸체는 구슬 또는 하트만 · 얼굴은 앞면에만 (f: 표정)
- {n:'보라팡',c:'#9b5cff',l:'#e2ccff',d:'#5a28c8',s:'ball',f:'kiss',no:1},
+ {n:'퍼플팡',c:'#9b5cff',l:'#e2ccff',d:'#5a28c8',s:'ball',f:'kiss',no:1},
  {n:'하트팡',c:'#ff6fae',l:'#ffd0e4',d:'#d43c80',s:'heart',f:'sparkle',no:2},
- {n:'연두팡',c:'#9be03a',l:'#e4ffb8',d:'#5aa818',s:'ball',f:'happy',no:3},
- {n:'하늘팡',c:'#4fc3ff',l:'#d0f0ff',d:'#1f86d0',s:'ball',f:'round',no:4},
- {n:'초록팡',c:'#2fcf7a',l:'#c8f7dc',d:'#16904e',s:'ball',f:'happy',no:5},
- {n:'노랑팡',c:'#ffd23f',l:'#fff4c0',d:'#d99a00',s:'ball',f:'round',no:6},
- {n:'주황팡',c:'#ff9a3d',l:'#ffe0c0',d:'#d0600f',s:'ball',f:'sparkle',no:7},
- {n:'빨강팡',c:'#ff4d5a',l:'#ffc8cc',d:'#c41e2e',s:'ball',f:'kiss',no:8}];
+ {n:'그린팡',c:'#9be03a',l:'#e4ffb8',d:'#5aa818',s:'ball',f:'happy',no:3},
+ {n:'블루팡',c:'#4fc3ff',l:'#d0f0ff',d:'#1f86d0',s:'ball',f:'round',no:4},
+ {n:'민트팡',c:'#2fcf7a',l:'#c8f7dc',d:'#16904e',s:'ball',f:'happy',no:5},
+ {n:'옐로우팡',c:'#ffd23f',l:'#fff4c0',d:'#d99a00',s:'ball',f:'round',no:6},
+ {n:'오렌지팡',c:'#ff9a3d',l:'#ffe0c0',d:'#d0600f',s:'ball',f:'sparkle',no:7},
+ {n:'레드팡',c:'#ff4d5a',l:'#ffc8cc',d:'#c41e2e',s:'ball',f:'kiss',no:8}];
 CH.forEach(c=>c.k=c.c);
 /* ===== 팡팡이 원화 8종 (512캔버스·발밑 256,448 → 256 저장) ===== */
-const PANG=[['purple','보라팡'],['lime','연두팡'],['sky','하늘팡'],['green','초록팡'],['yellow','노랑팡'],['orange','주황팡'],['red','빨강팡'],['cream','미색팡']];
+const PANG=[['purple','퍼플팡'],['lime','그린팡'],['sky','블루팡'],['green','민트팡'],['yellow','옐로우팡'],['orange','오렌지팡'],['red','레드팡'],['cream','베이지팡']];
 const PANG_OLD=['purple','red','lime','sky','green','yellow','orange','red']; // 예전 저장 S.ch(숫자) → 새 id (하트팡→빨강팡)
 const PIMG={};PANG.forEach(([id])=>{const im=new Image();im.onload=()=>{PIMG[id]=im};im.src='art/ch/pang_'+id+'.png?v='+(typeof V!=='undefined'?V:'')});
 function pangId(ch){if(typeof ch==='string'&&PANG.some(p=>p[0]===ch))return ch;return PANG_OLD[ch|0]||'purple'}

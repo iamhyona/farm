@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792864000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792865000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -416,7 +416,7 @@ function drawGroundStatic(xa,xb,ya,yb){
   const p=iso(xx,y,h);x.drawImage(soilTop(wet?1:0,hsh(xx,y)*3|0),p[0]-TW/2,p[1])}}
 
 /* 물체 */
-function drawObj(o,t){const X=o.x,Y=o.y;
+function drawObj(o,t){const X=o.x,Y=o.y;const AK={rock:'rock',weed:'weed',scare:'scarecrow',bin:'bin',crate:'crate'}[o.t];if(AK&&artOK(AK)){shadow(X+.5,Y+.55,o.t==='weed'?.3:.4,o.t==='weed'?.13:.18,.28);drawArt(AK,X+.5,Y+.5);if(o.t==='bin'){const p=iso(X+.5,Y+.5,1.05+Math.sin(t*2)*.03);x.fillStyle='#ffd23f';x.strokeStyle=OL;x.lineWidth=3*DPR;x.font=`900 ${10*DPR}px Galmuri11`;x.textAlign='center';x.strokeText('출하',p[0],p[1]);x.fillText('출하',p[0],p[1])}return}
  switch(o.t){
  case'house':{shadow(X+2.2,Y+3.1,2.3,1,.3);if(artOK('house')){drawArt('house',X+4,Y+3);break}box(X+.1,Y+.1,3.8,2.8,2.2,'#fff1dc',0,OLS,7);box(X,Y+2.8,4,.25,.25,'#c9b49a');
   winY(X+.45,X+1.15,Y+2.9,.9,1.6,'#ff9ab8');winY(X+2.8,X+3.5,Y+2.9,.9,1.6,'#ff9ab8');winX(X+3.9,Y+.7,Y+1.5,.95,1.6);winX(X+3.9,Y+1.9,Y+2.5,.95,1.6);

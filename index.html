@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792870000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792872000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -136,6 +136,9 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 .phS-b[hidden]{display:none!important}
 
 .joy,.act{display:none!important}
+#bPause i,#bSound i{background:url(art/ic/hud_pause.png) center/contain no-repeat!important;-webkit-mask:none!important;mask:none!important;box-shadow:none!important;width:22px!important;height:22px!important}
+#bSound.on i{background-image:url(art/ic/hud_music_on.png)!important}
+#bSound:not(.on) i{background-image:url(art/ic/hud_music_off.png)!important}
 
 </style></head>
 
@@ -257,7 +260,10 @@ for(const k in CROPS){ITEM['seed_'+k]={n:CROPS[k].n+' 씨앗',price:CROPS[k].see
 const sellOf=id=>ITEM[id]&&ITEM[id].sell||0;
 
 /* ===== 아이콘 (인벤토리 · 상점) ===== */
-function drawIcon(g,id,S){g.clearRect(0,0,S,S);if(!id)return;g.save();g.scale(S/48,S/48);g.lineJoin='round';g.lineCap='round';g.strokeStyle=OL;g.lineWidth=2.4;
+const ICM={hoe:'act_hoe',can:'act_water',hand:'act_hand',sleep:'act_sleep',coin:'act_coin',shop:'act_shop',board:'act_board',pick:'act_pick',weed:'act_weed',pet:'act_pet',egg:'item_egg',gegg:'item_egg_gold',sprinkler:'item_sprinkler',chicken:'item_chicken'},ICI={};
+const icKey=id=>ICM[id]||(/^seed_/.test(id)?id:'item_'+id);
+fetch('art/ic/list.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():[]).then(L=>{let n=L.length;for(const k of L){const im=new Image();im.onload=()=>{ICI[k]=im;if(--n<=0&&typeof drawInv==='function'){try{drawInv();actKey=''}catch(e){}}};im.onerror=()=>{--n};im.src='art/ic/'+k+'.png?v=1'}}).catch(()=>{});
+function drawIcon(g,id,S){g.clearRect(0,0,S,S);if(!id)return;{const im=ICI[icKey(id)];if(im){g.drawImage(im,S*.04,S*.04,S*.92,S*.92);return}}g.save();g.scale(S/48,S/48);g.lineJoin='round';g.lineCap='round';g.strokeStyle=OL;g.lineWidth=2.4;
  const it=ITEM[id]||{};
  if(it.seed){const C=CROPS[it.seed];g.fillStyle='#e9d3a8';g.beginPath();g.moveTo(12,14);g.lineTo(36,14);g.lineTo(39,42);g.lineTo(9,42);g.closePath();g.fill();g.stroke();g.fillStyle='#c9a46a';g.fillRect(14,10,20,6);g.strokeRect(14,10,20,6);
   g.fillStyle=C.c;g.beginPath();g.arc(24,29,7,0,7);g.fill();g.stroke();g.fillStyle=C.lf;g.beginPath();g.ellipse(24,20,3,5,0,0,7);g.fill()}
@@ -421,7 +427,7 @@ function drawGroundStatic(xa,xb,ya,yb){
   const p=iso(xx,y,h);x.drawImage(soilTop(wet?1:0,hsh(xx,y)*3|0),p[0]-TW/2,p[1])}}
 
 /* 물체 */
-function drawObj(o,t){const X=o.x,Y=o.y;if(o.t==='fence'&&artOK('fence')){const isF=(a,b)=>{const q=S.O[b]&&S.O[b][a];return q&&q.t==='fence'},fl=(isF(X,Y-1)||isF(X,Y+1))&&!(isF(X-1,Y)||isF(X+1,Y)),a=ART.fence,s2=TW/ART_BASE,p=iso(X+.5,Y+.5);shadow(X+.5,Y+.55,.4,.12,.2);x.save();x.translate(p[0],p[1]);if(fl)x.scale(-1,1);x.drawImage(a.img,-a.ax*s2,-a.ay*s2,a.w*s2,a.h*s2);x.restore();return}if(o.t==='sign'){shadow(X+.5,Y+.6,.45,.16,.25);if(artOK('sign')){drawArt('sign',X+.5,Y+.5);const s2=TW/ART_BASE,p=iso(X+.5,Y+.5);x.save();x.translate(p[0]-2*s2,p[1]-112*s2);x.transform(1,.31,0,1,0,0);x.font=`900 ${Math.min(11,(150/Math.max(4,(S.name||'').length)))*DPR}px Galmuri11`;x.textAlign='center';x.textBaseline='middle';x.fillStyle='#5a2e12';x.fillText(S.name||'팡팡농장',0,0,180*s2);x.restore()}else box(X+.2,Y+.45,.6,.08,.7,'#c48a58');return}const AK={rock:'rock',weed:'weed',scare:'scarecrow',bin:'bin',crate:'crate',bench:'bench',mail:'mailbox',well:'well',barrel:'barrel',hay:'hay',bed:'bed',flower:'flower',lamp:'lamp',sprinkler:'sprinkler',wild:'wildflower',bush:o.v>.72&&artOK('bush_berry')?'bush_berry':'bush'}[o.t];if(AK&&artOK(AK)){if(o.t!=='bed'&&o.t!=='wild')shadow(X+.5,Y+.55,o.t==='weed'||o.t==='flower'||o.t==='sprinkler'?.3:o.t==='lamp'?.22:.4,o.t==='weed'||o.t==='flower'?.13:.18,.28);drawArt(AK,X+.5,Y+.5);if(o.t==='bin'){const p=iso(X+.5,Y+.5,1.05+Math.sin(t*2)*.03);x.fillStyle='#ffd23f';x.strokeStyle=OL;x.lineWidth=3*DPR;x.font=`900 ${10*DPR}px Galmuri11`;x.textAlign='center';x.strokeText('출하',p[0],p[1]);x.fillText('출하',p[0],p[1])}return}
+function drawObj(o,t){const X=o.x,Y=o.y;if(o.t==='fence'&&artOK('fence')){const isF=(a,b)=>{const q=S.O[b]&&S.O[b][a];return q&&q.t==='fence'},fl=(isF(X,Y-1)||isF(X,Y+1))&&!(isF(X-1,Y)||isF(X+1,Y)),a=ART.fence,s2=TW/ART_BASE,p=iso(X+.5,Y+.5);shadow(X+.5,Y+.55,.4,.12,.2);x.save();x.translate(p[0],p[1]);if(fl)x.scale(-1,1);x.drawImage(a.img,-a.ax*s2,-a.ay*s2,a.w*s2,a.h*s2);x.restore();return}if(o.t==='sign'){shadow(X+.5,Y+.6,.45,.16,.25);if(artOK('sign')){drawArt('sign',X+.5,Y+.5);const s2=TW/ART_BASE,p=iso(X+.5,Y+.5);x.save();x.translate(p[0]-2*s2,p[1]-110*s2);x.transform(1,.5,0,1,0,0);x.font=`900 ${Math.min(11,(150/Math.max(4,(S.name||'').length)))*DPR}px Galmuri11`;x.textAlign='center';x.textBaseline='middle';x.fillStyle='#5a2e12';x.fillText(S.name||'팡팡농장',0,0,180*s2);x.restore()}else box(X+.2,Y+.45,.6,.08,.7,'#c48a58');return}const AK={rock:'rock',weed:'weed',scare:'scarecrow',bin:'bin',crate:'crate',bench:'bench',mail:'mailbox',well:'well',barrel:'barrel',hay:'hay',bed:'bed',flower:'flower',lamp:'lamp',sprinkler:'sprinkler',wild:'wildflower',bush:o.v>.72&&artOK('bush_berry')?'bush_berry':'bush'}[o.t];if(AK&&artOK(AK)){if(o.t!=='bed'&&o.t!=='wild')shadow(X+.5,Y+.55,o.t==='weed'||o.t==='flower'||o.t==='sprinkler'?.3:o.t==='lamp'?.22:.4,o.t==='weed'||o.t==='flower'?.13:.18,.28);drawArt(AK,X+.5,Y+.5);if(o.t==='bin'){const p=iso(X+.5,Y+.5,1.05+Math.sin(t*2)*.03);x.fillStyle='#ffd23f';x.strokeStyle=OL;x.lineWidth=3*DPR;x.font=`900 ${10*DPR}px Galmuri11`;x.textAlign='center';x.strokeText('출하',p[0],p[1]);x.fillText('출하',p[0],p[1])}return}
  switch(o.t){
  case'house':{shadow(X+2.2,Y+3.1,2.3,1,.3);if(artOK('house')){drawArt('house',X+4,Y+3);break}box(X+.1,Y+.1,3.8,2.8,2.2,'#fff1dc',0,OLS,7);box(X,Y+2.8,4,.25,.25,'#c9b49a');
   winY(X+.45,X+1.15,Y+2.9,.9,1.6,'#ff9ab8');winY(X+2.8,X+3.5,Y+2.9,.9,1.6,'#ff9ab8');winX(X+3.9,Y+.7,Y+1.5,.95,1.6);winX(X+3.9,Y+1.9,Y+2.5,.95,1.6);
@@ -573,7 +579,7 @@ function load(){let d;try{d=JSON.parse(store.get('farm-save')||'null')}catch(e){
  // 자리를 비운 동안: 15분마다 하루 (최대 5일) · 스프링클러 작물과 닭만 일해요
  const away=Math.min(5,Math.floor((Date.now()-(d.last||Date.now()))/(15*60*1000)));if(away>0){dayPass(away,true);S.awayMsg=`자리를 비운 사이 ${away}일이 지났어요`}GD=1;return true}
 
-function ensureSign(){if(!S||!S.O)return;for(const r of S.O)for(const o of r)if(o&&o.t==='sign')return;for(const [sx,sy] of[[9,5],[10,5],[8,4],[2,7],[9,7]])if(S.O[sy]&&!S.O[sy][sx]&&S.G[sy][sx]==='g'){S.O[sy][sx]={t:'sign',x:sx,y:sy,v:.5};GD=1;return}}
+function ensureSign(){if(!S||!S.O)return;for(const r of S.O)for(const o of r)if(o&&o.t==='sign'){if(!(o.x===10&&o.y===5&&!o.mv2))return;S.O[o.y][o.x]=null;break}for(const [sx,sy] of[[10,7],[11,7],[3,7],[10,5]])if(S.O[sy]&&(!S.O[sy][sx]||S.O[sy][sx].t==='wild')&&S.G[sy][sx]==='g'){S.O[sy][sx]={t:'sign',x:sx,y:sy,v:.5,mv2:1};GD=1;return}}
 
 /* ===== 소리 ===== */
 let AC=null,sound=store.get('farm-sound')!=='0',bgmT=null;

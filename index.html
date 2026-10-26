@@ -45,7 +45,10 @@
 #tmenu .tm-dot{width:10px!important;height:10px!important;margin:-5px 0 0 -5px!important}
 
 #sleepCf .kit,#sleepCf [data-a="kit"],#sleepCf .cf-kit{display:none!important}
-</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793015363";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+
+#screen #pnL.hasTabs{padding-top:0!important}
+#pnL .shopTabs{background:#f8e9c7!important;margin:0 -14px 4px!important;padding:10px 14px 8px!important;box-shadow:0 4px 6px -4px rgba(90,46,18,.25)}
+</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793015467";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -2392,10 +2395,10 @@ function bldAt(px,py){let best=null,bd=-1;for(let y=0;y<MH;y++)for(let xx=0;xx<M
 /* ===== 상점 탭: 농작물 · 꽃 · 시설 · 나무 · 동물 · 꾸미기 ===== */
 const SHOPTABS=[['crop','농작물',/^SEEDS/],['flower','꽃',/^FLOWER/],['mach','시설',/^(MACHINE|TOOL)/],['tree','나무',/^ORCHARD/],['animal','동물',/^ANIMAL/],['deco','꾸미기',/^DECO/]];
 let SHOPTAB='crop';
-(function(){const _o=openShop;openShop=function(){_o.apply(this,arguments);try{shopTabs()}catch(e){}}})();if(window.__f)window.__f.openShop=()=>openShop();
+(function(){const _o=openShop;openShop=function(){$('pnL').classList.remove('hasTabs');_o.apply(this,arguments);try{shopTabs()}catch(e){}}})();if(window.__f)window.__f.openShop=()=>openShop();
 function shopTabs(){const P=$('pnL');if(!P)return;let cur=null;const G={};
  for(const el of [...P.children]){if(el.classList.contains('hd')){const t=el.textContent.trim(),m=SHOPTABS.find(x=>x[2].test(t));cur=m?m[0]:cur;el.dataset.tab=cur;el.classList.add('st-hd');continue}if(cur){el.dataset.tab=cur;(G[cur]=G[cur]||0);G[cur]++}}
- const bar=document.createElement('div');bar.className='shopTabs';bar.innerHTML=SHOPTABS.filter(t=>G[t[0]]).map(t=>`<button data-st="${t[0]}">${t[1]}</button>`).join('');P.insertBefore(bar,P.firstChild);
+ P.classList.add('hasTabs');const bar=document.createElement('div');bar.className='shopTabs';bar.innerHTML=SHOPTABS.filter(t=>G[t[0]]).map(t=>`<button data-st="${t[0]}">${t[1]}</button>`).join('');P.insertBefore(bar,P.firstChild);
  if(!G[SHOPTAB])SHOPTAB='crop';
  const show=k=>{SHOPTAB=k;bar.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.st===k));for(const el of P.children)if(el.dataset.tab)el.style.display=el.dataset.tab===k?'':'none';const sc=P.closest('.pnl')||P;sc.scrollTop=0;P.scrollTop=0};
  bar.addEventListener('click',e=>{const b=e.target.closest('button[data-st]');if(!b)return;e.stopPropagation();sfx.click&&sfx.click();show(b.dataset.st)});show(SHOPTAB)}
@@ -2457,6 +2460,8 @@ function waterAsk(tx0,ty0){const [tx,ty]=edgeWater(tx0,ty0),A=[];A.push({ic:'rod
 (function(){const _e=ensureAlpha;ensureAlpha=function(){_e();if(S&&S.inv){const n=S.inv.length;S.inv=S.inv.filter(v=>v&&ITEM[v.id]);if(S.inv.length!==n){S.sel=Math.min(S.sel||0,S.inv.length-1);try{drawInv()}catch(_){}}}}})();
 (function(){const cur=((document.head.innerHTML.match(/var V="(\d+)"/))||[])[1]||'';let shown=0;const chk=()=>{if(shown||!cur)return;fetch(location.pathname+'?v='+Date.now(),{cache:'no-store'}).then(r=>r.text()).then(t=>{const m=t.match(/var V="(\d+)"/);if(m&&m[1]!==cur){shown=1;const b=document.createElement('div');b.id='newVer';b.innerHTML='새 버전이 있어요 <button>새로고침</button>';document.body.appendChild(b);b.querySelector('button').onclick=()=>{try{save()}catch(_){}location.replace(location.pathname+'?v='+m[1]+location.hash)}}}).catch(()=>{})};setTimeout(chk,4000);setInterval(chk,90000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)chk()})
  const st=document.createElement('style');st.textContent='#newVer{position:fixed;left:50%;top:max(10px,env(safe-area-inset-top));transform:translateX(-50%);z-index:99;display:flex;align-items:center;gap:8px;background:#5a2e12;color:#fff6e0;font:400 12px Paperlogy,sans-serif;padding:6px 6px 6px 14px;border-radius:18px;box-shadow:0 3px 10px rgba(0,0,0,.35);white-space:nowrap}#newVer button{border:0;border-radius:12px;background:#ffd56a;color:#5a2e12;font:700 12px Paperlogy,sans-serif;padding:5px 12px}';document.head.appendChild(st)})();
+
+(function(){const _p=openPanel;openPanel=function(){$('pnL').classList.remove('hasTabs');return _p.apply(this,arguments)}})();
 })();
 
 </script>

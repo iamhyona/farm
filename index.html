@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792922000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792923000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -1251,6 +1251,47 @@ if(window.__f)Object.assign(window.__f,{openExpand,doExpand,ensureLand,ZONES});
 
 /* 계절 바뀜 알림 */
 (function(){const _dp=dayPass;dayPass=function(n,a){const b=seasonIdx();const r=_dp.apply(this,arguments);const c=seasonIdx();if(b!==c)setTimeout(()=>toast(SEASON_KO[c]+'이 왔어요!'),1800);return r}})();
+/* ===== 사운드 2: 중독성 배경음 · 자연의 소리 · 행동 효과음 · 클릭음 ===== */
+(function(){
+ let NB=null;const noiseBuf=()=>{if(NB||!AC)return NB;const n=AC.sampleRate*2;NB=AC.createBuffer(1,n,AC.sampleRate);const d=NB.getChannelData(0);for(let i=0;i<n;i++)d[i]=Math.random()*2-1;return NB};
+ // 노이즈 한 방: 필터 종류·주파수·길이·볼륨
+ function nz(type,freq,dur,vol,del=0,q=1,ok){if(!AC||!ok)return;const t=AC.currentTime+del,s=AC.createBufferSource(),f=AC.createBiquadFilter(),g=AC.createGain();s.buffer=noiseBuf();f.type=type;f.frequency.value=freq;f.Q.value=q;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+Math.min(.02,dur*.3));g.gain.exponentialRampToValueAtTime(.0001,t+dur);s.connect(f).connect(g).connect(AC.destination);s.start(t,Math.random());s.stop(t+dur+.05)}
+ function tn(f,d,type,v,f2,del,ok){if(!AC||!ok)return;const t=AC.currentTime+(del||0),o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+d+.03)}
+ const fx=()=>sound,mu=()=>music;
+ /* 효과음 */
+ sfx.click=()=>{tn(1100,.05,'sine',.035,700,0,fx())};
+ sfx.step=()=>{nz('lowpass',380+Math.random()*120,.07,.05,0,.7,fx())};
+ sfx.hoe=()=>{nz('bandpass',900,.14,.09,0,1.2,fx());tn(120,.1,'triangle',.06,70,.02,fx());nz('highpass',2500,.08,.025,.06,.7,fx())};
+ sfx.plant=()=>{for(let i=0;i<4;i++)nz('highpass',4000+Math.random()*2000,.04,.03,i*.045,.8,fx());tn(620,.08,'sine',.025,880,.12,fx())};
+ const _w=sfx.water;sfx.water=()=>{nz('bandpass',1800,.35,.04,0,.6,fx());_w()};
+ const _pl=sfx.pluck;sfx.pluck=()=>{nz('highpass',1500,.08,.04,0,.7,fx());_pl()};
+ /* 배경음: 통통 튀는 시골 셔플 (G장조) · 볼륨은 예전의 절반 */
+ const MEL='G4 . B4 D5 . B4 G4 .|A4 . C5 E5 D5 . B4 .|G4 . B4 D5 G5 . E5 D5|C5 . B4 A4 G4 . . .|E5 . D5 B4 . G4 A4 .|B4 . A4 G4 E4 . D4 .|G4 . B4 D5 . E5 D5 B4|A4 . . G4 . . . .'.split('|').map(b=>b.split(' '));
+ const BAS=['G2','D3','G2','C3','E3','D3','G2','D3'],CH=[[67,71,74],[66,69,74],[67,71,74],[64,67,72],[64,67,71],[62,66,69],[67,71,74],[62,66,69]];
+ const NN=n=>{const m=n.match(/([A-G])(#?)(\d)/);const s={C:0,D:2,E:4,F:5,G:7,A:9,B:11}[m[1]]+(m[2]?1:0);return 440*Math.pow(2,(s+(+m[3]+1)*12-69)/12)};
+ const BG={on:false,at:0,n:0};let T=null;
+ function tick(){if(!BG.on||!AC)return;const live=music&&state==='play'&&!paused;const sp=60/116/2;if(!live){BG.at=AC.currentTime+.1;return}if(BG.at<AC.currentTime-.05)BG.at=AC.currentTime+.05;
+  while(BG.at<AC.currentTime+.25){const bar=(BG.n>>3)%8,st=BG.n&7,sw=st%2?sp*.2:0,t=BG.at+sw;
+   const n=MEL[bar][st];if(n&&n!=='.'){const o=AC.createOscillator(),g=AC.createGain();o.type='triangle';o.frequency.value=NN(n);g.gain.setValueAtTime(.011,t);g.gain.exponentialRampToValueAtTime(.0008,t+sp*1.5);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+sp*1.7)}
+   if(st===0||st===4){const o=AC.createOscillator(),g=AC.createGain();o.type='sine';o.frequency.value=NN(BAS[bar])*(st===4?1.5:1);g.gain.setValueAtTime(.013,t);g.gain.exponentialRampToValueAtTime(.0008,t+sp*1.6);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+sp*1.8)}
+   if(st===2||st===6){for(const m of CH[bar]){const o=AC.createOscillator(),g=AC.createGain();o.type='sine';o.frequency.value=440*Math.pow(2,(m-69)/12);g.gain.setValueAtTime(.0035,t);g.gain.exponentialRampToValueAtTime(.0005,t+sp*.9);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+sp)}}
+   if(st%2===1){const s=AC.createBufferSource(),f=AC.createBiquadFilter(),g=AC.createGain();s.buffer=noiseBuf();f.type='highpass';f.frequency.value=7000;g.gain.setValueAtTime(.004,t);g.gain.exponentialRampToValueAtTime(.0003,t+.04);s.connect(f).connect(g).connect(AC.destination);s.start(t,Math.random());s.stop(t+.06)}
+   BG.at+=sp;BG.n++}}
+ bgm=function(on){clearInterval(bgmT);bgmT=null;BG.on=!!on;if(on&&AC){BG.at=AC.currentTime+.1;BG.n=0}if(!T)T=setInterval(()=>{tick();amb()},60)};
+ /* 자연의 소리: 새·바람·밤 귀뚜라미 (배경음 켜져 있을 때) */
+ let nextAmb=0;
+ function bird(){const b=AC.currentTime,base=2600+Math.random()*1400,k=2+Math.floor(Math.random()*3);for(let i=0;i<k;i++)tn(base*(1+Math.random()*.15),.09,'sine',.008,base*1.35,i*.13+Math.random()*.03,true)}
+ function wind(){if(!AC)return;const t=AC.currentTime,s=AC.createBufferSource(),f=AC.createBiquadFilter(),g=AC.createGain();s.buffer=noiseBuf();s.loop=true;f.type='bandpass';f.frequency.setValueAtTime(400,t);f.frequency.linearRampToValueAtTime(700,t+1.8);f.frequency.linearRampToValueAtTime(350,t+3.6);f.Q.value=.6;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.008,t+1.6);g.gain.exponentialRampToValueAtTime(.0001,t+3.8);s.connect(f).connect(g).connect(AC.destination);s.start(t);s.stop(t+4)}
+ function cricket(){for(let i=0;i<6;i++)tn(4300,.03,'square',.004,null,i*.07,true)}
+ function amb(){if(!AC||!music||state!=='play'||paused)return;const now=AC.currentTime;if(now<nextAmb)return;nextAmb=now+5+Math.random()*9;const night=S&&(S.min>=1140||S.min<300);const w=seasonIdx&&seasonIdx()===3;
+  if(night)cricket();else{const r=Math.random();if(r<(w?.2:.6))bird();else wind()}}
+ /* 클릭음: 모든 버튼 · 땅 탭 */
+ document.addEventListener('click',e=>{if(e.target.closest('button,.it,.inv > *'))sfx.click()},true);
+ document.getElementById('cv').addEventListener('pointerdown',()=>{if(state==='play'&&!paused)sfx.click()});
+ /* 발소리: 걸을 때 */
+ let stT=0;setInterval(()=>{if(!S||state!=='play'||paused)return;if(S.pl.mv){if(++stT%5===0)sfx.step()}else stT=0},60);
+ if(state==='play')bgm(true);
+})();
 
 })();
 

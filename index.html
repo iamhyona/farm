@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792934900";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792935000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -755,6 +755,8 @@ html body .phT .phT-c .trow span{font-size:13.5px!important}
 #sleepCf .bcb .yes{background:linear-gradient(#8fb8ff,#5a7fd8);color:#fff;text-shadow:0 1.5px 0 #2a3f7a}
 #sleepCf .kit{width:100%;margin-top:4px;height:38px;border-radius:12px;border:2px dashed #c9a676;background:#fff8ea;color:#8a5a33;font:600 13.5px Paperlogy,sans-serif;cursor:pointer}
 #ovPause #bSleep2{display:none!important}
+.inv button i.fdb{position:absolute;left:-3px;top:-5px;display:flex;align-items:center;gap:1px;padding:0 4px 0 1px;height:15px;border-radius:9px;background:#fff3f3;border:1.5px solid #d84a5a;font:700 10px Paperlogy,sans-serif;font-style:normal;color:#c8323f;line-height:1;pointer-events:none;z-index:2}
+.inv button i.fdb::before{content:'';width:11px;height:11px;background:url(art/hud/hud_heart.png) center/contain no-repeat}
 </style></head>
 
 <body>
@@ -1314,7 +1316,7 @@ function drawPops(dt){for(const p of POPS){p.t+=dt;const q=iso(p.x,p.y,.8+p.t*1.
 const fmtT=m=>{const h=Math.floor(m/60)%24,mm=Math.floor(m%60/10)*10;return(h<10?'0':'')+h+':'+(mm<10?'0':'')+mm};
 function hud(){if(!S)return;$('hDay').textContent=S.day;$('hTime').textContent=fmtT(S.min)+(S.rain?' ☂':'');$('hGold').textContent=S.gold.toLocaleString()}
 function drawInv(){if(!S)return;const el=$('inv');el.innerHTML='';S.inv.forEach((s,i)=>{const b=document.createElement('button');if(i===S.sel)b.className='on';const c=document.createElement('canvas');c.width=c.height=72;drawIcon(c.getContext('2d'),s.id,72);b.appendChild(c);const n=document.createElement('b');n.textContent=ITEM[s.id]&&ITEM[s.id].tool?'':s.n;b.appendChild(n);
- b.onclick=e=>{e.stopPropagation();const it=ITEM[s.id];if(i===S.sel&&it.food!=null&&eatSel())return;S.sel=i;drawInv();{const P=(it.desc?it.desc.split(' · '):[]);if(it.food)P.push(`한 번 더 누르면 먹어요`,`힘 +${it.food}⚡`);tipT(P.length?P[0]+(P.length>1?'\n'+P.slice(1).join(' · '):''):it.n)}};el.appendChild(b)})}
+ b.onclick=e=>{e.stopPropagation();const it=ITEM[s.id];if(i===S.sel&&it.food!=null&&eatSel())return;S.sel=i;drawInv();{const P=(it.desc?it.desc.split(' · '):[]);if(it.food)P.push(`한 번 더 누르면 먹어요`,`힘 +${it.food}`);tipT(P.length?P[0]+(P.length>1?'\n'+P.slice(1).join(' · '):''):it.n)}};el.appendChild(b)})}
 let tipTm=0;function tipT(t){$('tip').textContent=t;tipTm=2.5}
 
 /* ===== 행동 버튼 ===== */
@@ -1464,7 +1466,7 @@ function gainSell(g){addXP(g/25)}
 /* 행동력 */
 function spend(c){ensureAlpha();if(S.en<c){toast('힘이 없어요… 음식을 먹거나 집에서 쉬어요');sfx.no();return false}S.en=Math.max(0,S.en-c);statUI();return true}
 function eatSel(){const id=selId(),it=ITEM[id];if(!it||it.food==null)return false;ensureAlpha();if(S.en>=EN_MAX){toast('지금은 배불러요');return true}
- if(take(id)){const v=Math.max(3,it.food||Math.round(sellOf(id)/6));S.en=Math.min(EN_MAX,S.en+v);sfx.get();toast(`${it.n} 냠! +${v}⚡`);statUI();save()}return true}
+ if(take(id)){const v=Math.max(3,it.food||Math.round(sellOf(id)/6));S.en=Math.min(EN_MAX,S.en+v);sfx.get();toast(`${it.n} 냠! 힘 +${v}`);statUI();save()}return true}
 for(const k in CROPS)if(ITEM[k]&&ITEM[k].food==null)ITEM[k].food=Math.max(4,Math.round(CROPS[k].sell/8));
 /* 행동 감싸기: 행동력·경험치·가공 시설 */
 const _decide=decide;
@@ -1638,11 +1640,11 @@ for(const k of ['sap_apple','sap_peach','sap_persimmon'])if(ITEM[k])ITEM[k].desc
 ICM.basket='sum_harvest';ICM.remove='act_pick';Object.assign(ICM,{hand:'tool_hand',can:'tool_can',basket:'tool_basket',hoe:'tool_hoe',remove:'tool_remove'});
 function ensureTools(){if(!S||!S.inv)return;const cur=S.inv[S.sel]&&S.inv[S.sel].id;for(const id of ['can','basket','remove'])if(!S.inv.some(v=>v.id===id))S.inv.push({id,n:1});const O=['hand','can','basket','hoe','remove','rod'],t=O.map(id=>S.inv.find(v=>v.id===id)).filter(Boolean),r=S.inv.filter(v=>!O.includes(v.id)),n=t.concat(r);if(n.some((v,i)=>v!==S.inv[i])){S.inv=n;S.sel=Math.max(0,S.inv.findIndex(v=>v.id===cur))}}
 drawInv=function(){if(!S)return;ensureTools();const el=$('inv');el.innerHTML='';const seeds=S.inv.filter(s=>ITEM[s.id]&&ITEM[s.id].seed),curSeed=!!(ITEM[selId()]&&ITEM[selId()].seed);let sd=false;
- const mk=(id,on,cnt,fn)=>{const b=document.createElement('button');if(on)b.className='on';const c=document.createElement('canvas');c.width=c.height=72;drawIcon(c.getContext('2d'),id,72);b.appendChild(c);const n=document.createElement('b');n.textContent=cnt;b.appendChild(n);b.onclick=e=>{e.stopPropagation();fn()};el.appendChild(b);return b};
+ const mk=(id,on,cnt,fn)=>{const b=document.createElement('button');if(on)b.className='on';const c=document.createElement('canvas');c.width=c.height=72;drawIcon(c.getContext('2d'),id,72);b.appendChild(c);{const F=ITEM[id]&&ITEM[id].food;if(F&&!(ITEM[id].seed)){const h=document.createElement('i');h.className='fdb';h.textContent='+'+F;b.appendChild(h)}}const n=document.createElement('b');n.textContent=cnt;b.appendChild(n);b.onclick=e=>{e.stopPropagation();fn()};el.appendChild(b);return b};
  S.inv.forEach((s,i)=>{const it=ITEM[s.id]||{};
   if(it.seed){if(sd)return;sd=true;const pk=curSeed?selId():(S.seedSel&&seeds.some(v=>v.id===S.seedSel)?S.seedSel:seeds[0].id),tot=seeds.reduce((a,v)=>a+v.n,0);
    mk(pk,curSeed,tot,()=>{if(curSeed)return openSeeds();S.sel=S.inv.findIndex(v=>v.id===pk);S.seedSel=pk;drawInv();tipT(ITEM[pk].n+'\n한 번 더 누르면 다른 씨앗을 골라요')}).classList.add('sbag');return}
-  mk(s.id,i===S.sel,it.tool?'':s.n,()=>{if(i===S.sel&&it.food!=null&&eatSel())return;S.sel=i;drawInv();const P=(it.desc?it.desc.split(' · '):[]);if(it.food)P.push('한 번 더 누르면 먹어요',`힘 +${it.food}⚡`);tipT(P.length?P[0]+(P.length>1?'\n'+P.slice(1).join(' · '):''):it.n)})})};
+  mk(s.id,i===S.sel,it.tool?'':s.n,()=>{if(i===S.sel&&it.food!=null&&eatSel())return;S.sel=i;drawInv();const P=(it.desc?it.desc.split(' · '):[]);if(it.food)P.push('한 번 더 누르면 먹어요',`힘 +${it.food}`);tipT(P.length?P[0]+(P.length>1?'\n'+P.slice(1).join(' · '):''):it.n)})})};
 function openSeeds(){const L=S.inv.filter(s=>ITEM[s.id]&&ITEM[s.id].seed);openPanel('씨앗 고르기','<div class="sgrid">'+L.map(s=>`<button data-a="sd:${s.id}" class="${s.id===selId()?'on':''}"><canvas data-ic="${s.id}" width="80" height="80"></canvas><span>${ITEM[s.id].n.replace(' 씨앗','')}</span><b>${s.n}</b></button>`).join('')+'</div>')}
 $('pnL').addEventListener('click',e=>{const b=e.target.closest('button[data-a]');if(!b)return;const [a,v]=b.dataset.a.split(':');if(a!=='sd')return;S.sel=S.inv.findIndex(x=>x.id===v);S.seedSel=v;$('ovPanel').classList.remove('show');paused=false;drawInv();tipT(ITEM[v].n+'\n'+(ITEM[v].desc||'').split(' · ')[0])});
 if(window.__f)Object.assign(window.__f,{openSeeds,growLeft,fmtLeft});
@@ -2019,6 +2021,9 @@ function sleepAsk(){if(!S||state!=='play')return;let m=$('sleepCf');
 /* 게임 설명: 최신 설명으로 갱신 · 시작 화면 버튼 보장 */
 try{localStorage.setItem('phTutCfg:'+location.pathname,JSON.stringify(TUT))}catch(e){}
 addEventListener('load',()=>{setTimeout(()=>{try{if(!document.querySelector('.phS-how')&&window.phTut)window.phTut('farm-how',TUT,()=>{})}catch(e){}},300)});
+/* 날작물도 조금 먹기 (+3~8) */
+for(const k in CROPS)if(!CROPS[k].fl&&ITEM[k]&&ITEM[k].food==null)ITEM[k].food=Math.max(3,Math.min(8,Math.round((CROPS[k].sell||30)/12)));
+try{drawInv()}catch(e){}
 })();
 
 </script>

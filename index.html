@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792933400";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792933500";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -586,7 +586,7 @@ html body .phT .phT-c #phTgo{box-shadow:0 16px 0 16px #f6e9cc,0 -16px 16px 6px #
 .pv-flow{font-size:11.5px;line-height:1.55;text-align:center;background:#f3e2bd;border-radius:10px;padding:7px 8px;color:#6b4220;font-weight:700}
 #ovPause{justify-content:flex-start!important;overflow-y:auto!important}
 #ovPause>.big{margin-top:auto!important}
-#ovPause #bMenu{margin-bottom:auto!important}
+#ovPause #bPauseX{margin-bottom:auto!important}
 #toast2{white-space:pre-line!important;word-break:keep-all}
 .pv-note{word-break:keep-all}
 .pv-rest{display:flex;flex-wrap:wrap;gap:4px}
@@ -677,6 +677,15 @@ html body .phT .phT-c #phTgo{box-shadow:0 16px 0 16px #f6e9cc,0 -16px 16px 6px #
 #screen .hud.hud2>.box.hrec{border-width:9px 6px!important;border-image-width:9px 6px!important}
 #screen .hud.hud2>#stat{border-width:9px 10px!important;border-image-width:9px 10px!important}
 #screen .hud.hud2>.htodo,#screen .hud.hud2>#bPause{flex:0 0 40px!important;width:40px!important}
+#ovPause #pauseInfo,#ovPause .btn,#ovPause .sndrow{width:min(260px,100%)!important;max-width:260px!important;box-sizing:border-box!important;margin-left:auto!important;margin-right:auto!important}
+#ovPause #pauseInfo .pinfo{width:100%!important;box-sizing:border-box}
+#ovPause .sndrow .btn{width:auto!important;flex:1 1 0!important;min-width:0!important}
+#ovPause{align-items:center!important}
+#ovPause .pv2{padding:10px 12px!important}
+#ovPause .pv2 .pi-time{font-size:17px!important}
+#ovPause .pv2 .pi-day b{font-size:16px!important}
+#ovPause .pv2 .pi-day small{font-size:10.5px!important}
+#ovPause .pv2 img{width:28px!important;height:28px!important;flex:0 0 28px!important}
 </style></head>
 
 <body>
@@ -1804,7 +1813,7 @@ function hpOpen(k,re){if(!S||state!=='play')return;if(!re){if(HP===k)return hpCl
   +(nu?`<div class="hp-sub">🔓 Lv ${nu.l}에 열려요</div><div class="hp-chips">${nu.L.map(n=>`<i>${n}</i>`).join('')}</div>`:'')
   +`<div class="hp-sub">솜씨 <span>경험치가 모여 농장 Lv이 올라요</span></div><div class="hp-sk">`+Object.keys(SKN).map(s=>{const v=skLv(S.sk[s]);return`<div class="hp-r"><span class="e"><img src="art/ic/sk_${s}.png" alt=""></span><b>${SKN[s][1]}</b><em>Lv ${v.l}</em><span class="hp-bar sm"><i style="width:${Math.round(v.cur/v.need*100)}%;background:${SKC[s]}"></i></span><small>${v.l>1?SKP[s](v.l):'Lv 2 · '+SKP[s](2)}</small></div>`}).join('')+'</div>'}
  else if(k==='en'){const en=Math.round(S.en||0);
-  h=`<div class="hp-hd">${ic('hud_energy')}<b>힘</b><small><b>${en}</b> / ${EN_MAX}</small></div><span class="hp-bar en"><i style="width:${en/EN_MAX*100}%"></i></span>`
+  h=`<div class="hp-hd"><span class="e">❤️</span><b>힘</b><small><b>${en}</b> / ${EN_MAX}</small></div><span class="hp-bar en"><i style="width:${en/EN_MAX*100}%"></i></span>`
   +`<div class="hp-sub">쉬면 차요</div><div class="hp-rest">`+[['😴','자기'],['🍲','먹기'],['🪑','앉아 쉬기'],['🔥','불멍'],['💧','물멍']].map(([e,n])=>`<div><span>${e}</span><small>${n}</small></div>`).join('')+'</div>'}
  else if(k==='gold'){
   h=`<div class="hp-hd"><span class="e">🪙</span><b>${S.gold.toLocaleString()}G</b><small>가진 돈</small></div><div class="hp-sub">지금까지</div><div class="hp-st">`

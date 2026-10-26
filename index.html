@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792935200";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792935400";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -759,6 +759,10 @@ html body .phT .phT-c .trow span{font-size:13.5px!important}
 .inv button i.fdb::before{content:'';width:11px;height:11px;background:url(art/hud/hud_heart.png) center/contain no-repeat}
 #sleepCf .bcb .nap{background:linear-gradient(#ffe08a,#f2b93a);color:#5a2e12}
 #sleepCf .bcb button{font-size:15px!important;white-space:nowrap}
+#screen .pnl .it{grid-template-columns:44px minmax(0,1fr) auto!important}
+#screen .pnl .it>div{min-width:0}
+#screen .pnl .it button{min-width:0!important;max-width:42vw;white-space:nowrap}
+@media (max-width:380px){#screen #ovPanel{padding-left:6px!important;padding-right:6px!important}#screen #pnL{border-width:24px!important;border-image-width:24px!important;width:100%!important}#screen .pnl .it{padding:8px 4px!important;gap:6px!important}#screen .pnl .it button{padding-left:2px!important;padding-right:2px!important}}
 </style></head>
 
 <body>
@@ -2037,6 +2041,17 @@ function clockTint(g,r,m){const H=m/60;let night=0,dusk=0;
 /* 낮잠: 2시간 지나고 힘 +50 */
 function nap(){if(!S||state!=='play')return;state='sleep';sfx.sleep&&sfx.sleep();$('fade').classList.add('on');
  setTimeout(()=>{S.min=Math.min(23*60+30,S.min+120);S.en=Math.min(EN_MAX,S.en+50);save();hud();$('fade').classList.remove('on');state='play';toast('낮잠을 잤어요 · 힘 +50');try{statUI()}catch(e){}},1400)}
+/* 버튼 글자 넘침 방지: 넘치면 글자 크기를 줄여 한 줄에 맞춤 */
+function fitBtn(b){if(!b||!b.offsetParent||b.querySelector('canvas,img'))return;const t=(b.textContent||'').trim();if(!t||b.clientWidth<20)return;
+ if(b.__ft===t+'|'+b.clientWidth)return;b.style.fontSize='';b.style.whiteSpace='nowrap';b.style.letterSpacing='';let fs=parseFloat(getComputedStyle(b).fontSize)||14,n=0;
+ const cs=getComputedStyle(b),pad=(parseFloat(cs.paddingLeft)||0)+(parseFloat(cs.paddingRight)||0),room=b.clientWidth-pad-2;
+ const w=()=>{const r=document.createRange();r.selectNodeContents(b);return r.getBoundingClientRect().width};
+ while(w()>room&&fs>9&&n<20){fs-=.5;b.style.fontSize=fs+'px';n++}if(w()>room)b.style.letterSpacing='-.04em';b.__ft=t+'|'+b.clientWidth}
+function fitAll(){document.querySelectorAll('button').forEach(fitBtn)}
+setInterval(fitAll,400);addEventListener('resize',()=>setTimeout(fitAll,50));
+/* 씨앗 설명: 새 성장 시간(실제 분)으로 */
+for(const k in CROPS){const C=CROPS[k],it=ITEM['seed_'+k];if(!it)continue;const mm=Math.round(cropStep(C)*C.days/60);const base=`약 ${mm}분 만에 ${C.fl?'피어요':'자라요'}`;
+ it.desc=(C.fl?SEASON_KO_[C.sea]+' 꽃 · ':'')+base+(C.re?` · 수확 후 약 ${Math.max(1,Math.round(cropStep(C)*C.re/60))}분마다 다시 열려요`:'')+(C.water?' · 연못 가장자리에 심어요':'')+' · 물을 줘야 자라요'}
 })();
 
 </script>

@@ -33,7 +33,9 @@
 #screen #toast2{font-size:11.5px!important;padding:5px 12px!important;line-height:1.4!important}
 
 #lvUp{z-index:45!important;top:30%!important}#lvUp .lv-u{text-align:center!important}#lvUp .lv-u i{font-style:normal;white-space:nowrap}#lvUp .lv-u b{display:inline-block;margin-bottom:1px;font-size:11.5px}
-</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793013774";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+
+#screen #toast2{max-width:92%!important;font-size:11px!important}
+</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793013864";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -1503,7 +1505,7 @@ function addXP(n,tx,ty){ensureAlpha();n=Math.round(n);if(n<=0)return;S.xp+=n;S.t
  while(S.lv<LVMAX&&S.xp>=xpNeed(S.lv)){S.xp-=xpNeed(S.lv);S.lv++;const L=(LVUNL[S.lv]||[]).map(k=>CROPS[k]&&CROPS[k].fl?ITEM['seed_'+k].n:ITEM[k]?ITEM[k].n:k);sfx.get();setTimeout(()=>lvUpShow(S.lv,L),300)}statUI()}
 function gainSell(g){addXP(g/25)}
 /* 행동력 */
-function spend(c){ensureAlpha();if(S.en<c){toast('힘이 없어요… 음식을 먹거나 집에서 쉬어요');sfx.no();return false}S.en=Math.max(0,S.en-c);statUI();return true}
+function spend(c){ensureAlpha();if(S.en<c){toast('힘이 없어요 · 먹거나 쉬어요');sfx.no();return false}S.en=Math.max(0,S.en-c);statUI();return true}
 function eatSel(){const id=selId(),it=ITEM[id];if(!it||it.food==null)return false;ensureAlpha();if(S.en>=EN_MAX){toast('지금은 배불러요');return true}
  if(take(id)){const v=Math.max(3,it.food||Math.round(sellOf(id)/6));S.en=Math.min(EN_MAX,S.en+v);sfx.get();toast(`${it.n} 냠! 힘 +${v}`);statUI();save()}return true}
 for(const k in CROPS)if(ITEM[k]&&ITEM[k].food==null)ITEM[k].food=Math.max(4,Math.round(CROPS[k].sell/8));
@@ -1759,7 +1761,7 @@ function morning(){const si=seasonIdx(),R=Math.random;
 (function(){const _dp=dayPass;dayPass=function(n,a){const r=_dp.apply(this,arguments);standUp(1);try{morning();if((n||1)>1)morning()}catch(e){}ensureDaily();GD=1;return r}})();
 /* --- 벤치 쉬기 --- */
 let SIT=null,sitT=0;
-function sitDown(tx,ty){const P=S.pl;SIT={x:tx,y:ty,px:P.x,py:P.y};P.x=tx+.5;P.y=ty+.62;P.fx=0;P.fy=1;toast('벤치에서 쉬어요 · 힘이 차오르고 시간이 빨리 가요\n움직이면 일어나요');taskHit('rest')}
+function sitDown(tx,ty){const P=S.pl;SIT={x:tx,y:ty,px:P.x,py:P.y};P.x=tx+.5;P.y=ty+.62;P.fx=0;P.fy=1;toast('벤치에서 쉬는 중 · 힘이 차요');taskHit('rest')}
 function standUp(q){if(!SIT)return;const P=S.pl;P.x=SIT.px;P.y=SIT.py;SIT=null;if(!q)toast('다시 일하러 가요!')}
 (function(){const _m=move;move=function(dt){if(SIT){const jx=IN.x+(KEY.r?1:0)-(KEY.l?1:0),jy=IN.y+(KEY.dn?1:0)-(KEY.u?1:0);if(Math.hypot(jx,jy)>.05||TAPQ.length){TAPQ.length=0;TAPPATH=null;standUp();return true}
   S.min+=dt/MIN_SEC*3;const e0=S.en;S.en=Math.min(EN_MAX,S.en+dt*.8);sitT+=dt;if(sitT>2.5){sitT=0;statUI();pop(SIT.x,SIT.y-.3,e0<EN_MAX?'+⚡':'♪','#ffe27a')}return true}return _m(dt)}})();
@@ -1960,8 +1962,8 @@ if(window.__f)Object.assign(window.__f,{pvMenu,nextUnl});
 ITEM.campfire={n:'모닥불',price:80,place:1,deco:1,desc:'옆에 앉아 불멍 · 힘이 1.5배 빨리 차요'};
 EMO.campfire='🔥';HIT_T.campfire=.8;COST['불멍']=0;COST['물멍']=0;TMAP['불멍']='rest';TMAP['물멍']='rest';
 function nearWater(tx,ty,r){for(let y=ty-r;y<=ty+r;y++)for(let x2=tx-r;x2<=tx+r;x2++)if(inMap(x2,y)&&S.G[y][x2]==='w')return true;return false}
-const REST_MSG={sit:'앉아서 쉬어요 · 힘이 차오르고 시간이 빨리 가요',fire:'🔥 불멍 중 · 타닥타닥… 힘이 1.5배 빨리 차요',water:'💧 물멍 중 · 잔잔한 물결… 힘이 1.5배 빨리 차요'};
-function restAt(mode,tx,ty,px,py){const P=S.pl;SIT={x:tx,y:ty,px:P.x,py:P.y,mode,mul:mode==='sit'?1:1.5};P.x=px;P.y=py;P.fx=0;P.fy=mode==='fire'?-1:1;toast(REST_MSG[mode]+'\n움직이면 일어나요');taskHit('rest')}
+const REST_MSG={sit:'앉아서 쉬는 중 · 힘이 차요',fire:'불멍 중 · 힘이 빨리 차요',water:'물멍 중 · 힘이 빨리 차요'};
+function restAt(mode,tx,ty,px,py){const P=S.pl;SIT={x:tx,y:ty,px:P.x,py:P.y,mode,mul:mode==='sit'?1:1.5};P.x=px;P.y=py;P.fx=0;P.fy=mode==='fire'?-1:1;toast(REST_MSG[mode]);taskHit('rest')}
 sitDown=function(tx,ty){const w=nearWater(tx,ty,2);restAt(w?'water':'sit',tx,ty,tx+.5,ty+.62)};
 (function(){const _m=move;move=function(dt){const r=_m(dt);if(SIT&&SIT.mul>1)S.en=Math.min(EN_MAX,S.en+dt*.8*(SIT.mul-1));return r}})();
 (function(){const _d=decide;decide=function(){if(SIT||!S)return _d();const T=target();if(T){const [tx,ty]=T,o=objAt(tx,ty),sid=selId();
@@ -1975,7 +1977,7 @@ sitDown=function(tx,ty){const w=nearWater(tx,ty,2);restAt(w?'water':'sit',tx,ty,
  for(let i=0;i<3;i++){const k=(t*.8+i/3)%1;x.globalAlpha=(1-k)*.8;x.fillStyle='#ffd27a';x.beginPath();x.arc(p[0]+Math.sin(k*7+i*2)*TW*.06,p[1]-TW*(.3+k*.35),TW*.012*(1-k)+1,0,7);x.fill()}x.restore()}})();
 if(window.__f)Object.assign(window.__f,{restAt,nearWater});
 /* 안내 문장: 쉼표 뒤에서 줄바꿈 */
-(function(){const _t=toast;toast=function(t){return _t(String(t).replace(/, /g,',\n'))}})();
+
 (function(){const _p=tipT;tipT=function(t){return _p(String(t).replace(/, /g,',\n'))}})();
 /* ===== 상단 HUD 정리: [⭐레벨/⚡힘] [돈/기록] [할 일] [설정] ===== */
 (function(){const h=document.querySelector('#screen .hud');if(!h)return;h.classList.add('hud2');
@@ -2158,7 +2160,7 @@ function mvBar(){let b=$('mvBar');if(!b){b=document.createElement('div');b.id='m
 (function(){const _p=paintable;paintable=function(tx,ty){if(selId()==='remove')return false;return _p(tx,ty)}})();
 (function(){const _w=isWalk;isWalk=function(tx,ty){if(selId()==='remove'&&MV)return false;return _w(tx,ty)}})();
 /* 괭이로 작물 들기는 메뉴의 '옮겨 심기'로 */
-(function(){const _d=decide;decide=function(){if(!S||selId()!=='hoe'||S.carry)return _d();const T=target();if(T&&S.C[T[1]][T[0]]&&S.G[T[1]][T[0]]==='s'){const C=CROPS[S.C[T[1]][T[0]].k];return{l:C.n+' 자라는 중',ic:'hoe',dim:1,f:()=>toast('옮기려면 꾹 눌러 [옮겨 심기]를 골라요')}}return _d()}})();
+(function(){const _d=decide;decide=function(){if(!S||selId()!=='hoe'||S.carry)return _d();const T=target();if(T&&S.C[T[1]][T[0]]&&S.G[T[1]][T[0]]==='s'){const C=CROPS[S.C[T[1]][T[0]].k];return{l:C.n+' 자라는 중',ic:'hoe',dim:1,f:()=>toast('꾹 누르면 옮길 수 있어요')}}return _d()}})();
 /* 옮기는 칸 표시 */
 (function(){const _g=drawGround;drawGround=function(t){_g(t);if(!MV||!S)return;const a=iso(MV.x,MV.y),b=iso(MV.x+1,MV.y),c=iso(MV.x+1,MV.y+1),d=iso(MV.x,MV.y+1);x.save();x.globalAlpha=.55+.35*Math.sin(t*5);x.strokeStyle='#fff3b0';x.lineWidth=3*DPR;x.setLineDash([6*DPR,4*DPR]);x.beginPath();x.moveTo(a[0],a[1]);x.lineTo(b[0],b[1]);x.lineTo(c[0],c[1]);x.lineTo(d[0],d[1]);x.closePath();x.stroke();x.restore()}})();
 
@@ -2249,7 +2251,7 @@ function onLong(tx,ty){if(!inMap(tx,ty))return;const g=S.G[ty][tx],o=objAt(tx,ty
 #mvBar{position:absolute;left:50%;top:10px;transform:translateX(-50%);z-index:5;display:none;align-items:center;gap:8px;background:#5a2e12;color:#fff6e0;font:700 13px Paperlogy,sans-serif;padding:6px 6px 6px 14px;border-radius:20px;box-shadow:0 3px 8px rgba(0,0,0,.3);white-space:nowrap}
 #mvBar.show{display:flex}#mvBar button{border:0;border-radius:14px;background:#fbf0d8;color:#5a2e12;font:700 12px Paperlogy,sans-serif;padding:5px 12px}`;document.head.appendChild(s)})();
 /* 처음 한 번 알려주기 */
-(function(){let k='pfHintLP3';try{if(localStorage.getItem(k))return}catch(_){}const iv=setInterval(()=>{if(state==='play'&&S){clearInterval(iv);setTimeout(()=>{toast('풀밭을 두 번 톡하면 밭을 갈아요\n밭·작물을 꾹 누르면 옮겨요');try{localStorage.setItem(k,1)}catch(_){}},2500)}},1000)})();
+(function(){let k='pfHintLP3';try{if(localStorage.getItem(k))return}catch(_){}const iv=setInterval(()=>{if(state==='play'&&S){clearInterval(iv);setTimeout(()=>{toast('두 번 톡 밭 갈기 · 꾹 옮기기');try{localStorage.setItem(k,1)}catch(_){}},2500)}},1000)})();
 if(window.__f)Object.assign(window.__f,{tileActs,openTM,mvStart,mvDo,MVget:()=>MV,scr:(tx,ty)=>{const r=cv.getBoundingClientRect(),p=iso(tx+.5,ty+.5);return[r.left+p[0]/DPR,r.top+p[1]/DPR]}});
 
 /* ===== 다 자란 작물: 둥실 말풍선 (작물 아이콘) ===== */
@@ -2350,7 +2352,7 @@ if(window.__f)Object.assign(window.__f,{lvUpShow});
 
 /* ===== 꽃: 먹지 않아요 · 꽃 구경 · 꽃밭 힐링 ===== */
 for(const k in CROPS)if(CROPS[k].fl&&ITEM[k]){delete ITEM[k].food;ITEM[k].desc='곱게 묶은 '+CROPS[k].n+' 꽃다발 · 출하함에 팔거나 주문에 납품해요'}
-function flowerSee(tx,ty){const c=S.C[ty][tx];if(!c)return;if(c.sm===S.day){toast('오늘은 이미 구경했어요\n꽃 옆에 머물면 힘이 조금씩 차요');return}
+function flowerSee(tx,ty){const c=S.C[ty][tx];if(!c)return;if(c.sm===S.day){toast('오늘은 이미 구경했어요');return}
  c.sm=S.day;S.en=Math.min(EN_MAX,(S.en||0)+3);pop(tx,ty,'♥ 힘 +3','#ff9ac8');sfx.pop&&sfx.pop();if(!S.la)S.la={};S.la.rest=nowT();try{taskHit('rest')}catch(_){}statUI();save()}
 (function(){const _c=cropAsk;cropAsk=function(tx,ty){const c=S.C[ty][tx],C=c&&CROPS[c.k];if(C&&C.fl&&c.age>=C.days){openTM(tx,ty,[{ic:c.k,l:'꽃 구경',f:()=>flowerSee(tx,ty)},{ic:'item_bouquet',l:'꽃다발 만들기',f:()=>useTool('basket',tx,ty)}],C.n+(((C.n.charCodeAt(C.n.length-1)-0xAC00)%28)?'이':'가')+' 활짝 피었어요');return}return _c(tx,ty)}})();
 /* 꽃밭 옆에서 가만히 있으면 힘이 조금씩 */

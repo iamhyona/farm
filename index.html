@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792919000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792920000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -477,6 +477,11 @@ html body .phT .phT-c #phTgo{bottom:0!important;margin-bottom:0!important;box-sh
 #screen #ovPause #bPauseX{margin-top:14px!important}
 #screen #ovPause .btn+.btn{margin-top:3px!important}
 
+#screen #ovPause .sndrow{display:flex;gap:4px;width:min(250px,100%);margin-top:3px}
+#screen #ovPause .sndrow .btn{flex:1 1 0;width:auto!important;min-width:0;margin:0!important;font-size:15px!important;padding-left:4px!important;padding-right:4px!important;white-space:nowrap}
+#screen #ovPause .sndrow .btn.off{filter:grayscale(.55) brightness(.9)}
+#screen #ovPause .sndrow+.btn{margin-top:3px!important}
+
 </style></head>
 
 <body>
@@ -518,7 +523,7 @@ html body .phT .phT-c #phTgo{bottom:0!important;margin-bottom:0!important;box-sh
       <div class="msg" id="pauseInfo"></div>
       <button class="btn" id="bResume" hidden>계속하기</button>
       <button class="btn" id="bSleep2">집에 가서 자기</button>
-      <button class="btn" id="bSnd2">소리 끄기</button>
+      <div class="sndrow"><button class="btn" id="bBgm">배경음 끄기</button><button class="btn" id="bSfx">효과음 끄기</button></div>
       <button class="btn" id="bMenu">홈 화면 가기</button>
       <button class="x" id="bPauseX" aria-label="닫기">✕</button>
     </div>
@@ -983,15 +988,15 @@ function load(){let d;try{d=JSON.parse(store.get('farm-save')||'null')}catch(e){
 function ensureSign(){if(!S||!S.O)return;for(const r of S.O)for(const o of r)if(o&&o.t==='sign'){if(!(o.x===10&&o.y===5&&!o.mv2))return;S.O[o.y][o.x]=null;break}for(const [sx,sy] of[[10,7],[11,7],[3,7],[10,5]])if(S.O[sy]&&(!S.O[sy][sx]||S.O[sy][sx].t==='wild')&&S.G[sy][sx]==='g'){S.O[sy][sx]={t:'sign',x:sx,y:sy,v:.5,mv2:1};GD=1;return}}
 
 /* ===== 소리 ===== */
-let AC=null,sound=store.get('farm-sound')!=='0',bgmT=null;
+let AC=null,sound=store.get('farm-sound')!=='0',music=store.get('farm-music')!==null?store.get('farm-music')!=='0':store.get('farm-sound')!=='0',_bt=0,bgmT=null;
 function unlock(){try{if(navigator.audioSession)navigator.audioSession.type='ambient'}catch(e){}if(!AC){try{AC=new(window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(AC&&AC.state==='suspended')AC.resume()}
-function tone(f,d,type='triangle',v=.05,f2,del=0){if(!sound||!AC)return;const t=AC.currentTime+del,o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+d+.02)}
+function tone(f,d,type='triangle',v=.05,f2,del=0){if(!AC||(_bt?!music:!sound))return;const t=AC.currentTime+del,o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+d+.02)}
 const sfx={hoe:()=>{tone(140,.12,'square',.05,70)},water:()=>{for(let i=0;i<4;i++)tone(900+i*140,.06,'sine',.03,null,i*.04)},plant:()=>tone(520,.1,'triangle',.05,780),get:()=>{tone(880,.08);tone(1320,.12,'triangle',.05,null,.07)},
  coin:()=>{tone(1200,.06,'square',.03);tone(1600,.1,'square',.03,null,.06)},cluck:()=>{tone(700,.07,'square',.03,500);tone(760,.06,'square',.03,520,.09)},sleep:()=>{[523,659,784,1047].forEach((f,i)=>tone(f,.25,'sine',.04,null,i*.12))},
  thud:()=>tone(110,.1,'square',.05,60),pluck:()=>tone(640,.06,'triangle',.05,420),no:()=>tone(200,.15,'square',.04,150)};
 const SONG=[0,4,7,4,9,7,4,2,0,4,7,12,9,7,4,2];
-function bgm(on){clearInterval(bgmT);bgmT=null;if(!on)return;let n=0;bgmT=setInterval(()=>{if(!sound||!AC||state!=='play'||paused)return;const k=n%16,root=S&&S.min>1080?220:262;tone(root*Math.pow(2,SONG[k]/12),.22,'sine',.022);if(k%4===0)tone(root/2*Math.pow(2,SONG[k]/12),.4,'triangle',.025);n++},260)}
-const sndSync=()=>{$('bSound').classList.toggle('on',sound);$('bSound').classList.toggle('off',!sound);if($('bSnd2'))$('bSnd2').textContent=sound?'소리 끄기':'소리 켜기'};sndSync();if($('bSnd2'))$('bSnd2').onclick=()=>{unlock();sound=!sound;store.set('farm-sound',sound?'1':'0');sndSync()};
+function bgm(on){clearInterval(bgmT);bgmT=null;if(!on)return;let n=0;bgmT=setInterval(()=>{if(!music||!AC||state!=='play'||paused)return;_bt=1;try{const k=n%16,root=S&&S.min>1080?220:262;tone(root*Math.pow(2,SONG[k]/12),.22,'sine',.022);if(k%4===0)tone(root/2*Math.pow(2,SONG[k]/12),.4,'triangle',.025);n++}finally{_bt=0}},260)}
+const sndSync=()=>{$('bSound').classList.toggle('on',sound);$('bSound').classList.toggle('off',!sound);if($('bBgm')){$('bBgm').textContent=music?'배경음 끄기':'배경음 켜기';$('bBgm').classList.toggle('off',!music)}if($('bSfx')){$('bSfx').textContent=sound?'효과음 끄기':'효과음 켜기';$('bSfx').classList.toggle('off',!sound)}};sndSync();if($('bBgm'))$('bBgm').onclick=()=>{unlock();music=!music;store.set('farm-music',music?'1':'0');sndSync()};if($('bSfx'))$('bSfx').onclick=()=>{unlock();sound=!sound;store.set('farm-sound',sound?'1':'0');sndSync()};
 $('bSound').onclick=()=>{unlock();sound=!sound;store.set('farm-sound',sound?'1':'0');sndSync()};
 function toast(t){const e=$('toast2');e.textContent=t;e.classList.remove('show');void e.offsetWidth;e.classList.add('show')}
 const POPS=[];function pop(tx,ty,txt,col){POPS.push({x:tx+.5,y:ty+.5,txt,col:col||'#fff',t:0})}

@@ -29,7 +29,7 @@
 #screen .hud.hud2 #stat .lv b,#screen .hud.hud2 #stat .en b#sEnT{width:auto!important;min-width:32px!important;flex:0 0 32px!important;white-space:nowrap;text-align:left!important}
 #screen .hud.hud2 #stat .lv b::before{content:'Lv';font-size:6.5px;margin-right:1px;letter-spacing:0;vertical-align:2px;opacity:.9}
 #screen #cropCard{width:max-content!important}#screen #cropCard .cc-bar{width:56px!important}#screen #cropCard .cc-m{flex:0 0 auto!important}
-</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793012849";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793012976";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -2364,6 +2364,13 @@ function bldAt(px,py){let best=null,bd=-1;for(let y=0;y<MH;y++)for(let xx=0;xx<M
   let inside=false;for(let i=0,j=P.length-1;i<P.length;j=i++){const a=P[i],b=P[j];if((a[1]>py)!==(b[1]>py)&&px<(b[0]-a[0])*(py-a[1])/(b[1]-a[1])+a[0])inside=!inside}
   if(inside&&o.x+o.y>bd){bd=o.x+o.y;best=[o.x,o.y]}}return best}
 (function(){const _t=tapTile;tapTile=function(e){const r=cv.getBoundingClientRect(),px=(e.clientX-r.left)*DPR,py=(e.clientY-r.top)*DPR;if(S){const b=bldAt(px,py);if(b){const t=_t(e);const o=t&&inMap(t[0],t[1])&&objAt(t[0],t[1]);if(!o||o.t==='tree'||o.t==='bush'||o===objAt(b[0],b[1]))return b}}return _t(e)}})();
+
+/* ===== 소리 v4: 상냥한 동화 느낌 (물 주기 · 발소리) ===== */
+(function(){const soft=(f,t,d,v,type,f2)=>{const o=AC.createOscillator(),g=AC.createGain(),lp=AC.createBiquadFilter();o.type=type||'sine';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d);lp.type='lowpass';lp.frequency.value=2400;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(lp).connect(g).connect(AC.destination);o.start(t);o.stop(t+d+.05)};
+ let wi=0;const SC=[[659,784,988],[587,740,880],[698,880,1047]];
+ sfx.water=function(){if(!AC||!sound)return;try{const t=AC.currentTime,N=SC[wi++%SC.length];N.forEach((f,i)=>{soft(f,t+i*.09,.42,.028,'sine');soft(f*2,t+i*.09,.18,.006,'sine')});soft(420,t+.3,.16,.012,'sine',760)}catch(e){}};
+ let lr=0;sfx.step=function(){if(!AC||!sound)return;try{const t=AC.currentTime;lr^=1;soft(lr?330:294,t,.11,.018,'sine',lr?250:220)}catch(e){}};
+})();
 })();
 
 </script>

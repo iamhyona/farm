@@ -63,7 +63,7 @@
 #dock button{width:44px!important;height:44px!important;border-radius:50%!important;border-width:2px!important;box-shadow:0 2px 0 #5a2e12!important;flex:0 0 44px}
 #dock img{width:26px!important;height:26px!important}
 #dock button[data-k="set"]{width:36px!important;height:36px!important;flex-basis:36px;align-self:center;opacity:.92}#dock button[data-k="set"] img{width:20px!important;height:20px!important}
-</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793018464";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793018741";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -2565,6 +2565,31 @@ function resale(id){const it=ITEM[id];return it&&it.place&&it.price&&!it.sell&&!
  if(o&&o.t==='well'){const n=(S.wd&&S.wd.d===S.day)?S.wd.n:0;if(n>=3)return{l:'오늘은 충분히 마셨어요',ic:'hand',dim:1,f:()=>toast('우물물은 하루 세 번 · 내일 또 마셔요')};
   return{l:'물 마시기',ic:'hand',f:()=>{if(S.en>=EN_MAX){toast('지금은 목마르지 않아요');return}S.wd={d:S.day,n:n+1};S.en=Math.min(EN_MAX,S.en+10);sfx.water&&sfx.water();pop(T[0],T[1],'♥ 힘 +10','#ff9ac8');toast('시원한 우물물 · 힘 +10 ('+(3-n-1)+'번 남음)');statUI();save()}}}
  return _d()}})();
+
+/* ===== 농장 구경: 링크로 내 농장 보여주기 · 친구 농장 둘러보기 ===== */
+const b64u=b=>{let s2='';const a=new Uint8Array(b);for(let i=0;i<a.length;i+=8192)s2+=String.fromCharCode.apply(null,a.subarray(i,i+8192));return btoa(s2).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')};
+const ub64=s2=>{s2=s2.replace(/-/g,'+').replace(/_/g,'/');while(s2.length%4)s2+='=';const b=atob(s2),a=new Uint8Array(b.length);for(let i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return a};
+async function zip(str){const cs=new CompressionStream('deflate-raw'),w=cs.writable.getWriter();w.write(new TextEncoder().encode(str));w.close();return await new Response(cs.readable).arrayBuffer()}
+async function unzip(u8){const ds=new DecompressionStream('deflate-raw'),w=ds.writable.getWriter();w.write(u8);w.close();return await new Response(ds.readable).text()}
+async function shareFarm(){if(!S)return;const snap={v:1,ch:S.ch,name:S.name,day:S.day,min:S.min,gold:0,G:S.G.map(r=>r.join('')),O:packO().map(o=>({...o,v:o.v!=null?Math.min(.99,Math.floor(o.v*100)/100):o.v})),C:S.C.map(r=>r.map(c=>c?{k:c.k,age:c.age,w:c.w}:0)),pl:{x:6.5,y:7.6,fx:0,fy:1,mv:0},ck:(S.ck||[]).map(c=>({x:c.x,y:c.y})),land:S.land,lv:S.lv,inv:[],orders:[],st:S.st,rv:S.rv,fire1:1,vis:1};
+ const url=location.origin+location.pathname+'#visit='+b64u(await zip(JSON.stringify(snap)));const txt=(S.name||'팡팡농장')+'에 놀러 오세요!';
+ try{if(navigator.share){await navigator.share({title:'팡팡농장',text:txt,url});return}}catch(e){if(e&&e.name==='AbortError')return}
+ try{await navigator.clipboard.writeText(url);toast('농장 링크를 복사했어요 · 친구에게 보내요')}catch(e){prompt('이 링크를 친구에게 보내요',url)}}
+let VISIT=0;
+(function(){const sb=document.createElement('button');sb.className='btn';sb.id='bShareFarm';sb.textContent='내 농장 자랑하기';const ch=$('bChar');if(ch)ch.parentNode.insertBefore(sb,ch);sb.onclick=e=>{e.stopPropagation();shareFarm()}})();
+(async function(){const h=location.hash;if(!h.startsWith('#visit='))return;let data;try{data=await unzip(ub64(h.slice(7)))}catch(e){toast('농장 링크가 잘못됐어요');return}
+ VISIT=1;document.documentElement.classList.add('visiting');const d=JSON.parse(data);d.last=Date.now();const json=JSON.stringify(d);const _g=store.get,_s=store.set;
+ store.get=k=>k==='farm-save'?json:(k.startsWith('pfTour')||k.startsWith('pfHint')?'1':_g(k));store.set=(k,v)=>{if(k!=='farm-save')_s(k,v)};save=function(){};window.__visitS=()=>S;
+ const go=()=>{try{unlock()}catch(_){}if(load()){begin();S.vis=1;try{localStorage.setItem('pfTourOff','1')}catch(_){}
+  const bar=document.createElement('div');bar.id='visitBar';bar.innerHTML=`<span>${(d.name||'팡팡농장').replace(/</g,'')} 구경 중</span><button>내 농장으로</button>`;$('screen').appendChild(bar);bar.addEventListener('pointerdown',e=>e.stopPropagation());bar.querySelector('button').onclick=()=>{location.href=location.pathname};toast('친구 농장을 둘러봐요 · 톡 눌러 걸어가요')}};
+ if(document.readyState==='complete')setTimeout(go,300);else addEventListener('load',()=>setTimeout(go,300))})();
+(function(){const _d=decide;decide=function(){if(VISIT)return null;return _d()}})();
+(function(){const _t=onTap;onTap=function(tx,ty){if(VISIT){walkTo(tx,ty);return true}return _t(tx,ty)}})();
+(function(){const _l=onLong;onLong=function(tx,ty){if(VISIT)return;return _l(tx,ty)}})();
+(function(){const st=document.createElement('style');st.textContent=`
+.visiting #dock,.visiting #screen .hud,.visiting #remind,.visiting #holdBar{display:none!important}
+#visitBar{position:absolute;left:50%;top:14px;transform:translateX(-50%);z-index:30;display:flex;align-items:center;gap:10px;background:#5a2e12;color:#fff6e0;font:400 13px 'Cafe24Surround',Paperlogy,sans-serif;padding:6px 6px 6px 16px;border-radius:20px;box-shadow:0 3px 10px rgba(0,0,0,.3);white-space:nowrap}
+#visitBar button{border:0;border-radius:14px;background:#ffd56a;color:#5a2e12;font:700 12px Paperlogy,sans-serif;padding:6px 12px}`;document.head.appendChild(st)})();
 })();
 
 </script>

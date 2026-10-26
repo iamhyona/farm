@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792923000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792924000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -492,6 +492,13 @@ html body .phT .phT-c .tpc{font-size:12px!important;opacity:.75;margin-bottom:8p
 html body .phT .phT-c #phTgo{margin-top:6px!important}
 html body .phT .phT-c #phTgo{box-shadow:0 16px 0 16px #f6e9cc,0 -16px 16px 6px #f6e9cc!important}
 
+.chgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:4px 2px}
+.chgrid button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0 8px;border-radius:12px;background:rgba(138,90,52,.08);border:3px solid transparent}
+.chgrid button.on{border-color:#ffd23f;background:#fff4c8}
+.chgrid img{width:60px;height:60px;object-fit:cover;object-position:50% 70%}
+.chgrid span{font-size:12px;color:#5a2e12;white-space:nowrap;font-family:'Cafe24Surround',Paperlogy,sans-serif}
+.chgrid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:4px!important;width:100%;box-sizing:border-box}.chgrid button{min-width:0;padding:4px 0 6px!important}.chgrid img{width:48px!important;height:48px!important}.chgrid span{font-size:11px!important}
+
 </style></head>
 
 <body>
@@ -534,6 +541,7 @@ html body .phT .phT-c #phTgo{box-shadow:0 16px 0 16px #f6e9cc,0 -16px 16px 6px #
       <button class="btn" id="bResume" hidden>계속하기</button>
       <button class="btn" id="bSleep2">집에 가서 자기</button>
       <div class="sndrow"><button class="btn" id="bBgm">배경음 끄기</button><button class="btn" id="bSfx">효과음 끄기</button></div>
+      <button class="btn" id="bChar">캐릭터 바꾸기</button>
       <button class="btn" id="bMenu">홈 화면 가기</button>
       <button class="x" id="bPauseX" aria-label="닫기">✕</button>
     </div>
@@ -634,7 +642,7 @@ const CROPS={
  watermelon:{n:'수박',days:8,seed:80,sell:360,c:'#3f8a2e',c2:'#e8382a',lf:'#4f9a3a'},
  minari:{n:'미나리',days:3,seed:20,sell:30,c:'#5fae45',c2:'#a8d870',lf:'#4f9a3a',re:2,water:1},
  lotus:{n:'연근',days:7,seed:70,sell:280,c:'#f0c8c8',c2:'#ff9ab0',lf:'#3f8a2e',water:1}};
-const ITEM={hand:{n:'이동',tool:1,desc:'누른 곳으로 걸어가요 · 수확·물 주기·물건 열기'},hoe:{n:'괭이',tool:1,desc:'누른 풀밭으로 가서 땅을 갈아요 · 쓸면 여러 칸'},egg:{n:'달걀',sell:50},gegg:{n:'황금달걀',sell:220},
+const ITEM={hand:{n:'이동',tool:1,desc:'누른 곳으로 걸어가요 · 수확·물 주기·물건 열기'},hoe:{n:'괭이',tool:1,desc:'풀밭은 갈고, 빈 밭은 메우고, 작물은 옮겨 심어요 · 쓸면 여러 칸'},egg:{n:'달걀',sell:50},gegg:{n:'황금달걀',sell:220},
  bed:{n:'꽃 화단',price:60,place:1,deco:1,desc:'꽃이 가득한 나무 화단'},crate:{n:'나무 상자',price:30,place:1,deco:1,desc:'수확물을 담아 두는 상자'},barrel:{n:'나무통',price:40,place:1,deco:1,desc:'튼튼한 나무통'},hay:{n:'건초더미',price:30,place:1,deco:1,desc:'폭신한 건초'},scare:{n:'허수아비',price:120,place:1,deco:1,desc:'밭을 지켜 주는 친구'},
  sap_apple:{n:'사과 묘목',price:300,place:1,tree:'apple',desc:'풀밭에 심어요 · 열흘쯤 지나 열매가 열려요'},sap_peach:{n:'복숭아 묘목',price:400,place:1,tree:'peach',desc:'풀밭에 심어요 · 열흘쯤 지나 열매가 열려요'},sap_persimmon:{n:'감 묘목',price:350,place:1,tree:'persimmon',desc:'풀밭에 심어요 · 감은 곶감으로 만들 수 있어요'},
  apple:{n:'사과',sell:70,food:20},peach:{n:'복숭아',sell:90,food:25},persimmon:{n:'감',sell:60,food:15},gotgam:{n:'곶감',sell:420,food:40},
@@ -889,7 +897,7 @@ function drawCrop(c,X,Y,t){const C=CROPS[c.k],p=iso(X+.5,Y+.55,.1),pr=Math.min(1
 /* 캐릭터 · 닭 */
 function drawPlayer(t){const P=S.pl,p=iso(P.x,P.y),moving=P.mv>0,b=moving?Math.abs(Math.sin(t*12))*TW*.08:Math.sin(t*3)*TW*.01,r=TW*.3;
  shadow(P.x,P.y,.3,.13,.3);const fr=P.fy+P.fx>-.2;const sq=moving?1+Math.sin(t*24)*.04:1;x.save();{const sdx=P.fx-P.fy,sdy=(P.fx+P.fy)/2;let d=P.dir==null?0:P.dir;if(Math.abs(sdx)>Math.abs(sdy)+1e-3)d=sdx>0?3:2;else if(Math.abs(sdy)>Math.abs(sdx)+1e-3)d=sdy>0?0:1;P.dir=d}
-if(pangAnim(S.ch)){drawPangAnim(x,S.ch,p[0],p[1],TW*1.2,P.dir,moving?1+(Math.floor(t*8)%4):0)}else if(PIMG[pangId(S.ch)]){x.translate(p[0],p[1]-b);x.scale(1/sq,sq);drawPangArt(x,S.ch,0,0,TW*1.2)}else{x.translate(p[0],p[1]-r*1.05-b);x.scale(1/sq,sq);drawPang(x,S.ch,0,0,r,true,!fr)}x.restore()}
+if(pangAnim(S.ch)){drawPangAnim(x,S.ch,p[0],p[1],TW*1.2,moving?P.dir:0,moving?1+(Math.floor(t*8)%4):0)}else if(PIMG[pangId(S.ch)]){x.translate(p[0],p[1]-b);x.scale(1/sq,sq);drawPangArt(x,S.ch,0,0,TW*1.2)}else{x.translate(p[0],p[1]-r*1.05-b);x.scale(1/sq,sq);drawPang(x,S.ch,0,0,r,true,!fr)}x.restore()}
 function drawChicken(c,t){const p=iso(c.x,c.y),b=c.mv?Math.abs(Math.sin(t*14+c.x))*TW*.05:0;shadow(c.x,c.y,.16,.07,.25);if(artOK('chicken_front')){const fr=c.fy+c.fx>-.2,k=fr||!artOK('chicken_back')?'chicken_front':'chicken_back',a=ART[k],dr=c.fx-c.fy>0?1:-1,fl=fr?dr>0:dr<0,s2=TW/ART_BASE;x.save();x.translate(p[0],p[1]-b);if(fl)x.scale(-1,1);x.drawImage(a.img,-a.ax*s2,-a.ay*s2,a.w*s2,a.h*s2);x.restore()}else drawChick(x,p[0],p[1]-TW*.16-b,TW*.15,c.fy+c.fx>-.2,c.fx-c.fy>0?1:-1);
  if(c.heart>0){const q=iso(c.x,c.y,1.2+(1-c.heart)*.8);x.globalAlpha=Math.min(1,c.heart*2);x.fillStyle='#ff5d8a';x.font=`${14*DPR}px sans-serif`;x.textAlign='center';x.fillText('♥',q[0],q[1]);x.globalAlpha=1}}
 /* 숲 (지도 밖까지 빽빽하게) */
@@ -952,9 +960,11 @@ function decide(){if(!S)return null;const P=S.pl;
   case'wild':return{l:'꽃 꺾기',ic:'hand',f:()=>{S.O[ty][tx]=null;S.gold+=1;sfx.pluck();pop(tx,ty,'+1G');save()}};
   default:if(ITEM[o.t]&&ITEM[o.t].place)return{l:'줍기',ic:o.t,f:()=>{S.O[ty][tx]=null;give(o.t);sfx.pluck();save()}};
    {const N={sign:S.name||'팡팡농장',lamp:'가로등',fence:'울타리',well:'우물',scare:'허수아비',hay:'건초더미',barrel:'나무통',crate:'과일 상자',mail:'우편함',bed:'꽃밭',bush:'덤불'}[o.t]||'';return{l:N||'살펴보기',ic:'hand',dim:1,f:()=>{toast(o.t==='sign'?`${S.name||'팡팡농장'}에 오신 걸 환영해요`:o.t==='mail'?'오늘은 편지가 없어요':o.t==='well'?'시원한 우물물이에요':N);sfx.pluck()}}}}}
+ if(cr&&sid==='hoe'&&g==='s'){if(S.carry)return{l:'여기엔 이미 작물이 있어요',ic:'hoe',dim:1,f:()=>toast('빈 밭을 눌러 옮겨 심어요')};return{l:'모종 들기',ic:'hoe',f:()=>{S.carry={...cr};S.C[ty][tx]=null;sfx.pluck();toast(CROPS[cr.k].n+'을 들었어요 · 옮길 빈 밭을 눌러요');save()}}}
  if(cr){const C=CROPS[cr.k];if(cr.age>=C.days)return{l:'수확',ic:cr.k,f:()=>harvest(tx,ty)};
   if(!cr.w)return{l:'물 주기',ic:'can',f:()=>{cr.w=1;sfx.water();splash(tx,ty);save()}};
   return{l:`${C.n} ${C.days-cr.age}일 남음`,ic:'can',dim:1,f:()=>toast(`${C.n}: ${C.days-cr.age}일 뒤 수확`)}}
+ if(g==='s'&&sid==='hoe'&&!cr){if(S.carry)return{l:'옮겨 심기',ic:'hoe',f:()=>{S.C[ty][tx]=S.carry;S.carry=null;sfx.plant();toast('옮겨 심었어요');save()}};return{l:'밭 메우기',ic:'hoe',f:()=>{S.G[ty][tx]='g';delete S.wet[ty*MW+tx];GD=1;sfx.hoe();save()}}}
  if(g==='s'&&it.seed&&CROPS[it.seed].water)return{l:'연못에 심어요',ic:sid,dim:1,f:()=>toast(CROPS[it.seed].n+'은 연못 가장자리에 심어요')};
  if(g==='w'&&it.seed&&CROPS[it.seed].water)return{l:'심기',ic:sid,f:()=>{if(take(sid)){S.C[ty][tx]={k:it.seed,age:0,w:1};sfx.plant();save()}}};
  if(g==='s'){if(it.seed)return{l:'심기',ic:sid,f:()=>{if(take(sid)){S.C[ty][tx]={k:it.seed,age:0,w:S.wet[ty*MW+tx]?1:0};sfx.plant();save()}}};
@@ -1117,7 +1127,7 @@ $('bPause').onclick=()=>menu(!paused);$('bResume').onclick=()=>menu(false);$('bP
 $('bMenu').onclick=()=>{save();hide('ovPause');paused=false;state='title';bgm(false);titleUI();show('ovTitle')};
 
 /* ===== 시작 화면 ===== */
-const TUT={"goal": "<b>🌱 팡팡 마을 이야기</b><p>도시 생활에 지친 팡팡이가 시골 팡팡 마을의 빈 농장으로 이사 왔어요. 잡초 무성한 풀밭을 일궈 밭을 만들고, 숲을 개간해 농장을 넓혀 가요. 봄·여름·가을·겨울이 28일마다 바뀌어요.</p><b>🌾 하루의 흐름</b><p>땅을 갈고 씨앗을 심어 물을 주면, 자고 일어날 때마다 쑥쑥 자라요. 수확한 작물은 출하함에 팔고, 상점에서 씨앗·묘목·꾸미기를 사요. 가공 시설로 김치·잼·곶감을 만들면 더 비싸게 팔 수 있고, 주문 게시판의 주문을 채우면 보상이 더 커요. 밤 12시까지 잠들지 않으면 기절하니 조심하세요!</p><b>🎮 게임 조작 방법</b><p>아래 칸에서 손에 들 것을 고르면, 무엇을 들었는지에 따라 화면을 눌렀을 때 하는 일이 달라져요.</p><div class=\"trow\"><img class=\"tic\" src=\"art/ic/act_hand.png\" alt=\"\"><div><b class=\"tn\">이동</b><span>누른 곳으로 걸어가요. 다 자란 작물은 수확, 마른 밭은 물 주기, 상점·게시판·출하함은 열기까지 해요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/act_hoe.png\" alt=\"\"><div><b class=\"tn\">괭이</b><span>풀밭을 누르면 걸어가서 땅을 갈아요. 쓸면 여러 칸을 한 번에 갈아요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/seed_turnip.png\" alt=\"\"><div><b class=\"tn\">씨앗</b><span>갈아 둔 밭을 누르면 심어요. 쓸면 여러 칸에 심어요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/sum_made.png\" alt=\"\"><div><b class=\"tn\">음식</b><span>두 번 누르면 먹고 힘을 회복해요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/hud_energy.png\" alt=\"\"><div><b class=\"tn\">힘</b><span>일할수록 줄어요. 음식을 먹거나 잠을 자면 다시 차요.</span></div></div><div class=\"trow\"><span class=\"tic tx\">👆</span><div><b class=\"tn\">화면 끌기 · 두 손가락</b><span>농장을 둘러보고, 두 손가락으로 확대·축소해요. 팡팡이를 누르면 하던 일을 멈춰요.</span></div></div><p class=\"tpc\">PC에서는 클릭·드래그·휠로 똑같이 하고, WASD·방향키로 걷고, SPACE로 바라보는 칸에 행동해요. 1~9는 물건 고르기, ESC는 메뉴예요.</p>", "touch": [], "pc": []};
+const TUT={"goal": "<b>🌱 팡팡 마을 이야기</b><p>도시 생활에 지친 팡팡이가 시골 팡팡 마을의 빈 농장으로 이사 왔어요. 잡초 무성한 풀밭을 일궈 밭을 만들고, 숲을 개간해 농장을 넓혀 가요. 봄·여름·가을·겨울이 28일마다 바뀌어요.</p><b>🌾 하루의 흐름</b><p>땅을 갈고 씨앗을 심어 물을 주면, 자고 일어날 때마다 쑥쑥 자라요. 수확한 작물은 출하함에 팔고, 상점에서 씨앗·묘목·꾸미기를 사요. 가공 시설로 김치·잼·곶감을 만들면 더 비싸게 팔 수 있고, 주문 게시판의 주문을 채우면 보상이 더 커요. 밤 12시까지 잠들지 않으면 기절하니 조심하세요!</p><b>🎮 게임 조작 방법</b><p>아래 칸에서 손에 들 것을 고르면, 무엇을 들었는지에 따라 화면을 눌렀을 때 하는 일이 달라져요.</p><div class=\"trow\"><img class=\"tic\" src=\"art/ic/act_hand.png\" alt=\"\"><div><b class=\"tn\">이동</b><span>누른 곳으로 걸어가요. 다 자란 작물은 수확, 마른 밭은 물 주기, 상점·게시판·출하함은 열기까지 해요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/act_hoe.png\" alt=\"\"><div><b class=\"tn\">괭이</b><span>풀밭을 누르면 걸어가서 땅을 갈아요. 쓸면 여러 칸을 한 번에 갈아요. 빈 밭을 누르면 다시 풀밭으로 메우고, 자라는 작물을 누르면 들어서 다른 빈 밭에 옮겨 심어요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/seed_turnip.png\" alt=\"\"><div><b class=\"tn\">씨앗</b><span>갈아 둔 밭을 누르면 심어요. 쓸면 여러 칸에 심어요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/sum_made.png\" alt=\"\"><div><b class=\"tn\">음식</b><span>두 번 누르면 먹고 힘을 회복해요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/hud_energy.png\" alt=\"\"><div><b class=\"tn\">힘</b><span>일할수록 줄어요. 음식을 먹거나 잠을 자면 다시 차요.</span></div></div><div class=\"trow\"><span class=\"tic tx\">👆</span><div><b class=\"tn\">화면 끌기 · 두 손가락</b><span>농장을 둘러보고, 두 손가락으로 확대·축소해요. 팡팡이를 누르면 하던 일을 멈춰요.</span></div></div><p class=\"tpc\">PC에서는 클릭·드래그·휠로 똑같이 하고, WASD·방향키로 걷고, SPACE로 바라보는 칸에 행동해요. 1~9는 물건 고르기, ESC는 메뉴예요.</p>", "touch": [], "pc": []};
 let pick='purple';
 function titleUI(){$('bContinue').hidden=!store.get('farm-save');const sh2=$('show');sh2.innerHTML='';['purple','lime','sky','cream'].forEach((ch,i)=>{const c=cnv(96,96);drawPang(c.getContext('2d'),ch,48,52,34,true,false);c.style.cssText='width:52px;height:52px;animation:kb 1.2s ease-in-out '+(-i*.3)+'s infinite';sh2.appendChild(c)})}
 const st=document.createElement('style');st.textContent='#show{display:flex;gap:6px;justify-content:center}@keyframes kb{50%{transform:translateY(-6px)}}';document.head.appendChild(st);
@@ -1149,7 +1159,7 @@ var LVUNL={1:['turnip','carrot','potato','cabbage','spinach','radish','flower','
 function unlockLv(id){if(!LVUNL)return 1;for(const l in LVUNL)if(LVUNL[l].includes(id))return +l;return 1}
 function unlocked(id){return !S||(S.lv||1)>=unlockLv(id)}
 const LVMAX=20,xpNeed=l=>40+l*30;
-const EN_MAX=100,COST={'땅 갈기':2,'심기':1,'물 주기':1,'수확':1,'돌 깨기':4,'풀 뽑기':4,'꽃 꺾기':1,'그루터기 캐기':4};
+const EN_MAX=100,COST={'땅 갈기':2,'심기':1,'물 주기':1,'수확':1,'돌 깨기':4,'풀 뽑기':4,'꽃 꺾기':1,'그루터기 캐기':4,'밭 메우기':2,'모종 들기':1,'옮겨 심기':1};
 const RECIPES={
  keg_pickle:[{in:{carrot:2},out:'pickle'},{in:{turnip:3},out:'pickle'},{in:{potato:2},out:'pickle'},{in:{cabbage:1},out:'pickle'}],
  mill:[{in:{wheat:3},out:'flour'},{in:{corn:2},out:'cornmeal'}],
@@ -1292,6 +1302,11 @@ if(window.__f)Object.assign(window.__f,{openExpand,doExpand,ensureLand,ZONES});
  let stT=0;setInterval(()=>{if(!S||state!=='play'||paused)return;if(S.pl.mv){if(++stT%5===0)sfx.step()}else stT=0},60);
  if(state==='play')bgm(true);
 })();
+
+/* 캐릭터 바꾸기 (설정 메뉴) */
+function openChar(){const cur=pangId(S.ch);hide('ovPause');openPanel('캐릭터 바꾸기','<div class="chgrid">'+PANG.map(([id,n])=>`<button data-a="chg:${id}" class="${id===cur?'on':''}"><img src="art/ch/pang_${id}.png" alt=""><span>${n}</span></button>`).join('')+'</div>')}
+$('bChar').onclick=()=>openChar();
+$('pnL').addEventListener('click',e=>{const b=e.target.closest('button[data-a]');if(!b)return;const [a,v]=b.dataset.a.split(':');if(a!=='chg')return;S.ch=v;save();$('pnL').querySelectorAll('.chgrid button').forEach(x=>x.classList.toggle('on',x.dataset.a==='chg:'+v));toast('캐릭터를 바꿨어요');setTimeout(()=>{$('ovPanel').classList.remove('show');paused=false},350)});
 
 })();
 

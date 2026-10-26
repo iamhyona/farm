@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792920000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792921000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -703,7 +703,7 @@ const STRUCT={house:{w:4,d:3},shop:{w:3,d:2},coop:{w:3,d:3},bin:{w:1,d:1},board:
 function newFarm(seed){const MW=26,MH=26;const R=rng(seed||(Math.random()*1e9|0)),G=[],O=[];for(let y=0;y<MH;y++){G.push([]);O.push([]);for(let x=0;x<MW;x++){G[y].push('g');O[y].push(null)}}
  const put=(t,x,y)=>{const S=STRUCT[t]||{w:1,d:1},o={t,x,y,w:S.w,d:S.d};for(let j=0;j<S.d;j++)for(let i=0;i<S.w;i++)O[y+j][x+i]=(i||j)?{t:'part',a:o}:o;return o};
  put('house',3,2);put('bin',8,4);put('board',10,4);put('shop',13,2);put('coop',19,2);
- for(let x=2;x<MW-2;x++)G[6][x]='p';for(let y=5;y<6;y++)G[y][5]='p';for(let y=6;y<9;y++){G[y][9]='p'}for(let y=4;y<6;y++){G[y][14]='p';G[y][20]='p'}
+ for(let x=2;x<MW-2;x++)G[6][x]='p';G[5][4]='p';G[5][5]='p';for(let y=6;y<9;y++){G[y][9]='p'}for(let y=4;y<6;y++){G[y][14]='p';G[y][20]='p'}
  for(let y=15;y<22;y++)for(let x=18;x<24;x++){const dx=(x-20.7)/3.2,dy=(y-18.4)/3.6;if(dx*dx+dy*dy<1)G[y][x]='w'}
  const deco=(t,x,y)=>{if(!O[y][x]&&G[y][x]==='g')O[y][x]={t,x,y,v:R()}};
  deco('mail',7,5);deco('well',16,8);
@@ -985,7 +985,7 @@ function load(){let d;try{d=JSON.parse(store.get('farm-save')||'null')}catch(e){
  // 자리를 비운 동안: 15분마다 하루 (최대 5일) · 스프링클러 작물과 닭만 일해요
  const away=Math.min(5,Math.floor((Date.now()-(d.last||Date.now()))/(15*60*1000)));if(away>0){dayPass(away,true);S.awayMsg=`자리를 비운 사이 ${away}일이 지났어요`}GD=1;return true}
 
-function ensureSign(){if(!S||!S.O)return;for(const r of S.O)for(const o of r)if(o&&o.t==='sign'){if(!(o.x===10&&o.y===5&&!o.mv2))return;S.O[o.y][o.x]=null;break}for(const [sx,sy] of[[10,7],[11,7],[3,7],[10,5]])if(S.O[sy]&&(!S.O[sy][sx]||S.O[sy][sx].t==='wild')&&S.G[sy][sx]==='g'){S.O[sy][sx]={t:'sign',x:sx,y:sy,v:.5,mv2:1};GD=1;return}}
+function ensureSign(){if(!S||!S.O)return;if(!S.lay3){S.lay3=1;if(S.G[5]&&S.G[5][4]==='g'&&!S.O[5][4]&&!(S.C[5]&&S.C[5][4]))S.G[5][4]='p';for(const r of S.O)for(const o of r)if(o&&o.t==='sign'&&o.x===10&&o.y===7){for(const [nx,ny] of [[12,8],[13,8],[12,9],[3,7]])if(S.G[ny][nx]==='g'&&(!S.O[ny][nx]||S.O[ny][nx].t==='wild')&&!(S.C[ny]&&S.C[ny][nx])){S.O[7][10]=null;o.x=nx;o.y=ny;S.O[ny][nx]=o;break}break}GD=1}for(const r of S.O)for(const o of r)if(o&&o.t==='sign'){if(!(o.x===10&&o.y===5&&!o.mv2))return;S.O[o.y][o.x]=null;break}for(const [sx,sy] of[[12,8],[13,8],[3,7],[10,5]])if(S.O[sy]&&(!S.O[sy][sx]||S.O[sy][sx].t==='wild')&&S.G[sy][sx]==='g'){S.O[sy][sx]={t:'sign',x:sx,y:sy,v:.5,mv2:1};GD=1;return}}
 
 /* ===== 소리 ===== */
 let AC=null,sound=store.get('farm-sound')!=='0',music=store.get('farm-music')!==null?store.get('farm-music')!=='0':store.get('farm-sound')!=='0',_bt=0,bgmT=null;

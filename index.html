@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792907000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792909000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -10,7 +10,7 @@
 <meta property="og:title" content="PANG FARM · 팡팡농장">
 <meta property="og:description" content="이 게임은 박현아가 제공하는 비상업적 게임입니다.">
 <meta property="og:url" content="https://iamhyona.github.io/farm/">
-<meta property="og:image" content="https://iamhyona.github.io/farm/og-image.png">
+<meta property="og:image" content="https://iamhyona.github.io/farm/og-image.png?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -19,8 +19,9 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="팡팡농장">
-<link rel="apple-touch-icon" href="icon-180.png">
-<link rel="icon" type="image/png" href="favicon-64.png">
+<link rel="apple-touch-icon" href="icon-180.png?v=2">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="favicon-64.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Press+Start+2P&family=Jua&display=block">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css">
@@ -368,6 +369,38 @@ i.coin{display:inline-block;width:1.1em;height:1.1em;margin-left:2px;vertical-al
 #screen .inv button.on{filter:none!important;transform:none!important;box-shadow:none!important}
 #screen .inv button.on::before{content:'';position:absolute;inset:-7px;border:3px solid #ffe14d;border-radius:9px;box-shadow:inset 0 0 6px rgba(255,220,80,.9),0 0 5px rgba(255,220,80,.9);pointer-events:none}
 
+/* ===== 상단 한 줄 HUD ===== */
+#screen .hud{gap:4px!important;align-items:stretch!important}
+#screen .hud>.box:not(.gold):not(.btnb){display:none!important}
+#screen .hud #stat{position:static!important;display:flex!important;flex-direction:row!important;flex:1 1 auto!important;gap:4px!important;left:auto!important;right:auto!important;top:auto!important;min-width:0}
+#screen .hud #stat>div{flex:1 1 0!important;min-width:0;height:auto!important;padding:0 6px 0 4px!important;gap:3px!important;border-width:11px 12px!important;border-image:url(art/ui2/hud_plate.png) 32 52 fill / 11px 12px stretch!important;margin:0!important}
+#screen .hud #stat>div>*{margin:-8px 0}
+#screen .hud #stat .ic{width:18px!important;height:18px!important;flex:0 0 18px}
+#screen .hud #stat .xb,#screen .hud #stat .eb{flex:1 1 auto!important;width:auto!important;min-width:24px;height:12px!important}
+#screen .hud #stat b{font-size:13px!important;min-width:0!important}
+#screen .hud .box.gold{flex:0 0 auto!important;width:auto!important;min-width:72px;padding:0 4px!important}
+#screen .hud .btnb{flex:0 0 46px!important;width:46px!important}
+#screen .inv{bottom:14px!important}
+#screen .tip{bottom:96px!important}
+#screen .hud #stat>div{position:relative;padding:0 2px!important}
+#screen .hud #stat .ic{width:22px!important;height:22px!important;flex:0 0 22px}
+#screen .hud #stat .lv b{position:absolute;left:-3px;top:50%;transform:translateY(-50%);width:22px;text-align:center;margin:0!important;font-size:11px!important;color:#5a2e12!important;text-shadow:0 0 2px #fff6d0,0 0 2px #fff6d0!important;pointer-events:none;z-index:2}
+#screen .hud #stat .en b{position:absolute;right:2px;top:50%;transform:translateY(-50%);margin:0!important;font-size:11px!important;z-index:2;pointer-events:none}
+#screen .hud #stat .eb{margin-right:0!important}
+#screen .hud #stat .xb,#screen .hud #stat .eb{min-width:44px!important;height:14px!important}
+#screen .hud .box.gold{min-width:0!important;padding:0 2px!important}
+#screen .hud .box.gold span{font-size:15px!important}
+#screen .hud .btnb{flex:0 0 42px!important;width:42px!important}
+#screen .hud #stat .lv b{position:static!important;transform:none!important;width:auto!important;font-size:13px!important;color:#fffaf0!important;text-shadow:0 1.5px 0 #5a2e12,1.5px 0 0 #5a2e12,-1.5px 0 0 #5a2e12,0 -1.5px 0 #5a2e12!important}
+#screen .hud #stat .en b{display:none!important}
+#screen .hud .box.btnb{border-width:8px!important;border-image-width:8px!important}
+#screen .hud .btnb .hic2{width:24px!important;height:24px!important}
+#screen .hud #stat .xb,#screen .hud #stat .eb{flex:1 1 100%!important;width:100%!important;max-width:none!important}
+#screen .hud .box.gold{display:flex!important;align-items:center!important;justify-content:center!important}
+#screen .hud .box.gold span{display:inline-flex!important;align-items:center!important;gap:3px;line-height:1!important}
+#screen .hud .box.gold span::after{vertical-align:middle!important;margin:0!important;width:18px!important;height:18px!important;flex:0 0 18px}
+i.coin{vertical-align:middle!important;position:relative;top:-.08em}
+
 </style></head>
 
 <body>
@@ -541,7 +574,7 @@ const sellOf=id=>ITEM[id]&&ITEM[id].sell||0;
 const ICM={hoe:'act_hoe',can:'act_water',hand:'act_hand',sleep:'act_sleep',coin:'act_coin',shop:'act_shop',board:'act_board',pick:'act_pick',weed:'act_weed',pet:'act_pet',egg:'item_egg',gegg:'item_egg_gold',sprinkler:'item_sprinkler',chicken:'item_chicken'},ICI={};
 const icKey=id=>ICM[id]||(/^seed_/.test(id)||ICI[id]?id:'item_'+id);
 fetch('art/ic/list.json?_='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():[]).then(L=>{let n=L.length;for(const k of L){const im=new Image();im.onload=()=>{ICI[k]=im;if(--n<=0&&typeof drawInv==='function'){try{drawInv();actKey=''}catch(e){}}};im.onerror=()=>{--n};im.src='art/ic/'+k+'.png?v=1'}}).catch(()=>{});
-function drawIcon(g,id,S){g.clearRect(0,0,S,S);if(!id)return;{const im=ICI[icKey(id)];if(im){g.drawImage(im,S*.04,S*.04,S*.92,S*.92);return}const A=typeof ART!=='undefined'&&ART[id];if(A&&A.ok){if(!A.bb){const iw=A.img.naturalWidth,ih=A.img.naturalHeight,c=document.createElement('canvas');c.width=iw;c.height=ih;const cg=c.getContext('2d');cg.drawImage(A.img,0,0);const d=cg.getImageData(0,0,iw,ih).data;let x0=iw,y0=ih,x1=0,y1=0;for(let yy=0;yy<ih;yy++)for(let xx=0;xx<iw;xx++)if(d[(yy*iw+xx)*4+3]>30){if(xx<x0)x0=xx;if(xx>x1)x1=xx;if(yy<y0)y0=yy;if(yy>y1)y1=yy}A.bb=x1>x0?[x0,y0,x1-x0+1,y1-y0+1]:[0,0,iw,ih]}const [bx,by,bw,bh]=A.bb,k=S*.9/Math.max(bw,bh);g.drawImage(A.img,bx,by,bw,bh,(S-bw*k)/2,(S-bh*k)/2,bw*k,bh*k);return}}g.save();g.scale(S/48,S/48);g.lineJoin='round';g.lineCap='round';g.strokeStyle=OL;g.lineWidth=2.4;
+function drawIcon(g,id,S){g.clearRect(0,0,S,S);if(!id)return;if(id==='scare')id='scarecrow';{const im=ICI[icKey(id)];if(im){g.drawImage(im,S*.04,S*.04,S*.92,S*.92);return}const A=typeof ART!=='undefined'&&ART[id];if(A&&A.ok){if(!A.bb){const iw=A.img.naturalWidth,ih=A.img.naturalHeight,c=document.createElement('canvas');c.width=iw;c.height=ih;const cg=c.getContext('2d');cg.drawImage(A.img,0,0);const d=cg.getImageData(0,0,iw,ih).data;let x0=iw,y0=ih,x1=0,y1=0;for(let yy=0;yy<ih;yy++)for(let xx=0;xx<iw;xx++)if(d[(yy*iw+xx)*4+3]>30){if(xx<x0)x0=xx;if(xx>x1)x1=xx;if(yy<y0)y0=yy;if(yy>y1)y1=yy}A.bb=x1>x0?[x0,y0,x1-x0+1,y1-y0+1]:[0,0,iw,ih]}const [bx,by,bw,bh]=A.bb,k=S*.9/Math.max(bw,bh);g.drawImage(A.img,bx,by,bw,bh,(S-bw*k)/2,(S-bh*k)/2,bw*k,bh*k);return}}g.save();g.scale(S/48,S/48);g.lineJoin='round';g.lineCap='round';g.strokeStyle=OL;g.lineWidth=2.4;
  const it=ITEM[id]||{};
  if(it.seed){const C=CROPS[it.seed];g.fillStyle='#e9d3a8';g.beginPath();g.moveTo(12,14);g.lineTo(36,14);g.lineTo(39,42);g.lineTo(9,42);g.closePath();g.fill();g.stroke();g.fillStyle='#c9a46a';g.fillRect(14,10,20,6);g.strokeRect(14,10,20,6);
   g.fillStyle=C.c;g.beginPath();g.arc(24,29,7,0,7);g.fill();g.stroke();g.fillStyle=C.lf;g.beginPath();g.ellipse(24,20,3,5,0,0,7);g.fill()}
@@ -978,7 +1011,7 @@ $('pnL').addEventListener('click',e=>{const b=e.target.closest('button[data-a]')
 
 /* ===== 메뉴 ===== */
 const show=id=>$(id).classList.add('show'),hide=id=>$(id).classList.remove('show');
-function menu(on){if(!S||state!=='play')return;paused=on;if(on){$('pauseInfo').innerHTML=`${esc(S.name)} · ${S.day}일차<br>수확 ${S.st.hv}번 · 번 돈 ${S.st.earn.toLocaleString()}G · 닭 ${S.ck.length}마리`;show('ovPause')}else{hide('ovPause');actKey=''}}
+function menu(on){if(!S||state!=='play')return;paused=on;if(on){$('pauseInfo').innerHTML=`<b style="font-size:20px">${S.day}일차 · ${fmtT(S.min)}</b><br>힘 ${Math.round(S.en||0)} / 100<br>${esc(S.name)}<br>수확 ${S.st.hv}번 · 번 돈 ${S.st.earn.toLocaleString()}G · 닭 ${S.ck.length}마리`;show('ovPause')}else{hide('ovPause');actKey=''}}
 $('bPause').onclick=()=>menu(!paused);$('bResume').onclick=()=>menu(false);$('bSleep2').onclick=()=>{menu(false);S.pl.x=4.6;S.pl.y=5.6;sleep()};
 $('bMenu').onclick=()=>{save();hide('ovPause');paused=false;state='title';bgm(false);titleUI();show('ovTitle')};
 
@@ -1109,6 +1142,9 @@ function doExpand(z){const Z=ZONES[z];if(!landState(z).ok)return;S.gold-=Z.cost;
  const [sx,sy]=Z.sign;if(S.O[sy][sx]&&S.O[sy][sx].t==='expand')S.O[sy][sx]=null;$('ovPanel').classList.remove('show');paused=false;toast(Z.n+'을 넓혔어요!');try{sfx.get()}catch(e){}save();ensureLand()}
 $('pnL').addEventListener('click',e=>{const b=e.target.closest('button[data-a]');if(!b||b.disabled)return;const [a,v]=b.dataset.a.split(':');if(a==='land')doExpand(v)});
 if(window.__f)Object.assign(window.__f,{openExpand,doExpand,ensureLand,ZONES});
+
+/* 상단 한 줄: 레벨·힘·골드·설정 */
+(function(){const st=$('stat'),h=document.querySelector('#screen .hud');if(st&&h)h.insertBefore(st,h.firstChild)})();
 
 })();
 

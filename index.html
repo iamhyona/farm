@@ -63,7 +63,7 @@
 #dock button{width:44px!important;height:44px!important;border-radius:50%!important;border-width:2px!important;box-shadow:0 2px 0 #5a2e12!important;flex:0 0 44px}
 #dock img{width:26px!important;height:26px!important}
 #dock button[data-k="set"]{width:36px!important;height:36px!important;flex-basis:36px;align-self:center;opacity:.92}#dock button[data-k="set"] img{width:20px!important;height:20px!important}
-</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793019667";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793020475";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1]+location.hash)}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -974,7 +974,7 @@ const CROPS={
  watermelon:{n:'수박',days:8,seed:80,sell:360,c:'#3f8a2e',c2:'#e8382a',lf:'#4f9a3a'},
  minari:{n:'미나리',days:3,seed:20,sell:30,c:'#5fae45',c2:'#a8d870',lf:'#4f9a3a',re:2,water:1},
  lotus:{n:'연근',days:7,seed:70,sell:280,c:'#f0c8c8',c2:'#ff9ab0',lf:'#3f8a2e',water:1}};
-const ITEM={hand:{n:'이동',tool:1,desc:'누른 곳으로 걸어가요 · 상점·게시판·출하함 열기'},can:{n:'물뿌리개',tool:1,desc:'마른 밭과 작물에 물을 줘요'},remove:{n:'철거',tool:1,desc:'밭을 풀밭으로 되돌리고, 놓은 물건을 거둬요'},basket:{n:'바구니',tool:1,desc:'다 자란 작물과 열매를 거둬요'},hoe:{n:'괭이',tool:1,desc:'풀밭을 갈고, 자라는 작물을 옮겨 심어요'},egg:{n:'달걀',sell:50},gegg:{n:'황금달걀',sell:220},
+const ITEM={hand:{n:'이동',tool:1,desc:'누른 곳으로 걸어가요 · 상점·게시판·출하 트럭 열기'},can:{n:'물뿌리개',tool:1,desc:'마른 밭과 작물에 물을 줘요'},remove:{n:'철거',tool:1,desc:'밭을 풀밭으로 되돌리고, 놓은 물건을 거둬요'},basket:{n:'바구니',tool:1,desc:'다 자란 작물과 열매를 거둬요'},hoe:{n:'괭이',tool:1,desc:'풀밭을 갈고, 자라는 작물을 옮겨 심어요'},egg:{n:'달걀',sell:50},gegg:{n:'황금달걀',sell:220},
  bed:{n:'꽃 화단',price:60,place:1,deco:1,desc:'꽃이 가득한 나무 화단'},crate:{n:'나무 상자',price:30,place:1,deco:1,desc:'수확물을 담아 두는 상자'},barrel:{n:'나무통',price:40,place:1,deco:1,desc:'튼튼한 나무통'},hay:{n:'건초더미',price:30,place:1,deco:1,desc:'폭신한 건초'},scare:{n:'허수아비',price:120,place:1,deco:1,desc:'밭을 지켜 주는 친구'},
  sap_apple:{n:'사과 묘목',price:300,place:1,tree:'apple',desc:'풀밭에 심어요 · 열흘쯤 지나 열매가 열려요'},sap_peach:{n:'복숭아 묘목',price:400,place:1,tree:'peach',desc:'풀밭에 심어요 · 열흘쯤 지나 열매가 열려요'},sap_persimmon:{n:'감 묘목',price:350,place:1,tree:'persimmon',desc:'풀밭에 심어요 · 감은 곶감으로 만들 수 있어요'},
  apple:{n:'사과',sell:70,food:20},peach:{n:'복숭아',sell:90,food:25},persimmon:{n:'감',sell:60,food:15},gotgam:{n:'곶감',sell:420,food:40},
@@ -1467,7 +1467,7 @@ function openShop(){const L=[];L.push('<div class="hd">SEEDS · 씨앗</div>');f
  L.push('<div class="hd">DECO · 꾸미기</div>');for(const id of['flower','bench','lamp','fence'])L.push(row(id,ITEM[id].n,ITEM[id].desc,ITEM[id].price+'G','buy:'+id,S.gold<ITEM[id].price));
  openPanel(`상점 · ${S.gold.toLocaleString()}G`,L.join(''))}
 function openSell(){const L=S.inv.filter(s=>sellOf(s.id)).map(s=>row(s.id,`${ITEM[s.id].n} ×${s.n}`,`개당 ${sellOf(s.id)}G`,`모두 ${(sellOf(s.id)*s.n).toLocaleString()}G`,'sell:'+s.id));
- openPanel('출하함',L.length?L.join(''):'<div class="it"><div></div><div><b>팔 물건이 없어요</b><small>작물을 수확하거나 달걀을 주워 와요</small></div><div></div></div>')}
+ openPanel('출하 트럭',L.length?L.join(''):'<div class="it"><div></div><div><b>팔 물건이 없어요</b><small>작물을 수확하거나 달걀을 주워 와요</small></div><div></div></div>')}
 function openOrders(){S.boardSeen=S.day;const L=S.orders.map((o,i)=>{const have=count(o.id);return row(o.id,`${ITEM[o.id].n} ${o.q}개`,o.done?'완료!':`가진 개수 ${have} · 보상 ${o.r}G`,o.done?'완료':'납품','ord:'+i,o.done||have<o.q)});
  openPanel(`주문 게시판 · ${S.day}일차`,L.join('')+'<div class="it"><div></div><div><small>주문은 매일 아침 새로 바뀌어요. 시장가보다 더 많이 받아요!</small></div><div></div></div>')}
 $('pnL').addEventListener('click',e=>{const b=e.target.closest('button[data-a]');if(!b||b.disabled)return;const [a,v]=b.dataset.a.split(':');
@@ -1483,7 +1483,7 @@ $('bPause').onclick=()=>menu(!paused);$('bResume').onclick=()=>menu(false);$('bP
 $('bMenu').onclick=()=>{save();hide('ovPause');paused=false;state='title';bgm(false);titleUI();show('ovTitle')};
 
 /* ===== 시작 화면 ===== */
-const TUT={"goal": "<b>🌱 팡팡 마을 이야기</b><p>도시 생활에 지친 팡팡이가 시골 팡팡 마을의 빈 농장으로 이사 왔어요. 풀밭을 일궈 밭을 만들고, 숲을 개간해 농장을 넓혀 가요. 하루는 실제 시간으로 약 15분이고, 계절은 28일마다 바뀌어요.</p><b>🌾 하루의 흐름</b><p>땅을 갈고 씨앗을 심어 물을 주면 몇 분 만에 쑥쑥 자라요(작물마다 4~10분). 다 자라면 바구니로 거둬 출하함에 팔거나 주문 게시판에 납품해요. 하루를 마치려면 <b>집</b>을 눌러 잠을 자요. 밤 12시까지 안 자면 기절하니 조심하세요!</p><b>🖥️ 화면 보는 법</b><p>맨 위 칸은 왼쪽부터 이렇게 읽어요. 칸을 누르면 자세한 내용이 열려요.</p><div class=\"trow\"><img class=\"tic\" src=\"art/hud/hud_star.png\" alt=\"\"><div><b class=\"tn\">농장 Lv</b><span>밭일·살림·채집·생산으로 얻은 경험치가 모여 올라요. 오르면 새 씨앗·시설·숲 개간이 열려요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/hud/hud_heart.png\" alt=\"\"><div><b class=\"tn\">힘</b><span>일할수록 줄어요. 자기·먹기·앉아 쉬기·불멍으로 다시 차요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/hud/hud_coin.png\" alt=\"\"><div><b class=\"tn\">돈</b><span>지금 가진 돈이에요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/hud/hud_harvest.png\" alt=\"\"><div><b class=\"tn\">기록</b><span>지금까지 수확한 수, 번 돈, 기르는 닭 수예요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/hud/hud_todo.png\" alt=\"\"><div><b class=\"tn\">할 일</b><span>매일 아침 생기는 할 일 3개예요. 다 하면 보너스 +60G를 받아요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/hud/hud_gear.png\" alt=\"\"><div><b class=\"tn\">설정</b><span>소리 켜고 끄기, 캐릭터 바꾸기, 홈 화면 가기.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/ui_clock.png\" alt=\"\"><div><b class=\"tn\">시계</b><span>오른쪽 위 시계로 지금 시각을 봐요.</span></div></div><b>🎮 조작 방법</b><p><b>톡</b> 누르면 그곳으로 걸어가요.</p><p><b>풀밭을 두 번 톡</b>(PC는 더블클릭)하면 밭을 갈아요.</p><p><b>작물을 톡</b> 누르면 마른 작물은 물을 주고, 다 자란 작물은 거두고, 자라는 중이면 남은 시간을 보여줘요.</p><p><b>밭·작물을 꾹</b>(PC는 우클릭) 누르면 다른 곳으로 옮겨요.</p><p><b>마을 구경</b>: 설정 → 마을 구경에서 친구 농장에 놀러 가요. 친구가 움직이면 바로 보여요.</p><p>아래 칸에는 씨앗·음식·꾸미기 같은 가방 물건이 있어요. 고른 뒤 땅을 누르면 심거나 놓고, 음식은 한 번 더 누르면 먹어요. 한 번 더 누르면 내려놓아요.</p><div class=\"trow\"><img class=\"tic\" src=\"art/ic/tool_seedbag.png\" alt=\"\"><div><b class=\"tn\">씨앗 주머니</b><span>갈아 둔 밭을 누르면 심어요. 주머니를 한 번 더 누르면 심을 씨앗을 골라요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/sum_made.png\" alt=\"\"><div><b class=\"tn\">음식</b><span>가방에서 두 번 누르면 먹고 힘이 차요.</span></div></div><div class=\"trow\"><span class=\"tic tx\">👆</span><div><b class=\"tn\">화면 끌기 · 두 손가락</b><span>농장을 둘러보고, 두 손가락으로 확대·축소해요. 여러 칸을 쓸면 한꺼번에 작업해요. 팡팡이를 누르면 하던 일을 멈춰요.</span></div></div><b>🏡 집과 부엌</b><p>집을 누르면 잠자기 창이 떠요. <b>자기</b>를 누르면 하루를 마치고 다음 날 아침이 돼요. 같은 창의 <b>부엌</b> 버튼으로 요리를 해요. 재료가 있으면 버튼이 켜지고, 누르면 바로 만들어져요(힘 1). 만든 음식은 먹어서 힘을 채우거나 출하함에 팔아요.</p><p>예: 산나물 2 → 산나물 무침, 다슬기 4 → 다슬기국, 붕어 1 → 붕어찜, 버섯 2 → 버섯볶음, 밤 3 → 군밤, 달걀 2 → 달걀찜, 고구마 1 → 군고구마, 감자 2 → 감자전</p><b>🌼 더 알면 좋은 것</b><p>숲가에서 산나물·버섯·밤을 줍고, 여름 덤불의 산딸기도 따요. 마당 잡초·나뭇가지·낙엽을 치우면 가끔 퇴비가 나오고, 퇴비를 작물에 주면 한 단계 더 자라요. 계절마다 상점에서 그 계절 꽃씨를 팔아요. 손으로 연못을 누르면 다슬기를 잡고, 낚싯대를 사면 낚시를 해요.</p><p class=\"tpc\">PC에서는 클릭·드래그·휠로 똑같이 하고, WASD·방향키로 걷고, SPACE로 바라보는 칸에 행동해요. 1~9는 물건 고르기, ESC는 메뉴예요.</p>", "touch": [], "pc": []};
+const TUT={"goal": "<b>🌱 팡팡 마을 이야기</b><p>도시 생활에 지친 팡팡이가 시골 팡팡 마을의 빈 농장으로 이사 왔어요. 풀밭을 일궈 밭을 만들고, 숲을 개간해 농장을 넓혀 가요. 하루는 실제 시간으로 약 15분이고, 계절은 28일마다 바뀌어요.</p><b>🌾 하루의 흐름</b><p>땅을 갈고 씨앗을 심어 물을 주면 몇 분 만에 쑥쑥 자라요(작물마다 4~10분). 다 자라면 바구니로 거둬 트럭에 팔거나 주문 게시판에 납품해요. 하루를 마치려면 <b>집</b>을 눌러 잠을 자요. 밤 12시까지 안 자면 기절하니 조심하세요!</p><b>🖥️ 화면 보는 법</b><p>맨 위 칸은 왼쪽부터 이렇게 읽어요. 칸을 누르면 자세한 내용이 열려요.</p><div class=\"trow\"><img class=\"tic\" src=\"art/hud/hud_star.png\" alt=\"\"><div><b class=\"tn\">농장 Lv</b><span>밭일·살림·채집·생산으로 얻은 경험치가 모여 올라요. 오르면 새 씨앗·시설·숲 개간이 열려요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/hud/hud_heart.png\" alt=\"\"><div><b class=\"tn\">힘</b><span>일할수록 줄어요. 자기·먹기·앉아 쉬기·불멍으로 다시 차요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/hud/hud_coin.png\" alt=\"\"><div><b class=\"tn\">돈</b><span>지금 가진 돈이에요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/hud/hud_harvest.png\" alt=\"\"><div><b class=\"tn\">기록</b><span>지금까지 수확한 수, 번 돈, 기르는 닭 수예요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/hud/hud_todo.png\" alt=\"\"><div><b class=\"tn\">할 일</b><span>매일 아침 생기는 할 일 3개예요. 다 하면 보너스 +60G를 받아요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/hud/hud_gear.png\" alt=\"\"><div><b class=\"tn\">설정</b><span>소리 켜고 끄기, 캐릭터 바꾸기, 홈 화면 가기.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/ui_clock.png\" alt=\"\"><div><b class=\"tn\">시계</b><span>오른쪽 위 시계로 지금 시각을 봐요.</span></div></div><b>🎮 조작 방법</b><p><b>톡</b> 누르면 그곳으로 걸어가요.</p><p><b>풀밭을 두 번 톡</b>(PC는 더블클릭)하면 밭을 갈아요.</p><p><b>작물을 톡</b> 누르면 마른 작물은 물을 주고, 다 자란 작물은 거두고, 자라는 중이면 남은 시간을 보여줘요.</p><p><b>밭·작물을 꾹</b>(PC는 우클릭) 누르면 다른 곳으로 옮겨요.</p><p><b>마을 구경</b>: 설정 → 마을 구경에서 친구 농장에 놀러 가요. 친구가 움직이면 바로 보여요.</p><p>아래 칸에는 씨앗·음식·꾸미기 같은 가방 물건이 있어요. 고른 뒤 땅을 누르면 심거나 놓고, 음식은 한 번 더 누르면 먹어요. 한 번 더 누르면 내려놓아요.</p><div class=\"trow\"><img class=\"tic\" src=\"art/ic/tool_seedbag.png\" alt=\"\"><div><b class=\"tn\">씨앗 주머니</b><span>갈아 둔 밭을 누르면 심어요. 주머니를 한 번 더 누르면 심을 씨앗을 골라요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/sum_made.png\" alt=\"\"><div><b class=\"tn\">음식</b><span>가방에서 두 번 누르면 먹고 힘이 차요.</span></div></div><div class=\"trow\"><span class=\"tic tx\">👆</span><div><b class=\"tn\">화면 끌기 · 두 손가락</b><span>농장을 둘러보고, 두 손가락으로 확대·축소해요. 여러 칸을 쓸면 한꺼번에 작업해요. 팡팡이를 누르면 하던 일을 멈춰요.</span></div></div><b>🏡 집과 부엌</b><p>집을 누르면 잠자기 창이 떠요. <b>자기</b>를 누르면 하루를 마치고 다음 날 아침이 돼요. 같은 창의 <b>부엌</b> 버튼으로 요리를 해요. 재료가 있으면 버튼이 켜지고, 누르면 바로 만들어져요(힘 1). 만든 음식은 먹어서 힘을 채우거나 트럭에 팔아요.</p><p>예: 산나물 2 → 산나물 무침, 다슬기 4 → 다슬기국, 붕어 1 → 붕어찜, 버섯 2 → 버섯볶음, 밤 3 → 군밤, 달걀 2 → 달걀찜, 고구마 1 → 군고구마, 감자 2 → 감자전</p><b>🌼 더 알면 좋은 것</b><p>숲가에서 산나물·버섯·밤을 줍고, 여름 덤불의 산딸기도 따요. 마당 잡초·나뭇가지·낙엽을 치우면 가끔 퇴비가 나오고, 퇴비를 작물에 주면 한 단계 더 자라요. 계절마다 상점에서 그 계절 꽃씨를 팔아요. 손으로 연못을 누르면 다슬기를 잡고, 낚싯대를 사면 낚시를 해요.</p><p class=\"tpc\">PC에서는 클릭·드래그·휠로 똑같이 하고, WASD·방향키로 걷고, SPACE로 바라보는 칸에 행동해요. 1~9는 물건 고르기, ESC는 메뉴예요.</p>", "touch": [], "pc": []};
 let pick='purple';
 function titleUI(){$('bContinue').hidden=!store.get('farm-save');const sh2=$('show');sh2.innerHTML='';['purple','lime','sky','cream'].forEach((ch,i)=>{const c=cnv(96,96);drawPang(c.getContext('2d'),ch,48,52,34,true,false);c.style.cssText='width:52px;height:52px;animation:kb 1.2s ease-in-out '+(-i*.3)+'s infinite';sh2.appendChild(c)})}
 const st=document.createElement('style');st.textContent='#show{display:flex;gap:6px;justify-content:center}@keyframes kb{50%{transform:translateY(-6px)}}';document.head.appendChild(st);
@@ -1907,7 +1907,7 @@ Object.assign(ITEM,{
  gungoguma:{n:'군고구마',sell:40,food:20,desc:'달콤한 군고구마'},gamjajeon:{n:'감자전',sell:42,food:22,desc:'바삭한 감자전'}});
 Object.assign(EMO,{namul:'🥗',snailsoup:'🍲',fishstew:'🍲',mushfry:'🍳',gunbam:'🌰',eggjjim:'🍮',gungoguma:'🍠',gamjajeon:'🥞'});
 const COOK=[{in:{wildgreens:2},out:'namul'},{in:{snail:4},out:'snailsoup'},{in:{crucian:1},out:'fishstew'},{in:{mushroom:2},out:'mushfry'},{in:{chestnut:3},out:'gunbam'},{in:{egg:2},out:'eggjjim'},{in:{sweetpotato:1},out:'gungoguma'},{in:{potato:2},out:'gamjajeon'}];
-TASKS.cook={n:'부엌에서 요리',q:[1,1],r:25};
+TASKS.cook={n:'식당에서 요리',q:[1,1],r:25};
 function openHome(){const L=COOK.map((r,i)=>{const need=Object.entries(r.in),ok=need.every(([k,n])=>count(k)>=n);return{ok,h:row(r.out,ITEM[r.out].n,need.map(([k,n])=>`${ITEM[k].n} ${n} (${count(k)})`).join(' + ')+` · 힘 +${ITEM[r.out].food} · ${ITEM[r.out].sell}G`,'요리','ck:'+i,!ok)}}).sort((a,b)=>b.ok-a.ok);
  openPanel('식당','<div class="hd">재료로 요리해요 · 힘 1</div>'+L.map(v=>v.h).join(''))}
 (function(){const _d=decide;decide=function(){const T=target();const o=T&&objAt(T[0],T[1]);if(o&&o.t==='house'&&!SIT)return{l:'집 (잠자기)',ic:'house',f:()=>sleepAsk()};return _d()}})();
@@ -2064,15 +2064,15 @@ function fixShopCover(){if(!S||SHOPCOV===S)return;SHOPCOV=S;let sh=null;for(let 
 let GCT=0,GCK=null,GCN=0;
 function useHint(id){const it=ITEM[id]||{};
  if(id==='compost')return '손에 들고 자라는 작물을 누르면 하루 더 자라요';
- if(id==='bouquet'||(CROPS[id]&&CROPS[id].fl))return '출하함에 넣으면 팔려요';
+ if(id==='bouquet'||(CROPS[id]&&CROPS[id].fl))return '트럭에 넣으면 팔려요';
  const cook=typeof COOK!=='undefined'&&COOK.some(r=>r.in[id]),dry=typeof RECIPES!=='undefined'&&RECIPES.mat&&RECIPES.mat.some(r=>r.in[id]);
- if(CROPS[id])return '출하함에 팔거나 주문 게시판에 납품해요'+(dry?' · 멍석에 말려도 좋아요':cook?' · 부엌 요리 재료예요':'');
+ if(CROPS[id])return '트럭에 팔거나 주문 게시판에 납품해요'+(dry?' · 멍석에 말려도 좋아요':cook?' · 부엌 요리 재료예요':'');
  if(cook&&dry)return '집 부엌에서 요리하거나 멍석에 말려요';
- if(cook)return '집 부엌에서 요리 재료로 써요 · 출하함에 팔아도 돼요';
+ if(cook)return '집 식당에서 요리 재료로 써요 · 트럭에 팔아도 돼요';
  if(dry)return '멍석에 말리면 값이 올라요';
  if(it.food)return '가방에서 두 번 누르면 먹고 힘이 차요';
  if(it.place)return '가방에서 골라 빈 땅을 누르면 놓을 수 있어요';
- if(it.sell)return '출하함에 넣으면 팔려요';
+ if(it.sell)return '트럭에 넣으면 팔려요';
  return ''}
 let GCL=[];
 function gotCard(id,n){if(!S||state!=='play'||paused||!ITEM[id])return;let el=$('gotCard');
@@ -2313,7 +2313,7 @@ function drawRipeBubbles(t){if(!S||state!=='play'||!DROPI.complete||!DROPI.natur
 const TOUR=[
  {q:'#stat .lv',t:'농장 레벨',d:'밭일·살림·채집·생산을 하면 경험치가 쌓여 올라요.\n누르면 다음에 열릴 것들이 보여요.'},
  {q:'#stat .en',t:'힘',d:'일을 하면 줄어요.\n자기·먹기·쉬기로 다시 차요.'},
- {q:()=>$('hGold')&&$('hGold').closest('.box'),t:'돈',d:'작물을 출하함에 넣어 팔면 벌어요.'},
+ {q:()=>$('hGold')&&$('hGold').closest('.box'),t:'돈',d:'작물을 트럭에 넣어 팔면 벌어요.'},
  
  {q:'.htodo',t:'게시판',d:'오늘 할 일 · 오늘 비싼 작물 · 주문이 다 있어요.'},
  
@@ -2335,7 +2335,7 @@ function tourGo(i){const o=tourEl();if(i>=TOUR.length)return tourEnd();TI=i;cons
  o.classList.add('show')}
 function tourStart(){if(!S||state!=='play')return;try{localStorage.setItem('pfHintLP3','1')}catch(_){}TPAUSE=paused;paused=true;tourGo(0)}
 function tourEnd(){const o=$('tour');if(!o)return;if($('trNo')&&$('trNo').checked){try{localStorage.setItem('pfTourOff','1')}catch(_){}}o.classList.remove('show');TI=-1;paused=TPAUSE;sfx.click&&sfx.click()}
-(function(){let done=0;const iv=setInterval(()=>{if(done)return clearInterval(iv);if(state==='play'&&S&&!paused&&!$('ovPanel').classList.contains('show')){done=1;let off=null;try{off=localStorage.getItem('pfTourOff')}catch(_){}if(!off&&!location.hash.includes('test'))setTimeout(tourStart,900)}},700)})();
+(function(){let done=0;const iv=setInterval(()=>{if(done)return clearInterval(iv);if(state==='play'&&S&&!paused&&!$('ovPanel').classList.contains('show')){done=1;let off=null;try{off=localStorage.getItem('pfTourOff')}catch(_){}if(!off&&!location.hash.includes('test')&&!VISIT)setTimeout(tourStart,900)}},700)})();
 (function(){const st=document.createElement('style');st.textContent=`
 #tour{position:fixed;inset:0;z-index:60;display:none}#tour.show{display:block}#tour.dim{background:rgba(30,16,8,.55)}
 #tour .tr-hl{position:absolute;border-radius:14px;box-shadow:0 0 0 9999px rgba(30,16,8,.55),0 0 0 3px #ffe39a inset;pointer-events:none;transition:all .25s}
@@ -2356,7 +2356,7 @@ const nowT=()=>S.day*1440+S.min;
 (function(){const _t=taskHit;taskHit=function(k,n){if(S){if(!S.la)S.la={};S.la[k]=nowT()}return _t.apply(this,arguments)}})();
 (function(){const _e=eatSel;eatSel=function(){const r=_e.apply(this,arguments);if(r&&S){if(!S.la)S.la={};S.la.rest=nowT()}return r}})();
 (function(){const _g=give;give=function(id,n){if(S&&/^seed_fl_/.test(id)){if(!S.la)S.la={};S.la.flower=nowT()}return _g.apply(this,arguments)}})();
-function remindShow(ic,t,d){let r=$('remind');if(!r){r=document.createElement('div');r.id='remind';$('field').appendChild(r);r.addEventListener('pointerdown',e=>{e.stopPropagation();r.classList.remove('show')})}
+function remindShow(ic,t,d){if(VISIT)return;let r=$('remind');if(!r){r=document.createElement('div');r.id='remind';$('field').appendChild(r);r.addEventListener('pointerdown',e=>{e.stopPropagation();r.classList.remove('show')})}
  r.innerHTML=`<img src="${ic}" alt=""><div><b>${t}</b>${d}</div>`;r.classList.add('show');clearTimeout(r._t);r._t=setTimeout(()=>r.classList.remove('show'),7000);sfx.pop&&sfx.pop()}
 let RMLAST=Date.now();
 setInterval(()=>{if(!S||state!=='play'||paused||(TI>=0)||Date.now()-RMLAST<150000)return;if(!S.la)S.la={};if(!S.rmd)S.rmd={};const T=nowT(),la=k=>S.la[k]!=null?S.la[k]:(S.la[k]=T),ok=k=>S.rmd[k]!==S.day;
@@ -2380,7 +2380,7 @@ function lvUpShow(lv,L){let e=$('lvUp');if(!e){e=document.createElement('div');e
 if(window.__f)Object.assign(window.__f,{lvUpShow});
 
 /* ===== 꽃: 먹지 않아요 · 꽃 구경 · 꽃밭 힐링 ===== */
-for(const k in CROPS)if(CROPS[k].fl&&ITEM[k]){delete ITEM[k].food;ITEM[k].desc='곱게 묶은 '+CROPS[k].n+' 꽃다발 · 출하함에 팔거나 주문에 납품해요'}
+for(const k in CROPS)if(CROPS[k].fl&&ITEM[k]){delete ITEM[k].food;ITEM[k].desc='곱게 묶은 '+CROPS[k].n+' 꽃다발 · 트럭에 팔거나 주문에 납품해요'}
 function flowerSee(tx,ty){const c=S.C[ty][tx];if(!c)return;if(c.sm===S.day){toast('오늘은 이미 구경했어요');return}
  c.sm=S.day;S.en=Math.min(EN_MAX,(S.en||0)+3);pop(tx,ty,'♥ 힘 +3','#ff9ac8');sfx.pop&&sfx.pop();if(!S.la)S.la={};S.la.rest=nowT();try{taskHit('rest')}catch(_){}statUI();save()}
 (function(){const _c=cropAsk;cropAsk=function(tx,ty){const c=S.C[ty][tx],C=c&&CROPS[c.k];if(C&&C.fl&&c.age>=C.days){openTM(tx,ty,[{ic:c.k,l:'꽃 구경',f:()=>flowerSee(tx,ty)},{ic:'item_bouquet',l:'꽃다발 만들기',f:()=>useTool('basket',tx,ty)}],C.n+(((C.n.charCodeAt(C.n.length-1)-0xAC00)%28)?'이':'가')+' 활짝 피었어요');return}return _c(tx,ty)}})();
@@ -2437,7 +2437,7 @@ function openBag(){const L=[],seen=new Set();for(const [g,t,f] of BAGGRP){const 
    else if(it.seed){btn='심기';act='bag:hold:'+v.id;sub='빈 밭을 눌러 심어요'}
    else if(it.place){btn='놓기';act='bag:hold:'+v.id;sub=resale(v.id)?'중고 '+resale(v.id)+'G':(it.desc?it.desc.split(' · ')[0]:'')}
    else if(v.id==='rod'){btn='들기';act='bag:hold:'+v.id;sub='물가를 눌러 낚시해요'}
-   else{btn=sellOf(v.id)?sellOf(v.id)+'G':'-';act='bag:none:'+v.id;dis=true;sub=sellOf(v.id)?'출하함에 팔 수 있어요':(it.desc||'')}
+   else{btn=sellOf(v.id)?sellOf(v.id)+'G':'-';act='bag:none:'+v.id;dis=true;sub=sellOf(v.id)?'트럭에 팔 수 있어요':(it.desc||'')}
    let h=row(v.id,`${it.n} ×${v.n}`,sub,btn,act,dis);const sp=sellOf(v.id)||resale(v.id);if(sp&&act.indexOf('bag:none')<0)h=h.replace(/(<button data-a="bag:[^"]*"[^>]*>[^<]*<\/button>)<\/div>$/,`<div class="bb">$1<button class="bsell" data-a="bag:sell:${v.id}">팔기 ${(sp*v.n).toLocaleString()}</button></div></div>`);if(sp&&act.indexOf('bag:none')===0)h=h.replace(/<button data-a="bag:none:[^"]*"[^>]*>[^<]*<\/button>/,`<button class="bsell" data-a="bag:sell:${v.id}">팔기 ${(sp*v.n).toLocaleString()}G</button>`);L.push(h)}}
  openPanel('바구니',L.length?L.join(''):'<div class="it"><div></div><div><small>아직 아무것도 없어요. 작물을 거두거나 숲가에서 채집해 보세요.</small></div><div></div></div>')}
 $('pnL').addEventListener('click',e=>{const b=e.target.closest('button[data-a^="bag:"]');if(!b||b.disabled)return;e.stopPropagation();const [,a,id]=b.dataset.a.split(':'),i=invIdx(id);if(i<0)return;S.sel=i;
@@ -2491,7 +2491,7 @@ if(window.__f)window.__f.addCk=()=>addChicken();addChicken=function(){const B=pe
 (function(){const _d=drawChicken;drawChicken=function(c,t){const B=penBox();if(!B)return _d(c,t);const q=iso(c.x,c.y);x.save();x.translate(q[0],q[1]);x.scale(.72,.72);x.translate(-q[0],-q[1]);try{return _d(c,t)}finally{x.restore()}}})();
 
 /* ===== 나무 베기: 농장 안 나무 → 통나무 + 그루터기 ===== */
-ITEM.wood={n:'통나무',sell:12,desc:'나무를 베어 얻은 통나무 · 출하함에 팔아요'};ICM.wood='item_twig';COST['나무 베기']=4;
+ITEM.wood={n:'통나무',sell:12,desc:'나무를 베어 얻은 통나무 · 트럭에 팔아요'};ICM.wood='item_twig';COST['나무 베기']=4;
 function lockedLand(tx,ty){if(tx<2||ty<2||tx>=MW-2||ty>=MH-2)return true;for(const z in ZONES){const Z=ZONES[z];if(!S.land[z]&&tx>=Z.x0&&tx<=Z.x1&&ty>=Z.y0&&ty<=Z.y1)return true}return false}
 (function(){const _d=decide;decide=function(){if(!S)return _d();const T=target();if(!T)return _d();const [tx,ty]=T,o=S.O[ty][tx];
  if(o&&o.t==='tree'&&!lockedLand(tx,ty))return{l:'나무 베기',ic:'pick',f:()=>{if(!spend(4))return;S.O[ty][tx]={t:'stump',x:tx,y:ty,v:o.v||.5};const n=2+(Math.random()<.4?1:0);give('wood',n);if(Math.random()<.5)give('twig',1);sfx.thud();pop(tx,ty,'+'+n+' 통나무');addXP(3,tx,ty);GD=1;save()}};
@@ -2580,7 +2580,7 @@ let VISIT=0;
 (async function(){const h=location.hash;if(!h.startsWith('#visit='))return;let data;try{data=await unzip(ub64(h.slice(7)))}catch(e){toast('농장 링크가 잘못됐어요');return}
  VISIT=1;document.documentElement.classList.add('visiting');const d=JSON.parse(data);d.last=Date.now();const json=JSON.stringify(d);const _g=store.get,_s=store.set;
  store.get=k=>k==='farm-save'?json:(k.startsWith('pfTour')||k.startsWith('pfHint')?'1':_g(k));store.set=(k,v)=>{if(k!=='farm-save')_s(k,v)};save=function(){};window.__visitS=()=>S;
- const go=()=>{try{unlock()}catch(_){}if(load()){begin();S.vis=1;try{localStorage.setItem('pfTourOff','1')}catch(_){}
+ const go=()=>{try{unlock()}catch(_){}if(load()){begin();S.vis=1;
   const bar=document.createElement('div');bar.id='visitBar';bar.innerHTML=`<span>${(d.name||'팡팡농장').replace(/</g,'')} 구경 중</span><button>내 농장으로</button>`;$('screen').appendChild(bar);bar.addEventListener('pointerdown',e=>e.stopPropagation());bar.querySelector('button').onclick=()=>{location.href=location.pathname};toast('친구 농장을 둘러봐요 · 톡 눌러 걸어가요')}};
  if(document.readyState==='complete')setTimeout(go,300);else addEventListener('load',()=>setTimeout(go,300))})();
 (function(){const _d=decide;decide=function(){if(VISIT)return null;return _d()}})();
@@ -2622,6 +2622,29 @@ let FRIEND=null;
 /* 친구 팡팡이 그리기 */
 (function(){const _l=landDeco;landDeco=function(L,t){_l(L,t);if(!FRIEND||!VISIT)return;const F=FRIEND,dx=F.tx-F.x,dy=F.ty-F.y,d=Math.hypot(dx,dy);if(d>.02){const sp=Math.min(d,.06);F.x+=dx/d*sp;F.y+=dy/d*sp;F.mv=1}else F.mv=0;
  L.push([F.x+F.y,()=>{const sp=S.pl,sc=S.ch;S.pl={x:F.x,y:F.y,fx:F.fx,fy:F.fy,mv:F.mv,dir:sp.dir};S.ch=F.ch;try{drawPlayer(t)}finally{S.pl=sp;S.ch=sc}const q=iso(F.x,F.y,1.9);x.save();x.font=`700 ${11*DPR}px Paperlogy,sans-serif`;x.textAlign='center';x.lineWidth=3*DPR;x.strokeStyle='#5a2e12';x.fillStyle='#fff6e0';const nm='친구';x.strokeText(nm,q[0],q[1]);x.fillText(nm,q[0],q[1]);x.restore()}])}})();
+
+/* ===== 팡팡식당 · 출하 트럭 · 작물 요리 25종 ===== */
+(function(){
+ const DS=[['turnip','순무 무침'],['carrot','당근 볶음'],['straw','딸기 우유'],['tomato','토마토 달걀볶음'],['pumpkin','호박죽'],['cabbage','양배추 쌈'],['corn','찐 옥수수'],['wheat','수제비'],['grape','포도 화채'],['spinach','시금치 나물'],['radish','뭇국'],['greenonion','파전'],['garlic','마늘 구이'],['napa','배춧국'],['pepper','고추전'],['onion','양파 볶음'],['perilla','깻잎전'],['soybean','콩자반'],['cucumber','오이 냉국'],['peanut','땅콩 조림'],['eggplant','가지 볶음'],['watermelon','수박 화채'],['minari','미나리전'],['lotus','연근 조림'],['sesame','깨강정']];
+ for(const [c,n] of DS){const C=CROPS[c];if(!C)continue;const q=Math.max(1,Math.min(3,Math.ceil(60/C.sell)));const inp={[c]:q};if(c==='tomato')inp.egg=1;
+  const base=C.sell*q+(inp.egg?(sellOf('egg')||20):0);ITEM['dish_'+c]={n,sell:Math.round(base*1.15+5),food:Math.min(40,14+C.days*3),desc:C.n+'로 만든 '+n};EMO['dish_'+c]='🍲';COOK.push({in:inp,out:'dish_'+c})}
+})();
+const DT={restaurant:{w:3,d:4},truck:{w:2,d:3}};BLDH.rest=2.7;BLDH.truck=1.4;
+const truckStage=()=>{const g=S&&S.ship||0;return g<=0?0:g<300?1:2};
+(function(){const _g=gainSell;gainSell=function(g){S.ship=(S.ship||0)+g;GD=1;return _g(g)}})();
+(function(){const _d=dayPass;dayPass=function(n,aw){S.ship=0;GD=1;return _d(n,aw)}})();
+function bldPut(t,w,d,C){const okc=(x2,y)=>{if(!inMap(x2,y)||x2<1||y<1)return false;const g=S.G[y][x2];if(g!=='g')return false;if(S.C[y]&&S.C[y][x2])return false;const o=S.O[y][x2];if(o&&!/^(tree|bush|wild|weed|rock|stump|flower)$/.test(o.t))return false;return !(Math.floor(S.pl.x)===x2&&Math.floor(S.pl.y)===y)};
+ for(const [X,Y] of C){let ok=true;for(let j=0;j<d&&ok;j++)for(let i=0;i<w;i++)if(!okc(X+i,Y+j)){ok=false;break}if(!ok)continue;const o={t,x:X,y:Y,w,d};for(let j=0;j<d;j++)for(let i=0;i<w;i++)S.O[Y+j][X+i]=(i||j)?{t:'part',a:o}:o;return o}return null}
+function lay8(){if(!S||S.lay8)return;const h=houseAt&&houseAt();const hx=h?h[0]:3,hy=h?h[1]:2;
+ const RC=[];for(const dy of [5,6,4,7,8])for(const dx of [-1,-2,0,1,-3])RC.push([hx+dx,hy+dy]);const r=bldPut('rest',3,4,RC);if(!r)return;
+ const TC=[];for(const dy of [4,5,6,3])for(const dx of [0,-1,1,2])TC.push([r.x+dx,r.y+dy]);for(const dy of [-3,-2])for(const dx of [-2,-3])TC.push([r.x+dx,r.y+dy]);const tr=bldPut('truck',2,3,TC);
+ if(tr){for(let y=0;y<MH;y++)for(let x2=0;x2<MW;x2++){const o=S.O[y]&&S.O[y][x2];if(o&&o.t==='bin')S.O[y][x2]=null}}
+ S.lay8=1;GD=1}
+(function(){const _e=ensureAlpha;ensureAlpha=function(){_e();try{lay8()}catch(e){console.warn(e)}}})();
+(function(){const _o=drawObj;drawObj=function(o,t){if(o.t==='rest'){const X=o.x,Y=o.y;shadow(X+1.6,Y+2.2,1.9,1.1,.28);if(artOK('restaurant'))drawArt('restaurant',X+3,Y+4);return}
+ if(o.t==='truck'){const X=o.x,Y=o.y;shadow(X+1,Y+1.6,1.2,.8,.3);const k='truck_'+truckStage();if(artOK(k))drawArt(k,X+TRK[0],Y+TRK[1]);else if(artOK('truck_0'))drawArt('truck_0',X+TRK[0],Y+TRK[1]);return}_o(o,t)}})();
+var TRK=[2,3];
+(function(){const _d=decide;decide=function(){const T=target();const o=T&&objAt(T[0],T[1]);if(o&&o.t==='rest')return{l:'팡팡식당',ic:'kit',f:()=>openHome()};if(o&&o.t==='truck')return{l:'출하 트럭',ic:'coin',f:()=>openSell()};return _d()}})();
 })();
 
 </script>

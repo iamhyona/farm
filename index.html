@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792933000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792933200";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -547,6 +547,51 @@ html body .phT .phT-c #phTgo{box-shadow:0 16px 0 16px #f6e9cc,0 -16px 16px 6px #
 .pi-sk small{grid-column:1/3;font-size:10.5px;color:#8a5a33;line-height:1.3}
 .pi-sk .pi-mind{grid-column:1/3}.pi-sk .pi-mind .pi-bar i{background:linear-gradient(90deg,#ff9ac0,#ff6f9f)}
 
+/* 정보 체계 v2 */
+#mind{display:none!important}
+#stat .lv,#stat .en{pointer-events:auto;cursor:pointer}
+#screen .hud #stat .en b#sEnT{margin:0 0 0 2px!important;display:block!important;position:static!important;transform:none!important;font-size:12px!important;color:#fffaf0!important;text-shadow:0 1.5px 0 #5a2e12,1.5px 0 0 #5a2e12,-1.5px 0 0 #5a2e12,0 -1.5px 0 #5a2e12!important;min-width:18px!important;text-align:right}
+.pv2{gap:12px!important}
+.pv2 .pi-top{padding-bottom:10px;border-bottom:2px dashed #d9bf92}
+.pv-sec{display:flex;flex-direction:column;gap:6px;scroll-margin-top:40px}
+.pv-h{font-size:13px;font-weight:900;color:#b0701c;letter-spacing:.5px;display:flex;align-items:baseline;gap:6px}
+.pv-h span{font-size:11px;font-weight:500;color:#9a7650;letter-spacing:0}
+.pv-h span::before{content:'· '}
+.pv-box{background:#fff8ea;border:1.5px solid #e2c49a;border-radius:12px;padding:9px 10px;display:flex;flex-direction:column;gap:6px}
+.pv-row{display:flex;align-items:center;gap:7px}
+.pv-row img{width:22px!important;height:22px!important;flex:0 0 22px!important}
+.pv-e{width:22px;text-align:center;font-size:17px;flex:0 0 22px}
+.pv-k{font-size:13px;width:34px;flex:0 0 34px}
+.pv-v{font-size:13px;min-width:66px;text-align:right;white-space:nowrap}
+.pv-v small{font-size:10.5px;opacity:.7}
+.pv-note{font-size:11px!important;color:#8a5a33!important;line-height:1.35;opacity:.95}
+.pv-dots{flex:1;display:flex;gap:5px}
+.pv-dots i{width:12px;height:12px;border-radius:50%;border:2px solid #b0884f;background:#fff}
+.pv-dots i.on{background:#7fc25a;border-color:#5a9a3a}
+.pv-lv{display:flex;align-items:center;gap:8px}
+.pv-lv img{width:30px!important;height:30px!important;flex:0 0 30px!important}
+.pv-ln{font-size:24px!important;font-family:'Cafe24Surround',Paperlogy,sans-serif;white-space:nowrap}
+.pv-lvr{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0}
+.pv-lvr small{font-size:10.5px;opacity:.75}
+.pv-seg{display:flex;height:13px;border-radius:7px;background:#e6d2ad;box-shadow:inset 0 1px 2px rgba(90,46,18,.35);overflow:hidden}
+.pv-seg i{display:block;height:100%}
+.pv-unl{background:#fff1cf;border:1.5px dashed #d9a24a;border-radius:10px;padding:6px 8px;display:flex;flex-direction:column;gap:4px}
+.pv-unl b{font-size:12px!important;color:#9a5a10!important}
+.pv-unl span{display:flex;flex-wrap:wrap;gap:4px}
+.pv-unl span i{font-style:normal;font-size:11px;background:#fff;border:1px solid #e2c49a;border-radius:20px;padding:2px 7px;color:#5a2e12}
+.pv2 .pi-sk{margin-top:0}
+.pv2 .pi-sk b{white-space:nowrap;font-size:12.5px}.pv2 .pi-sk>div{grid-template-columns:20px 1fr}.pv2 .pi-sk>div>span{font-size:16px}
+.pv-dot{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;vertical-align:1px}
+.pv2 .pi-grid{border-top:0;padding-top:0}
+.pv-flow{font-size:11.5px;line-height:1.55;text-align:center;background:#f3e2bd;border-radius:10px;padding:7px 8px;color:#6b4220;font-weight:700}
+#ovPause{justify-content:flex-start!important;overflow-y:auto!important}
+#ovPause>.big{margin-top:auto!important}
+#ovPause #bMenu{margin-bottom:auto!important}
+#toast2{white-space:pre-line!important;word-break:keep-all}
+.pv-note{word-break:keep-all}
+.pv-rest{display:flex;flex-wrap:wrap;gap:4px}
+.pv-rest i{font-style:normal;font-size:11px;background:#fff;border:1px solid #e2c49a;border-radius:20px;padding:2px 7px;color:#5a2e12;white-space:nowrap}
+.pv2 .pi-time{white-space:nowrap}
 </style></head>
 
 <body>
@@ -695,7 +740,7 @@ const CROPS={
  watermelon:{n:'수박',days:8,seed:80,sell:360,c:'#3f8a2e',c2:'#e8382a',lf:'#4f9a3a'},
  minari:{n:'미나리',days:3,seed:20,sell:30,c:'#5fae45',c2:'#a8d870',lf:'#4f9a3a',re:2,water:1},
  lotus:{n:'연근',days:7,seed:70,sell:280,c:'#f0c8c8',c2:'#ff9ab0',lf:'#3f8a2e',water:1}};
-const ITEM={hand:{n:'이동',tool:1,desc:'누른 곳으로 걸어가요 · 상점·게시판·출하함 열기'},can:{n:'물뿌리개',tool:1,desc:'마른 밭과 작물에 물을 줘요 · 쓸면 여러 칸'},remove:{n:'철거',tool:1,desc:'밭을 풀밭으로 되돌리고, 놓은 물건을 거둬요 · 쓸면 여러 칸'},basket:{n:'바구니',tool:1,desc:'다 자란 작물과 열매를 거둬요 · 쓸면 여러 칸'},hoe:{n:'괭이',tool:1,desc:'풀밭을 갈고, 자라는 작물을 옮겨 심어요 · 쓸면 여러 칸'},egg:{n:'달걀',sell:50},gegg:{n:'황금달걀',sell:220},
+const ITEM={hand:{n:'이동',tool:1,desc:'누른 곳으로 걸어가요 · 상점·게시판·출하함 열기'},can:{n:'물뿌리개',tool:1,desc:'마른 밭과 작물에 물을 줘요'},remove:{n:'철거',tool:1,desc:'밭을 풀밭으로 되돌리고, 놓은 물건을 거둬요'},basket:{n:'바구니',tool:1,desc:'다 자란 작물과 열매를 거둬요'},hoe:{n:'괭이',tool:1,desc:'풀밭을 갈고, 자라는 작물을 옮겨 심어요'},egg:{n:'달걀',sell:50},gegg:{n:'황금달걀',sell:220},
  bed:{n:'꽃 화단',price:60,place:1,deco:1,desc:'꽃이 가득한 나무 화단'},crate:{n:'나무 상자',price:30,place:1,deco:1,desc:'수확물을 담아 두는 상자'},barrel:{n:'나무통',price:40,place:1,deco:1,desc:'튼튼한 나무통'},hay:{n:'건초더미',price:30,place:1,deco:1,desc:'폭신한 건초'},scare:{n:'허수아비',price:120,place:1,deco:1,desc:'밭을 지켜 주는 친구'},
  sap_apple:{n:'사과 묘목',price:300,place:1,tree:'apple',desc:'풀밭에 심어요 · 열흘쯤 지나 열매가 열려요'},sap_peach:{n:'복숭아 묘목',price:400,place:1,tree:'peach',desc:'풀밭에 심어요 · 열흘쯤 지나 열매가 열려요'},sap_persimmon:{n:'감 묘목',price:350,place:1,tree:'persimmon',desc:'풀밭에 심어요 · 감은 곶감으로 만들 수 있어요'},
  apple:{n:'사과',sell:70,food:20},peach:{n:'복숭아',sell:90,food:25},persimmon:{n:'감',sell:60,food:15},gotgam:{n:'곶감',sell:420,food:40},
@@ -1284,7 +1329,7 @@ openShop=function(){ensureAlpha();const L=[],lock=id=>unlocked(id)?'':`Lv ${unlo
  L.push('<div class="hd">ORCHARD · 과수원</div>');for(const id of['sap_apple','sap_peach','sap_persimmon'])L.push(r2(id,ITEM[id].n,ITEM[id].desc,ITEM[id].price));
  L.push('<div class="hd">ANIMAL · 동물</div>');L.push(r2('chicken','닭',ITEM.chicken.desc+` (${S.ck.length}/10)`,ITEM.chicken.price,S.ck.length>=10));
  L.push('<div class="hd">TOOL · 도구</div>');L.push(r2('rod','낚싯대','연못을 눌러 물고기를 낚아요',300,count('rod')>0));L.push(r2('sprinkler','스프링클러',ITEM.sprinkler.desc,150));
- L.push('<div class="hd">DECO · 꾸미기</div>');for(const id of['flower','flower_pot_kr','bed','bench','pyeongsang','onggi_set','stone_lamp','stone_wall','straw_stack','lamp','fence','crate','barrel','hay','scare'])L.push(r2(id,ITEM[id].n,ITEM[id].desc,ITEM[id].price));
+ L.push('<div class="hd">DECO · 꾸미기</div>');for(const id of['flower','flower_pot_kr','bed','bench','pyeongsang','campfire','onggi_set','stone_lamp','stone_wall','straw_stack','lamp','fence','crate','barrel','hay','scare'])L.push(r2(id,ITEM[id].n,ITEM[id].desc,ITEM[id].price));
  openPanel(`상점 · ${S.gold.toLocaleString()}G`,L.join(''))};
 /* 씨앗 해금 검사: 잠긴 씨앗은 살 수 없지만 이미 가진 것은 심을 수 있어요 */
 /* 하루 넘기기 · 잠 · 기절 · 정산 */
@@ -1554,7 +1599,7 @@ function drawClock(){const c=$('clk');if(!c||!S)return;const g=c.getContext('2d'
  g.fillStyle='#e2574c';g.beginPath();g.arc(0,0,6,0,7);g.fill();g.restore()}
 setInterval(()=>{if(S&&state==='play')drawClock()},500);
 /* ===== 분야별 솜씨 (밭일·살림·취미·생산) + 마음 게이지 ===== */
-const SKN={farm:['🌱','밭일'],home:['🏡','살림'],hobby:['🎣','취미'],make:['🏭','생산']};
+const SKN={farm:['🌱','밭일'],home:['🏡','살림'],hobby:['🧺','채집'],make:['🏭','생산']};
 const SKP={farm:l=>`수확 2배 확률 ${Math.min(30,(l-1)*3)}%`,home:l=>`퇴비 확률 +${Math.min(30,(l-1)*3)}%`,hobby:l=>`채집 2배 ${Math.min(32,(l-1)*4)}% · 낚시 칸 +${Math.min(12,(l-1)*1.5)}%`,make:l=>`판매·주문 +${Math.min(30,(l-1)*2)}% · 요리 2배 ${Math.min(32,(l-1)*4)}%`};
 const CAT={'땅 갈기':'farm','심기':'farm','물 주기':'farm','수확':'farm','퇴비 주기':'farm','모종 들기':'farm','옮겨 심기':'farm','밭 메우기':'farm','작물 뽑기':'farm',
  '풀 뽑기':'home','돌 깨기':'home','꽃 꺾기':'home','그루터기 캐기':'home','나무 뽑기':'home','나뭇가지 줍기':'home','낙엽 쓸기':'home','꽃 물주기':'home','꽃 따기':'home','달걀 줍기':'home','놓기':'home',
@@ -1618,7 +1663,7 @@ if(RECIPES.bangat)RECIPES.bangat.push({in:{taeyangcho:2},out:'gochugaru'});
 function lay7(){if(!S||S.lay7)return;S.lay7=1;for(const [a,b] of [[11,7],[12,8],[10,8],[11,9],[7,9]])if(freeGrass(a,b)){S.O[b][a]={t:'mat',x:a,y:b};break}GD=1}
 (function(){const _e=ensureAlpha;ensureAlpha=function(){_e();ensureSk();lay7()}})();
 /* 벤치 쉬기 · 산책 → 마음 / 취미 */
-let WALK=0;(function(){const _m=move;move=function(dt){const P=S.pl,x0=P.x,y0=P.y,r=_m(dt);if(SIT){sitM+=dt;if(sitM>2.5){sitM=0;addMind(4)}}else{WALK+=Math.hypot(P.x-x0,P.y-y0);if(WALK>30){WALK=0;withCat('hobby',()=>addXP(1));addMind(2)}}return r}})();
+let WALK=0;(function(){const _m=move;move=function(dt){const P=S.pl,x0=P.x,y0=P.y,r=_m(dt);if(SIT){sitM+=dt;if(sitM>2.5){sitM=0;addMind(4)}}else{WALK+=Math.hypot(P.x-x0,P.y-y0);if(WALK>30){WALK=0}}return r}})();
 let sitM=0;
 (function(){const _a=autoWalk;autoWalk=function(dt){const P=S.pl,x0=P.x,y0=P.y,r=_a(dt);WALK+=Math.hypot(P.x-x0,P.y-y0);return r}})();
 /* 마음 · 솜씨 UI */
@@ -1647,6 +1692,60 @@ let SHOPFIX=0;function fixShop(){if(!S||SHOPFIX===S)return;SHOPFIX=S;let sh=null
 
 setInterval(()=>{const on=!!S&&state==='play';for(const id of ['bTodo','mind','clk']){const e=$(id);if(e)e.style.display=on?'':'none'}},300);
 
+/* ===== 정보 체계 v2: 오늘(힘·마음·할 일) / 성장(농장 Lv·해금·솜씨) / 기록 ===== */
+const SKC={farm:'#7fc25a',home:'#d08a4a',hobby:'#5aaee0',make:'#e8b03a'};
+/* 마음 게이지 제거: 오늘 상태는 ⚡힘 하나 · 하루 보너스는 할 일 3개 모두 완료 */
+mindMul=function(){return 1};addMind=function(){};mindUI=function(){};
+function nextUnl(){const lv=S.lv||1;if(lv>=LVMAX)return null;for(let l=lv+1;l<=LVMAX;l++){const L=(LVUNL[l]||[]).map(k=>ITEM[k]?ITEM[k].n:(ITEM['seed_'+k]?ITEM['seed_'+k].n.replace(/ ?씨앗$/,''):k));
+ if(typeof ZONES!=='undefined')for(const z in ZONES)if(ZONES[z].lv===l)L.push(ZONES[z].n+' 개간');if(L.length)return{l,L}}return null}
+function pvMenu(){ensureSk();const si=seasonIdx(),en=Math.round(S.en||0),ic=k=>`<img src="art/ic/${k}.png" alt="">`,D=S.daily&&S.daily.L||[],dn=D.filter(v=>v.done).length;
+ const tot=Object.values(S.sk).reduce((a,b)=>a+b,0)||1,need=xpNeed(S.lv),p=S.lv>=LVMAX?100:Math.min(100,S.xp/need*100);
+ const seg=Object.keys(SKN).map(k=>`<i style="width:${(S.sk[k]/tot*p).toFixed(2)}%;background:${SKC[k]}"></i>`).join('');
+ const nu=nextUnl();
+ const sk=Object.keys(SKN).map(k=>{const s=skLv(S.sk[k]);return`<div><span>${SKN[k][0]}</span><b><i class="pv-dot" style="background:${SKC[k]}"></i>${SKN[k][1]} <em>Lv ${s.l}</em></b><i class="pi-bar"><i style="width:${Math.round(s.cur/s.need*100)}%;background:${SKC[k]}"></i></i><small>${s.l>1?SKP[k](s.l):'Lv 2부터 '+SKP[k](2)}</small></div>`}).join('');
+ return `<div class="pinfo pv2">
+ <div class="pi-top">${ic('season_'+SEASONS[si])}<div class="pi-day"><b>${SEASON_KO[si]} ${((S.day-1)%28)+1}일</b><small>${S.day}일차 · 마감까지 약 ${fmtLeft(Math.max(0,1440-S.min)*MIN_SEC)}</small></div><b class="pi-time">${fmtAt(0)}</b></div>
+ <div class="pv-sec" id="pvToday"><div class="pv-h">오늘<span>자고 나면 새로 시작</span></div><div class="pv-box">
+  <div class="pv-row">${ic('hud_energy')}<b class="pv-k">힘</b><span class="pi-bar"><i style="width:${Math.min(100,en)}%"></i></span><b class="pv-v">${en}<small>/100</small></b></div>
+  <small class="pv-note">일할 때 줄고,<br>쉬면 차요</small><span class="pv-rest"><i>😴 자기</i><i>🍲 먹기</i><i>🪑 앉아 쉬기</i><i>🔥 불멍</i><i>💧 물멍</i></span>
+  <div class="pv-row"><span class="pv-e">📒</span><b class="pv-k">할 일</b><span class="pv-dots">${D.map(v=>`<i class="${v.done?'on':''}"></i>`).join('')}</span><b class="pv-v">${dn}/${D.length} 완료</b></div>
+  <small class="pv-note">${S.daily&&S.daily.bonus?'오늘 할 일 모두 완료! 보너스를 받았어요':'3개를 모두 하면 보너스 +60G · 경험치 +10'}</small>
+ </div></div>
+ <div class="pv-sec" id="pvGrow"><div class="pv-h">성장<span>계속 쌓여요</span></div><div class="pv-box">
+  <div class="pv-lv">${ic('hud_level')}<b class="pv-ln">Lv ${S.lv}</b><div class="pv-lvr"><span class="pv-seg">${seg}</span><small>${S.lv>=LVMAX?'최고 레벨이에요':`경험치 ${S.xp} / ${need}`}</small></div></div>
+  <div class="pv-unl">${nu?`<b>🔓 Lv ${nu.l}에 열려요</b><span>${nu.L.map(n=>`<i>${n}</i>`).join('')}</span>`:'<b>모든 해금 완료!</b>'}</div>
+  <small class="pv-note">아래 네 가지 솜씨에서 얻은 경험치가 모두 농장 Lv에 쌓여요</small>
+  <div class="pi-sk">${sk}</div>
+ </div></div>
+ <div class="pv-sec"><div class="pv-h">기록<span>지금까지</span></div><div class="pi-grid"><div>${ic('sum_harvest')}<b>${S.st.hv}</b><small>수확</small></div><div>${ic('sum_earn')}<b>${S.st.earn.toLocaleString()}</b><small>번 돈</small></div><div>${ic('item_chicken')}<b>${S.ck.length}</b><small>닭</small></div></div></div>
+ <div class="pv-flow">⚡ 힘을 써서 일하면 → 솜씨 경험치 → ⭐ 농장 Lv<br>📒 할 일 3개를 모두 하면 → 보너스 +60G</div>
+</div>`}
+(function(){const _mn=menu;menu=function(on,sec){_mn(on);if(on&&S&&state==='play'){$('pauseInfo').innerHTML=pvMenu();if(sec){const e=$(sec),o=$('ovPause');if(e&&o)setTimeout(()=>{if(sec==='pvToday')o.scrollTo({top:0,behavior:'smooth'});else e.scrollIntoView({block:'start',behavior:'smooth'})},60)}}}})();
+/* 상단 HUD: ⭐ 성장 · ⚡ 오늘 — 누르면 메뉴의 해당 구역 */
+(function(){const st=$('stat');if(!st)return;const en=st.querySelector('.en'),lv=st.querySelector('.lv');
+ if(lv)lv.addEventListener('click',()=>{if(S&&state==='play'&&!paused)menu(true,'pvGrow')});if(en)en.addEventListener('click',()=>{if(S&&state==='play'&&!paused){menu(true);const o=$('ovPause');if(o)o.scrollTop=0}})})();
+if(window.__f)Object.assign(window.__f,{pvMenu,nextUnl});
+/* ===== 쉼: 자기·먹기·앉아 쉬기·불멍·물멍 → ⚡ 힘 회복 (경험치 없음) ===== */
+ITEM.campfire={n:'모닥불',price:80,place:1,deco:1,desc:'옆에 앉아 불멍 · 힘이 1.5배 빨리 차요'};
+EMO.campfire='🔥';HIT_T.campfire=.8;COST['불멍']=0;COST['물멍']=0;TMAP['불멍']='rest';TMAP['물멍']='rest';
+function nearWater(tx,ty,r){for(let y=ty-r;y<=ty+r;y++)for(let x2=tx-r;x2<=tx+r;x2++)if(inMap(x2,y)&&S.G[y][x2]==='w')return true;return false}
+const REST_MSG={sit:'앉아서 쉬어요 · 힘이 차오르고 시간이 빨리 가요',fire:'🔥 불멍 중 · 타닥타닥… 힘이 1.5배 빨리 차요',water:'💧 물멍 중 · 잔잔한 물결… 힘이 1.5배 빨리 차요'};
+function restAt(mode,tx,ty,px,py){const P=S.pl;SIT={x:tx,y:ty,px:P.x,py:P.y,mode,mul:mode==='sit'?1:1.5};P.x=px;P.y=py;P.fx=0;P.fy=mode==='fire'?-1:1;toast(REST_MSG[mode]+'\n움직이면 일어나요');taskHit('rest')}
+sitDown=function(tx,ty){const w=nearWater(tx,ty,2);restAt(w?'water':'sit',tx,ty,tx+.5,ty+.62)};
+(function(){const _m=move;move=function(dt){const r=_m(dt);if(SIT&&SIT.mul>1)S.en=Math.min(EN_MAX,S.en+dt*.8*(SIT.mul-1));return r}})();
+(function(){const _d=decide;decide=function(){if(SIT||!S)return _d();const T=target();if(T){const [tx,ty]=T,o=objAt(tx,ty),sid=selId();
+  if(o&&o.t==='campfire'&&sid!=='remove')return{l:'불멍',ic:'campfire',f:()=>{const y2=inMap(tx,ty+1)&&!solidAt(tx,ty+1)?ty+1:ty;restAt('fire',tx,ty,tx+.5,y2+.75)}};
+  if(S.G[ty]&&S.G[ty][tx]==='w'&&!(S.C[ty]&&S.C[ty][tx])&&sid==='hand'&&(seasonIdx()===3||((S.snd||{}).d===S.day&&S.snd.n>=8))){const P=S.pl;return{l:'물멍',ic:'hand',f:()=>restAt('water',tx,ty,P.x,P.y)}}}
+ return _d()}})();
+(function(){const _o=drawObj;drawObj=function(o,t){if(o.t!=='campfire')return _o(o,t);const p=iso(o.x+.5,o.y+.5);
+ if(artOK('campfire')){shadow(o.x+.5,o.y+.6,.4,.16,.22);drawArt('campfire',o.x+.5,o.y+.5)}
+ else{shadow(o.x+.5,o.y+.6,.38,.15,.22);const s=TW*.42;x.save();x.font=`${s}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`;x.textAlign='center';x.textBaseline='bottom';x.fillText('🔥',p[0],p[1]+s*.15);x.restore()}
+ x.save();x.globalCompositeOperation='lighter';const g=x.createRadialGradient(p[0],p[1]-TW*.1,0,p[0],p[1]-TW*.1,TW*.5);g.addColorStop(0,`rgba(255,170,60,${.22+.06*Math.sin(t*9+o.x)})`);g.addColorStop(1,'rgba(255,120,30,0)');x.fillStyle=g;x.beginPath();x.arc(p[0],p[1]-TW*.1,TW*.5,0,7);x.fill();
+ for(let i=0;i<3;i++){const k=(t*.8+i/3)%1;x.globalAlpha=(1-k)*.8;x.fillStyle='#ffd27a';x.beginPath();x.arc(p[0]+Math.sin(k*7+i*2)*TW*.06,p[1]-TW*(.3+k*.35),TW*.012*(1-k)+1,0,7);x.fill()}x.restore()}})();
+if(window.__f)Object.assign(window.__f,{restAt,nearWater});
+/* 안내 문장: 쉼표 뒤에서 줄바꿈 */
+(function(){const _t=toast;toast=function(t){return _t(String(t).replace(/, /g,',\n'))}})();
+(function(){const _p=tipT;tipT=function(t){return _p(String(t).replace(/, /g,',\n'))}})();
 })();
 
 </script>

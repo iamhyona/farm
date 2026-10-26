@@ -58,7 +58,7 @@
 #screen #pnL .it .bb button{display:flex!important;align-items:center!important;justify-content:center!important;width:92px!important;min-width:92px!important;height:28px!important;min-height:28px!important;padding:0 6px!important;margin:0!important;border-image:none!important;border:2px solid #8a5a34!important;border-radius:10px!important;font:400 12px/1 'Cafe24Surround',Paperlogy,sans-serif!important;letter-spacing:0!important;white-space:nowrap!important;overflow:hidden!important;background:linear-gradient(#ffe48a,#ffc93a)!important;color:#5a2e12!important;text-shadow:none!important;box-shadow:0 2px 0 #8a5a34!important}
 #screen #pnL .it .bb button::after,#screen #pnL .it .bb button::before{display:none!important}
 #screen #pnL .it .bb .bsell{background:linear-gradient(#c6eda8,#7cc25a)!important;border-color:#3f7a2a!important;color:#fff!important;text-shadow:0 1px 0 #2f5e1e!important;box-shadow:0 2px 0 #2f5e1e!important}
-</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793017810";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793018153";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -2510,6 +2510,49 @@ openTodo=openNotice;setTimeout(()=>{document.querySelectorAll('#screen .hud .hre
 /* ===== 집 앞 모닥불 (불멍) ===== */
 (function(){const _e=ensureAlpha;ensureAlpha=function(){_e();if(!S||S.fire1)return;let has=false;for(let y=0;y<MH&&!has;y++)for(let x2=0;x2<MW;x2++){const o=S.O[y][x2];if(o&&o.t==='campfire'){has=true;break}}
  if(!has){const C=[[9,8],[10,8],[8,8],[11,8],[9,9],[12,8],[7,8],[10,9]];for(const [x2,y] of C){if(inMap(x2,y)&&S.G[y][x2]==='g'&&!S.O[y][x2]&&!(S.C[y]&&S.C[y][x2])){S.O[y][x2]={t:'campfire',x:x2,y};GD=1;break}}}S.fire1=1}})();
+/* ===== 낚시 미니게임 v2: 찌 보고 챔질 → 꾹 눌러 릴 감기 ===== */
+const ZW=.34,FDIF={minnow:{sp:.75,jit:.5},crucian:{sp:.55,jit:.35},loach:{sp:.8,jit:.6},catfish:{sp:.95,jit:.7},carp:{sp:1.1,jit:.9}};
+let FG=null;
+openFish=function(){const f=pickFish();FG={f,ph:'wait',t:0,bite:1.6+Math.random()*2.8,win:.9,zone:.3,zv:0,fx:.5,fv:0,ft:.5,prog:.3,hold:false,last:performance.now(),done:0};
+ openPanel('연못 낚시',`<div class="fg"><div class="fg-sea" id="fgSea"><i class="fg-rip"></i><i class="fg-rip r2"></i><div class="fg-bob" id="fgBob"><b>!</b></div></div><p class="fg-msg" id="fgMsg">찌를 보고 있어요…</p>
+  <div class="fg-reel" id="fgReel"><div class="fg-track"><i class="fg-zone" id="fgZone"></i><img class="fg-fish" id="fgFish" src="art/ic/item_${f}.png" onerror="this.src='art/ic/item_minnow.png'" alt=""></div><div class="fg-prog"><i id="fgProg"></i></div></div>
+  <button class="fg-btn" id="fgBtn">챔질!</button></div>`);
+ const btn=$('fgBtn'),sea=$('fgSea');
+ const press=e=>{e.preventDefault();e.stopPropagation();if(!FG||FG.done)return;if(FG.ph==='wait'){fgEnd(false,'너무 빨랐어요… 물고기가 도망갔어요');return}if(FG.ph==='bite'){FG.ph='reel';$('fgReel').classList.add('on');sea.classList.add('hook');sea.insertAdjacentHTML('beforeend',`<img class="fg-sf" id="fgSF" src="art/ic/item_${FG.f}.png" onerror="this.src='art/ic/item_minnow.png'" alt="">`);$('fgMsg').textContent='꾹 눌러 초록 칸에 물고기를 담아요';btn.textContent='꾹 눌러 감기';sfx.pop&&sfx.pop();return}if(FG.ph==='reel')FG.hold=true};
+ const rel=e=>{if(FG)FG.hold=false};
+ for(const el of [btn,sea]){el.addEventListener('pointerdown',press);el.addEventListener('pointerup',rel);el.addEventListener('pointerleave',rel);el.addEventListener('pointercancel',rel)}
+ requestAnimationFrame(fgTick)}
+function fgTick(t){if(!FG||FG.done)return;if(!$('ovPanel').classList.contains('show')||!$('fgBtn')){FG=null;return}const dt=Math.min(.05,(t-FG.last)/1000);FG.last=t;FG.t+=dt;const D=FDIF[FG.f]||FDIF.crucian;
+ if(FG.ph==='wait'){$('fgBob').style.transform=`translateY(${Math.sin(FG.t*3)*3}px)`;if(FG.t>=FG.bite){FG.ph='bite';FG.t=0;$('fgSea').classList.add('bite');$('fgMsg').textContent='지금이에요! 톡!';try{navigator.vibrate&&navigator.vibrate(30)}catch(_){}sfx.water&&sfx.water()}}
+ else if(FG.ph==='bite'){$('fgBob').style.transform=`translateY(${8+Math.sin(FG.t*30)*3}px)`;if(FG.t>FG.win){fgEnd(false,'놓쳤어요… 찌가 움직이면 바로 톡!');return}}
+ else if(FG.ph==='reel'){FG.zv+=(FG.hold?2.6:-2.2)*dt;FG.zv*=.92;FG.zone=Math.max(0,Math.min(1-ZW,FG.zone+FG.zv*dt*3.2));if(FG.zone<=0||FG.zone>=1-ZW)FG.zv*=-.3;
+  FG.ft-=dt;if(FG.ft<=0){FG.ft=.35+Math.random()*(1.1-D.jit*.6);FG.fv=(Math.random()-.5)*2*D.sp}FG.fx=Math.max(.03,Math.min(.97,FG.fx+FG.fv*dt*.55));if(FG.fx<=.03||FG.fx>=.97)FG.fv*=-1;
+  const inZ=FG.fx>=FG.zone&&FG.fx<=FG.zone+ZW;FG.prog+=(inZ?.38:-.13)*dt;const sf=$('fgSF');if(sf){sf.style.left=(10+FG.fx*80)+'%';sf.style.transform=`translateX(-50%) rotate(${Math.sin(FG.t*12)*12}deg) scaleX(${FG.fv<0?-1:1})`}$('fgZone').style.left=(FG.zone*100)+'%';$('fgFish').style.left=(FG.fx*100)+'%';$('fgZone').classList.toggle('in',inZ);$('fgProg').style.width=Math.max(0,Math.min(1,FG.prog))*100+'%';
+  if(FG.prog>=1){fgEnd(true);return}if(FG.prog<=0){fgEnd(false,'줄이 풀려 놓쳤어요…');return}}
+ requestAnimationFrame(fgTick)}
+function fgEnd(ok,msg){if(!FG)return;FG.done=1;const f=FG.f,m=$('fgMsg'),b=$('fgBtn');$('fgReel')&&$('fgReel').classList.remove('on');
+ if(ok){give(f);addXP(f==='carp'?10:f==='catfish'?7:4);taskHit('fish');sfx.get&&sfx.get();$('fgSea').classList.add('caught');$('fgSea').innerHTML=`<img class="fg-got" src="art/ic/item_${f}.png" onerror="this.src='art/ic/item_minnow.png'" alt="">`;m.innerHTML=`<b>${ITEM[f].n}</b>${josa(ITEM[f].n)} 낚았어요!`+(f==='carp'?' 대물이에요!':'')}
+ else{sfx.no&&sfx.no();m.textContent=msg}
+ const nb=b.cloneNode(false);nb.textContent='한 번 더 · 힘 2';nb.className='fg-btn again';b.replaceWith(nb);nb.addEventListener('click',e=>{e.stopPropagation();if(!spend(2))return;openFish()})}
+(function(){const st=document.createElement('style');st.textContent=`
+.fg{display:flex;flex-direction:column;align-items:center;gap:10px;padding:6px 2px 4px}
+.fg-sea{position:relative;width:100%;height:120px;border-radius:14px;background:linear-gradient(#bfe6f7,#5fb3dc 60%,#3f8fc0);overflow:hidden;box-shadow:inset 0 0 0 2px #2f6a9a;touch-action:none;cursor:pointer}
+.fg-rip{position:absolute;left:50%;top:58%;width:70px;height:16px;margin-left:-35px;border:2px solid rgba(255,255,255,.55);border-radius:50%;animation:fgr 2.4s ease-out infinite}.fg-rip.r2{animation-delay:1.2s}
+@keyframes fgr{from{transform:scale(.4);opacity:.9}to{transform:scale(1.6);opacity:0}}
+.fg-bob{position:absolute;left:50%;top:44%;width:16px;height:26px;margin-left:-8px;border-radius:8px 8px 6px 6px;background:linear-gradient(#ff5a4a 50%,#fff 50%);border:2px solid #5a2e12}
+.fg-bob b{position:absolute;left:50%;top:-30px;transform:translateX(-50%);font:900 22px 'Cafe24Surround',sans-serif;color:#ffd23f;-webkit-text-stroke:3px #5a2e12;paint-order:stroke;display:none}
+.fg-sea.bite .fg-bob b{display:block;animation:fgb .25s infinite alternate}@keyframes fgb{to{transform:translate(-50%,-4px) scale(1.15)}}
+.fg-sea.hook .fg-bob,.fg-sea.hook .fg-rip{display:none}.fg-sf{position:absolute;top:50%;width:54px;height:54px;margin-top:-27px;object-fit:contain;filter:drop-shadow(0 3px 0 rgba(20,60,100,.35))}
+.fg-sea.caught{display:flex;align-items:center;justify-content:center}.fg-got{width:80px;height:80px;animation:fgg .5s ease-out}@keyframes fgg{from{transform:translateY(40px) scale(.5) rotate(-20deg)}}
+.fg-msg{margin:0;font:400 13px Paperlogy,sans-serif;color:#5a2e12;text-align:center;min-height:18px}.fg-msg b{color:#c07a1c}
+.fg-reel{width:100%;display:none;flex-direction:column;gap:6px}.fg-reel.on{display:flex}
+.fg-track{position:relative;height:34px;border-radius:17px;background:#5fb3dc;box-shadow:inset 0 0 0 2px #2f6a9a;overflow:hidden}
+.fg-zone{position:absolute;top:3px;bottom:3px;width:34%;border-radius:14px;background:rgba(140,220,110,.55);box-shadow:inset 0 0 0 2px #3f7a2a}.fg-zone.in{background:rgba(160,240,120,.85)}
+.fg-fish{position:absolute;top:2px;width:30px;height:30px;margin-left:-15px;object-fit:contain;transition:none}
+.fg-prog{height:8px;border-radius:5px;background:#e6d2ad;overflow:hidden}.fg-prog i{display:block;height:100%;width:30%;background:linear-gradient(90deg,#ffd23f,#ff9a2a)}
+.fg-btn{width:100%;height:46px;border-radius:14px;border:3px solid #3f7a2a;background:linear-gradient(#a8e06a,#5fae3a);color:#fff;font:400 17px 'Cafe24Surround',Paperlogy,sans-serif;text-shadow:0 2px 0 #2f5e1e;box-shadow:0 3px 0 #2f5e1e;touch-action:none;user-select:none;-webkit-user-select:none}
+.fg-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #2f5e1e}.fg-btn.again{border-color:#8a5a34;background:linear-gradient(#ffe48a,#ffc93a);color:#5a2e12;text-shadow:none;box-shadow:0 3px 0 #8a5a34}`;document.head.appendChild(st)})();
+if(window.__f)Object.assign(window.__f,{openFish:()=>openFish(),FGget:()=>FG});
 })();
 
 </script>

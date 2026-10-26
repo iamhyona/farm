@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792935100";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792935200";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -757,6 +757,8 @@ html body .phT .phT-c .trow span{font-size:13.5px!important}
 #ovPause #bSleep2{display:none!important}
 .inv button i.fdb{position:absolute;left:-3px;top:-5px;display:flex;align-items:center;gap:1px;padding:0 4px 0 1px;height:15px;border-radius:9px;background:#fff3f3;border:1.5px solid #d84a5a;font:700 10px Paperlogy,sans-serif;font-style:normal;color:#c8323f;line-height:1;pointer-events:none;z-index:2}
 .inv button i.fdb::before{content:'';width:11px;height:11px;background:url(art/hud/hud_heart.png) center/contain no-repeat}
+#sleepCf .bcb .nap{background:linear-gradient(#ffe08a,#f2b93a);color:#5a2e12}
+#sleepCf .bcb button{font-size:15px!important;white-space:nowrap}
 </style></head>
 
 <body>
@@ -2011,10 +2013,11 @@ setInterval(()=>{if(!S||state!=='play'||paused)return;let ripe=0;for(let y=0;y<M
 (function(){const _cc=cropCard;cropCard=function(C,cr,L){return _cc(C,cr,cropLeft(C,cr))}})();
 /* ===== 집: 잠자기 창 (+ 부엌) ===== */
 function sleepAsk(){if(!S||state!=='play')return;let m=$('sleepCf');
- if(!m){m=document.createElement('div');m.id='sleepCf';m.className='cfw';m.innerHTML='<div class="bc"><img src="art/hud/rest_sleep.png" alt=""><b>오늘은 여기까지 할까요?</b><p>자고 나면 다음 날 아침이 돼요<br><small>힘이 가득 차고, 물 준 작물은 한 단계 더 자라요</small></p><div class="bcb"><button class="no">취소</button><button class="yes">자기</button></div><button class="kit">🍳 부엌에서 요리하기</button></div>';$('screen').appendChild(m);
+ if(!m){m=document.createElement('div');m.id='sleepCf';m.className='cfw';m.innerHTML='<div class="bc"><img src="art/hud/rest_sleep.png" alt=""><b>오늘은 여기까지 할까요?</b><p>자고 나면 다음 날 아침이 돼요<br><small>힘이 가득 차고, 물 준 작물은 한 단계 더 자라요</small></p><div class="bcb"><button class="no">취소</button><button class="nap">낮잠</button><button class="yes">자기</button></div><button class="kit">🍳 부엌에서 요리하기</button></div>';$('screen').appendChild(m);
   m.addEventListener('pointerdown',e=>e.stopPropagation());
   m.addEventListener('click',ev=>{ev.stopPropagation();const close=()=>{m.classList.remove('show');paused=false};
-   if(ev.target.closest('.yes')){close();sleep()}else if(ev.target.closest('.kit')){m.classList.remove('show');openHome()}else if(ev.target.closest('.no')||ev.target===m){close();sfx.click&&sfx.click()}})}
+   if(ev.target.closest('.nap')){close();nap()}else if(ev.target.closest('.yes')){close();sleep(true)}else if(ev.target.closest('.kit')){m.classList.remove('show');openHome()}else if(ev.target.closest('.no')||ev.target===m){close();sfx.click&&sfx.click()}})}
+{const night=canSleep();m.querySelector('.nap').style.display=night?'none':'';m.querySelector('.yes').textContent=night?'자기':'내일까지';m.querySelector('b').textContent=night?'오늘은 여기까지 할까요?':'잠깐 쉬어 갈까요?';m.querySelector('p').innerHTML=night?'자고 나면 다음 날 아침이 돼요<br><small>힘이 가득 차고, 물 준 작물은 한 단계 더 자라요</small>':'낮잠: 2시간 지나고 힘 +50<br><small>내일까지: 하루를 마치고 다음 날 아침으로</small>'}
  const n=typeof COOK!=='undefined'?COOK.filter(r=>Object.entries(r.in).every(([k,v])=>count(k)>=v)).length:0;
  m.querySelector('.kit').textContent=n?`🍳 부엌에서 요리하기 · 만들 수 있는 요리 ${n}개`:'🍳 부엌 둘러보기 (재료가 아직 없어요)';
  paused=true;m.classList.add('show');sfx.pop&&sfx.pop()}
@@ -2031,6 +2034,9 @@ function clockTint(g,r,m){const H=m/60;let night=0,dusk=0;
  if(dusk>0){g.fillStyle=`rgba(255,170,110,${.55*dusk})`;g.fillRect(-r,-r,2*r,2*r)}
  if(night>0){g.fillStyle=`rgba(60,72,140,${.75*night})`;g.fillRect(-r,-r,2*r,2*r)}
  g.restore()}
+/* 낮잠: 2시간 지나고 힘 +50 */
+function nap(){if(!S||state!=='play')return;state='sleep';sfx.sleep&&sfx.sleep();$('fade').classList.add('on');
+ setTimeout(()=>{S.min=Math.min(23*60+30,S.min+120);S.en=Math.min(EN_MAX,S.en+50);save();hud();$('fade').classList.remove('on');state='play';toast('낮잠을 잤어요 · 힘 +50');try{statUI()}catch(e){}},1400)}
 })();
 
 </script>

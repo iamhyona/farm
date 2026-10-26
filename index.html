@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792935400";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793007515";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -1108,14 +1108,14 @@ function drawGroundStatic(xa,xb,ya,yb){
   else if(g==='w'){poly([iso(xx,y,-.12),iso(xx+1,y,-.12),iso(xx+1,y+1,-.12),iso(xx,y+1,-.12)],'#3fb6ea')}
   else if(g==='s'){x.drawImage(grassTile(hsh(xx,y)*6|0,1),p0[0]-TW/2,p0[1])}}
  // 연못: 물결 · 반짝임 · 가장자리 돌
- for(let y=0;y<MH;y++)for(let xx=0;xx<MW;xx++){if(S.G[y][xx]!=='w')continue;
+ for(let y=0;y<MH;y++)for(let xx=0;xx<MW;xx++){if(S.G[y][xx]!=='w'||(typeof isRiv==='function'&&isRiv(xx,y)))continue;
   const reedHere=isReed(xx,y);if(artOK('lily_1')){if(!S.C[y][xx]&&!reedHere&&vnz(xx/2.2,y/2.2,41)>.6){const n=hsh(xx,y,3)<.5?2:1;for(let q=0;q<n;q++){const v=hsh(xx,y,6+q*5),k=v<.1?'lily_4':'lily_'+(1+Math.floor(v*3));drawArt(k,xx+.25+hsh(xx,y,4+q)*.5,y+.25+hsh(xx,y,5+q)*.5,-.12,.5+hsh(xx,y,7+q)*.12)}}}else if(hsh(xx,y,3)<.25){const q=iso(xx+.3+hsh(xx,y,4)*.4,y+.3+hsh(xx,y,5)*.4,-.1);x.fillStyle='#5cbf55';x.strokeStyle=OLS;x.lineWidth=1*DPR;x.beginPath();x.ellipse(q[0],q[1],TW*.11,TW*.055,0,.3,6.0);x.lineTo(q[0],q[1]);x.closePath();x.fill();x.stroke();if(hsh(xx,y,6)<.4){x.fillStyle='#ffb0d0';x.beginPath();x.arc(q[0]+TW*.03,q[1]-TW*.02,TW*.03,0,7);x.fill()}}
   for(const [dx,dy] of[[1,0],[0,1],[-1,0],[0,-1]])if(gAt(xx+dx,y+dy)!=='w'){const e=dx===1?[[xx+1,y],[xx+1,y+1]]:dx===-1?[[xx,y],[xx,y+1]]:dy===1?[[xx,y+1],[xx+1,y+1]]:[[xx,y],[xx+1,y]];
    const a=iso(e[0][0],e[0][1]),b=iso(e[1][0],e[1][1]),a2=iso(e[0][0],e[0][1],-.12),b2=iso(e[1][0],e[1][1],-.12);if(dx===-1||dy===-1)poly([a,b,b2,a2],'#7a6a50');
    {const ek='pond_edge_'+(dx===1?'se':dx===-1?'nw':dy===1?'sw':'ne');if(artOK(ek)){drawArt(ek,xx,y);continue}}
    for(let k=0;k<3;k++){const tt=(k+.5)/3,p=[lerp(a[0],b[0],tt),lerp(a[1],b[1],tt)];x.fillStyle=['#c9c2b0','#b4ad9a','#ddd6c4'][(xx+y+k)%3];x.strokeStyle=OLS;x.lineWidth=1*DPR;x.beginPath();x.ellipse(p[0],p[1],TW*.075,TW*.045,0,0,7);x.fill();x.stroke()}}}
  // 물가: 큰·작은 돌과 풀을 일부 변에만 (고정 seed)
- for(let y=0;y<MH;y++)for(let xx=0;xx<MW;xx++){if(S.G[y][xx]!=='w')continue;for(const [dx,dy] of[[1,0],[0,1],[-1,0],[0,-1]]){if(gAt(xx+dx,y+dy)==='w')continue;const r=hsh(xx*3+dx+7,y*3+dy+7,51);if(r>.55)continue;const k=r<.17?'shore_rock_large':r<.36?'shore_rock_small':'shore_grass';if(!artOK(k))continue;const o=(hsh(xx,y,52+dx*2+dy)-.5)*.5,cx=xx+.5+dx*.46+(dy?o:0),cy=y+.5+dy*.46+(dx?o:0);drawArt(k,cx,cy,0,k==='shore_rock_large'?.78:k==='shore_rock_small'?.68:.75)}}
+ for(let y=0;y<MH;y++)for(let xx=0;xx<MW;xx++){if(S.G[y][xx]!=='w'||(typeof isRiv==='function'&&isRiv(xx,y)))continue;for(const [dx,dy] of[[1,0],[0,1],[-1,0],[0,-1]]){if(gAt(xx+dx,y+dy)==='w')continue;const r=hsh(xx*3+dx+7,y*3+dy+7,51);if(r>.55)continue;const k=r<.17?'shore_rock_large':r<.36?'shore_rock_small':'shore_grass';if(!artOK(k))continue;const o=(hsh(xx,y,52+dx*2+dy)-.5)*.5,cx=xx+.5+dx*.46+(dy?o:0),cy=y+.5+dy*.46+(dx?o:0);drawArt(k,cx,cy,0,k==='shore_rock_large'?.78:k==='shore_rock_small'?.68:.75)}}
  // 무드: 숲 바닥 어둡게 · 넓은 색 변화 · 길 밝게 (한 경로로 칠해 이음새 없음)
  {const diam=(xx,y)=>{const a=iso(xx,y),b=iso(xx+1,y),c=iso(xx+1,y+1),d=iso(xx,y+1);x.moveTo(a[0],a[1]);x.lineTo(b[0],b[1]);x.lineTo(c[0],c[1]);x.lineTo(d[0],d[1]);x.closePath()};
   x.save();x.beginPath();for(let y=0;y<MH;y++)for(let xx=0;xx<MW;xx++){const o2=S.O[y][xx];if(S.G[y][xx]==='g'&&o2&&(o2.t==='tree'||o2.t==='bush'))diam(xx,y)}x.fillStyle='rgba(28,52,12,.20)';x.fill();
@@ -2052,6 +2052,49 @@ setInterval(fitAll,400);addEventListener('resize',()=>setTimeout(fitAll,50));
 /* 씨앗 설명: 새 성장 시간(실제 분)으로 */
 for(const k in CROPS){const C=CROPS[k],it=ITEM['seed_'+k];if(!it)continue;const mm=Math.round(cropStep(C)*C.days/60);const base=`약 ${mm}분 만에 ${C.fl?'피어요':'자라요'}`;
  it.desc=(C.fl?SEASON_KO_[C.sea]+' 꽃 · ':'')+base+(C.re?` · 수확 후 약 ${Math.max(1,Math.round(cropStep(C)*C.re/60))}분마다 다시 열려요`:'')+(C.water?' · 연못 가장자리에 심어요':'')+' · 물을 줘야 자라요'}
+/* ===== 하천: 농장 남쪽 2칸 강 · 연못과 이어짐 · 개간하면 다리 ===== */
+const RV_T=xx=>(xx>=14&&xx<=17)||(xx>=23&&xx<=26)||xx>=33?24:23;
+const RV_BR={s:9,se:29};
+STRUCT.bridge={w:1,d:2};
+ZONES.se.sign=[29,22];
+function inPond(xx,y){if(y<15||y>21||xx<18||xx>23)return false;const dx=(xx-20.7)/3.2,dy=(y-18.4)/3.6;return dx*dx+dy*dy<1}
+function isRiv(xx,y){return inMap(xx,y)&&S.G[y][xx]==='w'}
+function rvTiles(){const T=[[20,22],[21,22]];for(let xx=0;xx<MW;xx++){const t=RV_T(xx);T.push([xx,t],[xx,t+1])}return T}
+function rvLand(a,b){if(a<0||a>=MW){const t=RV_T(a<0?0:MW-1);return !(b===t||b===t+1)}if(b<0||b>=MH)return false;return S.G[b][a]!=='w'}
+function bankKey(xx,y){const L=rvLand,n=L(xx-1,y),e=L(xx,y-1),s=L(xx+1,y),w=L(xx,y+1);
+ if(n&&e)return'bank_in_ne';if(e&&s)return'bank_in_se';if(s&&w)return'bank_in_sw';if(w&&n)return'bank_in_nw';
+ if(n)return'bank_n';if(e)return'bank_e';if(s)return'bank_s';if(w)return'bank_w';
+ if(L(xx-1,y-1))return'bank_ne';if(L(xx+1,y-1))return'bank_se';if(L(xx+1,y+1))return'bank_sw';if(L(xx-1,y+1))return'bank_nw';
+ return seasonIdx()===3&&artOK('river_flow_winter')?'river_flow_winter':'river_flow'}
+function isBridge(o){return o&&(o.t==='bridge'||(o.t==='part'&&o.a&&o.a.t==='bridge'))}
+function rvApply(){if(!S||!S.G||S.G.length<MH)return;let ch=0;
+ if(!S.rv){for(const [xx,y] of rvTiles()){if(!inMap(xx,y)||S.G[y][xx]==='w')continue;const o=S.O[y][xx];
+   if(o){if(o.t==='part'||STRUCT[o.t])continue;if(!/^(tree|bush|weed|rock|wild|expand|flower)$/.test(o.t)&&ITEM[o.t])give(o.t)}
+   const c=S.C[y]&&S.C[y][xx];if(c&&ITEM['seed_'+c.k])give('seed_'+c.k);
+   S.O[y][xx]=null;if(S.C[y])S.C[y][xx]=null;delete S.wet[y*MW+xx];S.G[y][xx]='w'}
+  const q=S.O[22]&&S.O[22][21];if(q&&q.t==='expand'&&q.z==='se')S.O[22][21]=null;
+  const P=S.pl;if(P&&S.G[Math.floor(P.y)]&&S.G[Math.floor(P.y)][Math.floor(P.x)]==='w'){P.x=9.5;P.y=20.5}
+  S.rv=1;ch=1}
+ for(const z in RV_BR){if(!S.land||!S.land[z])continue;const X=RV_BR[z],Y=RV_T(X);if(isBridge(S.O[Y][X]))continue;
+  const o={t:'bridge',x:X,y:Y,w:1,d:2};S.O[Y][X]=o;S.O[Y+1][X]={t:'part',a:o};S.C[Y][X]=S.C[Y+1][X]=null;
+  for(const [a,b] of[[X,Y-1],[X,Y+2],[X-1,Y-1],[X+1,Y-1],[X-1,Y+2],[X+1,Y+2]]){const q=inMap(a,b)&&S.O[b][a];if(q&&/^(tree|bush|weed|rock|wild)$/.test(q.t))S.O[b][a]=null}ch=1}
+ if(ch){GD=1;try{save()}catch(e){}}}
+(function(){const _e=ensureLand;ensureLand=function(){if(!S||!S.G)return _e();const se=ZONES.se,hide=!(S.land&&S.land.e);if(hide)delete ZONES.se;try{_e()}finally{if(hide)ZONES.se=se}rvApply()}})();
+/* 그리기: 물가 타일 · 흐르는 물 · 다리(바닥층) */
+(function(){const _g=drawGroundStatic;drawGroundStatic=function(xa,xb,ya,yb){_g(xa,xb,ya,yb);if(!artOK('river_flow'))return;
+ for(let y=0;y<MH;y++)for(let xx=0;xx<MW;xx++)if(isRiv(xx,y))drawArt(bankKey(xx,y),xx,y);
+ if(artOK('lily_1'))for(let y=0;y<MH;y++)for(let xx=0;xx<MW;xx++){if(!inPond(xx,y)||S.C[y][xx]||isReed(xx,y)||!/^river_flow/.test(bankKey(xx,y))||vnz(xx/2.2,y/2.2,41)<=.5)continue;const n=hsh(xx,y,3)<.5?2:1;for(let q=0;q<n;q++){const v=hsh(xx,y,6+q*5),k=v<.1?'lily_4':'lily_'+(1+Math.floor(v*3));drawArt(k,xx+.25+hsh(xx,y,4+q)*.5,y+.25+hsh(xx,y,5+q)*.5,0,.5+hsh(xx,y,7+q)*.12)}}
+ const wn=seasonIdx()===3;for(let y=0;y<MH;y++)for(let xx=0;xx<MW;xx++){const o=S.O[y][xx];if(o&&o.t==='bridge'){const k=wn&&artOK('bridge_ew_winter')?'bridge_ew_winter':'bridge_ew';if(artOK(k))drawArt(k,o.x+1,o.y+2)}}}})();
+/* 기존 연못 장식은 연못에만 */
+(function(){const _r=isReed;isReed=function(a,b){if(isBridge(S&&S.O[b]&&S.O[b][a]))return false;return _r(a,b)}})();
+pondBehind=function(X,Y){for(let j=0;j<=3;j++)for(let i=0;i<=3;i++){if(!i&&!j)continue;if(gAt(X-i,Y-j)==='w'&&inPond(X-i,Y-j))return true}return false};
+treeFade=function(X,Y){let w=0;for(let j=0;j<=3;j++)for(let i=0;i<=3;i++){if(!i&&!j)continue;if(gAt(X-i,Y-j)==='w'&&inPond(X-i,Y-j)){w=1;break}}const P=S.pl,d=Math.hypot(P.x-(X+.5),P.y-(Y+.5));if(d<2.4&&P.x+P.y<X+Y+.6)return .45;return w?.5:1};
+/* 다리: 걸어서 건너요 */
+(function(){const _s=solidAt;solidAt=function(tx,ty){if(inMap(tx,ty)&&isBridge(S.O[ty][tx]))return false;return _s(tx,ty)}})();
+(function(){const _d=decide;decide=function(){const T=S&&target&&target();if(T&&isBridge(S.O[T[1]][T[0]]))return null;return _d()}})();
+(function(){const _o=drawObj;drawObj=function(o,t){if(o.t==='bridge')return;return _o(o,t)}})();
+if(window.__f)Object.assign(window.__f,{rvApply,bankKey,RV_T,tapAdd,solidAt:(a,b)=>solidAt(a,b)});
+(function(){const _w=isWalk;isWalk=function(tx,ty){if(inMap(tx,ty)&&isBridge(S.O[ty][tx]))return true;return _w(tx,ty)}})();
 })();
 
 </script>

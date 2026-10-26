@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793009041";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793009571";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -1173,7 +1173,7 @@ function drawObj(o,t){const X=o.x,Y=o.y;if(o.t==='ftree'){const st=ftStage(o),k=
 /* 작물 */
 const LFL={};
 function drawCrop(c,X,Y,t){const C=CROPS[c.k],p=iso(X+.5,Y+.55,.1),pr=Math.min(1,c.age/C.days),ripe=c.age>=C.days,sw=Math.sin(t*2+X+Y)*.05;
- if(artOK(c.k+'_0')){const st=ripe?3:pr<.5?1:2,key=artOK(c.k+'_'+st)?c.k+'_'+st:c.k+'_0';drawArt(key,X+.5,Y+.5,.1,st===1?1.5:st===2?1.35:1.25);if(ripe){const s=iso(X+.5,Y+.5,1.2+Math.sin(t*3+X)*.06);x.fillStyle='#fff';x.beginPath();x.arc(s[0]+TW*.2,s[1],2.2*DPR,0,7);x.fill()}return}
+ if(artOK(c.k+'_0')){const st=ripe?3:pr<.5?1:2,key=artOK(c.k+'_'+st)?c.k+'_'+st:c.k+'_0';drawArt(key,X+.5,Y+.5,.1,st===1?1.5:st===2?1.35:1.25);return}
  if(c.age===0){x.fillStyle='#4a2a14';for(const [a,b] of[[-.08,0],[.06,.03],[0,-.04]]){x.beginPath();x.arc(p[0]+a*TW,p[1]+b*TW,1.8*DPR,0,7);x.fill()}return}
  shadow(X+.5,Y+.6,.22*(.5+pr),.1,.18);const n=ripe?6:2+Math.round(pr*4),hh=TW*(.14+pr*.34);
  for(let i=0;i<n;i++){const a=-1.15+i*2.3/(n-1||1)+sw,lx=p[0]+Math.sin(a)*hh*.42,ly=p[1]-hh*.5-Math.cos(a)*hh*.25;x.fillStyle=i%2?C.lf:LFL[C.lf]||(LFL[C.lf]=sh(C.lf,1.15));x.strokeStyle=OLS;x.lineWidth=1.1*DPR;x.beginPath();x.ellipse(lx,ly,TW*.055*(.7+pr*.5),hh*.5,a*.8,0,7);x.fill();x.stroke();
@@ -2185,6 +2185,20 @@ function openTM(tx,ty,A,title){let m=$('tmenu');if(!m){m=document.createElement(
 /* 처음 한 번 알려주기 */
 (function(){let k='pfHintLP';try{if(localStorage.getItem(k))return}catch(_){}const iv=setInterval(()=>{if(state==='play'&&S){clearInterval(iv);setTimeout(()=>{toast('땅을 꾹 누르면 할 수 있는 일이 나와요');try{localStorage.setItem(k,1)}catch(_){}},2500)}},1000)})();
 if(window.__f)Object.assign(window.__f,{tileActs,openTM,mvStart,mvDo,MVget:()=>MV,scr:(tx,ty)=>{const r=cv.getBoundingClientRect(),p=iso(tx+.5,ty+.5);return[r.left+p[0]/DPR,r.top+p[1]/DPR]}});
+
+/* ===== 다 자란 작물: 둥실 말풍선 (작물 아이콘) ===== */
+const RBIC={};
+function rbIcon(k){if(RBIC[k])return RBIC[k];const c=document.createElement('canvas');c.width=c.height=96;drawIcon(c.getContext('2d'),k,96);if(typeof ICI!=='undefined'&&(ICI[k]||ICI[ICM&&ICM[k]]))RBIC[k]=c;return c}
+const RB_H={corn:2.35,grape:2.05,tomato:2.0,sunflower:2.2,fl_sunflower:2.2};
+function drawRipeBubbles(t){if(!S||state!=='play')return;for(let y=0;y<MH;y++)for(let xx=0;xx<MW;xx++){const c=S.C[y]&&S.C[y][xx];if(!c)continue;const C=CROPS[c.k];if(!C||c.age<C.days)continue;
+  const ph=t*2.6+xx*.7+y*.9,h=(RB_H[c.k]||1.75)+Math.sin(ph)*.07,p=iso(xx+.5,y+.5,h);if(p[0]<-TW||p[0]>W+TW||p[1]<-TW||p[1]>H+TW)continue;
+  const r=TW*.2*(1+Math.sin(ph*1.6)*.03),bx=p[0],by=p[1];
+  x.save();x.shadowColor='rgba(60,30,10,.35)';x.shadowBlur=4*DPR;x.shadowOffsetY=2*DPR;
+  x.fillStyle='#fffaf0';x.strokeStyle='#5a2e12';x.lineWidth=2.2*DPR;x.lineJoin='round';
+  x.beginPath();x.arc(bx,by,r,Math.PI*.62,Math.PI*.38+Math.PI*2);x.lineTo(bx,by+r*1.45);x.closePath();x.fill();x.shadowColor='transparent';x.stroke();
+  x.globalAlpha=.55+.45*Math.sin(ph*1.6);x.strokeStyle='#ffd23f';x.lineWidth=2*DPR;x.beginPath();x.arc(bx,by,r+3.5*DPR,0,7);x.stroke();x.globalAlpha=1;
+  const ic=rbIcon(c.k),s=r*1.5;x.drawImage(ic,bx-s/2,by-s/2,s,s);x.restore()}}
+(function(){const _l=typeof landDeco==='function'?landDeco:null;landDeco=function(L,t){if(_l)_l(L,t);L.push([1e9,()=>drawRipeBubbles(t)])}})();
 })();
 
 </script>

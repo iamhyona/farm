@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792933200";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792933300";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -592,6 +592,60 @@ html body .phT .phT-c #phTgo{box-shadow:0 16px 0 16px #f6e9cc,0 -16px 16px 6px #
 .pv-rest{display:flex;flex-wrap:wrap;gap:4px}
 .pv-rest i{font-style:normal;font-size:11px;background:#fff;border:1px solid #e2c49a;border-radius:20px;padding:2px 7px;color:#5a2e12;white-space:nowrap}
 .pv2 .pi-time{white-space:nowrap}
+#hpWrap{position:absolute;inset:0;z-index:6;display:none}
+#hpWrap.show{display:block}
+#hpWrap .hp-bg{position:absolute;inset:0;background:rgba(30,16,8,.18)}
+.hp{position:absolute;left:10px;right:10px;top:54px;max-width:360px;margin:0 auto;background:#fbf0d8;border:3px solid #8a5a34;border-radius:16px;box-shadow:0 3px 0 #5a2e12,0 8px 20px rgba(0,0,0,.25);padding:12px 14px 14px;color:#5a2e12;display:flex;flex-direction:column;gap:8px;text-align:left;font-family:Paperlogy,sans-serif;animation:hpIn .18s ease-out}
+@keyframes hpIn{from{opacity:0;transform:translateY(-6px)}}
+.hp img{width:26px;height:26px;object-fit:contain;flex:0 0 26px}
+.hp .e{font-size:20px;width:26px;text-align:center;flex:0 0 26px}
+.hp-hd{display:flex;align-items:center;gap:8px}
+.hp-hd>b{font-size:18px;font-family:'Cafe24Surround',Paperlogy,sans-serif;flex:1}
+.hp-hd small{font-size:12px;color:#8a5a33}.hp-hd small b{font-size:16px;color:#5a2e12}
+.hp-bar{display:block;height:12px;border-radius:7px;background:#e6d2ad;box-shadow:inset 0 1px 2px rgba(90,46,18,.3);overflow:hidden}
+.hp-bar i{display:block;height:100%;border-radius:7px}
+.hp-bar.lv i{background:linear-gradient(90deg,#f0b84a,#f7d77a)}
+.hp-bar.en i{background:linear-gradient(90deg,#ffb52a,#ffe45a)}
+.hp-bar.sm{height:7px}
+.hp-sub{font-size:12px;font-weight:700;color:#b0701c;margin-top:4px;padding-top:8px;border-top:1.5px dashed #e0c9a0}
+.hp-sub span{font-weight:400;color:#9a7650;margin-left:4px}
+.hp-chips{display:flex;flex-wrap:wrap;gap:4px}
+.hp-chips i{font-style:normal;font-size:11.5px;background:#fff;border:1px solid #e2c49a;border-radius:20px;padding:2px 8px}
+.hp-sk{display:flex;flex-direction:column;gap:7px}
+.hp-r{display:grid;grid-template-columns:24px auto auto 1fr;align-items:center;column-gap:6px;row-gap:1px}
+.hp-r .e{font-size:16px;width:24px;flex:none;grid-row:1/3}
+.hp-r b{font-size:13px}.hp-r em{font-style:normal;font-size:12px;color:#c07a1c;font-weight:700}
+.hp-r small{grid-column:2/5;font-size:10.5px;color:#9a7650;line-height:1.3}
+.hp-rest{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.hp-rest div{display:flex;flex-direction:column;align-items:center;gap:2px;background:#fff8ea;border:1px solid #ecd9b8;border-radius:10px;padding:6px 0}
+.hp-rest span{font-size:19px}.hp-rest small{font-size:10.5px;white-space:nowrap}
+.hp-st{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.hp-st div{display:flex;flex-direction:column;align-items:center;gap:1px}
+.hp-st b{font-size:16px}.hp-st small{font-size:11px;color:#8a5a33}
+#screen .hud.hud2{gap:4px!important;align-items:stretch!important}
+#screen .hud.hud2 #stat{flex:1 1 0!important;flex-direction:column!important;justify-content:center!important;gap:4px!important;border-style:solid!important;border-width:9px 12px!important;border-image:url(art/ui2/hud_plate.png) 32 52 fill / 9px 12px stretch!important;padding:0 1px!important;min-width:0}
+#screen .hud.hud2 #stat>div{border:0!important;border-image:none!important;background:none!important;padding:0!important;margin:0!important;flex:0 0 auto!important;height:18px!important;gap:4px!important;min-width:0}
+#screen .hud.hud2 #stat>div>*{margin:0!important}
+#screen .hud.hud2 #stat .ic{width:18px!important;height:18px!important;flex:0 0 18px!important}
+#screen .hud.hud2 #stat .xb,#screen .hud.hud2 #stat .eb{height:12px!important;min-width:30px!important;flex:1 1 auto!important}
+#screen .hud.hud2 #stat .lv b,#screen .hud.hud2 #stat .en b#sEnT{font-size:12px!important;min-width:16px!important;text-align:center}
+#screen .hud.hud2 .hrec{flex:1.2 1 0!important;width:auto!important;height:auto!important;min-width:0!important;flex-direction:column!important;justify-content:center!important;gap:3px!important;border-width:9px 12px!important;border-image-width:9px 12px!important;padding:0 1px!important;cursor:default}
+#screen .hud.hud2 .hrec .r1{display:flex;justify-content:center;height:18px;align-items:center}
+#screen .hud.hud2 .hrec .r1 span{font-size:15px!important}
+#screen .hud.hud2 .hrec .r2{display:flex;justify-content:space-around;gap:0;height:16px;align-items:center;width:100%}
+#screen .hud.hud2 .hrec .r2 span{display:flex!important;align-items:center;gap:1px;font-size:0!important}
+#screen .hud.hud2 .hrec .r2 span::after{content:none!important;display:none!important}
+#screen .hud.hud2 .hrec .r2 img{width:14px;height:14px;object-fit:contain}
+#screen .hud.hud2 .hrec .r2 b{font-family:'Cafe24Surround',Paperlogy,sans-serif;font-weight:400;font-size:11px;color:#fffaf0;text-shadow:0 1.5px 0 #5a2e12,1.5px 0 0 #5a2e12,-1.5px 0 0 #5a2e12,0 -1.5px 0 #5a2e12}
+#screen .hud.hud2 .htodo{position:relative!important;left:auto!important;top:auto!important;flex-direction:column!important;gap:0!important;padding:0!important;background-color:transparent!important;flex:0 0 42px!important;width:42px!important;height:auto!important}
+#screen .hud.hud2 .htodo .tdi{display:block;width:24px;height:24px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='4' y='3' width='16' height='19' rx='3' fill='%23c9894f'/%3E%3Crect x='6' y='5' width='12' height='15' rx='1.5' fill='%23fffaf0'/%3E%3Cpath d='M8 9h8M8 12.5h8M8 16h5' stroke='%238a5a33' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat}
+#screen .hud.hud2 .htodo span{font-size:11px!important;line-height:1;margin-top:1px}
+#screen .hud.hud2 .htodo.done .tdi{filter:hue-rotate(60deg) saturate(1.3)}
+#screen .hud.hud2 .htodo.done span{color:#c8f59a!important}
+#screen .hud.hud2 #bPause{flex:0 0 42px!important;width:42px!important;height:auto!important}
+#screen .hud.hud2 #stat,#screen .hud.hud2 .hrec{max-width:250px!important}
+#screen .hud.hud2 .hrec .r2{justify-content:space-evenly!important}
+#screen .hud.hud2{justify-content:center!important}
 </style></head>
 
 <body>
@@ -1698,32 +1752,31 @@ const SKC={farm:'#7fc25a',home:'#d08a4a',hobby:'#5aaee0',make:'#e8b03a'};
 mindMul=function(){return 1};addMind=function(){};mindUI=function(){};
 function nextUnl(){const lv=S.lv||1;if(lv>=LVMAX)return null;for(let l=lv+1;l<=LVMAX;l++){const L=(LVUNL[l]||[]).map(k=>ITEM[k]?ITEM[k].n:(ITEM['seed_'+k]?ITEM['seed_'+k].n.replace(/ ?씨앗$/,''):k));
  if(typeof ZONES!=='undefined')for(const z in ZONES)if(ZONES[z].lv===l)L.push(ZONES[z].n+' 개간');if(L.length)return{l,L}}return null}
-function pvMenu(){ensureSk();const si=seasonIdx(),en=Math.round(S.en||0),ic=k=>`<img src="art/ic/${k}.png" alt="">`,D=S.daily&&S.daily.L||[],dn=D.filter(v=>v.done).length;
- const tot=Object.values(S.sk).reduce((a,b)=>a+b,0)||1,need=xpNeed(S.lv),p=S.lv>=LVMAX?100:Math.min(100,S.xp/need*100);
- const seg=Object.keys(SKN).map(k=>`<i style="width:${(S.sk[k]/tot*p).toFixed(2)}%;background:${SKC[k]}"></i>`).join('');
- const nu=nextUnl();
- const sk=Object.keys(SKN).map(k=>{const s=skLv(S.sk[k]);return`<div><span>${SKN[k][0]}</span><b><i class="pv-dot" style="background:${SKC[k]}"></i>${SKN[k][1]} <em>Lv ${s.l}</em></b><i class="pi-bar"><i style="width:${Math.round(s.cur/s.need*100)}%;background:${SKC[k]}"></i></i><small>${s.l>1?SKP[k](s.l):'Lv 2부터 '+SKP[k](2)}</small></div>`}).join('');
- return `<div class="pinfo pv2">
- <div class="pi-top">${ic('season_'+SEASONS[si])}<div class="pi-day"><b>${SEASON_KO[si]} ${((S.day-1)%28)+1}일</b><small>${S.day}일차 · 마감까지 약 ${fmtLeft(Math.max(0,1440-S.min)*MIN_SEC)}</small></div><b class="pi-time">${fmtAt(0)}</b></div>
- <div class="pv-sec" id="pvToday"><div class="pv-h">오늘<span>자고 나면 새로 시작</span></div><div class="pv-box">
-  <div class="pv-row">${ic('hud_energy')}<b class="pv-k">힘</b><span class="pi-bar"><i style="width:${Math.min(100,en)}%"></i></span><b class="pv-v">${en}<small>/100</small></b></div>
-  <small class="pv-note">일할 때 줄고,<br>쉬면 차요</small><span class="pv-rest"><i>😴 자기</i><i>🍲 먹기</i><i>🪑 앉아 쉬기</i><i>🔥 불멍</i><i>💧 물멍</i></span>
-  <div class="pv-row"><span class="pv-e">📒</span><b class="pv-k">할 일</b><span class="pv-dots">${D.map(v=>`<i class="${v.done?'on':''}"></i>`).join('')}</span><b class="pv-v">${dn}/${D.length} 완료</b></div>
-  <small class="pv-note">${S.daily&&S.daily.bonus?'오늘 할 일 모두 완료! 보너스를 받았어요':'3개를 모두 하면 보너스 +60G · 경험치 +10'}</small>
- </div></div>
- <div class="pv-sec" id="pvGrow"><div class="pv-h">성장<span>계속 쌓여요</span></div><div class="pv-box">
-  <div class="pv-lv">${ic('hud_level')}<b class="pv-ln">Lv ${S.lv}</b><div class="pv-lvr"><span class="pv-seg">${seg}</span><small>${S.lv>=LVMAX?'최고 레벨이에요':`경험치 ${S.xp} / ${need}`}</small></div></div>
-  <div class="pv-unl">${nu?`<b>🔓 Lv ${nu.l}에 열려요</b><span>${nu.L.map(n=>`<i>${n}</i>`).join('')}</span>`:'<b>모든 해금 완료!</b>'}</div>
-  <small class="pv-note">아래 네 가지 솜씨에서 얻은 경험치가 모두 농장 Lv에 쌓여요</small>
-  <div class="pi-sk">${sk}</div>
- </div></div>
- <div class="pv-sec"><div class="pv-h">기록<span>지금까지</span></div><div class="pi-grid"><div>${ic('sum_harvest')}<b>${S.st.hv}</b><small>수확</small></div><div>${ic('sum_earn')}<b>${S.st.earn.toLocaleString()}</b><small>번 돈</small></div><div>${ic('item_chicken')}<b>${S.ck.length}</b><small>닭</small></div></div></div>
- <div class="pv-flow">⚡ 힘을 써서 일하면 → 솜씨 경험치 → ⭐ 농장 Lv<br>📒 할 일 3개를 모두 하면 → 보너스 +60G</div>
-</div>`}
-(function(){const _mn=menu;menu=function(on,sec){_mn(on);if(on&&S&&state==='play'){$('pauseInfo').innerHTML=pvMenu();if(sec){const e=$(sec),o=$('ovPause');if(e&&o)setTimeout(()=>{if(sec==='pvToday')o.scrollTo({top:0,behavior:'smooth'});else e.scrollIntoView({block:'start',behavior:'smooth'})},60)}}}})();
-/* 상단 HUD: ⭐ 성장 · ⚡ 오늘 — 누르면 메뉴의 해당 구역 */
-(function(){const st=$('stat');if(!st)return;const en=st.querySelector('.en'),lv=st.querySelector('.lv');
- if(lv)lv.addEventListener('click',()=>{if(S&&state==='play'&&!paused)menu(true,'pvGrow')});if(en)en.addEventListener('click',()=>{if(S&&state==='play'&&!paused){menu(true);const o=$('ovPause');if(o)o.scrollTop=0}})})();
+/* 설정 메뉴: 날짜·시간만 (정보는 상단 아이콘 창으로) */
+function pvMenu(){const si=seasonIdx(),ic=k=>`<img src="art/ic/${k}.png" alt="">`;
+ return `<div class="pinfo pv2"><div class="pi-top" style="border:0;padding:0">${ic('season_'+SEASONS[si])}<div class="pi-day"><b>${SEASON_KO[si]} ${((S.day-1)%28)+1}일</b><small>${S.day}일차 · 마감까지 약 ${fmtLeft(Math.max(0,1440-S.min)*MIN_SEC)}</small></div><b class="pi-time">${fmtAt(0)}</b></div></div>`}
+(function(){const _mn=menu;menu=function(on){hpClose();_mn(on);if(on&&S&&state==='play')$('pauseInfo').innerHTML=pvMenu()}})();
+/* ===== 상단 아이콘 창: ⭐ 농장 Lv · ⚡ 힘 · 🪙 돈 ===== */
+let HP=null;
+(function(){const d=document.createElement('div');d.id='hpWrap';d.innerHTML='<div class="hp-bg"></div><div class="hp" id="hpBox"></div>';$('screen').appendChild(d);
+ d.querySelector('.hp-bg').addEventListener('click',()=>hpClose());d.addEventListener('pointerdown',e=>e.stopPropagation())})();
+function hpClose(){if(!HP)return;HP=null;$('hpWrap').classList.remove('show');if(S&&state==='play'&&!$('ovPanel').classList.contains('show')&&!$('ovPause').classList.contains('show'))paused=false}
+function hpOpen(k,re){if(!S||state!=='play')return;if(!re){if(HP===k)return hpClose();if(paused&&!HP)return}ensureSk();HP=k;paused=true;
+ const ic=n=>`<img src="art/ic/${n}.png" alt="">`;let h='';
+ if(k==='lv'){const need=xpNeed(S.lv),mx=S.lv>=LVMAX,p=mx?100:Math.min(100,S.xp/need*100),nu=nextUnl();
+  h=`<div class="hp-hd">${ic('hud_level')}<b>농장 Lv ${S.lv}</b><small>${mx?'최고 레벨':`${S.xp} / ${need}`}</small></div><span class="hp-bar lv"><i style="width:${p}%"></i></span>`
+  +(nu?`<div class="hp-sub">🔓 Lv ${nu.l}에 열려요</div><div class="hp-chips">${nu.L.map(n=>`<i>${n}</i>`).join('')}</div>`:'')
+  +`<div class="hp-sub">솜씨 <span>경험치가 모여 농장 Lv이 올라요</span></div><div class="hp-sk">`+Object.keys(SKN).map(s=>{const v=skLv(S.sk[s]);return`<div class="hp-r"><span class="e">${SKN[s][0]}</span><b>${SKN[s][1]}</b><em>Lv ${v.l}</em><span class="hp-bar sm"><i style="width:${Math.round(v.cur/v.need*100)}%;background:${SKC[s]}"></i></span><small>${v.l>1?SKP[s](v.l):'Lv 2 · '+SKP[s](2)}</small></div>`}).join('')+'</div>'}
+ else if(k==='en'){const en=Math.round(S.en||0);
+  h=`<div class="hp-hd">${ic('hud_energy')}<b>힘</b><small><b>${en}</b> / ${EN_MAX}</small></div><span class="hp-bar en"><i style="width:${en/EN_MAX*100}%"></i></span>`
+  +`<div class="hp-sub">쉬면 차요</div><div class="hp-rest">`+[['😴','자기'],['🍲','먹기'],['🪑','앉아 쉬기'],['🔥','불멍'],['💧','물멍']].map(([e,n])=>`<div><span>${e}</span><small>${n}</small></div>`).join('')+'</div>'}
+ else if(k==='gold'){
+  h=`<div class="hp-hd"><span class="e">🪙</span><b>${S.gold.toLocaleString()}G</b><small>가진 돈</small></div><div class="hp-sub">지금까지</div><div class="hp-st">`
+  +`<div>${ic('sum_harvest')}<b>${S.st.hv}</b><small>수확</small></div><div>${ic('sum_earn')}<b>${S.st.earn.toLocaleString()}</b><small>번 돈</small></div><div>${ic('item_chicken')}<b>${S.ck.length}</b><small>닭</small></div></div>`}
+ $('hpBox').className='hp hp-'+k;$('hpBox').innerHTML=h;{const r=document.querySelector('#screen .hud').getBoundingClientRect(),q=$('screen').getBoundingClientRect();$('hpBox').style.top=(r.bottom-q.top+6)+'px'}$('hpWrap').classList.add('show');if(!re&&sfx.tap)sfx.tap()}
+(function(){const st=$('stat'),g=$('hGold')&&$('hGold').closest('.box');const on=(e,k)=>{if(!e)return;e.style.cursor='pointer';e.addEventListener('click',ev=>{ev.stopPropagation();hpOpen(k)})};
+ if(st){on(st.querySelector('.lv'),'lv');on(st.querySelector('.en'),'en')}})();
+setInterval(()=>{if(HP&&S&&state==='play')hpOpen(HP,1)},1000);
 if(window.__f)Object.assign(window.__f,{pvMenu,nextUnl});
 /* ===== 쉼: 자기·먹기·앉아 쉬기·불멍·물멍 → ⚡ 힘 회복 (경험치 없음) ===== */
 ITEM.campfire={n:'모닥불',price:80,place:1,deco:1,desc:'옆에 앉아 불멍 · 힘이 1.5배 빨리 차요'};
@@ -1746,6 +1799,17 @@ if(window.__f)Object.assign(window.__f,{restAt,nearWater});
 /* 안내 문장: 쉼표 뒤에서 줄바꿈 */
 (function(){const _t=toast;toast=function(t){return _t(String(t).replace(/, /g,',\n'))}})();
 (function(){const _p=tipT;tipT=function(t){return _p(String(t).replace(/, /g,',\n'))}})();
+/* ===== 상단 HUD 정리: [⭐레벨/⚡힘] [돈/기록] [할 일] [설정] ===== */
+(function(){const h=document.querySelector('#screen .hud');if(!h)return;h.classList.add('hud2');
+ const g=$('hGold'),gb=g&&g.closest('.box');if(gb){const pl=document.createElement('div');pl.className='box gold hplate hrec';
+  pl.innerHTML='<div class="r1"></div><div class="r2"><span><img src="art/ic/sum_harvest.png" alt=""><b id="rHv">0</b></span><span><img src="art/ic/sum_earn.png" alt=""><b id="rEarn">0</b></span><span><img src="art/ic/item_chicken.png" alt=""><b id="rCk">0</b></span></div>';
+  pl.querySelector('.r1').appendChild(g);gb.replaceWith(pl)}
+ const t=$('bTodo');if(t){t.className='box btnb htodo';t.innerHTML='<i class="tdi"></i><span id="todoT">0/3</span>';h.insertBefore(t,$('bPause'))}})();
+function fmtK(n){n=n||0;return n>=100000?Math.floor(n/1000)+'k':n>=10000?(n/1000).toFixed(1).replace(/\.0$/,'')+'k':n.toLocaleString()}
+function recUI(){if(!S||!$('rHv'))return;$('rHv').textContent=fmtK(S.st.hv);$('rEarn').textContent=fmtK(S.st.earn);$('rCk').textContent=S.ck?S.ck.length:0}
+(function(){const _h=hud;hud=function(){_h();recUI()}})();
+todoUI=function(){const b=$('bTodo');if(!b||!S||!S.daily)return;const L=S.daily.L,d=L.filter(v=>v.done).length;$('todoT').textContent=`${d}/${L.length}`;b.classList.toggle('done',d===L.length)};
+setInterval(()=>{if(S&&state==='play')recUI()},1000);
 })();
 
 </script>

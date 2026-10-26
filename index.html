@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792933800";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792933900";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -706,6 +706,20 @@ html body .phT .phT-c .trow span{font-size:13.5px!important}
 #screen .todoL .ti b,.todoL .ti b{flex:0 0 auto!important;white-space:nowrap!important;font-size:14px!important}
 #screen .todoL .ti em,.todoL .ti em{flex:0 0 auto!important;white-space:nowrap!important;display:inline-flex!important;align-items:center!important;gap:2px;margin-left:4px!important;font-size:14px!important;letter-spacing:-.02em!important}
 #screen .todoL .ti em *,.todoL .ti em *{flex:0 0 auto}
+/* 작물 정보 카드 */
+#cropCard{position:absolute;left:50%;top:15%;transform:translate(-50%,-6px);z-index:5;display:flex;align-items:center;gap:8px;min-width:210px;max-width:calc(100% - 32px);padding:8px 12px 8px 8px;background:#fbf0d8;border:3px solid #8a5a34;border-radius:14px;box-shadow:0 3px 0 #5a2e12;color:#5a2e12;pointer-events:none;opacity:0;transition:opacity .2s,transform .2s;font-family:'Cafe24Surround',Paperlogy,sans-serif}
+#cropCard.show{opacity:1;transform:translate(-50%,0)}
+#cropCard canvas{width:36px;height:36px;flex:0 0 36px}
+#cropCard .cc-m{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+#cropCard .cc-t{display:flex;align-items:center;gap:6px}
+#cropCard b{font-size:15px;font-weight:400;white-space:nowrap}
+#cropCard .cc-w{display:none;align-items:center;gap:2px;font-size:11px;color:#2f7fc4;background:#e3f1ff;border-radius:20px;padding:1px 7px 1px 3px;white-space:nowrap;font-family:Paperlogy,sans-serif;font-weight:700}
+#cropCard .cc-w img{width:14px;height:14px}
+#cropCard.dry .cc-w{display:inline-flex}
+#cropCard .cc-bar{display:block;height:9px;border-radius:6px;background:#e6d2ad;box-shadow:inset 0 1px 2px rgba(90,46,18,.3);overflow:hidden}
+#cropCard .cc-bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(#a8e06a,#5fae3a)}
+#cropCard.dry .cc-bar i{background:linear-gradient(#d8cba8,#b9a77c)}
+#cropCard small{font-size:12px;font-family:Paperlogy,sans-serif;color:#8a5a33;white-space:nowrap}
 </style></head>
 
 <body>
@@ -1199,7 +1213,7 @@ function decide(){if(!S)return null;const P=S.pl;
  if(cr&&sid==='hoe'&&g==='s'){if(S.carry)return{l:'여기엔 이미 작물이 있어요',ic:'hoe',dim:1,f:()=>toast('빈 밭을 눌러 옮겨 심어요')};return{l:'모종 들기',ic:'hoe',f:()=>{S.carry={...cr};S.C[ty][tx]=null;sfx.pluck();toast(CROPS[cr.k].n+'을 들었어요 · 옮길 빈 밭을 눌러요');save()}}}
  if(cr){const C=CROPS[cr.k];if(cr.age>=C.days){if(sid==='basket')return{l:'수확',ic:cr.k,f:()=>harvest(tx,ty)};return{l:'바구니로 수확해요',ic:'basket',dim:1,f:()=>toast('바구니를 들고 누르면 수확해요')}}
   if(!cr.w&&sid==='can')return{l:'물 주기',ic:'can',f:()=>{cr.w=1;sfx.water();splash(tx,ty);save()}};
-  {const L=growLeft(C.days-cr.age);return{l:`${C.n} 약 ${fmtLeft(L)} 뒤`,ic:'can',dim:1,f:()=>toast(`${C.n} · 약 ${fmtLeft(L)} 뒤 (${fmtAt(L)}쯤) 수확해요`+(cr.w?'':' · 물을 줘야 자라요'))}}}
+  {const L=growLeft(C.days-cr.age);return{l:`${C.n} 약 ${fmtLeft(L)} 뒤`,ic:'can',dim:1,f:()=>cropCard(C,cr,L)}}}
  if(g==='s'&&sid==='hoe'&&!cr){if(S.carry)return{l:'옮겨 심기',ic:'hoe',f:()=>{S.C[ty][tx]=S.carry;S.carry=null;sfx.plant();toast('옮겨 심었어요');save()}};return{l:'철거 도구로 밭을 메워요',ic:'remove',dim:1,f:()=>toast('밭을 없애려면 철거 도구를 들어요')}}
  if(g==='s'&&it.seed&&CROPS[it.seed].water)return{l:'연못에 심어요',ic:sid,dim:1,f:()=>toast(CROPS[it.seed].n+'은 연못 가장자리에 심어요')};
  if(g==='w'&&it.seed&&CROPS[it.seed].water)return{l:'심기',ic:sid,f:()=>{if(take(sid)){S.C[ty][tx]={k:it.seed,age:0,w:1};GD=1;sfx.plant();save()}}};
@@ -1901,6 +1915,12 @@ delete EMO.campfire;delete EMO.mat;
 (function(){const h=document.querySelector('#screen .hud');if(!h)return;const R=[['hud_harvest','rHv'],['hud_earn','rEarn'],['hud_chicken','rCk']];for(const [k,id] of R){const b=$(id),im=b&&b.previousElementSibling;if(im&&im.tagName==='IMG')im.src='art/hud/'+k+'.png'}})();
 /* 아침: 자란 작물 · 열린 작물 소리 */
 (function(){const snap=()=>{let g=0,r=0;for(let y=0;y<MH;y++)for(let x2=0;x2<MW;x2++){const c=S.C[y]&&S.C[y][x2];if(!c)continue;g+=c.age;if(c.age>=CROPS[c.k].days)r++}return[g,r]};const _d=dayPass;dayPass=function(...a){const b=S?snap():[0,0];const res=_d.apply(this,a);try{const n=snap();if(n[1]>b[1])setTimeout(()=>sfx.ripe&&sfx.ripe(),2200);else if(n[0]>b[0])setTimeout(()=>sfx.grow&&sfx.grow(),2200)}catch(e){}return res}})();
+/* 작물 정보 카드: 이름 · 자람 바 · 수확 시각 · 물 필요 */
+let CCT=0;
+function cropCard(C,cr,L){let el=$('cropCard');if(!el){el=document.createElement('div');el.id='cropCard';el.innerHTML='<canvas width="64" height="64"></canvas><div class="cc-m"><div class="cc-t"><b></b><span class="cc-w"><img src="art/hud/rest_water.png" alt="">물 필요</span></div><span class="cc-bar"><i></i></span><small></small></div>';$('screen').appendChild(el)}
+ const p=Math.max(.04,Math.min(1,cr.age/C.days));drawIcon(el.querySelector('canvas').getContext('2d'),cr.k,64);
+ el.querySelector('b').textContent=C.n;el.querySelector('.cc-bar i').style.width=(p*100)+'%';el.querySelector('small').textContent=fmtAt(L)+' 수확 · '+fmtLeft(L)+' 남음';
+ el.classList.toggle('dry',!cr.w);el.classList.remove('show');void el.offsetWidth;el.classList.add('show');clearTimeout(CCT);CCT=setTimeout(()=>el.classList.remove('show'),3200)}
 })();
 
 </script>

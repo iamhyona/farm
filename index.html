@@ -29,7 +29,7 @@
 #screen .hud.hud2 #stat .lv b,#screen .hud.hud2 #stat .en b#sEnT{width:auto!important;min-width:32px!important;flex:0 0 32px!important;white-space:nowrap;text-align:left!important}
 #screen .hud.hud2 #stat .lv b::before{content:'Lv';font-size:6.5px;margin-right:1px;letter-spacing:0;vertical-align:2px;opacity:.9}
 #screen #cropCard{width:max-content!important}#screen #cropCard .cc-bar{width:56px!important}#screen #cropCard .cc-m{flex:0 0 auto!important}
-</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793012976";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793013490";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -2371,6 +2371,22 @@ function bldAt(px,py){let best=null,bd=-1;for(let y=0;y<MH;y++)for(let xx=0;xx<M
  sfx.water=function(){if(!AC||!sound)return;try{const t=AC.currentTime,N=SC[wi++%SC.length];N.forEach((f,i)=>{soft(f,t+i*.09,.42,.028,'sine');soft(f*2,t+i*.09,.18,.006,'sine')});soft(420,t+.3,.16,.012,'sine',760)}catch(e){}};
  let lr=0;sfx.step=function(){if(!AC||!sound)return;try{const t=AC.currentTime;lr^=1;soft(lr?330:294,t,.11,.018,'sine',lr?250:220)}catch(e){}};
 })();
+
+/* ===== 상점 탭: 농작물 · 꽃 · 시설 · 나무 · 동물 · 꾸미기 ===== */
+const SHOPTABS=[['crop','농작물',/^SEEDS/],['flower','꽃',/^FLOWER/],['mach','시설',/^(MACHINE|TOOL)/],['tree','나무',/^ORCHARD/],['animal','동물',/^ANIMAL/],['deco','꾸미기',/^DECO/]];
+let SHOPTAB='crop';
+(function(){const _o=openShop;openShop=function(){_o.apply(this,arguments);try{shopTabs()}catch(e){}}})();if(window.__f)window.__f.openShop=()=>openShop();
+function shopTabs(){const P=$('pnL');if(!P)return;let cur=null;const G={};
+ for(const el of [...P.children]){if(el.classList.contains('hd')){const t=el.textContent.trim(),m=SHOPTABS.find(x=>x[2].test(t));cur=m?m[0]:cur;el.dataset.tab=cur;el.classList.add('st-hd');continue}if(cur){el.dataset.tab=cur;(G[cur]=G[cur]||0);G[cur]++}}
+ const bar=document.createElement('div');bar.className='shopTabs';bar.innerHTML=SHOPTABS.filter(t=>G[t[0]]).map(t=>`<button data-st="${t[0]}">${t[1]}</button>`).join('');P.insertBefore(bar,P.firstChild);
+ if(!G[SHOPTAB])SHOPTAB='crop';
+ const show=k=>{SHOPTAB=k;bar.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.st===k));for(const el of P.children)if(el.dataset.tab)el.style.display=el.dataset.tab===k?'':'none';const sc=P.closest('.pnl')||P;sc.scrollTop=0;P.scrollTop=0};
+ bar.addEventListener('click',e=>{const b=e.target.closest('button[data-st]');if(!b)return;e.stopPropagation();sfx.click&&sfx.click();show(b.dataset.st)});show(SHOPTAB)}
+(function(){const st=document.createElement('style');st.textContent=`
+#pnL .shopTabs{position:sticky;top:0;z-index:3;display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:4px 2px 8px;background:#fbf0d8;margin:0 0 4px}
+#pnL .shopTabs button{border:2px solid #c9a46a;background:#fff8ea;color:#8a5a33;border-radius:12px;padding:6px 0;font:400 13px 'Cafe24Surround',Paperlogy,sans-serif;cursor:pointer;box-shadow:0 2px 0 #c9a46a}
+#pnL .shopTabs button.on{background:#ffd56a;border-color:#8a5a34;color:#5a2e12;box-shadow:0 2px 0 #8a5a34}
+#pnL .st-hd{display:none!important}`;document.head.appendChild(st)})();
 })();
 
 </script>

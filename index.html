@@ -63,7 +63,7 @@
 #dock button{width:44px!important;height:44px!important;border-radius:50%!important;border-width:2px!important;box-shadow:0 2px 0 #5a2e12!important;flex:0 0 44px}
 #dock img{width:26px!important;height:26px!important}
 #dock button[data-k="set"]{width:36px!important;height:36px!important;flex-basis:36px;align-self:center;opacity:.92}#dock button[data-k="set"] img{width:20px!important;height:20px!important}
-</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793021769";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1]+location.hash)}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793021990";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1]+location.hash)}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -1252,7 +1252,7 @@ if(!moving&&drawPangIdle(x,S.ch,p[0],p[1],TW*1.2,t)){}else if(pangAnim(S.ch)){dr
 function drawChicken(c,t){const p=iso(c.x,c.y),b=c.mv?Math.abs(Math.sin(t*14+c.x))*TW*.05:0;shadow(c.x,c.y,.16,.07,.25);if(artOK('chicken_front')){const fr=c.fy+c.fx>-.2,k=fr||!artOK('chicken_back')?'chicken_front':'chicken_back',a=ART[k],dr=c.fx-c.fy>0?1:-1,fl=fr?dr>0:dr<0,s2=TW/ART_BASE;x.save();x.translate(p[0],p[1]-b);if(fl)x.scale(-1,1);x.drawImage(a.img,-a.ax*s2,-a.ay*s2,a.w*s2,a.h*s2);x.restore()}else drawChick(x,p[0],p[1]-TW*.16-b,TW*.15,c.fy+c.fx>-.2,c.fx-c.fy>0?1:-1);
  if(c.heart>0){const q=iso(c.x,c.y,1.2+(1-c.heart)*.8);x.globalAlpha=Math.min(1,c.heart*2);x.fillStyle='#ff5d8a';x.font=`${14*DPR}px sans-serif`;x.textAlign='center';x.fillText('♥',q[0],q[1]);x.globalAlpha=1}}
 /* 숲 (지도 밖까지 빽빽하게) */
-function outsideTrees(L){const [a0]=scr2w(0,0),[a1]=scr2w(W,H),[,b0]=scr2w(W,0),[,b1]=scr2w(0,H);for(let y=Math.floor(b0)-3;y<=Math.ceil(b1)+3;y++)for(let xx=Math.floor(a0)-3;xx<=Math.ceil(a1)+3;xx++){if(xx>=0&&y>=0&&xx<MW&&y<MH)continue;const v=hsh(xx,y,2);const fo=forestN(xx,y);if(fo<.5){if(fo>.36&&artOK('bush_'+seasonKey())){L.push([xx+y+.5,()=>drawArt('bush_'+seasonKey(),xx+.5,y+.5,0,.9)])}continue}L.push([xx+y+.5,()=>{shadow(xx+.55,y+.65,.55,.25,.3);const tk=treeKeys();if(tk.length)drawArt(treePick(v,tk[(v*tk.length*7|0)%tk.length]),xx+.5,y+.5,0,.9+v*.2);else drawSpr(treeSpr(v,v>.6),xx+.5,y+.62)}])}}
+function outsideTrees(L){const [a0]=scr2w(0,0),[a1]=scr2w(W,H),[,b0]=scr2w(W,0),[,b1]=scr2w(0,H);for(let y=Math.floor(b0)-3;y<=Math.ceil(b1)+3;y++)for(let xx=Math.floor(a0)-3;xx<=Math.ceil(a1)+3;xx++){if(xx>=0&&y>=0&&xx<MW&&y<MH)continue;if(inClear(xx,y))continue;const v=hsh(xx,y,2);const fo=forestN(xx,y);if(fo<.5){if(fo>.36&&artOK('bush_'+seasonKey())){L.push([xx+y+.5,()=>drawArt('bush_'+seasonKey(),xx+.5,y+.5,0,.9)])}continue}L.push([xx+y+.5,()=>{shadow(xx+.55,y+.65,.55,.25,.3);const tk=treeKeys();if(tk.length)drawArt(treePick(v,tk[(v*tk.length*7|0)%tk.length]),xx+.5,y+.5,0,.9+v*.2);else drawSpr(treeSpr(v,v>.6),xx+.5,y+.62)}])}}
 
 let nightA=0,clouds=[...Array(5)].map((_,i)=>({x:i*7,y:i*5+2,s:1+i%3*.5}));
 function render(t){if(!S)return;const P=S.pl,want=[(P.x-P.y)*TW/2,(P.x+P.y)*TH/2];if(!(typeof DRAGGING!=='undefined'&&DRAGGING)&&!window.CAMFREE){CX+=(want[0]-CX)*.18;CY+=(want[1]-CY)*.18}
@@ -2731,6 +2731,20 @@ let BMV=null;
  const go=()=>{const b=document.querySelector('#dock button[data-k="set"]');if(!b)return false;const n=document.createElement('button');n.id='bSetTop';n.setAttribute('aria-label','설정');n.innerHTML=b.innerHTML;n.querySelectorAll('span').forEach(e=>e.remove());b.remove();$('field').appendChild(n);
   n.addEventListener('pointerdown',e=>e.stopPropagation());n.addEventListener('click',e=>{e.stopPropagation();if(state!=='play')return;sfx.click&&sfx.click();closeTM();try{menu(true)}catch(_){$('bPause').click()}});return true};
  if(!go()){const iv=setInterval(()=>{if(go())clearInterval(iv)},300)}})();
+
+/* 식당·트럭: 숲 안쪽으로 밀고 둘레 나무 정리 */
+const NAT=/^(tree|bush|wild|weed|rock|stump|flower)$/;
+function bldPut0(t,w,d,C){const okc=(x2,y)=>{if(!inMap(x2,y))return false;if(S.G[y][x2]!=='g')return false;if(S.C[y]&&S.C[y][x2])return false;const o=S.O[y][x2];if(o&&!NAT.test(o.t))return false;return !(Math.floor(S.pl.x)===x2&&Math.floor(S.pl.y)===y)};
+ for(const [X,Y] of C){let ok=true;for(let j=0;j<d&&ok;j++)for(let i=0;i<w;i++)if(!okc(X+i,Y+j)){ok=false;break}if(!ok)continue;const o={t,x:X,y:Y,w,d};for(let j=0;j<d;j++)for(let i=0;i<w;i++)S.O[Y+j][X+i]=(i||j)?{t:'part',a:o}:o;return o}return null}
+function clearRing(o){for(let y=o.y-1;y<=o.y+o.d;y++)for(let x2=o.x-1;x2<=o.x+o.w;x2++){if(!inMap(x2,y))continue;const q=S.O[y][x2];if(q&&/^(tree|bush|rock|stump)$/.test(q.t))S.O[y][x2]=null}}
+function lay9(){if(!S||S.lay9||!S.lay8)return;const r=findBld('rest'),tr=findBld('truck');const lift=o=>{if(!o)return;for(let j=0;j<o.d;j++)for(let i=0;i<o.w;i++)if(S.O[o.y+j][o.x+i]&&(S.O[o.y+j][o.x+i]===o||S.O[o.y+j][o.x+i].a===o))S.O[o.y+j][o.x+i]=null};
+ let R=r;if(r&&r.x>0){lift(r);const C=[];for(const dy of [0,-1,1,-2,2])C.push([0,r.y+dy]);for(const dy of [0,-1,1])C.push([1,r.y+dy]);R=bldPut0('rest',3,4,C);if(!R){R=bldPut0('rest',3,4,[[r.x,r.y]])}}
+ if(tr&&R&&tr.x>0){lift(tr);const C=[];for(const dy of [4,5,3,6])C.push([0,R.y+dy]);for(const dy of [4,5])C.push([1,R.y+dy]);if(!bldPut0('truck',2,3,C))bldPut0('truck',2,3,[[tr.x,tr.y]])}
+ for(const o of [findBld('rest'),findBld('truck')])if(o)clearRing(o);S.lay9=1;GD=1}
+(function(){const _e=ensureAlpha;ensureAlpha=function(){_e();try{lay9()}catch(e){console.warn(e)}}})();
+let CLZ=null,CLZG=-1;
+function clearZones(){const L=[];for(const t of ['rest','truck']){const o=findBld(t);if(o)L.push([o.x-2.5,o.y-1.5,o.x+o.w+.5,o.y+o.d+.5])}return L}
+let CZ=[],CZT=0;function inClear(xx,y){const n=performance.now();if(n-CZT>500){CZT=n;CZ=S?clearZones():[]}for(const z of CZ)if(xx+.5>=z[0]&&xx+.5<=z[2]&&y+.5>=z[1]&&y+.5<=z[3])return true;return false}
 })();
 
 </script>

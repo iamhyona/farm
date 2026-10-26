@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792925000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792926000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -507,6 +507,8 @@ html body .phT .phT-c #phTgo{box-shadow:0 16px 0 16px #f6e9cc,0 -16px 16px 6px #
 .sgrid b{position:absolute;right:6px;top:4px;font-size:12px;color:#5a2e12}
 #screen .inv button.sbag::after{content:'';position:absolute;left:-3px;bottom:-3px;width:18px;height:18px;border-radius:50%;background:#fff4c8 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 4l3 3 3-3' fill='none' stroke='%235a2e12' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") center/12px no-repeat;border:2px solid #8a5a34}
 .pi-day small{white-space:nowrap}
+#screen .inv{gap:4px!important;padding-left:2px!important;padding-right:2px!important}#screen .inv button{width:52px!important;height:52px!important;flex:0 0 52px!important;border-width:10px!important}#screen .inv button canvas{width:34px!important;height:34px!important}
+#screen .inv{left:6px!important;right:6px!important;gap:3px!important;justify-content:flex-start}#screen .inv button{width:48px!important;height:48px!important;flex:0 0 48px!important;margin:0!important;border-width:9px!important;border-image-width:9px!important}#screen .inv button canvas{width:32px!important;height:32px!important}
 
 </style></head>
 
@@ -549,7 +551,7 @@ html body .phT .phT-c #phTgo{box-shadow:0 16px 0 16px #f6e9cc,0 -16px 16px 6px #
       <div class="msg" id="pauseInfo"></div>
       <button class="btn" id="bResume" hidden>계속하기</button>
       <button class="btn" id="bSleep2">집에 가서 자기</button>
-      <div class="sndrow"><button class="btn" id="bBgm">배경음 끄기</button><button class="btn" id="bSfx">효과음 끄기</button></div>
+      <div class="sndrow"><button class="btn" id="bBgm">자연 소리 끄기</button><button class="btn" id="bSfx">효과음 끄기</button></div>
       <button class="btn" id="bChar">캐릭터 바꾸기</button>
       <button class="btn" id="bMenu">홈 화면 가기</button>
       <button class="x" id="bPauseX" aria-label="닫기">✕</button>
@@ -651,7 +653,7 @@ const CROPS={
  watermelon:{n:'수박',days:8,seed:80,sell:360,c:'#3f8a2e',c2:'#e8382a',lf:'#4f9a3a'},
  minari:{n:'미나리',days:3,seed:20,sell:30,c:'#5fae45',c2:'#a8d870',lf:'#4f9a3a',re:2,water:1},
  lotus:{n:'연근',days:7,seed:70,sell:280,c:'#f0c8c8',c2:'#ff9ab0',lf:'#3f8a2e',water:1}};
-const ITEM={hand:{n:'이동',tool:1,desc:'누른 곳으로 걸어가요 · 상점·게시판·출하함 열기'},can:{n:'물뿌리개',tool:1,desc:'마른 밭과 작물에 물을 줘요 · 쓸면 여러 칸'},basket:{n:'바구니',tool:1,desc:'다 자란 작물과 열매를 거둬요 · 쓸면 여러 칸'},hoe:{n:'괭이',tool:1,desc:'풀밭은 갈고, 빈 밭은 메우고, 작물은 옮겨 심어요 · 쓸면 여러 칸'},egg:{n:'달걀',sell:50},gegg:{n:'황금달걀',sell:220},
+const ITEM={hand:{n:'이동',tool:1,desc:'누른 곳으로 걸어가요 · 상점·게시판·출하함 열기'},can:{n:'물뿌리개',tool:1,desc:'마른 밭과 작물에 물을 줘요 · 쓸면 여러 칸'},remove:{n:'철거',tool:1,desc:'밭을 풀밭으로 되돌리고, 놓은 물건을 거둬요 · 쓸면 여러 칸'},basket:{n:'바구니',tool:1,desc:'다 자란 작물과 열매를 거둬요 · 쓸면 여러 칸'},hoe:{n:'괭이',tool:1,desc:'풀밭을 갈고, 자라는 작물을 옮겨 심어요 · 쓸면 여러 칸'},egg:{n:'달걀',sell:50},gegg:{n:'황금달걀',sell:220},
  bed:{n:'꽃 화단',price:60,place:1,deco:1,desc:'꽃이 가득한 나무 화단'},crate:{n:'나무 상자',price:30,place:1,deco:1,desc:'수확물을 담아 두는 상자'},barrel:{n:'나무통',price:40,place:1,deco:1,desc:'튼튼한 나무통'},hay:{n:'건초더미',price:30,place:1,deco:1,desc:'폭신한 건초'},scare:{n:'허수아비',price:120,place:1,deco:1,desc:'밭을 지켜 주는 친구'},
  sap_apple:{n:'사과 묘목',price:300,place:1,tree:'apple',desc:'풀밭에 심어요 · 열흘쯤 지나 열매가 열려요'},sap_peach:{n:'복숭아 묘목',price:400,place:1,tree:'peach',desc:'풀밭에 심어요 · 열흘쯤 지나 열매가 열려요'},sap_persimmon:{n:'감 묘목',price:350,place:1,tree:'persimmon',desc:'풀밭에 심어요 · 감은 곶감으로 만들 수 있어요'},
  apple:{n:'사과',sell:70,food:20},peach:{n:'복숭아',sell:90,food:25},persimmon:{n:'감',sell:60,food:15},gotgam:{n:'곶감',sell:420,food:40},
@@ -954,6 +956,7 @@ const objAt=(tx,ty)=>{const o=S.O[ty][tx];return o&&o.t==='part'?o.a:o};
 function decide(){if(!S)return null;const P=S.pl;
  for(const c of S.ck){const d=Math.hypot(c.x-(P.x+P.fx*.6),c.y-(P.y+P.fy*.6));if(d<.55)return{l:c.pet?'닭':'쓰다듬기',ic:'pet',f:()=>{if(!c.pet){c.pet=1;c.aff=Math.min(10,(c.aff||0)+1);sfx.cluck()}c.heart=1}}}
  const T=target();if(!T)return null;const [tx,ty]=T,o=objAt(tx,ty),g=S.G[ty][tx],cr=S.C[ty][tx],sid=selId(),it=ITEM[sid]||{};
+ if(sid==='remove'){if(o&&o.t==='ftree')return{l:'나무 뽑기',ic:'remove',f:()=>{S.O[ty][tx]=null;sfx.thud();save()}};if(o&&ITEM[o.t]&&ITEM[o.t].place){if(ITEM[o.t].mach&&S.mach&&S.mach[o.x+','+o.y])return{l:'가공 중이에요',ic:'remove',dim:1,f:()=>toast('가공이 끝나면 거둘 수 있어요')};return{l:'거두기',ic:o.t,f:()=>{S.O[ty][tx]=null;give(o.t);sfx.pluck();save()}}}if(g==='s'&&cr)return{l:'작물 뽑기',ic:'remove',f:()=>{S.C[ty][tx]=null;sfx.pluck();save()}};if(g==='s')return{l:'밭 메우기',ic:'remove',f:()=>{S.G[ty][tx]='g';delete S.wet[ty*MW+tx];GD=1;sfx.hoe();save()}}}
  if(o){switch(o.t){
   case'house':return{l:'잠자기',ic:'sleep',f:()=>sleep()};
   case'shop':return{l:'상점',ic:'shop',f:()=>openShop()};
@@ -967,13 +970,13 @@ function decide(){if(!S)return null;const P=S.pl;
   case'rock':return{l:'돌 깨기',ic:'pick',f:()=>{S.O[ty][tx]=null;S.gold+=2;sfx.thud();pop(tx,ty,'+2G');save()}};
   case'weed':return{l:'풀 뽑기',ic:'weed',f:()=>{S.O[ty][tx]=null;sfx.pluck();save()}};
   case'wild':return{l:'꽃 꺾기',ic:'hand',f:()=>{S.O[ty][tx]=null;S.gold+=1;sfx.pluck();pop(tx,ty,'+1G');save()}};
-  default:if(ITEM[o.t]&&ITEM[o.t].place)return{l:'줍기',ic:o.t,f:()=>{S.O[ty][tx]=null;give(o.t);sfx.pluck();save()}};
+  default:if(ITEM[o.t]&&ITEM[o.t].place&&sid==='remove')return{l:'줍기',ic:o.t,f:()=>{S.O[ty][tx]=null;give(o.t);sfx.pluck();save()}};
    {const N={sign:S.name||'팡팡농장',lamp:'가로등',fence:'울타리',well:'우물',scare:'허수아비',hay:'건초더미',barrel:'나무통',crate:'과일 상자',mail:'우편함',bed:'꽃밭',bush:'덤불'}[o.t]||'';return{l:N||'살펴보기',ic:'hand',dim:1,f:()=>{toast(o.t==='sign'?`${S.name||'팡팡농장'}에 오신 걸 환영해요`:o.t==='mail'?'오늘은 편지가 없어요':o.t==='well'?'시원한 우물물이에요':N);sfx.pluck()}}}}}
  if(cr&&sid==='hoe'&&g==='s'){if(S.carry)return{l:'여기엔 이미 작물이 있어요',ic:'hoe',dim:1,f:()=>toast('빈 밭을 눌러 옮겨 심어요')};return{l:'모종 들기',ic:'hoe',f:()=>{S.carry={...cr};S.C[ty][tx]=null;sfx.pluck();toast(CROPS[cr.k].n+'을 들었어요 · 옮길 빈 밭을 눌러요');save()}}}
  if(cr){const C=CROPS[cr.k];if(cr.age>=C.days){if(sid==='basket')return{l:'수확',ic:cr.k,f:()=>harvest(tx,ty)};return{l:'바구니로 수확해요',ic:'basket',dim:1,f:()=>toast('바구니를 들고 누르면 수확해요')}}
   if(!cr.w&&sid==='can')return{l:'물 주기',ic:'can',f:()=>{cr.w=1;sfx.water();splash(tx,ty);save()}};
   {const L=growLeft(C.days-cr.age);return{l:`${C.n} 약 ${fmtLeft(L)} 뒤`,ic:'can',dim:1,f:()=>toast(`${C.n} · 약 ${fmtLeft(L)} 뒤 (${fmtAt(L)}쯤) 수확해요`+(cr.w?'':' · 물을 줘야 자라요'))}}}
- if(g==='s'&&sid==='hoe'&&!cr){if(S.carry)return{l:'옮겨 심기',ic:'hoe',f:()=>{S.C[ty][tx]=S.carry;S.carry=null;sfx.plant();toast('옮겨 심었어요');save()}};return{l:'밭 메우기',ic:'hoe',f:()=>{S.G[ty][tx]='g';delete S.wet[ty*MW+tx];GD=1;sfx.hoe();save()}}}
+ if(g==='s'&&sid==='hoe'&&!cr){if(S.carry)return{l:'옮겨 심기',ic:'hoe',f:()=>{S.C[ty][tx]=S.carry;S.carry=null;sfx.plant();toast('옮겨 심었어요');save()}};return{l:'철거 도구로 밭을 메워요',ic:'remove',dim:1,f:()=>toast('밭을 없애려면 철거 도구를 들어요')}}
  if(g==='s'&&it.seed&&CROPS[it.seed].water)return{l:'연못에 심어요',ic:sid,dim:1,f:()=>toast(CROPS[it.seed].n+'은 연못 가장자리에 심어요')};
  if(g==='w'&&it.seed&&CROPS[it.seed].water)return{l:'심기',ic:sid,f:()=>{if(take(sid)){S.C[ty][tx]={k:it.seed,age:0,w:1};sfx.plant();save()}}};
  if(g==='s'){if(it.seed)return{l:'심기',ic:sid,f:()=>{if(take(sid)){S.C[ty][tx]={k:it.seed,age:0,w:S.wet[ty*MW+tx]?1:0};sfx.plant();save()}}};
@@ -1025,7 +1028,7 @@ const sfx={hoe:()=>{tone(140,.12,'square',.05,70)},water:()=>{for(let i=0;i<4;i+
  thud:()=>tone(110,.1,'square',.05,60),pluck:()=>tone(640,.06,'triangle',.05,420),no:()=>tone(200,.15,'square',.04,150)};
 const SONG=[0,4,7,4,9,7,4,2,0,4,7,12,9,7,4,2];
 function bgm(on){clearInterval(bgmT);bgmT=null;if(!on)return;let n=0;bgmT=setInterval(()=>{if(!music||!AC||state!=='play'||paused)return;_bt=1;try{const k=n%16,root=S&&S.min>1080?220:262;tone(root*Math.pow(2,SONG[k]/12),.22,'sine',.022);if(k%4===0)tone(root/2*Math.pow(2,SONG[k]/12),.4,'triangle',.025);n++}finally{_bt=0}},260)}
-const sndSync=()=>{$('bSound').classList.toggle('on',sound);$('bSound').classList.toggle('off',!sound);if($('bBgm')){$('bBgm').textContent=music?'배경음 끄기':'배경음 켜기';$('bBgm').classList.toggle('off',!music)}if($('bSfx')){$('bSfx').textContent=sound?'효과음 끄기':'효과음 켜기';$('bSfx').classList.toggle('off',!sound)}};sndSync();if($('bBgm'))$('bBgm').onclick=()=>{unlock();music=!music;store.set('farm-music',music?'1':'0');sndSync()};if($('bSfx'))$('bSfx').onclick=()=>{unlock();sound=!sound;store.set('farm-sound',sound?'1':'0');sndSync()};
+const sndSync=()=>{$('bSound').classList.toggle('on',sound);$('bSound').classList.toggle('off',!sound);if($('bBgm')){$('bBgm').textContent=music?'자연 소리 끄기':'자연 소리 켜기';$('bBgm').classList.toggle('off',!music)}if($('bSfx')){$('bSfx').textContent=sound?'효과음 끄기':'효과음 켜기';$('bSfx').classList.toggle('off',!sound)}};sndSync();if($('bBgm'))$('bBgm').onclick=()=>{unlock();music=!music;store.set('farm-music',music?'1':'0');sndSync()};if($('bSfx'))$('bSfx').onclick=()=>{unlock();sound=!sound;store.set('farm-sound',sound?'1':'0');sndSync()};
 $('bSound').onclick=()=>{unlock();sound=!sound;store.set('farm-sound',sound?'1':'0');sndSync()};
 function toast(t){const e=$('toast2');e.textContent=t;e.classList.remove('show');void e.offsetWidth;e.classList.add('show')}
 const POPS=[];function pop(tx,ty,txt,col){POPS.push({x:tx+.5,y:ty+.5,txt,col:col||'#fff',t:0})}
@@ -1084,7 +1087,7 @@ function autoWalk(dt){const P=S.pl;if(TAPWAIT>0){TAPWAIT-=dt;return}
 window.ZOOM=1;window.CAMFREE=0;
 function clampCam(){const mx=(MW)*TW/2,my=(MW+MH)*TH/2;CX=clamp(CX,-MH*TW/2,mx);CY=clamp(CY,-TH,my)}
 function setZoom(z,sx,sy){z=clamp(z,.6,1.9);if(Math.abs(z-ZOOM)<.02)return;const [wx,wy]=scr2w(sx,sy);ZOOM=z;resize();const a=(wx-wy),b=(wx+wy);CX=a*TW/2-sx+W/2;CY=b*TH/2-sy+H*.44;CAMFREE=1;clampCam()}
-function paintable(tx,ty){if(!inMap(tx,ty))return false;const sid=selId(),it=ITEM[sid]||{},g=S.G[ty][tx],c0=S.C[ty]&&S.C[ty][tx];if(sid==='can')return g==='s'&&(c0?!c0.w&&c0.age<CROPS[c0.k].days:!S.wet[ty*MW+tx]);if(sid==='basket')return !!c0&&c0.age>=CROPS[c0.k].days;if(sid==='hoe')return g==='g'&&!objAt(tx,ty);if(it.seed)return CROPS[it.seed].water?g==='w'&&!S.C[ty][tx]:g==='s'&&!S.C[ty][tx];return false}
+function paintable(tx,ty){if(!inMap(tx,ty))return false;const sid=selId(),it=ITEM[sid]||{},g=S.G[ty][tx],c0=S.C[ty]&&S.C[ty][tx];if(sid==='can')return g==='s'&&(c0?!c0.w&&c0.age<CROPS[c0.k].days:!S.wet[ty*MW+tx]);if(sid==='basket')return !!c0&&c0.age>=CROPS[c0.k].days;if(sid==='remove')return g==='s'&&!c0;if(sid==='hoe')return g==='g'&&!objAt(tx,ty);if(it.seed)return CROPS[it.seed].water?g==='w'&&!S.C[ty][tx]:g==='s'&&!S.C[ty][tx];return false}
 (function(){const PT=new Map();let mode='',sx0=0,sy0=0,lx=0,ly=0,t0=null,lt='',pd0=0,z0=1;
  const xy=e=>{const r=cv.getBoundingClientRect();return[(e.clientX-r.left)*DPR,(e.clientY-r.top)*DPR]};
  cv.addEventListener('pointerdown',e=>{if(state!=='play'||paused)return;unlock();e.preventDefault();try{cv.setPointerCapture(e.pointerId)}catch(_){}PT.set(e.pointerId,[e.clientX,e.clientY]);
@@ -1136,7 +1139,7 @@ $('bPause').onclick=()=>menu(!paused);$('bResume').onclick=()=>menu(false);$('bP
 $('bMenu').onclick=()=>{save();hide('ovPause');paused=false;state='title';bgm(false);titleUI();show('ovTitle')};
 
 /* ===== 시작 화면 ===== */
-const TUT={"goal": "<b>🌱 팡팡 마을 이야기</b><p>도시 생활에 지친 팡팡이가 시골 팡팡 마을의 빈 농장으로 이사 왔어요. 잡초 무성한 풀밭을 일궈 밭을 만들고, 숲을 개간해 농장을 넓혀 가요. 하루는 실제 시간으로 약 15분이고, 계절은 28일마다 바뀌어요.</p><b>🌾 하루의 흐름</b><p>땅을 갈고 씨앗을 심어 물을 주면, 자고 일어날 때마다 쑥쑥 자라요. 수확한 작물은 출하함에 팔고, 상점에서 씨앗·묘목·꾸미기를 사요. 가공 시설로 김치·잼·곶감을 만들면 더 비싸게 팔 수 있고, 주문 게시판의 주문을 채우면 보상이 더 커요. 밤 12시까지 잠들지 않으면 기절하니 조심하세요!</p><b>🎮 게임 조작 방법</b><p>아래 칸에서 손에 들 것을 고르면, 무엇을 들었는지에 따라 화면을 눌렀을 때 하는 일이 달라져요.</p><div class=\"trow\"><img class=\"tic\" src=\"art/ic/act_hand.png\" alt=\"\"><div><b class=\"tn\">이동</b><span>누른 곳으로 걸어가요. 상점·게시판·출하함·집은 누르면 열려요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/act_water.png\" alt=\"\"><div><b class=\"tn\">물뿌리개</b><span>마른 밭과 작물을 누르면 물을 줘요. 쓸면 여러 칸에 줘요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/sum_harvest.png\" alt=\"\"><div><b class=\"tn\">바구니</b><span>다 자란 작물과 과일나무를 누르면 거둬요. 쓸면 여러 칸을 거둬요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/act_hoe.png\" alt=\"\"><div><b class=\"tn\">괭이</b><span>풀밭을 누르면 땅을 갈아요. 빈 밭은 다시 풀밭으로 메우고, 자라는 작물은 들어서 다른 빈 밭에 옮겨 심어요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/seed_turnip.png\" alt=\"\"><div><b class=\"tn\">씨앗 주머니</b><span>갈아 둔 밭을 누르면 심어요. 주머니를 한 번 더 누르면 심을 씨앗을 골라요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/sum_made.png\" alt=\"\"><div><b class=\"tn\">음식</b><span>두 번 누르면 먹고 힘을 회복해요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/hud_energy.png\" alt=\"\"><div><b class=\"tn\">힘</b><span>일할수록 줄어요. 음식을 먹거나 잠을 자면 다시 차요.</span></div></div><div class=\"trow\"><span class=\"tic tx\">👆</span><div><b class=\"tn\">화면 끌기 · 두 손가락</b><span>농장을 둘러보고, 두 손가락으로 확대·축소해요. 팡팡이를 누르면 하던 일을 멈춰요.</span></div></div><p class=\"tpc\">PC에서는 클릭·드래그·휠로 똑같이 하고, WASD·방향키로 걷고, SPACE로 바라보는 칸에 행동해요. 1~9는 물건 고르기, ESC는 메뉴예요.</p>", "touch": [], "pc": []};
+const TUT={"goal": "<b>🌱 팡팡 마을 이야기</b><p>도시 생활에 지친 팡팡이가 시골 팡팡 마을의 빈 농장으로 이사 왔어요. 잡초 무성한 풀밭을 일궈 밭을 만들고, 숲을 개간해 농장을 넓혀 가요. 하루는 실제 시간으로 약 15분이고, 계절은 28일마다 바뀌어요.</p><b>🌾 하루의 흐름</b><p>땅을 갈고 씨앗을 심어 물을 주면, 자고 일어날 때마다 쑥쑥 자라요. 수확한 작물은 출하함에 팔고, 상점에서 씨앗·묘목·꾸미기를 사요. 가공 시설로 김치·잼·곶감을 만들면 더 비싸게 팔 수 있고, 주문 게시판의 주문을 채우면 보상이 더 커요. 밤 12시까지 잠들지 않으면 기절하니 조심하세요!</p><b>🎮 게임 조작 방법</b><p>아래 칸에서 손에 들 것을 고르면, 무엇을 들었는지에 따라 화면을 눌렀을 때 하는 일이 달라져요.</p><div class=\"trow\"><img class=\"tic\" src=\"art/ic/act_hand.png\" alt=\"\"><div><b class=\"tn\">이동</b><span>누른 곳으로 걸어가요. 상점·게시판·출하함·집은 누르면 열려요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/act_water.png\" alt=\"\"><div><b class=\"tn\">물뿌리개</b><span>마른 밭과 작물을 누르면 물을 줘요. 쓸면 여러 칸에 줘요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/sum_harvest.png\" alt=\"\"><div><b class=\"tn\">바구니</b><span>다 자란 작물과 과일나무를 누르면 거둬요. 쓸면 여러 칸을 거둬요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/act_hoe.png\" alt=\"\"><div><b class=\"tn\">괭이</b><span>풀밭을 누르면 땅을 갈아요. 자라는 작물을 누르면 들어서 다른 빈 밭에 옮겨 심어요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/act_pick.png\" alt=\"\"><div><b class=\"tn\">철거</b><span>빈 밭은 다시 풀밭으로 메우고, 놓아 둔 꾸미기·시설·나무는 거둬서 가방에 넣어요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/seed_turnip.png\" alt=\"\"><div><b class=\"tn\">씨앗 주머니</b><span>갈아 둔 밭을 누르면 심어요. 주머니를 한 번 더 누르면 심을 씨앗을 골라요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/sum_made.png\" alt=\"\"><div><b class=\"tn\">음식</b><span>두 번 누르면 먹고 힘을 회복해요.</span></div></div><div class=\"trow\"><img class=\"tic\" src=\"art/ic/hud_energy.png\" alt=\"\"><div><b class=\"tn\">힘</b><span>일할수록 줄어요. 음식을 먹거나 잠을 자면 다시 차요.</span></div></div><div class=\"trow\"><span class=\"tic tx\">👆</span><div><b class=\"tn\">화면 끌기 · 두 손가락</b><span>농장을 둘러보고, 두 손가락으로 확대·축소해요. 팡팡이를 누르면 하던 일을 멈춰요.</span></div></div><p class=\"tpc\">PC에서는 클릭·드래그·휠로 똑같이 하고, WASD·방향키로 걷고, SPACE로 바라보는 칸에 행동해요. 1~9는 물건 고르기, ESC는 메뉴예요.</p>", "touch": [], "pc": []};
 let pick='purple';
 function titleUI(){$('bContinue').hidden=!store.get('farm-save');const sh2=$('show');sh2.innerHTML='';['purple','lime','sky','cream'].forEach((ch,i)=>{const c=cnv(96,96);drawPang(c.getContext('2d'),ch,48,52,34,true,false);c.style.cssText='width:52px;height:52px;animation:kb 1.2s ease-in-out '+(-i*.3)+'s infinite';sh2.appendChild(c)})}
 const st=document.createElement('style');st.textContent='#show{display:flex;gap:6px;justify-content:center}@keyframes kb{50%{transform:translateY(-6px)}}';document.head.appendChild(st);
@@ -1168,7 +1171,7 @@ var LVUNL={1:['turnip','carrot','potato','cabbage','spinach','radish','flower','
 function unlockLv(id){if(!LVUNL)return 1;for(const l in LVUNL)if(LVUNL[l].includes(id))return +l;return 1}
 function unlocked(id){return !S||(S.lv||1)>=unlockLv(id)}
 const LVMAX=20,xpNeed=l=>40+l*30;
-const EN_MAX=100,COST={'땅 갈기':2,'심기':1,'물 주기':1,'수확':1,'돌 깨기':4,'풀 뽑기':4,'꽃 꺾기':1,'그루터기 캐기':4,'밭 메우기':2,'모종 들기':1,'옮겨 심기':1};
+const EN_MAX=100,COST={'땅 갈기':2,'심기':1,'물 주기':1,'수확':1,'돌 깨기':4,'풀 뽑기':4,'꽃 꺾기':1,'그루터기 캐기':4,'밭 메우기':2,'작물 뽑기':1,'나무 뽑기':4,'모종 들기':1,'옮겨 심기':1};
 const RECIPES={
  keg_pickle:[{in:{carrot:2},out:'pickle'},{in:{turnip:3},out:'pickle'},{in:{potato:2},out:'pickle'},{in:{cabbage:1},out:'pickle'}],
  mill:[{in:{wheat:3},out:'flour'},{in:{corn:2},out:'cornmeal'}],
@@ -1192,7 +1195,7 @@ function eatSel(){const id=selId(),it=ITEM[id];if(!it||it.food==null)return fals
 for(const k in CROPS)if(ITEM[k]&&ITEM[k].food==null)ITEM[k].food=Math.max(4,Math.round(CROPS[k].sell/8));
 /* 행동 감싸기: 행동력·경험치·가공 시설 */
 const _decide=decide;
-decide=function(){ensureAlpha();const T=target();if(T){const o=objAt(T[0],T[1]);if(o&&ITEM[o.t]&&ITEM[o.t].mach)return machAct(o)}
+decide=function(){ensureAlpha();const T=target();if(T){const o=objAt(T[0],T[1]);if(o&&ITEM[o.t]&&ITEM[o.t].mach&&selId()!=='remove')return machAct(o)}
  const a=_decide();if(!a||a.dim)return a;const c=COST[a.l];if(c==null)return a;const f=a.f,T2=target();
  a.f=()=>{if(!spend(c))return;const before=S.st.hv;f();const [tx,ty]=T2||[0,0];
   if(a.l==='수확'&&S.st.hv>before){S.today.hv++;const cr=S.C[ty]&&S.C[ty][tx],k=a.ic;addXP(3+(CROPS[k]?CROPS[k].days*2:2),tx,ty)}
@@ -1296,14 +1299,31 @@ if(window.__f)Object.assign(window.__f,{openExpand,doExpand,ensureLand,ZONES});
    if(st===2||st===6){for(const m of CH[bar]){const o=AC.createOscillator(),g=AC.createGain();o.type='sine';o.frequency.value=440*Math.pow(2,(m-69)/12);g.gain.setValueAtTime(.0035,t);g.gain.exponentialRampToValueAtTime(.0005,t+sp*.9);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+sp)}}
    if(st%2===1){const s=AC.createBufferSource(),f=AC.createBiquadFilter(),g=AC.createGain();s.buffer=noiseBuf();f.type='highpass';f.frequency.value=7000;g.gain.setValueAtTime(.004,t);g.gain.exponentialRampToValueAtTime(.0003,t+.04);s.connect(f).connect(g).connect(AC.destination);s.start(t,Math.random());s.stop(t+.06)}
    BG.at+=sp;BG.n++}}
- bgm=function(on){clearInterval(bgmT);bgmT=null;BG.on=!!on;if(on&&AC){BG.at=AC.currentTime+.1;BG.n=0}if(!T)T=setInterval(()=>{tick();amb()},60)};
+ bgm=function(on){clearInterval(bgmT);bgmT=null;BG.on=false;AMB.on=!!on;if(!T)T=setInterval(()=>{amb()},60)};
  /* 자연의 소리: 새·바람·밤 귀뚜라미 (배경음 켜져 있을 때) */
  let nextAmb=0;
  function bird(){const b=AC.currentTime,base=2600+Math.random()*1400,k=2+Math.floor(Math.random()*3);for(let i=0;i<k;i++)tn(base*(1+Math.random()*.15),.09,'sine',.008,base*1.35,i*.13+Math.random()*.03,true)}
  function wind(){if(!AC)return;const t=AC.currentTime,s=AC.createBufferSource(),f=AC.createBiquadFilter(),g=AC.createGain();s.buffer=noiseBuf();s.loop=true;f.type='bandpass';f.frequency.setValueAtTime(400,t);f.frequency.linearRampToValueAtTime(700,t+1.8);f.frequency.linearRampToValueAtTime(350,t+3.6);f.Q.value=.6;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.008,t+1.6);g.gain.exponentialRampToValueAtTime(.0001,t+3.8);s.connect(f).connect(g).connect(AC.destination);s.start(t);s.stop(t+4)}
- function cricket(){for(let i=0;i<6;i++)tn(4300,.03,'square',.004,null,i*.07,true)}
- function amb(){if(!AC||!music||state!=='play'||paused)return;const now=AC.currentTime;if(now<nextAmb)return;nextAmb=now+5+Math.random()*9;const night=S&&(S.min>=1140||S.min<300);const w=seasonIdx&&seasonIdx()===3;
-  if(night)cricket();else{const r=Math.random();if(r<(w?.2:.6))bird();else wind()}}
+ function cricket(){for(let r=0;r<2;r++)for(let i=0;i<6;i++)tn(4300,.03,'square',.0035,null,r*.6+i*.07,true)}
+ const AMB={on:false,n:null};let lastBed=0;
+ function ambNodes(){if(AMB.n||!AC)return AMB.n;const mk=(type,f,q)=>{const so=AC.createBufferSource();so.buffer=noiseBuf();so.loop=true;const fl=AC.createBiquadFilter();fl.type=type;fl.frequency.value=f;fl.Q.value=q;const g=AC.createGain();g.gain.value=0;so.connect(fl).connect(g).connect(AC.destination);so.start(0,Math.random()*1.5);return{g,fl}};AMB.n={wind:mk('lowpass',450,.5),leaf:mk('bandpass',3200,.7),stream:mk('bandpass',1500,.9),rain:mk('highpass',1800,.5)};return AMB.n}
+ function cuckoo(){tn(660,.28,'sine',.009,640,0,true);tn(540,.4,'sine',.009,520,.32,true)}
+ function cicada(){const t=AC.currentTime,o=AC.createOscillator(),l=AC.createOscillator(),lg=AC.createGain(),g=AC.createGain(),d=2.5+Math.random()*2;o.type='square';o.frequency.value=4600+Math.random()*800;l.frequency.value=32+Math.random()*10;lg.gain.value=.5;g.gain.value=0;l.connect(lg).connect(g.gain);g.gain.setValueAtTime(0,t);const v=AC.createGain();v.gain.setValueAtTime(.0001,t);v.gain.exponentialRampToValueAtTime(.0035,t+.6);v.gain.setValueAtTime(.0035,t+d-.6);v.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(v).connect(AC.destination);o.start(t);l.start(t);o.stop(t+d+.05);l.stop(t+d+.05)}
+ function frog(){const k=3+Math.floor(Math.random()*4),f=170+Math.random()*60;for(let i=0;i<k;i++)tn(f,.05,'square',.005,f*.8,i*.09,true)}
+ function owl(){tn(410,.35,'sine',.008,390,0,true);tn(380,.55,'sine',.008,350,.5,true)}
+ function crow(){const k=2+Math.floor(Math.random()*2);for(let i=0;i<k;i++)tn(560,.22,'sawtooth',.0035,380,i*.35,true)}
+ function rustle(){nz('highpass',2800,.5,.012,0,.6,true);nz('highpass',3600,.3,.008,.25,.6,true)}
+ function amb(){if(!AC)return;const live=AMB.on&&music&&state==='play'&&!paused,now=AC.currentTime,si=typeof seasonIdx==='function'?seasonIdx():1,night=S&&(S.min>=1140||S.min<300),rain=S&&S.rain;
+  if(now-lastBed>.9){lastBed=now;const n=ambNodes();if(n){const k=live?1:0,W=[.006,.004,.009,.015][si],Lf=[.003,.004,.006,.001][si],St=[.004,.003,.002,0][si];
+   n.wind.g.gain.setTargetAtTime(k*W*(.6+Math.random()*.8),now,.9);n.wind.fl.frequency.setTargetAtTime(320+Math.random()*320,now,1.2);
+   n.leaf.g.gain.setTargetAtTime(k*Lf*(night?.4:1)*(Math.random()<.3?2:.6),now,.5);n.stream.g.gain.setTargetAtTime(k*St,now,.9);n.rain.g.gain.setTargetAtTime(k*(rain?.022:0),now,1.2)}}
+  if(!live||now<nextAmb)return;nextAmb=now+3+Math.random()*6;const r=Math.random();
+  if(night){if(si<=1){if(r<.5)frog();else cricket()}else if(si===2)cricket();if(si===3?r<.35:r<.12)owl();return}
+  if(si===0){if(r<.6)bird();else if(r<.8)cuckoo();else rustle()}
+  else if(si===1){if(r<.5)cicada();else if(r<.85)bird();else rustle()}
+  else if(si===2){if(r<.35)cricket();else if(r<.7)rustle();else bird()}
+  else{if(r<.35)crow();else if(r<.7)wind();else rustle()}
+  if(S&&S.ck&&S.ck.length&&Math.random()<.12){tn(700,.07,'square',.008,500,0,true);tn(760,.06,'square',.008,520,.09,true)}}
  /* 클릭음: 모든 버튼 · 땅 탭 */
  document.addEventListener('click',e=>{if(e.target.closest('button,.it,.inv > *'))sfx.click()},true);
  document.getElementById('cv').addEventListener('pointerdown',()=>{if(state==='play'&&!paused)sfx.click()});
@@ -1324,8 +1344,8 @@ function fmtAt(sec){const d=new Date(Date.now()+sec*1000),h=d.getHours();return 
 for(const k in CROPS){const C=CROPS[k],it=ITEM['seed_'+k];if(it)it.desc=`약 ${fmtLeft(C.days*1080*MIN_SEC)} 만에 자라요`+(C.re?` · 수확 후 약 ${fmtLeft(C.re*1080*MIN_SEC)}마다 다시 열려요`:'')+(C.water?' · 연못 가장자리에 심어요':'')}
 for(const k of ['sap_apple','sap_peach','sap_persimmon'])if(ITEM[k])ITEM[k].desc=`풀밭에 심어요 · 약 ${fmtLeft(10*1080*MIN_SEC)} 뒤 열매가 열려요`;
 /* ===== 도구 칸: 이동·물뿌리개·바구니·괭이 + 씨앗 주머니 ===== */
-ICM.basket='sum_harvest';
-function ensureTools(){if(!S||!S.inv)return;const cur=S.inv[S.sel]&&S.inv[S.sel].id;for(const id of ['can','basket'])if(!S.inv.some(v=>v.id===id))S.inv.push({id,n:1});const O=['hand','can','basket','hoe'],t=O.map(id=>S.inv.find(v=>v.id===id)).filter(Boolean),r=S.inv.filter(v=>!O.includes(v.id)),n=t.concat(r);if(n.some((v,i)=>v!==S.inv[i])){S.inv=n;S.sel=Math.max(0,S.inv.findIndex(v=>v.id===cur))}}
+ICM.basket='sum_harvest';ICM.remove='act_pick';
+function ensureTools(){if(!S||!S.inv)return;const cur=S.inv[S.sel]&&S.inv[S.sel].id;for(const id of ['can','basket','remove'])if(!S.inv.some(v=>v.id===id))S.inv.push({id,n:1});const O=['hand','can','basket','hoe','remove'],t=O.map(id=>S.inv.find(v=>v.id===id)).filter(Boolean),r=S.inv.filter(v=>!O.includes(v.id)),n=t.concat(r);if(n.some((v,i)=>v!==S.inv[i])){S.inv=n;S.sel=Math.max(0,S.inv.findIndex(v=>v.id===cur))}}
 drawInv=function(){if(!S)return;ensureTools();const el=$('inv');el.innerHTML='';const seeds=S.inv.filter(s=>ITEM[s.id]&&ITEM[s.id].seed),curSeed=!!(ITEM[selId()]&&ITEM[selId()].seed);let sd=false;
  const mk=(id,on,cnt,fn)=>{const b=document.createElement('button');if(on)b.className='on';const c=document.createElement('canvas');c.width=c.height=72;drawIcon(c.getContext('2d'),id,72);b.appendChild(c);const n=document.createElement('b');n.textContent=cnt;b.appendChild(n);b.onclick=e=>{e.stopPropagation();fn()};el.appendChild(b);return b};
  S.inv.forEach((s,i)=>{const it=ITEM[s.id]||{};

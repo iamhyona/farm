@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792934500";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792934600";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -734,6 +734,13 @@ html body .phT .phT-c .trow span{font-size:13.5px!important}
 #buyCf .bcb .no{background:#e9d8b8;color:#5a2e12}
 #buyCf .bcb .yes{background:linear-gradient(#9be06a,#5fae3a);color:#fff;text-shadow:0 1.5px 0 #2f5a1a}
 #buyCf .bcb button:active{transform:translateY(2px);box-shadow:0 1px 0 #5a2e12}
+/* 획득 카드 */
+#gotCard{position:absolute;left:50%;bottom:150px;transform:translate(-50%,8px);z-index:5;display:flex;flex-direction:column;gap:6px;width:max-content;max-width:calc(100% - 28px);padding:9px 14px 9px 9px;background:#fbf0d8;border:3px solid #8a5a34;border-radius:14px;box-shadow:0 3px 0 #5a2e12;color:#5a2e12;pointer-events:none;opacity:0;transition:opacity .2s,transform .2s}
+#gotCard.show{opacity:1;transform:translate(-50%,0)}
+#gotCard canvas{width:40px;height:40px;flex:0 0 40px}
+#gotCard .gr{display:flex;align-items:center;gap:10px}#gotCard .gr+.gr{border-top:1.5px dashed #e0c9a0;padding-top:6px}#gotCard .gr>div{display:flex;flex-direction:column;gap:2px;min-width:0}
+#gotCard b{font:400 16px 'Cafe24Surround',Paperlogy,sans-serif;white-space:nowrap}
+#gotCard small{font:600 12.5px Paperlogy,sans-serif;color:#8a5a33;line-height:1.35;word-break:keep-all}
 </style></head>
 
 <body>
@@ -1959,6 +1966,28 @@ function fixShopCover(){if(!S||SHOPCOV===S)return;SHOPCOV=S;let sh=null;for(let 
  for(const [i,j] of SHOP_COV){const tx=sh.x+i,ty=sh.y+j;if(!inMap(tx,ty)||S.O[ty][tx]||(S.C[ty]&&S.C[ty][tx])||S.G[ty][tx]==='w')continue;S.O[ty][tx]={t:'part',a:sh}}
  const P=S.pl;if(P&&solidAt(Math.floor(P.x),Math.floor(P.y))){P.x=sh.x+2.5;P.y=sh.y+5.5}GD=1}
 (function(){const _e=ensureAlpha;ensureAlpha=function(){_e();fixShopCover()}})();
+/* 획득 카드: 무엇을 얻었는지 + 어디에 쓰는지 */
+let GCT=0,GCK=null,GCN=0;
+function useHint(id){const it=ITEM[id]||{};
+ if(id==='compost')return '손에 들고 자라는 작물을 누르면 하루 더 자라요';
+ if(id==='bouquet'||(CROPS[id]&&CROPS[id].fl))return '출하함에 넣으면 팔려요';
+ const cook=typeof COOK!=='undefined'&&COOK.some(r=>r.in[id]),dry=typeof RECIPES!=='undefined'&&RECIPES.mat&&RECIPES.mat.some(r=>r.in[id]);
+ if(CROPS[id])return '출하함에 팔거나 주문 게시판에 납품해요'+(dry?' · 멍석에 말려도 좋아요':cook?' · 부엌 요리 재료예요':'');
+ if(cook&&dry)return '집 부엌에서 요리하거나 멍석에 말려요';
+ if(cook)return '집 부엌에서 요리 재료로 써요 · 출하함에 팔아도 돼요';
+ if(dry)return '멍석에 말리면 값이 올라요';
+ if(it.food)return '가방에서 두 번 누르면 먹고 힘이 차요';
+ if(it.place)return '가방에서 골라 빈 땅을 누르면 놓을 수 있어요';
+ if(it.sell)return '출하함에 넣으면 팔려요';
+ return ''}
+let GCL=[];
+function gotCard(id,n){if(!S||state!=='play'||paused||!ITEM[id])return;let el=$('gotCard');
+ if(!el){el=document.createElement('div');el.id='gotCard';$('screen').appendChild(el)}
+ if(!el.classList.contains('show'))GCL=[];const f=GCL.find(v=>v.id===id);if(f)f.n+=n;else GCL.push({id,n});if(GCL.length>3)GCL.shift();
+ el.innerHTML=GCL.map(v=>{const h=useHint(v.id);return`<div class="gr"><canvas width="64" height="64" data-g="${v.id}"></canvas><div><b>${ITEM[v.id].n} +${v.n}</b>${h?`<small>${h}</small>`:''}</div></div>`}).join('');
+ el.querySelectorAll('canvas[data-g]').forEach(c=>drawIcon(c.getContext('2d'),c.dataset.g,64));
+ el.classList.add('show');clearTimeout(GCT);GCT=setTimeout(()=>{el.classList.remove('show')},4000)}
+(function(){const _g=give;give=function(id,n=1){const r=_g(id,n);try{gotCard(id,n)}catch(e){}return r}})();
 })();
 
 </script>

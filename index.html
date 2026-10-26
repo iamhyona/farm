@@ -31,7 +31,9 @@
 #screen #cropCard{width:max-content!important}#screen #cropCard .cc-bar{width:56px!important}#screen #cropCard .cc-m{flex:0 0 auto!important}
 
 #screen #toast2{font-size:11.5px!important;padding:5px 12px!important;line-height:1.4!important}
-</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793013643";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+
+#lvUp{z-index:45!important;top:30%!important}#lvUp .lv-u{text-align:center!important}#lvUp .lv-u i{font-style:normal;white-space:nowrap}#lvUp .lv-u b{display:inline-block;margin-bottom:1px;font-size:11.5px}
+</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793013774";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -2341,8 +2343,8 @@ setInterval(()=>{if(!S||state!=='play'||paused||(TI>=0)||Date.now()-RMLAST<15000
 if(window.__f)Object.assign(window.__f,{tourStart,tourGo,remindShow,RMreset:()=>{RMLAST=0}});
 
 /* ===== 레벨업: 크게 · 열린 것은 작게 ===== */
-function lvUpShow(lv,L){let e=$('lvUp');if(!e){e=document.createElement('div');e.id='lvUp';$('field').appendChild(e)}
- e.innerHTML=`<span class="lv-s">LEVEL UP</span><span class="lv-n"><img src="art/hud/hud_star.png" alt="">Lv ${lv}</span>`+(L&&L.length?`<span class="lv-u"><b>새로 열림</b> · ${L.join(' · ')}</span>`:'');
+function lvUpShow(lv,L){let e=$('lvUp');if(!e){e=document.createElement('div');e.id='lvUp';$('screen').appendChild(e)}
+ e.innerHTML=`<span class="lv-s">LEVEL UP</span><span class="lv-n"><img src="art/hud/hud_star.png" alt="">Lv ${lv}</span>`+(L&&L.length?`<span class="lv-u"><b>새로 열림</b><br>${L.map(n=>'<i>'+n+'</i>').join(' · ')}</span>`:'');
  e.classList.remove('show');void e.offsetWidth;e.classList.add('show');try{sfx.grow&&setTimeout(sfx.grow,150)}catch(_){}}
 if(window.__f)Object.assign(window.__f,{lvUpShow});
 

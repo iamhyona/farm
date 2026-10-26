@@ -63,7 +63,7 @@
 #dock button{width:44px!important;height:44px!important;border-radius:50%!important;border-width:2px!important;box-shadow:0 2px 0 #5a2e12!important;flex:0 0 44px}
 #dock img{width:26px!important;height:26px!important}
 #dock button[data-k="set"]{width:36px!important;height:36px!important;flex-basis:36px;align-self:center;opacity:.92}#dock button[data-k="set"] img{width:20px!important;height:20px!important}
-</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793018374";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793018464";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -2320,7 +2320,7 @@ const TOUR=[
  {q:'#clk',t:'시계',d:'하루가 흘러가요.\n밤이 되면 집에서 자요.'},
  {q:'#dock',t:'아래 버튼',d:'바구니 · 상점 · 집(잠자기) · 식당(요리) · 설정'},
  {c:1,t:'이렇게 움직여요',L:[['tool_hand','톡','걸어가요 · 작물은 알아서 물 주기나 수확'],['tool_hoe','풀밭 두 번 톡','밭을 갈아요 (PC 더블클릭)'],['tool_remove','밭·작물 꾹','다른 곳으로 옮겨요 (PC 우클릭)']]},
- {c:1,t:'꼭 알아둘 것',L:[['act_sleep','잠자기','집이나 아래 집 버튼 → 낮잠(힘 +50)이나 내일까지 자요'],['item_eggjjim','요리','아래 식당 버튼에서 재료로 요리해요. 먹으면 힘이 많이 차요'],['rest_fire','회복','벤치에 앉기, 모닥불 불멍, 꽃밭 옆에서 쉬어요']]},
+ {c:1,t:'꼭 알아둘 것',L:[['act_sleep','잠자기','집이나 아래 집 버튼 → 낮잠(힘 +50)이나 내일까지 자요'],['item_eggjjim','요리','아래 식당 버튼에서 재료로 요리해요. 먹으면 힘이 많이 차요'],['rest_fire','회복','벤치에 앉기, 모닥불 불멍, 꽃밭 옆에서 쉬기, 우물물 마시기(하루 3번)']]},
  {c:1,t:'즐길 거리',L:[['item_mushroom','채집','숲 가장자리의 버섯·나물·나뭇가지를 톡 눌러 주워요. 숲 안은 개간해야 들어가요'],['item_twig','나무 베기','농장 안 나무를 톡 → 통나무를 얻고 그루터기가 남아요'],['act_rod','물가','물가를 톡 → 다슬기 잡기. 상점에서 낚싯대를 사면 낚시로 바뀌어요'],['rest_fire','불멍','집 앞 모닥불을 톡 → 앉아서 힘이 빨리 차요']],last:1}];
 let TI=-1,TPAUSE=false;
 function tourEl(){let o=$('tour');if(!o){o=document.createElement('div');o.id='tour';o.innerHTML='<div class="tr-hl"></div><div class="tr-card"><b class="tr-t"></b><div class="tr-d"></div><label class="tr-no"><input type="checkbox" id="trNo"> 다시 보지 않기</label><div class="tr-b"><button class="tr-skip">건너뛰기</button><span class="tr-n"></span><button class="tr-next">다음</button></div></div>';document.body.appendChild(o);
@@ -2435,14 +2435,14 @@ function openBag(){const L=[],seen=new Set();for(const [g,t,f] of BAGGRP){const 
   for(const v of R){seen.add(v.id);const it=ITEM[v.id];let btn,act,dis=false,sub='';
    if(it.food!=null&&!it.seed){btn='먹기 +'+it.food;act='bag:eat:'+v.id;sub=sellOf(v.id)?'개당 '+sellOf(v.id)+'G':''}
    else if(it.seed){btn='심기';act='bag:hold:'+v.id;sub='빈 밭을 눌러 심어요'}
-   else if(it.place){btn='놓기';act='bag:hold:'+v.id;sub=it.desc?it.desc.split(' · ')[0]:''}
+   else if(it.place){btn='놓기';act='bag:hold:'+v.id;sub=resale(v.id)?'중고 '+resale(v.id)+'G':(it.desc?it.desc.split(' · ')[0]:'')}
    else if(v.id==='rod'){btn='들기';act='bag:hold:'+v.id;sub='물가를 눌러 낚시해요'}
    else{btn=sellOf(v.id)?sellOf(v.id)+'G':'-';act='bag:none:'+v.id;dis=true;sub=sellOf(v.id)?'출하함에 팔 수 있어요':(it.desc||'')}
-   let h=row(v.id,`${it.n} ×${v.n}`,sub,btn,act,dis);const sp=sellOf(v.id);if(sp&&act.indexOf('bag:none')<0)h=h.replace(/(<button data-a="bag:[^"]*"[^>]*>[^<]*<\/button>)<\/div>$/,`<div class="bb">$1<button class="bsell" data-a="bag:sell:${v.id}">팔기 ${(sp*v.n).toLocaleString()}</button></div></div>`);if(sp&&act.indexOf('bag:none')===0)h=h.replace(/<button data-a="bag:none:[^"]*"[^>]*>[^<]*<\/button>/,`<button class="bsell" data-a="bag:sell:${v.id}">팔기 ${(sp*v.n).toLocaleString()}G</button>`);L.push(h)}}
+   let h=row(v.id,`${it.n} ×${v.n}`,sub,btn,act,dis);const sp=sellOf(v.id)||resale(v.id);if(sp&&act.indexOf('bag:none')<0)h=h.replace(/(<button data-a="bag:[^"]*"[^>]*>[^<]*<\/button>)<\/div>$/,`<div class="bb">$1<button class="bsell" data-a="bag:sell:${v.id}">팔기 ${(sp*v.n).toLocaleString()}</button></div></div>`);if(sp&&act.indexOf('bag:none')===0)h=h.replace(/<button data-a="bag:none:[^"]*"[^>]*>[^<]*<\/button>/,`<button class="bsell" data-a="bag:sell:${v.id}">팔기 ${(sp*v.n).toLocaleString()}G</button>`);L.push(h)}}
  openPanel('바구니',L.length?L.join(''):'<div class="it"><div></div><div><small>아직 아무것도 없어요. 작물을 거두거나 숲가에서 채집해 보세요.</small></div><div></div></div>')}
 $('pnL').addEventListener('click',e=>{const b=e.target.closest('button[data-a^="bag:"]');if(!b||b.disabled)return;e.stopPropagation();const [,a,id]=b.dataset.a.split(':'),i=invIdx(id);if(i<0)return;S.sel=i;
  if(a==='eat'){eatSel();openBag();return}
- if(a==='sell'){const n=count(id),g=sellOf(id)*n;if(n&&take(id,n)){S.gold+=g;S.st.earn+=g;gainSell(g);(sfx.buy||sfx.coin)();toast(`${ITEM[id].n} ${n}개 팔았어요 · +${g.toLocaleString()}G`);hud();save()}openBag();return}
+ if(a==='sell'){const n=count(id),g=(sellOf(id)||resale(id))*n;if(n&&take(id,n)){S.gold+=g;S.st.earn+=g;gainSell(g);(sfx.buy||sfx.coin)();toast(`${ITEM[id].n} ${n}개 팔았어요 · +${g.toLocaleString()}G`);hud();save()}openBag();return}
  if(a==='hold'){$('ovPanel').classList.remove('show');paused=false;drawInv();toast(ITEM[id].seed?'빈 밭을 눌러 심어요':id==='rod'?'물가를 눌러 낚시해요':'놓을 곳을 눌러요')}},true);
 /* 들고 있는 물건 표시 */
 setInterval(()=>{if(!S)return;let b=$('holdBar');const id=selId(),it=ITEM[id]||{},show=state==='play'&&!MV&&id&&!INVHIDE.includes(id)&&(it.seed||it.place||id==='rod');
@@ -2558,6 +2558,13 @@ function fgEnd(ok,msg){if(!FG)return;FG.done=1;const f=FG.f,m=$('fgMsg'),b=$('fg
 .fg-btn{width:100%;height:46px;border-radius:14px;border:3px solid #3f7a2a;background:linear-gradient(#a8e06a,#5fae3a);color:#fff;font:400 17px 'Cafe24Surround',Paperlogy,sans-serif;text-shadow:0 2px 0 #2f5e1e;box-shadow:0 3px 0 #2f5e1e;touch-action:none;user-select:none;-webkit-user-select:none}
 .fg-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #2f5e1e}.fg-btn.again{border-color:#8a5a34;background:linear-gradient(#ffe48a,#ffc93a);color:#5a2e12;text-shadow:none;box-shadow:0 3px 0 #8a5a34}`;document.head.appendChild(st)})();
 if(window.__f)Object.assign(window.__f,{openFish:()=>openFish(),FGget:()=>FG});
+
+/* ===== 중고 팔기 · 우물 물 마시기 ===== */
+function resale(id){const it=ITEM[id];return it&&it.place&&it.price&&!it.sell&&!it.seed?Math.floor(it.price/2):0}
+(function(){const _d=decide;decide=function(){if(!S)return _d();const T=target();if(!T)return _d();const o=objAt(T[0],T[1]);
+ if(o&&o.t==='well'){const n=(S.wd&&S.wd.d===S.day)?S.wd.n:0;if(n>=3)return{l:'오늘은 충분히 마셨어요',ic:'hand',dim:1,f:()=>toast('우물물은 하루 세 번 · 내일 또 마셔요')};
+  return{l:'물 마시기',ic:'hand',f:()=>{if(S.en>=EN_MAX){toast('지금은 목마르지 않아요');return}S.wd={d:S.day,n:n+1};S.en=Math.min(EN_MAX,S.en+10);sfx.water&&sfx.water();pop(T[0],T[1],'♥ 힘 +10','#ff9ac8');toast('시원한 우물물 · 힘 +10 ('+(3-n-1)+'번 남음)');statUI();save()}}}
+ return _d()}})();
 })();
 
 </script>

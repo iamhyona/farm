@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792918000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792919000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -469,6 +469,13 @@ html body .phT .phT-c #phTgo{bottom:0!important;margin-bottom:0!important;box-sh
  #screen #ovTitle .phS-credit{font-size:11.5px!important;line-height:1.5!important;margin-top:8px!important}
  #screen #ovTitle .phS-sp.c{flex:0 0 4px!important}
 }
+#screen #ovPause #bResume{display:none!important}
+#screen #ovPause{gap:0!important}
+#screen #ovPause .btn{margin:0!important}
+#screen #ovPause .btn+.btn{margin-top:-1px!important}
+#screen #ovPause #pauseInfo{margin-bottom:14px!important}
+#screen #ovPause #bPauseX{margin-top:14px!important}
+#screen #ovPause .btn+.btn{margin-top:3px!important}
 
 </style></head>
 
@@ -509,10 +516,11 @@ html body .phT .phT-c #phTgo{bottom:0!important;margin-bottom:0!important;box-sh
     <div class="ov" id="ovPause">
       <div class="big" style="font-size:26px">메뉴</div>
       <div class="msg" id="pauseInfo"></div>
-      <button class="btn" id="bResume">계속하기</button>
+      <button class="btn" id="bResume" hidden>계속하기</button>
       <button class="btn" id="bSleep2">집에 가서 자기</button>
       <button class="btn" id="bSnd2">소리 끄기</button>
-      <button class="btn" id="bMenu">처음 화면</button>
+      <button class="btn" id="bMenu">홈 화면 가기</button>
+      <button class="x" id="bPauseX" aria-label="닫기">✕</button>
     </div>
   </div></div>
 </div>
@@ -1090,7 +1098,7 @@ $('pnL').addEventListener('click',e=>{const b=e.target.closest('button[data-a]')
 /* ===== 메뉴 ===== */
 const show=id=>$(id).classList.add('show'),hide=id=>$(id).classList.remove('show');
 function menu(on){if(!S||state!=='play')return;paused=on;if(on){$('pauseInfo').innerHTML=(()=>{const si=seasonIdx(),en=Math.round(S.en||0),ic=k=>`<img src="art/ic/${k}.png" alt="">`;return `<div class="pinfo"><div class="pi-top">${ic('season_'+SEASONS[si])}<div class="pi-day"><b>${SEASON_KO[si]} ${((S.day-1)%28)+1}일</b><small>${S.day}일차 · ${esc(S.name)}</small></div><b class="pi-time">${fmtT(S.min)}</b></div><div class="pi-en">${ic('hud_energy')}<span class="pi-bar"><i style="width:${Math.min(100,en)}%"></i></span><b>${en}<small>/100</small></b></div><div class="pi-grid"><div>${ic('sum_harvest')}<b>${S.st.hv}</b><small>수확</small></div><div>${ic('sum_earn')}<b>${S.st.earn.toLocaleString()}</b><small>번 돈</small></div><div>${ic('item_chicken')}<b>${S.ck.length}</b><small>닭</small></div></div></div>`})();show('ovPause')}else{hide('ovPause');actKey=''}}
-$('bPause').onclick=()=>menu(!paused);$('bResume').onclick=()=>menu(false);$('bSleep2').onclick=()=>{menu(false);S.pl.x=4.6;S.pl.y=5.6;sleep()};
+$('bPause').onclick=()=>menu(!paused);$('bResume').onclick=()=>menu(false);$('bPauseX').onclick=()=>menu(false);$('bSleep2').onclick=()=>{menu(false);S.pl.x=4.6;S.pl.y=5.6;sleep()};
 $('bMenu').onclick=()=>{save();hide('ovPause');paused=false;state='title';bgm(false);titleUI();show('ovTitle')};
 
 /* ===== 시작 화면 ===== */

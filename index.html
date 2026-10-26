@@ -48,7 +48,12 @@
 
 #screen #pnL.hasTabs{padding-top:0!important}
 #pnL .shopTabs{background:#f8e9c7!important;margin:0 -14px 4px!important;padding:10px 14px 8px!important;box-shadow:0 4px 6px -4px rgba(90,46,18,.25)}
-</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793015617";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+
+#pnL .it .bb{display:flex;flex-direction:column;gap:4px}#pnL .it .bb button{min-height:30px!important;height:30px!important;font-size:12px!important}
+#pnL .it .bsell{background:linear-gradient(#bfe8a0,#7cc25a)!important;border-color:#3f7a2a!important;color:#fff!important;font-size:12px!important;white-space:nowrap;padding:0 8px!important;text-shadow:0 1px 0 #3f7a2a}
+
+#screen #pnL .it .bb .bsell{background:linear-gradient(#bfe8a0,#6fb84c)!important;background-image:linear-gradient(#bfe8a0,#6fb84c)!important;border-image:none!important;border:2.5px solid #3f7a2a!important;border-radius:12px!important;color:#fff!important;text-shadow:0 1px 0 #2f5e1e!important;box-shadow:0 2px 0 #2f5e1e!important}
+</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793015756";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -2418,15 +2423,16 @@ function openBoard(){openOrders();const P=$('pnL'),H=hotCrops();if(!P)return;con
 const BAGGRP=[['crop','수확한 작물',id=>CROPS[id]&&!CROPS[id].fl],['flower','꽃다발',id=>CROPS[id]&&CROPS[id].fl],['food','음식 · 채집물',id=>ITEM[id].food!=null&&!CROPS[id]],['seed','씨앗',id=>ITEM[id].seed],['thing','물건',()=>true]];
 function openBag(){const L=[],seen=new Set();for(const [g,t,f] of BAGGRP){const R=S.inv.filter(v=>v&&v.n>0&&ITEM[v.id]&&!INVHIDE.includes(v.id)&&!seen.has(v.id)&&f(v.id));if(!R.length)continue;L.push(`<div class="hd">${t}</div>`);
   for(const v of R){seen.add(v.id);const it=ITEM[v.id];let btn,act,dis=false,sub='';
-   if(it.food!=null&&!it.seed){btn='먹기 +'+it.food;act='bag:eat:'+v.id;sub=sellOf(v.id)?'출하 '+sellOf(v.id)+'G':''}
+   if(it.food!=null&&!it.seed){btn='먹기 +'+it.food;act='bag:eat:'+v.id;sub=sellOf(v.id)?'개당 '+sellOf(v.id)+'G':''}
    else if(it.seed){btn='심기';act='bag:hold:'+v.id;sub='빈 밭을 눌러 심어요'}
    else if(it.place){btn='놓기';act='bag:hold:'+v.id;sub=it.desc?it.desc.split(' · ')[0]:''}
    else if(v.id==='rod'){btn='들기';act='bag:hold:'+v.id;sub='물가를 눌러 낚시해요'}
    else{btn=sellOf(v.id)?sellOf(v.id)+'G':'-';act='bag:none:'+v.id;dis=true;sub=sellOf(v.id)?'출하함에 팔 수 있어요':(it.desc||'')}
-   L.push(row(v.id,`${it.n} ×${v.n}`,sub,btn,act,dis))}}
+   let h=row(v.id,`${it.n} ×${v.n}`,sub,btn,act,dis);const sp=sellOf(v.id);if(sp&&act.indexOf('bag:none')<0)h=h.replace(/(<button data-a="bag:[^"]*"[^>]*>[^<]*<\/button>)<\/div>$/,`<div class="bb">$1<button class="bsell" data-a="bag:sell:${v.id}">팔기 ${(sp*v.n).toLocaleString()}G</button></div></div>`);if(sp&&act.indexOf('bag:none')===0)h=h.replace(/<button data-a="bag:none:[^"]*"[^>]*>[^<]*<\/button>/,`<button class="bsell" data-a="bag:sell:${v.id}">팔기 ${(sp*v.n).toLocaleString()}G</button>`);L.push(h)}}
  openPanel('바구니',L.length?L.join(''):'<div class="it"><div></div><div><small>아직 아무것도 없어요. 작물을 거두거나 숲가에서 채집해 보세요.</small></div><div></div></div>')}
 $('pnL').addEventListener('click',e=>{const b=e.target.closest('button[data-a^="bag:"]');if(!b||b.disabled)return;e.stopPropagation();const [,a,id]=b.dataset.a.split(':'),i=invIdx(id);if(i<0)return;S.sel=i;
  if(a==='eat'){eatSel();openBag();return}
+ if(a==='sell'){const n=count(id),g=sellOf(id)*n;if(n&&take(id,n)){S.gold+=g;S.st.earn+=g;gainSell(g);(sfx.buy||sfx.coin)();toast(`${ITEM[id].n} ${n}개 팔았어요 · +${g.toLocaleString()}G`);hud();save()}openBag();return}
  if(a==='hold'){$('ovPanel').classList.remove('show');paused=false;drawInv();toast(ITEM[id].seed?'빈 밭을 눌러 심어요':id==='rod'?'물가를 눌러 낚시해요':'놓을 곳을 눌러요')}},true);
 /* 들고 있는 물건 표시 */
 setInterval(()=>{if(!S)return;let b=$('holdBar');const id=selId(),it=ITEM[id]||{},show=state==='play'&&!MV&&id&&!INVHIDE.includes(id)&&(it.seed||it.place||id==='rod');

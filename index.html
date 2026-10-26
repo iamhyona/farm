@@ -4,7 +4,7 @@
 /* 안내 문구: 작은 박스 */
 #screen #toast2{background:rgba(251,240,216,.96)!important;color:#5a2e12!important;-webkit-text-stroke:0!important;border:2.5px solid #8a5a34;border-radius:12px;box-shadow:0 3px 0 #5a2e12,0 6px 14px rgba(0,0,0,.2);padding:6px 14px!important;font-size:13px!important;line-height:1.45!important;text-align:center;max-width:82%;white-space:pre-line!important;font-weight:400!important}
 #screen #toast2.show{animation:tst 2.6s ease-out forwards!important}
-</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793011382";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793011737";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -2242,6 +2242,76 @@ function drawRipeBubbles(t){if(!S||state!=='play'||!DROPI.complete||!DROPI.natur
  sfx.step=function(){if(!AC||!sound)return;try{const t=AC.currentTime,s=AC.createBufferSource(),f=AC.createBiquadFilter(),g=AC.createGain(),o=AC.createOscillator(),og=AC.createGain();lr^=1;const k=lr?1:.86;
   s.buffer=nb();f.type='bandpass';f.frequency.value=(900+Math.random()*250)*k;f.Q.value=1.1;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.085,t+.008);g.gain.exponentialRampToValueAtTime(.0001,t+.075);s.connect(f).connect(g).connect(AC.destination);s.start(t);s.stop(t+.1);
   o.type='sine';o.frequency.setValueAtTime(170*k,t);o.frequency.exponentialRampToValueAtTime(90,t+.06);og.gain.setValueAtTime(.0001,t);og.gain.exponentialRampToValueAtTime(.05,t+.006);og.gain.exponentialRampToValueAtTime(.0001,t+.07);o.connect(og).connect(AC.destination);o.start(t);o.stop(t+.09)}catch(e){}}})();
+/* ===== 소리 v3: 물 주기 = 졸졸 · 톡 = 낮고 부드럽게 ===== */
+(function(){let NB=null;const nb=()=>{if(NB||!AC)return NB;const n=AC.sampleRate*1;NB=AC.createBuffer(1,n,AC.sampleRate);const d=NB.getChannelData(0);let b=0;for(let i=0;i<n;i++){b=b*.97+(Math.random()*2-1)*.03;d[i]=b*6+(Math.random()*2-1)*.25}return NB};
+ const env=(g,t,a,v,d)=>{g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v,t+a);g.gain.exponentialRampToValueAtTime(.0001,t+d)};
+ sfx.water=function(){if(!AC||!sound)return;try{const t=AC.currentTime,s=AC.createBufferSource(),f=AC.createBiquadFilter(),f2=AC.createBiquadFilter(),g=AC.createGain();s.buffer=nb();f.type='lowpass';f.frequency.setValueAtTime(2200,t);f.frequency.linearRampToValueAtTime(1300,t+.55);f2.type='highpass';f2.frequency.value=380;env(g,t,.06,.05,.6);s.connect(f).connect(f2).connect(g).connect(AC.destination);s.start(t,Math.random()*.3);s.stop(t+.65);
+  for(let i=0;i<4;i++){const d=.08+i*.11+Math.random()*.05,o=AC.createOscillator(),og=AC.createGain(),fr=700+Math.random()*500;o.type='sine';o.frequency.setValueAtTime(fr,t+d);o.frequency.exponentialRampToValueAtTime(fr*1.8,t+d+.06);env(og,t+d,.005,.022,.08);o.connect(og).connect(AC.destination);o.start(t+d);o.stop(t+d+.1)}}catch(e){}};
+ sfx.click=function(){if(!AC||!sound)return;try{const t=AC.currentTime,o=AC.createOscillator(),g=AC.createGain();o.type='sine';o.frequency.setValueAtTime(430,t);o.frequency.exponentialRampToValueAtTime(300,t+.06);env(g,t,.004,.035,.07);o.connect(g).connect(AC.destination);o.start(t);o.stop(t+.09)}catch(e){}};
+})();
+
+/* ===== 처음 안내: 아이콘 하나씩 · 꼭 알아둘 기능 ===== */
+const TOUR=[
+ {q:'#stat .lv',t:'농장 레벨',d:'밭일·살림·채집·생산을 하면 경험치가 쌓여 올라요.\n누르면 다음에 열릴 것들이 보여요.'},
+ {q:'#stat .en',t:'힘',d:'일을 하면 줄어요.\n자기·먹기·쉬기로 다시 차요.'},
+ {q:()=>$('hGold')&&$('hGold').closest('.box'),t:'돈',d:'작물을 출하함에 넣어 팔면 벌어요.'},
+ {q:'.hrec',t:'기록',d:'지금까지 수확한 작물,\n번 돈, 키우는 닭 수예요.'},
+ {q:'.htodo',t:'오늘 할 일',d:'매일 바뀌는 할 일이에요.\n다 하면 돈과 경험치를 받아요.'},
+ {q:'#bPause',t:'설정',d:'소리 켜고 끄기, 게임 설명이 있어요.'},
+ {q:'#clk',t:'시계',d:'하루가 흘러가요.\n밤이 되면 집에서 자요.'},
+ {q:'#inv',t:'가방',d:'씨앗·음식·꾸미기 물건이에요.\n고른 뒤 땅을 누르면 심거나 놓아요.'},
+ {c:1,t:'이렇게 움직여요',L:[['tool_hand','톡','그곳으로 걸어가요'],['act_water','작물 톡','물 주기 · 수확 · 남은 시간'],['tool_hoe','풀밭 두 번 톡','밭을 갈아요 (PC 더블클릭)'],['tool_remove','밭·작물 꾹','다른 곳으로 옮겨요 (PC 우클릭)']]},
+ {c:1,t:'꼭 알아둘 것',L:[['act_sleep','잠자기','집을 누르면 낮잠(힘 +50)이나 내일까지 자요'],['item_eggjjim','요리','집에서 부엌을 열어 재료로 요리해요. 먹으면 힘이 많이 차요'],['item_mushroom','채집','숲 가장자리의 버섯·나물·나뭇가지를 눌러 주워요'],['rest_fire','회복','벤치에 앉기, 모닥불 불멍, 물가 물멍으로 쉬어요']],last:1}];
+let TI=-1,TPAUSE=false;
+function tourEl(){let o=$('tour');if(!o){o=document.createElement('div');o.id='tour';o.innerHTML='<div class="tr-hl"></div><div class="tr-card"><b class="tr-t"></b><div class="tr-d"></div><label class="tr-no"><input type="checkbox" id="trNo"> 다시 보지 않기</label><div class="tr-b"><button class="tr-skip">건너뛰기</button><span class="tr-n"></span><button class="tr-next">다음</button></div></div>';document.body.appendChild(o);
+ o.addEventListener('pointerdown',e=>e.stopPropagation());o.querySelector('.tr-next').onclick=()=>{sfx.click&&sfx.click();tourGo(TI+1)};o.querySelector('.tr-skip').onclick=()=>tourEnd()}return o}
+function tourGo(i){const o=tourEl();if(i>=TOUR.length)return tourEnd();TI=i;const st=TOUR[i],hl=o.querySelector('.tr-hl'),cd=o.querySelector('.tr-card');
+ o.querySelector('.tr-t').textContent=st.t;o.querySelector('.tr-n').textContent=(i+1)+' / '+TOUR.length;o.querySelector('.tr-next').textContent=st.last?'시작하기':'다음';o.querySelector('.tr-no').style.display=st.last?'':'none';o.querySelector('.tr-skip').style.visibility=st.last?'hidden':'';
+ const D=o.querySelector('.tr-d');if(st.c){D.innerHTML='<div class="tr-L">'+st.L.map(([ic,a,b])=>`<div><img src="art/${/^(rest_)/.test(ic)?'hud':'ic'}/${ic}.png" alt=""><p><b>${a}</b><small>${b}</small></p></div>`).join('')+'</div>'}else D.textContent=st.d;
+ const el=st.c?null:(typeof st.q==='function'?st.q():document.querySelector(st.q));cd.classList.toggle('wide',!!st.c);
+ if(el){const r=el.getBoundingClientRect(),pad=6;Object.assign(hl.style,{display:'block',left:(r.left-pad)+'px',top:(r.top-pad)+'px',width:(r.width+pad*2)+'px',height:(r.height+pad*2)+'px'});o.classList.remove('dim');
+  const cw=Math.min(300,innerWidth-24);let top=r.bottom+14;cd.style.width=cw+'px';cd.style.left=Math.max(12,Math.min(innerWidth-cw-12,r.left+r.width/2-cw/2))+'px';cd.style.top=top+'px';cd.style.transform='';requestAnimationFrame(()=>{const h=cd.offsetHeight;if(top+h>innerHeight-12)cd.style.top=Math.max(12,r.top-h-14)+'px'})}
+ else{hl.style.display='none';o.classList.add('dim');const cw=Math.min(340,innerWidth-24);cd.style.width=cw+'px';cd.style.left=(innerWidth-cw)/2+'px';cd.style.top='50%';cd.style.transform='translateY(-50%)'}
+ o.classList.add('show')}
+function tourStart(){if(!S||state!=='play')return;try{localStorage.setItem('pfHintLP3','1')}catch(_){}TPAUSE=paused;paused=true;tourGo(0)}
+function tourEnd(){const o=$('tour');if(!o)return;if($('trNo')&&$('trNo').checked){try{localStorage.setItem('pfTourOff','1')}catch(_){}}o.classList.remove('show');TI=-1;paused=TPAUSE;sfx.click&&sfx.click()}
+(function(){let done=0;const iv=setInterval(()=>{if(done)return clearInterval(iv);if(state==='play'&&S&&!paused&&!$('ovPanel').classList.contains('show')){done=1;let off=null;try{off=localStorage.getItem('pfTourOff')}catch(_){}if(!off&&!location.hash.includes('test'))setTimeout(tourStart,900)}},700)})();
+(function(){const st=document.createElement('style');st.textContent=`
+#tour{position:fixed;inset:0;z-index:60;display:none}#tour.show{display:block}#tour.dim{background:rgba(30,16,8,.55)}
+#tour .tr-hl{position:absolute;border-radius:14px;box-shadow:0 0 0 9999px rgba(30,16,8,.55),0 0 0 3px #ffe39a inset;pointer-events:none;transition:all .25s}
+#tour .tr-card{position:absolute;background:#fbf0d8;border:3px solid #8a5a34;border-radius:16px;box-shadow:0 4px 0 #5a2e12,0 10px 24px rgba(0,0,0,.3);padding:12px 14px 10px;color:#5a2e12;font-family:Paperlogy,sans-serif;box-sizing:border-box}
+#tour .tr-t{display:block;font:400 17px 'Cafe24Surround',Paperlogy,sans-serif;margin-bottom:4px}
+#tour .tr-d{font-size:13px;line-height:1.55;white-space:pre-line;word-break:keep-all}
+#tour .tr-L{display:flex;flex-direction:column;gap:7px;margin-top:4px}#tour .tr-L>div{display:flex;align-items:center;gap:10px;background:#fff8ea;border:1px solid #ecd9b8;border-radius:12px;padding:6px 8px}
+#tour .tr-L img{width:34px;height:34px;object-fit:contain;flex:none}#tour .tr-L p{margin:0;display:flex;flex-direction:column;line-height:1.35}#tour .tr-L b{font-size:13.5px}#tour .tr-L small{font-size:11.5px;color:#8a5a33;white-space:normal}
+#tour .tr-no{display:flex;align-items:center;gap:6px;font-size:12.5px;margin-top:10px;color:#8a5a33}#tour .tr-no input{width:16px;height:16px;accent-color:#8a5a34}
+#tour .tr-b{display:flex;align-items:center;justify-content:space-between;margin-top:10px;gap:8px}#tour .tr-n{font-size:11.5px;color:#a07a50}
+#tour .tr-b button{border:2.5px solid #5a2e12;border-radius:12px;padding:6px 14px;font:400 14px 'Cafe24Surround',Paperlogy,sans-serif;box-shadow:0 2px 0 #5a2e12;cursor:pointer}
+#tour .tr-skip{background:#e9d8b8;color:#5a2e12}#tour .tr-next{background:linear-gradient(#9be06a,#5fae3a);color:#fff}
+#remind{position:absolute;left:50%;bottom:78px;transform:translateX(-50%) translateY(10px);z-index:6;display:flex;align-items:center;gap:9px;width:max-content;max-width:86%;background:rgba(251,240,216,.97);border:2.5px solid #8a5a34;border-radius:14px;box-shadow:0 3px 0 #5a2e12,0 6px 14px rgba(0,0,0,.2);padding:7px 10px;color:#5a2e12;font:400 12.5px/1.45 Paperlogy,sans-serif;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;word-break:keep-all}
+#remind.show{opacity:1;transform:translateX(-50%);pointer-events:auto}#remind img{width:30px;height:30px;object-fit:contain;flex:none}#remind b{display:block;font-size:13px}`;document.head.appendChild(st)})();
+
+/* ===== 잊은 기능 알려주기 ===== */
+const nowT=()=>S.day*1440+S.min;
+(function(){const _t=taskHit;taskHit=function(k,n){if(S){if(!S.la)S.la={};S.la[k]=nowT()}return _t.apply(this,arguments)}})();
+(function(){const _e=eatSel;eatSel=function(){const r=_e.apply(this,arguments);if(r&&S){if(!S.la)S.la={};S.la.rest=nowT()}return r}})();
+(function(){const _g=give;give=function(id,n){if(S&&/^seed_fl_/.test(id)){if(!S.la)S.la={};S.la.flower=nowT()}return _g.apply(this,arguments)}})();
+function remindShow(ic,t,d){let r=$('remind');if(!r){r=document.createElement('div');r.id='remind';$('field').appendChild(r);r.addEventListener('pointerdown',e=>{e.stopPropagation();r.classList.remove('show')})}
+ r.innerHTML=`<img src="${ic}" alt=""><div><b>${t}</b>${d}</div>`;r.classList.add('show');clearTimeout(r._t);r._t=setTimeout(()=>r.classList.remove('show'),7000);sfx.pop&&sfx.pop()}
+let RMLAST=Date.now();
+setInterval(()=>{if(!S||state!=='play'||paused||(TI>=0)||Date.now()-RMLAST<150000)return;if(!S.la)S.la={};if(!S.rmd)S.rmd={};const T=nowT(),la=k=>S.la[k]!=null?S.la[k]:(S.la[k]=T),ok=k=>S.rmd[k]!==S.day;
+ let dry=0,ripe=0,soil=0;for(let y=0;y<MH;y++)for(let x2=0;x2<MW;x2++){const c=S.C[y][x2];if(c&&CROPS[c.k]){const C=CROPS[c.k];if(c.age>=C.days)ripe++;else if(!c.w&&S.G[y][x2]!=='w')dry++}else if(S.G[y][x2]==='s'&&!S.O[y][x2])soil++}
+ const seeds=S.inv.some(v=>ITEM[v.id]&&ITEM[v.id].seed&&v.n>0);
+ const R=[
+  ['rest',S.en<35&&T-la('rest')>600,'art/hud/rest_sit.png','힘이 떨어졌어요','벤치에 앉거나, 집에서 낮잠을 자거나, 음식을 먹으면 차요.'],
+  ['water',dry>0&&T-la('water')>240,'art/hud/drop_water.png','목마른 작물이 있어요','물방울이 뜬 작물을 톡 누르면 물을 줘요.'],
+  ['harvest',ripe>0&&T-la('harvest')>240,'art/hud/hud_harvest.png','다 자란 작물이 있어요','살랑 흔들리는 작물을 톡 누르면 거둬요.'],
+  ['plant',soil>0&&T-la('plant')>720,'art/ic/tool_seedbag.png','빈 밭이 있어요',seeds?'빈 밭을 톡 누르면 씨앗을 심어요.':'상점에서 씨앗을 사서 빈 밭에 심어요.'],
+  ['forage',T-la('forage')>1440*2,'art/ic/item_mushroom.png','숲가에 채집할 게 있어요','숲 가장자리의 버섯·나물·나뭇가지를 눌러 주워요.'],
+  ['flower',S.day>=3&&!S.la.flower,'art/ic/item_bouquet.png','꽃밭도 가꿔 보세요','상점에 계절 꽃씨가 있어요. 피면 꽃다발로 팔 수 있어요.'],
+  ['chicken',S.day>=4&&!(S.ck&&S.ck.length),'art/hud/hud_chicken.png','닭을 키워 보세요','상점에서 닭을 사면 매일 아침 달걀을 낳아요.']];
+ for(const [k,c,ic,t,d] of R)if(c&&ok(k)){S.rmd[k]=S.day;RMLAST=Date.now();remindShow(ic,t,d);break}},20000);
+if(window.__f)Object.assign(window.__f,{tourStart,tourGo,remindShow,RMreset:()=>{RMLAST=0}});
 })();
 
 </script>

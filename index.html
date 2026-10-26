@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792912000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792913000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -400,6 +400,25 @@ i.coin{display:inline-block;width:1.1em;height:1.1em;margin-left:2px;vertical-al
 #screen .hud .box.gold span{display:inline-flex!important;align-items:center!important;gap:3px;line-height:1!important}
 #screen .hud .box.gold span::after{vertical-align:middle!important;margin:0!important;width:18px!important;height:18px!important;flex:0 0 18px}
 i.coin{vertical-align:middle!important;position:relative;top:-.08em}
+#screen .tip{white-space:pre-line!important;word-break:keep-all!important;line-height:1.45!important;max-width:calc(100% - 24px)!important}
+/* 설정 메뉴 정보 카드 */
+#screen #pauseInfo{width:min(300px,86%);margin:10px auto 0!important;padding:0!important;background:none!important}
+.pinfo{background:#fbf0d8;border:3px solid #8a5a34;border-radius:16px;box-shadow:0 3px 0 #5a2e12;padding:12px 14px;color:#5a2e12;text-shadow:none!important;display:flex;flex-direction:column;gap:10px;text-align:left}
+.pinfo img{width:32px;height:32px;object-fit:contain;flex:0 0 32px}
+.pinfo b,.pinfo small{color:#5a2e12!important;text-shadow:none!important}
+.pi-top{display:flex;align-items:center;gap:10px}
+.pi-day{flex:1;display:flex;flex-direction:column;line-height:1.2}
+.pi-day b{font-size:19px}.pi-day small{font-size:12px;opacity:.75}
+.pi-time{font-size:22px;font-family:'Cafe24Surround',Paperlogy,sans-serif}
+.pi-en{display:flex;align-items:center;gap:8px}
+.pi-en img{width:24px;height:24px;flex-basis:24px}
+.pi-bar{flex:1;height:12px;border-radius:7px;background:#e6d2ad;box-shadow:inset 0 1px 2px rgba(90,46,18,.35);overflow:hidden}
+.pi-bar i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,#ffb52a,#ffe45a)}
+.pi-en b{font-size:15px;min-width:52px;text-align:right}.pi-en b small{font-size:11px;opacity:.7}
+.pi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;border-top:2px dashed #d9bf92;padding-top:10px}
+.pi-grid>div{display:flex;flex-direction:column;align-items:center;gap:2px}
+.pi-grid b{font-size:17px;line-height:1.1}.pi-grid small{font-size:11px;opacity:.75}
+#screen #pauseInfo{margin:4px auto 12px!important}
 
 </style></head>
 
@@ -439,11 +458,11 @@ i.coin{vertical-align:middle!important;position:relative;top:-.08em}
     </div>
     <div class="ov" id="ovPause">
       <div class="big" style="font-size:26px">메뉴</div>
+      <div class="msg" id="pauseInfo"></div>
       <button class="btn" id="bResume">계속하기</button>
       <button class="btn" id="bSleep2">집에 가서 자기</button>
       <button class="btn" id="bSnd2">소리 끄기</button>
       <button class="btn" id="bMenu">처음 화면</button>
-      <div class="msg" id="pauseInfo"></div>
     </div>
   </div></div>
 </div>
@@ -927,7 +946,7 @@ function drawPops(dt){for(const p of POPS){p.t+=dt;const q=iso(p.x,p.y,.8+p.t*1.
 const fmtT=m=>{const h=Math.floor(m/60)%24,mm=Math.floor(m%60/10)*10;return(h<10?'0':'')+h+':'+(mm<10?'0':'')+mm};
 function hud(){if(!S)return;$('hDay').textContent=S.day;$('hTime').textContent=fmtT(S.min)+(S.rain?' ☂':'');$('hGold').textContent=S.gold.toLocaleString()}
 function drawInv(){if(!S)return;const el=$('inv');el.innerHTML='';S.inv.forEach((s,i)=>{const b=document.createElement('button');if(i===S.sel)b.className='on';const c=document.createElement('canvas');c.width=c.height=72;drawIcon(c.getContext('2d'),s.id,72);b.appendChild(c);const n=document.createElement('b');n.textContent=ITEM[s.id]&&ITEM[s.id].tool?'':s.n;b.appendChild(n);
- b.onclick=e=>{e.stopPropagation();const it=ITEM[s.id];if(i===S.sel&&it.food!=null&&eatSel())return;S.sel=i;drawInv();tipT(it.n+(it.desc?' · '+it.desc:'')+(it.food?` · 한 번 더 누르면 먹어요 (+${it.food}⚡)`:''))};el.appendChild(b)})}
+ b.onclick=e=>{e.stopPropagation();const it=ITEM[s.id];if(i===S.sel&&it.food!=null&&eatSel())return;S.sel=i;drawInv();{const P=(it.desc?it.desc.split(' · '):[]);if(it.food)P.push(`한 번 더 누르면 먹어요`,`힘 +${it.food}⚡`);tipT(P.length?P[0]+(P.length>1?'\n'+P.slice(1).join(' · '):''):it.n)}};el.appendChild(b)})}
 let tipTm=0;function tipT(t){$('tip').textContent=t;tipTm=2.5}
 
 /* ===== 행동 버튼 ===== */
@@ -1020,7 +1039,7 @@ $('pnL').addEventListener('click',e=>{const b=e.target.closest('button[data-a]')
 
 /* ===== 메뉴 ===== */
 const show=id=>$(id).classList.add('show'),hide=id=>$(id).classList.remove('show');
-function menu(on){if(!S||state!=='play')return;paused=on;if(on){$('pauseInfo').innerHTML=`<b style="font-size:20px">${SEASON_KO[seasonIdx()]} ${((S.day-1)%28)+1}일 · ${fmtT(S.min)}</b><br>${S.day}일차<br>힘 ${Math.round(S.en||0)} / 100<br>${esc(S.name)}<br>수확 ${S.st.hv}번 · 번 돈 ${S.st.earn.toLocaleString()}G · 닭 ${S.ck.length}마리`;show('ovPause')}else{hide('ovPause');actKey=''}}
+function menu(on){if(!S||state!=='play')return;paused=on;if(on){$('pauseInfo').innerHTML=(()=>{const si=seasonIdx(),en=Math.round(S.en||0),ic=k=>`<img src="art/ic/${k}.png" alt="">`;return `<div class="pinfo"><div class="pi-top">${ic('season_'+SEASONS[si])}<div class="pi-day"><b>${SEASON_KO[si]} ${((S.day-1)%28)+1}일</b><small>${S.day}일차 · ${esc(S.name)}</small></div><b class="pi-time">${fmtT(S.min)}</b></div><div class="pi-en">${ic('hud_energy')}<span class="pi-bar"><i style="width:${Math.min(100,en)}%"></i></span><b>${en}<small>/100</small></b></div><div class="pi-grid"><div>${ic('sum_harvest')}<b>${S.st.hv}</b><small>수확</small></div><div>${ic('sum_earn')}<b>${S.st.earn.toLocaleString()}</b><small>번 돈</small></div><div>${ic('item_chicken')}<b>${S.ck.length}</b><small>닭</small></div></div></div>`})();show('ovPause')}else{hide('ovPause');actKey=''}}
 $('bPause').onclick=()=>menu(!paused);$('bResume').onclick=()=>menu(false);$('bSleep2').onclick=()=>{menu(false);S.pl.x=4.6;S.pl.y=5.6;sleep()};
 $('bMenu').onclick=()=>{save();hide('ovPause');paused=false;state='title';bgm(false);titleUI();show('ovTitle')};
 

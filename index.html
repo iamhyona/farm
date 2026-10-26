@@ -29,7 +29,7 @@
 #screen .hud.hud2 #stat .lv b,#screen .hud.hud2 #stat .en b#sEnT{width:auto!important;min-width:32px!important;flex:0 0 32px!important;white-space:nowrap;text-align:left!important}
 #screen .hud.hud2 #stat .lv b::before{content:'Lv';font-size:6.5px;margin-right:1px;letter-spacing:0;vertical-align:2px;opacity:.9}
 #screen #cropCard{width:max-content!important}#screen #cropCard .cc-bar{width:56px!important}#screen #cropCard .cc-m{flex:0 0 auto!important}
-</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793012525";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793012750";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -1876,7 +1876,7 @@ const COOK=[{in:{wildgreens:2},out:'namul'},{in:{snail:4},out:'snailsoup'},{in:{
 TASKS.cook={n:'부엌에서 요리',q:[1,1],r:25};
 function openHome(){const L=COOK.map((r,i)=>{const need=Object.entries(r.in),ok=need.every(([k,n])=>count(k)>=n);return{ok,h:row(r.out,ITEM[r.out].n,need.map(([k,n])=>`${ITEM[k].n} ${n} (${count(k)})`).join(' + ')+` · 힘 +${ITEM[r.out].food} · ${ITEM[r.out].sell}G`,'요리','ck:'+i,!ok)}}).sort((a,b)=>b.ok-a.ok);
  openPanel('우리 집','<div class="it"><canvas width="80" height="80" data-ic="sleep"></canvas><div><b>잠자기</b><small>하루를 마치고 내일 아침으로</small></div><button data-a="home:sleep">자기</button></div><div class="hd">🍳 부엌 · 바로 만들어요 (⚡1)</div>'+L.map(v=>v.h).join(''))}
-(function(){const _d=decide;decide=function(){const T=target();const o=T&&objAt(T[0],T[1]);if(o&&o.t==='house'&&!SIT)return{l:'집 (잠자기)',ic:'sleep',f:()=>sleepAsk()};return _d()}})();
+(function(){const _d=decide;decide=function(){const T=target();const o=T&&objAt(T[0],T[1]);if(o&&o.t==='house'&&!SIT)return{l:'집 (잠자기)',ic:'house',f:()=>sleepAsk()};return _d()}})();
 (function(){const _g=genDaily;genDaily=function(){_g();try{if(COOK.some(r=>Object.entries(r.in).every(([k,n])=>count(k)>=n))&&S.daily.L.length===3&&Math.random()<.5&&!S.daily.L.some(t=>t.k==='cook')){S.daily.L[2]={k:'cook',n:1,c:0,done:0};todoUI()}}catch(e){}}})();
 /* 멍석: 마당에 널어 말리기 */
 ITEM.mat={n:'멍석',price:40,place:1,mach:1,desc:'마당에 널어 고추·감·나물을 말려요'};
@@ -2356,6 +2356,14 @@ setInterval(()=>{if(!S||state!=='play'||paused||S.pl.mv||typeof SIT!=='undefined
  if(!n||S.en>=EN_MAX)return;S.en=Math.min(EN_MAX,S.en+.12*Math.min(n,6));if(++FLT%6===0){pop(P.x-.5,P.y-1.2,'♥','#ff9ac8');statUI()}
  if(!FLHINT){FLHINT=1;let k=null;try{k=localStorage.getItem('pfFlHint')}catch(_){}if(!k){try{localStorage.setItem('pfFlHint','1')}catch(_){}remindShow('art/ic/item_bouquet.png','꽃밭 힐링','활짝 핀 꽃 옆에 가만히 있으면 힘이 조금씩 차요.')}}},1000);
 /* 수확 알림은 채소만 */
+
+/* ===== 건물 그림을 누르면 그 건물로 (지붕 뒤 나무가 눌리지 않게) ===== */
+const BLDH={house:2.9,shop:2.6,coop:2.0};
+function bldAt(px,py){let best=null,bd=-1;for(let y=0;y<MH;y++)for(let xx=0;xx<MW;xx++){const o=S.O[y][xx];if(!o||!BLDH[o.t])continue;const w=o.w||1,d=o.d||1,H=BLDH[o.t]*TW;
+  const L=iso(o.x,o.y+d),B=iso(o.x+w,o.y+d),R=iso(o.x+w,o.y),T=iso(o.x,o.y);const P=[L,B,R,[R[0],R[1]-H],[T[0],T[1]-H],[L[0],L[1]-H]];
+  let inside=false;for(let i=0,j=P.length-1;i<P.length;j=i++){const a=P[i],b=P[j];if((a[1]>py)!==(b[1]>py)&&px<(b[0]-a[0])*(py-a[1])/(b[1]-a[1])+a[0])inside=!inside}
+  if(inside&&o.x+o.y>bd){bd=o.x+o.y;best=[o.x,o.y]}}return best}
+(function(){const _t=tapTile;tapTile=function(e){const r=cv.getBoundingClientRect(),px=(e.clientX-r.left)*DPR,py=(e.clientY-r.top)*DPR;if(S){const b=bldAt(px,py);if(b){const t=_t(e);const o=t&&inMap(t[0],t[1])&&objAt(t[0],t[1]);if(!o||o.t==='tree'||o.t==='bush'||o===objAt(b[0],b[1]))return b}}return _t(e)}})();
 })();
 
 </script>

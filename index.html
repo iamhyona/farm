@@ -29,7 +29,7 @@
 #screen .hud.hud2 #stat .lv b,#screen .hud.hud2 #stat .en b#sEnT{width:auto!important;min-width:32px!important;flex:0 0 32px!important;white-space:nowrap;text-align:left!important}
 #screen .hud.hud2 #stat .lv b::before{content:'Lv';font-size:6.5px;margin-right:1px;letter-spacing:0;vertical-align:2px;opacity:.9}
 #screen #cropCard{width:max-content!important}#screen #cropCard .cc-bar{width:56px!important}#screen #cropCard .cc-m{flex:0 0 auto!important}
-</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793012276";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793012392";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -2286,7 +2286,7 @@ const TOUR=[
  {q:'#clk',t:'시계',d:'하루가 흘러가요.\n밤이 되면 집에서 자요.'},
  {q:'#inv',t:'가방',d:'씨앗·음식·꾸미기 물건이에요.\n고른 뒤 땅을 누르면 심거나 놓아요.'},
  {c:1,t:'이렇게 움직여요',L:[['tool_hand','톡','그곳으로 걸어가요'],['act_water','작물 톡','물 주기 · 수확 · 남은 시간'],['tool_hoe','풀밭 두 번 톡','밭을 갈아요 (PC 더블클릭)'],['tool_remove','밭·작물 꾹','다른 곳으로 옮겨요 (PC 우클릭)']]},
- {c:1,t:'꼭 알아둘 것',L:[['act_sleep','잠자기','집을 누르면 낮잠(힘 +50)이나 내일까지 자요'],['item_eggjjim','요리','집에서 부엌을 열어 재료로 요리해요. 먹으면 힘이 많이 차요'],['item_mushroom','채집','숲 가장자리의 버섯·나물·나뭇가지를 눌러 주워요'],['rest_fire','회복','벤치에 앉기, 모닥불 불멍, 물가 물멍으로 쉬어요']],last:1}];
+ {c:1,t:'꼭 알아둘 것',L:[['act_sleep','잠자기','집을 누르면 낮잠(힘 +50)이나 내일까지 자요'],['item_eggjjim','요리','집에서 부엌을 열어 재료로 요리해요. 먹으면 힘이 많이 차요'],['item_mushroom','채집','숲 가장자리의 버섯·나물·나뭇가지를 눌러 주워요'],['rest_fire','회복','벤치에 앉기, 모닥불 불멍, 물가 물멍, 꽃밭 옆에서 쉬어요']],last:1}];
 let TI=-1,TPAUSE=false;
 function tourEl(){let o=$('tour');if(!o){o=document.createElement('div');o.id='tour';o.innerHTML='<div class="tr-hl"></div><div class="tr-card"><b class="tr-t"></b><div class="tr-d"></div><label class="tr-no"><input type="checkbox" id="trNo"> 다시 보지 않기</label><div class="tr-b"><button class="tr-skip">건너뛰기</button><span class="tr-n"></span><button class="tr-next">다음</button></div></div>';document.body.appendChild(o);
  o.addEventListener('pointerdown',e=>e.stopPropagation());o.querySelector('.tr-next').onclick=()=>{sfx.click&&sfx.click();tourGo(TI+1)};o.querySelector('.tr-skip').onclick=()=>tourEnd()}return o}
@@ -2325,7 +2325,7 @@ function remindShow(ic,t,d){let r=$('remind');if(!r){r=document.createElement('d
  r.innerHTML=`<img src="${ic}" alt=""><div><b>${t}</b>${d}</div>`;r.classList.add('show');clearTimeout(r._t);r._t=setTimeout(()=>r.classList.remove('show'),7000);sfx.pop&&sfx.pop()}
 let RMLAST=Date.now();
 setInterval(()=>{if(!S||state!=='play'||paused||(TI>=0)||Date.now()-RMLAST<150000)return;if(!S.la)S.la={};if(!S.rmd)S.rmd={};const T=nowT(),la=k=>S.la[k]!=null?S.la[k]:(S.la[k]=T),ok=k=>S.rmd[k]!==S.day;
- let dry=0,ripe=0,soil=0;for(let y=0;y<MH;y++)for(let x2=0;x2<MW;x2++){const c=S.C[y][x2];if(c&&CROPS[c.k]){const C=CROPS[c.k];if(c.age>=C.days)ripe++;else if(!c.w&&S.G[y][x2]!=='w')dry++}else if(S.G[y][x2]==='s'&&!S.O[y][x2])soil++}
+ let dry=0,ripe=0,soil=0;for(let y=0;y<MH;y++)for(let x2=0;x2<MW;x2++){const c=S.C[y][x2];if(c&&CROPS[c.k]){const C=CROPS[c.k];if(c.age>=C.days){if(!C.fl)ripe++}else if(!c.w&&S.G[y][x2]!=='w')dry++}else if(S.G[y][x2]==='s'&&!S.O[y][x2])soil++}
  const seeds=S.inv.some(v=>ITEM[v.id]&&ITEM[v.id].seed&&v.n>0);
  const R=[
   ['rest',S.en<35&&T-la('rest')>600,'art/hud/rest_sit.png','힘이 떨어졌어요','벤치에 앉거나, 집에서 낮잠을 자거나, 음식을 먹으면 차요.'],
@@ -2343,6 +2343,19 @@ function lvUpShow(lv,L){let e=$('lvUp');if(!e){e=document.createElement('div');e
  e.innerHTML=`<span class="lv-s">LEVEL UP</span><span class="lv-n"><img src="art/hud/hud_star.png" alt="">Lv ${lv}</span>`+(L&&L.length?`<span class="lv-u"><b>새로 열림</b> · ${L.join(' · ')}</span>`:'');
  e.classList.remove('show');void e.offsetWidth;e.classList.add('show');try{sfx.grow&&setTimeout(sfx.grow,150)}catch(_){}}
 if(window.__f)Object.assign(window.__f,{lvUpShow});
+
+/* ===== 꽃: 먹지 않아요 · 꽃 구경 · 꽃밭 힐링 ===== */
+for(const k in CROPS)if(CROPS[k].fl&&ITEM[k]){delete ITEM[k].food;ITEM[k].desc='곱게 묶은 '+CROPS[k].n+' 꽃다발 · 출하함에 팔거나 주문에 납품해요'}
+function flowerSee(tx,ty){const c=S.C[ty][tx];if(!c)return;if(c.sm===S.day){toast('오늘은 이미 구경했어요\n꽃 옆에 머물면 힘이 조금씩 차요');return}
+ c.sm=S.day;S.en=Math.min(EN_MAX,(S.en||0)+3);pop(tx,ty,'♥ 힘 +3','#ff9ac8');sfx.pop&&sfx.pop();if(!S.la)S.la={};S.la.rest=nowT();try{taskHit('rest')}catch(_){}statUI();save()}
+(function(){const _c=cropAsk;cropAsk=function(tx,ty){const c=S.C[ty][tx],C=c&&CROPS[c.k];if(C&&C.fl&&c.age>=C.days){openTM(tx,ty,[{ic:c.k,l:'꽃 구경',f:()=>flowerSee(tx,ty)},{ic:'item_bouquet',l:'꽃다발 만들기',f:()=>useTool('basket',tx,ty)}],C.n+(((C.n.charCodeAt(C.n.length-1)-0xAC00)%28)?'이':'가')+' 활짝 피었어요');return}return _c(tx,ty)}})();
+/* 꽃밭 옆에서 가만히 있으면 힘이 조금씩 */
+let FLT=0,FLHINT=0;
+setInterval(()=>{if(!S||state!=='play'||paused||S.pl.mv||typeof SIT!=='undefined'&&SIT)return;const P=S.pl,px=Math.floor(P.x),py=Math.floor(P.y);let n=0;
+ for(let y=py-2;y<=py+2;y++)for(let x2=px-2;x2<=px+2;x2++){const c=inMap(x2,y)&&S.C[y][x2];if(c&&CROPS[c.k]&&CROPS[c.k].fl&&c.age>=CROPS[c.k].days)n++}
+ if(!n||S.en>=EN_MAX)return;S.en=Math.min(EN_MAX,S.en+.12*Math.min(n,6));if(++FLT%6===0){pop(P.x-.5,P.y-1.2,'♥','#ff9ac8');statUI()}
+ if(!FLHINT){FLHINT=1;let k=null;try{k=localStorage.getItem('pfFlHint')}catch(_){}if(!k){try{localStorage.setItem('pfFlHint','1')}catch(_){}remindShow('art/ic/item_bouquet.png','꽃밭 힐링','활짝 핀 꽃 옆에 가만히 있으면 힘이 조금씩 차요.')}}},1000);
+/* 수확 알림은 채소만 */
 })();
 
 </script>

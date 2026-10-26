@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792933900";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792934000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -1150,7 +1150,7 @@ function outsideTrees(L){const [a0]=scr2w(0,0),[a1]=scr2w(W,H),[,b0]=scr2w(W,0),
 
 let nightA=0,clouds=[...Array(5)].map((_,i)=>({x:i*7,y:i*5+2,s:1+i%3*.5}));
 function render(t){if(!S)return;const P=S.pl,want=[(P.x-P.y)*TW/2,(P.x+P.y)*TH/2];if(!(typeof DRAGGING!=='undefined'&&DRAGGING)&&!window.CAMFREE){CX+=(want[0]-CX)*.18;CY+=(want[1]-CY)*.18}
- x.setTransform(1,0,0,1,0,0);x.fillStyle='#6aae47';x.fillRect(0,0,W,H);drawGround(t);
+ x.setTransform(1,0,0,1,0,0);{const pt=grassPat();if(pt){const o=iso(0,0);try{pt.setTransform(new DOMMatrix([1,0,0,1,o[0],o[1]]))}catch(e){}x.fillStyle=pt}else x.fillStyle='#6aae47'}x.fillRect(0,0,W,H);drawGround(t);
  if(state==='play'&&typeof TAPQ!=='undefined')TAPQ.forEach((q,i)=>{const pq=[iso(q[0],q[1],.11),iso(q[0]+1,q[1],.11),iso(q[0]+1,q[1]+1,.11),iso(q[0],q[1]+1,.11)];x.save();x.setLineDash([5*DPR,4*DPR]);x.lineDashOffset=-t*20;poly(pq,i?'rgba(255,255,255,.12)':'rgba(255,240,150,.25)',i?'rgba(255,255,255,.7)':'#fff6b0',2);x.restore()});
  const T=target();if(T&&state==='play'&&typeof KEYMODE!=='undefined'&&KEYMODE){const q=[iso(T[0],T[1],.11),iso(T[0]+1,T[1],.11),iso(T[0]+1,T[1]+1,.11),iso(T[0],T[1]+1,.11)];x.save();x.setLineDash([5*DPR,4*DPR]);x.lineDashOffset=-t*20;poly(q,'rgba(255,240,150,.2)','#fff6b0',2);x.restore()}
  const L=[];for(let y=0;y<MH;y++)for(let xx=0;xx<MW;xx++){const o=S.O[y][xx];if(o&&o.t!=='part'){const w=o.w||1,d=o.d||1;L.push([(w>1||d>1)?xx+y+Math.min(w,d)-.05:xx+y+.5,()=>drawObj(o,t)])}const c=S.C[y][xx];if(c)L.push([xx+y+.4,()=>drawCrop(c,xx,y,t)])}
@@ -1921,6 +1921,12 @@ function cropCard(C,cr,L){let el=$('cropCard');if(!el){el=document.createElement
  const p=Math.max(.04,Math.min(1,cr.age/C.days));drawIcon(el.querySelector('canvas').getContext('2d'),cr.k,64);
  el.querySelector('b').textContent=C.n;el.querySelector('.cc-bar i').style.width=(p*100)+'%';el.querySelector('small').textContent=fmtAt(L)+' 수확 · '+fmtLeft(L)+' 남음';
  el.classList.toggle('dry',!cr.w);el.classList.remove('show');void el.offsetWidth;el.classList.add('show');clearTimeout(CCT);CCT=setTimeout(()=>el.classList.remove('show'),3200)}
+/* 지도 바깥 바닥: 풀밭 무늬를 한 번 만들어 반복해서 깔기 */
+let GP=null,GPk='';
+function grassPat(){try{const sk=seasonIdx()!==1&&artOK('grass_'+seasonKey())?['grass_'+seasonKey()]:['tile_grass_1','tile_grass_2','tile_grass_3'].filter(artOK);if(!sk.length)return null;const key=sk.join()+'|'+TW;if(GPk===key)return GP;
+ const N=4,M2=2*N,PW=Math.round(TW*N),PH=Math.round(TH*N),c=cnv(PW,PH),g=c.getContext('2d'),k2=TW/ART_BASE;
+ for(let l=-2;l<=M2+2;l++)for(let k=-2;k<=M2+2;k++){if((k+l)&1)continue;const v=hsh(((k%M2)+M2)%M2,((l%M2)+M2)%M2,7),kk=sk.length===1?sk[0]:(v<.07&&sk[2]?sk[2]:v<.27&&sk[1]?sk[1]:sk[0]),a=ART[kk];g.drawImage(a.img,k*TW/2-a.ax*k2,l*TH/2-a.ay*k2,a.w*k2,a.h*k2)}
+ GP=x.createPattern(c,'repeat');GPk=key;return GP}catch(e){return null}}
 })();
 
 </script>

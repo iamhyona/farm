@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792934000";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792934100";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -720,6 +720,20 @@ html body .phT .phT-c .trow span{font-size:13.5px!important}
 #cropCard .cc-bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(#a8e06a,#5fae3a)}
 #cropCard.dry .cc-bar i{background:linear-gradient(#d8cba8,#b9a77c)}
 #cropCard small{font-size:12px;font-family:Paperlogy,sans-serif;color:#8a5a33;white-space:nowrap}
+/* 구매 확인 창 */
+#buyCf{position:absolute;inset:0;z-index:20;display:none;align-items:center;justify-content:center;background:rgba(42,23,18,.45)}
+#buyCf.show{display:flex}
+#buyCf .bc{width:min(260px,80%);background:#fbf0d8;border:4px solid #8a5a34;border-radius:18px;box-shadow:0 4px 0 #5a2e12;padding:16px 16px 14px;display:flex;flex-direction:column;align-items:center;gap:6px;color:#5a2e12;text-align:center;font-family:'Cafe24Surround',Paperlogy,sans-serif;animation:hpIn .15s ease-out}
+#buyCf canvas{width:56px;height:56px}
+#buyCf b{font-size:18px;font-weight:400}
+#buyCf p{margin:0;font-size:15px;line-height:1.5}
+#buyCf p em{font-style:normal;color:#c07a1c}
+#buyCf p small{font-family:Paperlogy,sans-serif;font-size:12px;color:#8a5a33}
+#buyCf .bcb{display:flex;gap:8px;width:100%;margin-top:6px}
+#buyCf .bcb button{flex:1;height:42px;border-radius:12px;border:3px solid #5a2e12;font:400 16px 'Cafe24Surround',Paperlogy,sans-serif;cursor:pointer;box-shadow:0 3px 0 #5a2e12}
+#buyCf .bcb .no{background:#e9d8b8;color:#5a2e12}
+#buyCf .bcb .yes{background:linear-gradient(#9be06a,#5fae3a);color:#fff;text-shadow:0 1.5px 0 #2f5a1a}
+#buyCf .bcb button:active{transform:translateY(2px);box-shadow:0 1px 0 #5a2e12}
 </style></head>
 
 <body>
@@ -1365,7 +1379,7 @@ function openSell(){const L=S.inv.filter(s=>sellOf(s.id)).map(s=>row(s.id,`${ITE
 function openOrders(){const L=S.orders.map((o,i)=>{const have=count(o.id);return row(o.id,`${ITEM[o.id].n} ${o.q}개`,o.done?'완료!':`가진 개수 ${have} · 보상 ${o.r}G`,o.done?'완료':'납품','ord:'+i,o.done||have<o.q)});
  openPanel(`주문 게시판 · ${S.day}일차`,L.join('')+'<div class="it"><div></div><div><small>주문은 매일 아침 새로 바뀌어요. 시장가보다 더 많이 받아요!</small></div><div></div></div>')}
 $('pnL').addEventListener('click',e=>{const b=e.target.closest('button[data-a]');if(!b||b.disabled)return;const [a,v]=b.dataset.a.split(':');
- if(a==='buy'){const it=ITEM[v];if(S.gold<it.price)return;S.gold-=it.price;if(v==='chicken'){addChicken();toast('닭이 닭장 마당에 왔어요!');sfx.cluck()}else{give(v);sfx.coin()}hud();openShop()}
+ if(a==='buy'){const it=ITEM[v];if(S.gold<it.price)return;S.gold-=it.price;if(v==='chicken'){addChicken();toast('닭이 닭장 마당에 왔어요!');sfx.cluck()}else{give(v);(sfx.buy||sfx.coin)()}hud();openShop()}
  else if(a==='sell'){const n=count(v),g=sellOf(v)*n;if(take(v,n)){S.gold+=g;S.st.earn+=g;gainSell(g);sfx.coin();toast(`+${g.toLocaleString()}G`);hud();openSell()}}
  else if(a==='ord'){const o=S.orders[+v];if(o&&!o.done&&take(o.id,o.q)){o.done=1;S.gold+=o.r;S.st.earn+=o.r;gainSell(o.r);sfx.get();toast(`주문 완료! +${o.r}G`);hud();openOrders()}}
  save()});
@@ -1533,6 +1547,8 @@ if(window.__f)Object.assign(window.__f,{openExpand,doExpand,ensureLand,ZONES});
  sfx.grow=()=>{[523,659,784,1047].forEach((f,i)=>tn(f,.18,'sine',.022,null,i*.09,fx()))};
  sfx.ripe=()=>{tn(1318,.6,'sine',.03,null,0,fx());tn(1976,.45,'sine',.014,null,0,fx());tn(2637,.3,'sine',.008,null,.02,fx())};
  sfx.harvest=()=>{nz('bandpass',900,.06,.07,0,2,fx());tn(420,.08,'triangle',.06,820,.02,fx());tn(1175,.1,'sine',.025,null,.09,fx());tn(1568,.14,'sine',.02,null,.15,fx())};
+ sfx.buy=()=>{const P=[2637,3136,2349,2794,3520,2093];P.forEach((f,i)=>{const d=i*.045+Math.random()*.02;tn(f,.16,'triangle',.022,f*.985,d,fx());tn(f*2.01,.09,'sine',.008,null,d,fx())});nz('highpass',6000,.25,.012,0,.6,fx());tn(1320,.12,'square',.012,1046,.3,fx())};
+ sfx.pop=()=>{tn(880,.05,'sine',.03,1180,0,fx())};
  /* 빗방울 */
  function drop(){const f=1600+Math.random()*2400;tn(f,.025+Math.random()*.03,'sine',.0035+Math.random()*.004,f*.5,Math.random()*.05,mu())}
  function drip(){tn(620+Math.random()*180,.09,'sine',.007,380,0,mu());tn(900,.05,'sine',.003,500,.11,mu())}
@@ -1927,6 +1943,13 @@ function grassPat(){try{const sk=seasonIdx()!==1&&artOK('grass_'+seasonKey())?['
  const N=4,M2=2*N,PW=Math.round(TW*N),PH=Math.round(TH*N),c=cnv(PW,PH),g=c.getContext('2d'),k2=TW/ART_BASE;
  for(let l=-2;l<=M2+2;l++)for(let k=-2;k<=M2+2;k++){if((k+l)&1)continue;const v=hsh(((k%M2)+M2)%M2,((l%M2)+M2)%M2,7),kk=sk.length===1?sk[0]:(v<.07&&sk[2]?sk[2]:v<.27&&sk[1]?sk[1]:sk[0]),a=ART[kk];g.drawImage(a.img,k*TW/2-a.ax*k2,l*TH/2-a.ay*k2,a.w*k2,a.h*k2)}
  GP=x.createPattern(c,'repeat');GPk=key;return GP}catch(e){return null}}
+/* 상점: 사기 전에 확인 창 */
+let BUYOK=0;
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#pnL button[data-a^="buy:"]');if(!b||b.disabled)return;if(BUYOK){BUYOK=0;return}
+ e.preventDefault();e.stopImmediatePropagation();const id=b.dataset.a.split(':')[1],it=ITEM[id];if(!it)return;
+ let m=$('buyCf');if(!m){m=document.createElement('div');m.id='buyCf';m.innerHTML='<div class="bc"><canvas width="96" height="96"></canvas><b></b><p></p><div class="bcb"><button class="no">취소</button><button class="yes">사기</button></div></div>';$('ovPanel').appendChild(m);
+  m.addEventListener('click',ev=>{ev.stopPropagation();if(ev.target.closest('.yes')){m.classList.remove('show');const t=m._b;if(t&&document.contains(t)){BUYOK=1;t.click()}}else if(ev.target.closest('.no')||ev.target===m){m.classList.remove('show');sfx.click&&sfx.click()}})}
+ m._b=b;drawIcon(m.querySelector('canvas').getContext('2d'),id,96);m.querySelector('b').textContent=it.n;m.querySelector('p').innerHTML=`<em>${it.price.toLocaleString()}G</em>에 살까요?<br><small>남는 돈 ${(S.gold-it.price).toLocaleString()}G</small>`;m.classList.add('show');sfx.pop&&sfx.pop()},true);
 })();
 
 </script>

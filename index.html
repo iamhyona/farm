@@ -4,7 +4,26 @@
 /* 안내 문구: 작은 박스 */
 #screen #toast2{background:rgba(251,240,216,.96)!important;color:#5a2e12!important;-webkit-text-stroke:0!important;border:2.5px solid #8a5a34;border-radius:12px;box-shadow:0 3px 0 #5a2e12,0 6px 14px rgba(0,0,0,.2);padding:6px 14px!important;font-size:13px!important;line-height:1.45!important;text-align:center;max-width:82%;white-space:pre-line!important;font-weight:400!important}
 #screen #toast2.show{animation:tst 2.6s ease-out forwards!important}
-</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793011737";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+
+/* 작게: 작물 정보 · 주운 물건 */
+#screen #cropCard{min-width:0!important;gap:6px!important;padding:5px 10px 5px 6px!important;border-width:2.5px!important;border-radius:12px!important}
+#screen #cropCard canvas{width:26px!important;height:26px!important;flex:0 0 26px!important}
+#screen #cropCard b{font-size:12.5px!important}#screen #cropCard small{font-size:10.5px!important}
+#screen #cropCard .cc-bar{height:6px!important;width:90px}#screen #cropCard .cc-m{gap:2px!important}#screen #cropCard .cc-w{font-size:9.5px!important}
+#screen #gotCard{gap:4px!important;padding:6px 10px!important;border-width:2.5px!important;border-radius:12px!important}
+#screen #gotCard canvas{width:26px!important;height:26px!important;flex:0 0 26px!important}
+#screen #gotCard .gr{gap:7px!important}#screen #gotCard .gr+.gr{padding-top:4px!important}
+#screen #gotCard b{font-size:12.5px!important}#screen #gotCard small{font-size:10px!important;font-weight:500!important}
+/* 레벨업 */
+#lvUp{position:absolute;left:50%;top:22%;transform:translate(-50%,0) scale(.6);z-index:7;display:flex;flex-direction:column;align-items:center;gap:4px;pointer-events:none;opacity:0}
+#lvUp.show{animation:lvIn 3.6s ease-out forwards}
+@keyframes lvIn{0%{opacity:0;transform:translate(-50%,0) scale(.5)}10%{opacity:1;transform:translate(-50%,0) scale(1.12)}16%{transform:translate(-50%,0) scale(1)}85%{opacity:1}100%{opacity:0;transform:translate(-50%,-10px) scale(1)}}
+#lvUp .lv-s{font:400 15px 'Cafe24Surround',Paperlogy,sans-serif;color:#fff6c0;-webkit-text-stroke:3px #5a2e12;paint-order:stroke;letter-spacing:.12em}
+#lvUp .lv-n{display:flex;align-items:center;gap:6px;font:400 44px 'Cafe24Surround',Paperlogy,sans-serif;color:#ffd23f;-webkit-text-stroke:5px #5a2e12;paint-order:stroke;line-height:1}
+#lvUp .lv-n img{width:42px;height:42px;filter:drop-shadow(0 2px 0 #5a2e12)}
+#lvUp .lv-u{margin-top:4px;max-width:260px;background:rgba(251,240,216,.95);border:2px solid #8a5a34;border-radius:10px;padding:4px 9px;font:400 10.5px/1.45 Paperlogy,sans-serif;color:#5a2e12;text-align:center;word-break:keep-all}
+#lvUp .lv-u b{color:#c07a1c}
+</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1793011958";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -1471,7 +1490,7 @@ const RECIPES={
 function ensureAlpha(){if(!S)return;ensureLand();ensureTools();let ch=0;if(S.inv&&!S.inv.some(s=>s.id==='hoe')){S.inv.unshift({id:'hoe',n:1});S.sel=(S.sel||0)+1;ch=1}if(S.inv&&!S.inv.some(s=>s.id==='hand')){S.inv.unshift({id:'hand',n:1});S.sel=0;ch=1}if(ch)setTimeout(()=>{try{drawInv()}catch(e){}},0);if(S.lv==null){S.lv=1;S.xp=0}if(S.en==null)S.en=EN_MAX;if(!S.mach)S.mach={};if(!S.today)S.today={earn:0,hv:0,made:0,xp:0}}
 /* 경험치 */
 function addXP(n,tx,ty){ensureAlpha();n=Math.round(n);if(n<=0)return;S.xp+=n;S.today.xp+=n;if(tx!=null)pop(tx,ty,`+${n} EXP`,'#9fe8ff');
- while(S.lv<LVMAX&&S.xp>=xpNeed(S.lv)){S.xp-=xpNeed(S.lv);S.lv++;const L=(LVUNL[S.lv]||[]).map(k=>CROPS[k]&&CROPS[k].fl?ITEM['seed_'+k].n:ITEM[k]?ITEM[k].n:k);sfx.get();setTimeout(()=>toast(`레벨 ${S.lv}!`+(L.length?' · 새로 열림: '+L.join(', '):'')),300)}statUI()}
+ while(S.lv<LVMAX&&S.xp>=xpNeed(S.lv)){S.xp-=xpNeed(S.lv);S.lv++;const L=(LVUNL[S.lv]||[]).map(k=>CROPS[k]&&CROPS[k].fl?ITEM['seed_'+k].n:ITEM[k]?ITEM[k].n:k);sfx.get();setTimeout(()=>lvUpShow(S.lv,L),300)}statUI()}
 function gainSell(g){addXP(g/25)}
 /* 행동력 */
 function spend(c){ensureAlpha();if(S.en<c){toast('힘이 없어요… 음식을 먹거나 집에서 쉬어요');sfx.no();return false}S.en=Math.max(0,S.en-c);statUI();return true}
@@ -1972,7 +1991,7 @@ delete EMO.campfire;delete EMO.mat;
 let CCT=0;
 function cropCard(C,cr,L){let el=$('cropCard');if(!el){el=document.createElement('div');el.id='cropCard';el.innerHTML='<canvas width="64" height="64"></canvas><div class="cc-m"><div class="cc-t"><b></b><span class="cc-w"><img src="art/hud/rest_water.png" alt="">물 필요</span></div><span class="cc-bar"><i></i></span><small></small></div>';$('screen').appendChild(el)}
  const p=Math.max(.04,Math.min(1,cr.age/C.days));drawIcon(el.querySelector('canvas').getContext('2d'),cr.k,64);
- el.querySelector('b').textContent=C.n;el.querySelector('.cc-bar i').style.width=(p*100)+'%';el.querySelector('small').textContent=fmtAt(L)+' 수확 · '+fmtLeft(L)+' 남음';
+ el.querySelector('b').textContent=C.n;el.querySelector('.cc-bar i').style.width=(p*100)+'%';el.querySelector('small').textContent=fmtLeft(L)+' 남음';
  el.classList.toggle('dry',!cr.w);el.classList.remove('show');void el.offsetWidth;el.classList.add('show');clearTimeout(CCT);CCT=setTimeout(()=>el.classList.remove('show'),3200)}
 /* 지도 바깥 바닥: 풀밭 무늬를 한 번 만들어 반복해서 깔기 */
 let GP=null,GPk='';
@@ -2312,6 +2331,12 @@ setInterval(()=>{if(!S||state!=='play'||paused||(TI>=0)||Date.now()-RMLAST<15000
   ['chicken',S.day>=4&&!(S.ck&&S.ck.length),'art/hud/hud_chicken.png','닭을 키워 보세요','상점에서 닭을 사면 매일 아침 달걀을 낳아요.']];
  for(const [k,c,ic,t,d] of R)if(c&&ok(k)){S.rmd[k]=S.day;RMLAST=Date.now();remindShow(ic,t,d);break}},20000);
 if(window.__f)Object.assign(window.__f,{tourStart,tourGo,remindShow,RMreset:()=>{RMLAST=0}});
+
+/* ===== 레벨업: 크게 · 열린 것은 작게 ===== */
+function lvUpShow(lv,L){let e=$('lvUp');if(!e){e=document.createElement('div');e.id='lvUp';$('field').appendChild(e)}
+ e.innerHTML=`<span class="lv-s">LEVEL UP</span><span class="lv-n"><img src="art/hud/hud_star.png" alt="">Lv ${lv}</span>`+(L&&L.length?`<span class="lv-u"><b>새로 열림</b> · ${L.join(' · ')}</span>`:'');
+ e.classList.remove('show');void e.offsetWidth;e.classList.add('show');try{sfx.grow&&setTimeout(sfx.grow,150)}catch(_){}}
+if(window.__f)Object.assign(window.__f,{lvUpShow});
 })();
 
 </script>

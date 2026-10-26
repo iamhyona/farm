@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ko">
-<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792934100";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
+<head><style>html.phL body{visibility:hidden}</style><script>/* 글꼴·최신 버전 확인될 때까지 잠깐 가리기 (옛 글꼴·옛 화면 깜빡임 방지) */(function(){var d=document.documentElement,n=2;d.classList.add("phL");function o(){d.classList.remove("phL")}window.__phDone=function(){if(--n<=0)o()};setTimeout(o,1200);function f(){try{var F=document.fonts;Promise.all([F.load('700 14px "Silkscreen"'),F.load('12px "Galmuri11"'),F.load('8px "Press Start 2P"')]).then(function(){return F.ready}).then(window.__phDone,window.__phDone)}catch(e){o()}}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",f);else f()})();</script><script>/* 옛 버전 캐시 자동 갱신 */(function(){var V="1792934200";try{fetch(location.pathname+"?_="+Date.now(),{cache:"no-store"}).then(function(r){return r.text()}).then(function(t){var m=t.match(/var V="(\d+)"/);if(m&&m[1]!==V&&location.search.indexOf("v="+m[1])<0){location.replace(location.pathname+"?v="+m[1])}if(!(m&&m[1]!==V)&&window.__phDone)__phDone()}).catch(function(){window.__phDone&&__phDone()})}catch(e){window.__phDone&&__phDone()}})();</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>PANG FARM · 팡팡농장</title>
@@ -1549,8 +1549,11 @@ if(window.__f)Object.assign(window.__f,{openExpand,doExpand,ensureLand,ZONES});
  sfx.harvest=()=>{nz('bandpass',900,.06,.07,0,2,fx());tn(420,.08,'triangle',.06,820,.02,fx());tn(1175,.1,'sine',.025,null,.09,fx());tn(1568,.14,'sine',.02,null,.15,fx())};
  sfx.buy=()=>{const P=[2637,3136,2349,2794,3520,2093];P.forEach((f,i)=>{const d=i*.045+Math.random()*.02;tn(f,.16,'triangle',.022,f*.985,d,fx());tn(f*2.01,.09,'sine',.008,null,d,fx())});nz('highpass',6000,.25,.012,0,.6,fx());tn(1320,.12,'square',.012,1046,.3,fx())};
  sfx.pop=()=>{tn(880,.05,'sine',.03,1180,0,fx())};
+ sfx.collect=()=>{tn(1568,.08,'sine',.032,null,.03,fx());tn(2093,.16,'sine',.028,null,.1,fx());tn(4186,.08,'sine',.006,null,.1,fx())};
+ sfx.thud=()=>{tn(240,.07,'sine',.035,150,0,fx());nz('lowpass',900,.06,.025,0,.7,fx());sfx.collect()};
+ sfx.pluck=()=>{nz('highpass',2600,.07,.018,0,.6,fx());sfx.collect()};
  /* 빗방울 */
- function drop(){const f=1600+Math.random()*2400;tn(f,.025+Math.random()*.03,'sine',.0035+Math.random()*.004,f*.5,Math.random()*.05,mu())}
+ function drop(){const f=1400+Math.random()*1600;tn(f,.03+Math.random()*.03,'sine',.0022+Math.random()*.0022,f*.6,Math.random()*.05,mu())}
  function drip(){tn(620+Math.random()*180,.09,'sine',.007,380,0,mu());tn(900,.05,'sine',.003,500,.11,mu())}
  function brownBuf(){if(brownBuf.b)return brownBuf.b;const n=AC.sampleRate*4,b=AC.createBuffer(1,n,AC.sampleRate),d=b.getChannelData(0);let l=0;for(let i=0;i<n;i++){const w=Math.random()*2-1;l=(l+.02*w)/1.02;d[i]=l*3.2}brownBuf.b=b;return b}
  /* 배경음: 통통 튀는 시골 셔플 (G장조) · 볼륨은 예전의 절반 */
@@ -1568,11 +1571,11 @@ if(window.__f)Object.assign(window.__f,{openExpand,doExpand,ensureLand,ZONES});
  bgm=function(on){clearInterval(bgmT);bgmT=null;BG.on=false;AMB.on=!!on;if(!T)T=setInterval(()=>{amb()},60)};
  /* 자연의 소리: 새·바람·밤 귀뚜라미 (배경음 켜져 있을 때) */
  let nextAmb=0;
- function bird(){const b=AC.currentTime,base=2600+Math.random()*1400,k=2+Math.floor(Math.random()*3);for(let i=0;i<k;i++)tn(base*(1+Math.random()*.15),.09,'sine',.008,base*1.35,i*.13+Math.random()*.03,true)}
+ function bird(){const base=2400+Math.random()*900,k=2+Math.floor(Math.random()*2);for(let i=0;i<k;i++)tn(base*(1+Math.random()*.1),.11,'sine',.0045,base*1.2,i*.18+Math.random()*.04,true)}
  function wind(){if(!AC)return;const t=AC.currentTime,s=AC.createBufferSource(),f=AC.createBiquadFilter(),g=AC.createGain();s.buffer=noiseBuf();s.loop=true;f.type='bandpass';f.frequency.setValueAtTime(400,t);f.frequency.linearRampToValueAtTime(700,t+1.8);f.frequency.linearRampToValueAtTime(350,t+3.6);f.Q.value=.6;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.008,t+1.6);g.gain.exponentialRampToValueAtTime(.0001,t+3.8);s.connect(f).connect(g).connect(AC.destination);s.start(t);s.stop(t+4)}
  function cricket(){for(let r=0;r<2;r++)for(let i=0;i<6;i++)tn(4300,.03,'square',.0035,null,r*.6+i*.07,true)}
  const AMB={on:false,n:null};let lastBed=0;
- function ambNodes(){if(AMB.n||!AC)return AMB.n;const mk=(type,f,q)=>{const so=AC.createBufferSource();so.buffer=noiseBuf();so.loop=true;const fl=AC.createBiquadFilter();fl.type=type;fl.frequency.value=f;fl.Q.value=q;const g=AC.createGain();g.gain.value=0;so.connect(fl).connect(g).connect(AC.destination);so.start(0,Math.random()*1.5);return{g,fl}};AMB.n={wind:mk('lowpass',450,.5),leaf:mk('bandpass',3200,.7),stream:mk('bandpass',1500,.9),rain:(()=>{const so=AC.createBufferSource();so.buffer=brownBuf();so.loop=true;const fl=AC.createBiquadFilter();fl.type='lowpass';fl.frequency.value=1100;fl.Q.value=.3;const g=AC.createGain();g.gain.value=0;so.connect(fl).connect(g).connect(AC.destination);so.start(0,Math.random()*2);return{g,fl}})()};return AMB.n}
+ function ambNodes(){if(AMB.n||!AC)return AMB.n;const mk=(type,f,q)=>{const so=AC.createBufferSource();so.buffer=noiseBuf();so.loop=true;const fl=AC.createBiquadFilter();fl.type=type;fl.frequency.value=f;fl.Q.value=q;const g=AC.createGain();g.gain.value=0;so.connect(fl).connect(g).connect(AC.destination);so.start(0,Math.random()*1.5);return{g,fl}};AMB.n={wind:mk('lowpass',450,.5),leaf:mk('bandpass',3200,.7),stream:mk('bandpass',1500,.9),rain:(()=>{const so=AC.createBufferSource();so.buffer=brownBuf();so.loop=true;const fl=AC.createBiquadFilter();fl.type='lowpass';fl.frequency.value=650;fl.Q.value=.3;const g=AC.createGain();g.gain.value=0;so.connect(fl).connect(g).connect(AC.destination);so.start(0,Math.random()*2);return{g,fl}})()};return AMB.n}
  function cuckoo(){tn(660,.28,'sine',.009,640,0,true);tn(540,.4,'sine',.009,520,.32,true)}
  function cicada(){const t=AC.currentTime,o=AC.createOscillator(),l=AC.createOscillator(),lg=AC.createGain(),g=AC.createGain(),d=2.5+Math.random()*2;o.type='square';o.frequency.value=4600+Math.random()*800;l.frequency.value=32+Math.random()*10;lg.gain.value=.5;g.gain.value=0;l.connect(lg).connect(g.gain);g.gain.setValueAtTime(0,t);const v=AC.createGain();v.gain.setValueAtTime(.0001,t);v.gain.exponentialRampToValueAtTime(.0035,t+.6);v.gain.setValueAtTime(.0035,t+d-.6);v.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(v).connect(AC.destination);o.start(t);l.start(t);o.stop(t+d+.05);l.stop(t+d+.05)}
  function frog(){const k=3+Math.floor(Math.random()*4),f=170+Math.random()*60;for(let i=0;i<k;i++)tn(f,.05,'square',.005,f*.8,i*.09,true)}
@@ -1580,16 +1583,16 @@ if(window.__f)Object.assign(window.__f,{openExpand,doExpand,ensureLand,ZONES});
  function crow(){const k=2+Math.floor(Math.random()*2);for(let i=0;i<k;i++)tn(560,.22,'sawtooth',.0035,380,i*.35,true)}
  function rustle(){nz('highpass',2800,.5,.012,0,.6,true);nz('highpass',3600,.3,.008,.25,.6,true)}
  function amb(){if(!AC)return;const live=AMB.on&&music&&state==='play'&&!paused,now=AC.currentTime,si=typeof seasonIdx==='function'?seasonIdx():1,night=S&&(S.min>=1140||S.min<300),rain=S&&S.rain;
-  if(now-lastBed>.9){lastBed=now;const n=ambNodes();if(n){const k=live?1:0,W=[.006,.004,.009,.015][si],Lf=[.003,.004,.006,.001][si],St=[.004,.003,.002,0][si];
-   n.wind.g.gain.setTargetAtTime(k*W*(.6+Math.random()*.8),now,.9);n.wind.fl.frequency.setTargetAtTime(320+Math.random()*320,now,1.2);
-   n.leaf.g.gain.setTargetAtTime(k*Lf*(night?.4:1)*(Math.random()<.3?2:.6),now,.5);n.stream.g.gain.setTargetAtTime(k*St,now,.9);n.rain.g.gain.setTargetAtTime(k*(rain?.05:0),now,1.2)}}
-  if(live&&rain){if(Math.random()<.45)drop();if(Math.random()<.35)drop();if(Math.random()<.02)drip()}
-  if(!live||now<nextAmb)return;nextAmb=now+3+Math.random()*6;const r=Math.random();
+  if(now-lastBed>.9){lastBed=now;const n=ambNodes();if(n){const k=live?1:0,W=[.0015,.001,.002,.0035][si],Lf=[.0007,.0009,.0012,.0003][si],St=[.003,.0025,.0018,0][si];
+   n.wind.g.gain.setTargetAtTime(k*W,now,3);n.wind.fl.frequency.setTargetAtTime(380,now,3);
+   n.leaf.g.gain.setTargetAtTime(k*Lf*(night?.4:1),now,3);n.stream.g.gain.setTargetAtTime(k*St,now,.9);n.rain.g.gain.setTargetAtTime(k*(rain?.013:0),now,2)}}
+  if(live&&rain){if(Math.random()<.16)drop();if(Math.random()<.035)drip()}
+  if(!live||now<nextAmb)return;nextAmb=now+14+Math.random()*16;const r=Math.random();
   if(night){if(si<=1){if(r<.5)frog();else cricket()}else if(si===2)cricket();if(si===3?r<.35:r<.12)owl();return}
-  if(si===0){if(r<.6)bird();else if(r<.8)cuckoo();else rustle()}
-  else if(si===1){if(r<.5)cicada();else if(r<.85)bird();else rustle()}
-  else if(si===2){if(r<.35)cricket();else if(r<.7)rustle();else bird()}
-  else{if(r<.35)crow();else if(r<.7)wind();else rustle()}
+  if(si===0){if(r<.45)bird();else if(r<.6)cuckoo()}
+  else if(si===1){if(r<.3)cicada();else if(r<.55)bird()}
+  else if(si===2){if(r<.35)cricket();else if(r<.55)bird()}
+  else{if(r<.25)crow()}
   if(S&&S.ck&&S.ck.length&&Math.random()<.12){tn(700,.07,'square',.008,500,0,true);tn(760,.06,'square',.008,520,.09,true)}}
  /* 클릭음: 모든 버튼 · 땅 탭 */
  document.addEventListener('click',e=>{if(e.target.closest('button,.it,.inv > *'))sfx.click()},true);

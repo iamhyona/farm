@@ -119,3 +119,11 @@
 - 새 파일: `art/dock/dock_{bag,shop,sleep,cook}_shaded.png` (각 512×512 RGBA). Built-in imagegen으로 원본 구조와 HUD 스타일을 참조해 제작. 공통 요청: centered transparent cartoon icon, warm brown outline, upper-left highlight, lower-right shading, no text/background.
 - 원형 52px, 간격 4px, 접근성 이름 유지. 격리 테스트 농장 브라우저에서 4종 로딩·크기·시각 확인. 자동 검사 61개 통과. 모바일 실기기 미검증.
 - 미니게임 조리 도구 같은 화풍 제작 및 꽃 성장 이미지 점검 진행 중.
+
+## 2026-11-01 · 미니게임 그림 및 꽃 성장 연결 (1793507218)
+- **검증 완료**: 조리 썰기·젓기·굽기 장면의 평면 CSS 도형을 새 투명 PNG 세 종으로 교체. 실제 재료는 별도 작은 원형 아이콘으로 표시. 진행/재료 예약/취소/완성 로직 유지. 작은 움직임과 reduced-motion 대응.
+- **검증 완료**: 낚시 찌를 같은 음영 화풍의 PNG로 교체. 기존 물고기 에셋과 판정 로직 유지.
+- 저장 파일: `art/minigames/cook_mix_shaded.png`, `cook_stir_shaded.png`, `cook_grill_shaded.png`, `fishing_float_shaded.png` (각 512×512 RGBA). Built-in imagegen 사용. 공통 요청: warm brown outline, rounded shallow 2.5D volume, 2–3 tonal steps, upper-left highlight, lower-right shading, transparent background, no text. 바구니/국그릇 새 아이콘을 스타일 참조로 사용.
+- **검증 완료**: 16종 꽃의 48개 품종별 성장 PNG/WebP와 공통 씨앗 에셋을 확인. 원본 그래픽은 보존. 물망초/진달래를 포함한 이미지 누락은 없었으나, 공통 씨앗 별칭이 없는 `fl_<species>_0`를 요청해 전체 품종의 원화 렌더링 진입을 막을 수 있던 버그를 재현하고 `fl_0` 경로로 정규화.
+- 꽃 심은 직후에는 공통 씨앗(0), 이후 새싹(1)→봉오리(2)→만개(3)로 표시. 표시/정보 높이/클릭 판정의 단계 선택과 크기 기준을 일치. 채소의 기존 단계 정책 유지. 저장 데이터 변경/초기화 없음.
+- 분리된 `#test` 농장에만 꽃 16종/4단계 검증 배치 도구 추가. 실제 브라우저에서 꽃 그림과 조리 3종의 이미지 로딩 및 재료 반환을 확인. 모바일 실기기/모든 계절의 실제 일수 경과는 미검증.

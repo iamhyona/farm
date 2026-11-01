@@ -1,0 +1,1 @@
+{"name":"pang-farm","private":true,"scripts":{"test":"node --test tests/playability.test.cjs"},"devDependencies":{"linkedom":"0.18.12"}}

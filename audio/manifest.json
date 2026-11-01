@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "origin": "Original composition and procedural synthesis; no samples",
+  "tracks": [
+    {
+      "id": "morning",
+      "title": "햇살 든 텃밭",
+      "seconds": 96.0,
+      "file": "morning.mp3",
+      "peak": 0.38
+    },
+    {
+      "id": "evening",
+      "title": "처마 아래 저녁",
+      "seconds": 96.0,
+      "file": "evening.mp3",
+      "peak": 0.38
+    },
+    {
+      "id": "rain",
+      "title": "빗방울과 작은 연못",
+      "seconds": 96.0,
+      "file": "rain.mp3",
+      "peak": 0.38
+    }
+  ]
+}

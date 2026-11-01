@@ -4,6 +4,7 @@ html body #screen #ovPause>.big,html body #screen #ovPause>.sndrow,html body #sc
 html body #screen #settingsActions{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;max-width:100%;margin:auto 0}
 html body #screen #settingsActions .btn{width:min(310px,80vw)!important;max-width:100%!important;min-height:52px!important;margin:0!important;font-size:17px!important;border-width:15px 24px!important;border-image-width:15px 24px!important}
 html body #screen #ovPause #bPauseX{flex:none;margin:18px 0 0!important;position:static!important}
+html body #screen .hud.hud2 #bSound,html body #screen .hud.hud2 #bTodo,html body #screen .hud.hud2 #bSetTop{height:auto!important;min-height:0!important;align-self:stretch!important;box-sizing:border-box!important}
 html body #screen .hud.hud2 #bSound{display:flex!important;flex:0 0 42px!important;width:42px!important;min-height:0!important;align-self:stretch;align-items:center;justify-content:center;cursor:pointer;padding:0!important}
 html body #screen #bSound img{width:30px;height:30px;object-fit:contain}
 html body #screen #ovSound{z-index:24;display:none;flex-direction:column;align-items:center;justify-content:center;padding:18px 12px;gap:12px}
